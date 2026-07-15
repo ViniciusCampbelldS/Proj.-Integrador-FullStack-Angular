@@ -1,0 +1,39 @@
+<section class="container mt-4">
+    <article class="mb-4">
+        <h2>Listas de Equipamentos de Proteção Individual</h2>
+        <!-- <ul>
+            <li><strong>Capacete de segurança</strong><br>
+                Tipo: Proteção de Cabeça<br>
+                Validade: 12 meses
+            </li>
+            <li><strong>Óculos de Proteção</strong><br>
+                Tipo: Proteção de Olhos<br>
+                Validade: 24 meses</li>
+            <li><strong>Luva de Proteção</strong><br>
+                Tipo: Proteção de Mãos<br>
+                Validade: 6 meses</li>
+        </ul> -->
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+                <tr class="table-dark">
+                    <th>ID do Sistema</th>
+                    <th>Nome do EPI</th>
+                    <th>Categoria</th>
+                    <th>CA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let epi of epis">
+                    <td>{{ epi.id }}</td>
+                    <td>{{ epi.nome }}</td>
+                    <td>{{ epi.categoria }}</td>
+                    <td>{{ epi.ca }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+
+    <button class="btn btn-sm btn-primary ms-2 mt-2">Comprar</button>
+    <a routerLink="/epi/detalhe" class="btn btn-sm btn-primary ms-2 mt-2">Ver detalhes</a>
+    <a [routerLink]="['/epi/detalhe']" [queryParams]="{ id: 1 }" class="btn btn-sm btn-primary ms-2 mt-2">Enviar ID</a>
+</section>
