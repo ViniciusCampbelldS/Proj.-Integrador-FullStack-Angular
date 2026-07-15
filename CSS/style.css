@@ -1,0 +1,77 @@
+body {
+	background: #f5f7fb;
+}
+
+.nav-tabs .nav-link {
+	padding: 16px;
+	font-size: 1.05rem;
+}
+
+.list-card {
+	min-height: 420px;
+}
+
+.card {
+	border-radius: 12px;
+}
+
+.form-control {
+	height: 45px;
+}
+
+.btn {
+	height: 45px;
+}
+
+.display-3 {
+	font-weight: 300;
+}
+
+.display-4 {
+	font-weight: 700;
+}
+
+.list-group-item {
+	border: none;
+	padding-left: 0;
+}
+
+.logo {
+	/*	vw = view width = % do tamanho da tela:		*/
+	/*	width: 17vw;								*/
+
+	/*	Manter proporção da imagem original:		*/
+	height: auto;
+
+	/*	40% do tamanho da tela, desde que não seja menor que 133px ou maior que 333px:	*/
+	width: clamp(133px, 40vw, 333px);
+	/*	se usar % em vez de vw, será 40% do tamanho do <div> ou outra tag onde a imagem estiver aninhada	*/
+}
+
+/*	Tamanho da tela entre 990 e 1250 px	*/
+@media (min-width: 990px) and (max-width: 1250px) {
+	/*	tag que contém <img> */
+	header div #logoDiv {
+		/* 30% do tamanho do header */
+		width: 30%;
+	}
+
+	
+	header div #logoDiv img {
+		width: 100%;
+	}
+
+	header div #metalDiv {
+		width: 40%;
+	}
+
+	header div #TSTDiv {
+		width: 30%;
+	}
+}
+
+@media (max-width: 989px) {
+	header div #logoDiv img {
+		width: 50%;
+	}
+}
