@@ -19,6 +19,7 @@ export class EpiList implements OnInit {
 	// Injeta o serviço EpiService e ChangeDetectorRef no construtor
 	constructor(private epiService: EpiService, private cdr: ChangeDetectorRef) { }
 
+	// método ngOnInit é chamado ao inicializar
 	ngOnInit(): void {
 		// Chama o método listar() para obter a lista de EPIs
 		this.epiService.listar().subscribe({
