@@ -18,16 +18,18 @@
                 <tr class="table-dark">
                     <th>ID do Sistema</th>
                     <th>Nome do EPI</th>
-                    <th>Categoria</th>
                     <th>CA</th>
+                    <th>Funcionário</th>
+                    <th>Vencimento</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let epi of epis">
                     <td>{{ epi.id }}</td>
                     <td>{{ epi.nome }}</td>
-                    <td>{{ epi.categoria }}</td>
                     <td>{{ epi.ca }}</td>
+                    <td>{{ epi.funcionarios }}</td>
+                    <td>{{ epi.vencimento }}</td>
                 </tr>
             </tbody>
         </table>

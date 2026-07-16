@@ -1,13 +1,14 @@
-<section class="conteiner mt-4">
-  <article>
-    <h1>{{titulo}}</h1>
-    <h4>{{subtitulo}}</h4>
+<section class="container py-4">
+  <article class="text-center mb-4">
+    <span class="badge bg-primary mb-2">Sistema de Gestão</span>
+    <h1 class="display-5 fw-bold">{{titulo}}</h1>
+    <h4 class="text-secondary">{{subtitulo}}</h4>
   </article>
   <!-- <hr>
   <h3>Bem-vindo!</h3> -->
-  <p class="lead">{{descricao}}</p>
-  <div class="card p-3 mb-3">
-    <h5>Resumo do Sistema</h5>
+  <p class="lead text-center mb-4">{{descricao}}</p>
+  <div class="card shadow-sm border-o rounded-4 p-4 mb-4">
+    <h5 class="text-primary mb-3">Resumo do Sistema</h5>
     <ul class="mb-0">
       <li>
         Gestão de Equipamentos de Proteção Individual (EPIs)
@@ -23,20 +24,23 @@
   </div>
 </section>
 
-<hr>
+<hr class="my-4">
 
-<nav class="container mt-3">
+<nav class="container d-flex flex-wrap gap-2 justify-content-center mt-3">
 
-  <a routerLink="/epi" class="btn btn-outline-primary me-2">
+  <a routerLink="/epi" class="btn btn-outline-primary ms-2">
 
     Lista de EPIs
 
   </a>
 
-  <a routerLink="/epi/detalhe" class="btn btn-outline-secondary">
+  <a routerLink="/epi/detalhe" class="btn btn-outline-secondary ms-2">
 
     Detalhes do EPI
 
+  </a>
+  <a routerLink="/epi/cadastro" class="btn btn-outline-success ms-2">
+    Cadastrar EPI
   </a>
 </nav>
 <!-- <app-epi-list></app-epi-list>

@@ -1,19 +1,41 @@
-//criação de variáveis
+// criação de variáveis
 $cor-principal: #0d6efd;
-$cor-texto: #aaa;
+$cor-texto: #495057;
 
-h1 {color:$cor-principal;text-align: center;}
-h2 {color:green;text-align: center;}
-h3 {color:#999;text-align: center;}
-h4 {color:#999;text-align: center;}
-p {color:$cor-texto;font-size:18px;text-align: center;}
+:host {
+    display: block;
+}
 
-// .container{
-//     width: 600px;
-//     margin: 30px;
-//     padding: 20px;
-//     border: 2px solid $cor-principal;
-//     border-radius: 10px;
-//     background-color: #f8f9fa;
-//     text-align: center;
-// }
+.container {
+    max-width: 960px;
+}
+
+h1 {
+    color: $cor-principal;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+h4 {
+    color: #6c757d;
+    text-align: center;
+}
+
+p.Lead {
+    color: $cor-texto;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.card {
+    background: #ffffff;
+    border-left: 4px solid $cor-principal;
+}
+
+.card h5 {
+    color: $cor-principal;
+}
+
+nav a.btn {
+    min-width: 160px;
+}
