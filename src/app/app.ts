@@ -1,17 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterModule, CommonModule],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  // protected readonly title = signal('Aula de Angular Turma 2026.1');
-  titulo = "Sistema de controle de EPI's";
-  subtitulo = "Gestão de Segurança do Trabalho";
-  descricao = "Aplicação para controle, monitoramento e conformidade de Equipamentos de Proteção Individual (EPI's).";
+  protected readonly title = signal('Angular');
 }
