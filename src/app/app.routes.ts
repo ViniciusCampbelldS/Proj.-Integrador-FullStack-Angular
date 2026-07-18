@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { EpiList } from './epi/epi-list/epi-list';
 import { EpiDetalhe } from './epi/epi-detalhe/epi-detalhe';
 import { EpiForm } from './epi/epi-form/epi-form';
-import { LoginComponent } from './auth/login/login';
+import { LoginComponent } from './login/login';
 // import { Epifilter } from './epi/epi-filter/epi-filter';
 
 export const routes: Routes = [
