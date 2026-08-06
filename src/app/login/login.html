@@ -1,32 +1,42 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office"
-    xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<section class="login-page">
+  <div class="login-panel">
+    <img src="/logo-mar.svg" alt="MAR Metalurgica" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <div class="login-copy">
+      <p class="eyebrow">Sistema de gerenciamento</p>
+      <h1>Seguranca do Trabalho</h1>
+      <p>Acesse com seu usuario ou entre por um perfil de demonstracao.</p>
+    </div>
 
-    <!--[if gte mso 9]><xml>
-<mso:CustomDocumentProperties>
-<mso:_ApprovalStatus msdt:dt="string">0</mso:_ApprovalStatus>
-<mso:_ApprovalAssignedTo msdt:dt="string"></mso:_ApprovalAssignedTo>
-<mso:_ApprovalRespondedBy msdt:dt="string"></mso:_ApprovalRespondedBy>
-</mso:CustomDocumentProperties>
-</xml><![endif]-->
-</head>
+    <form class="login-form">
+      <label for="email">Email</label>
+      <input id="email" type="email" [(ngModel)]="email" name="email" placeholder="email@mar.com" />
 
-<body>
-    Welcome!
-    <p><a href="/index.html">Login</a></p>
-    <section id="login-section" class="container">
-        <h2 class="form-title">Login</h2>
-        <input type="text" [(ngModel)]="email" placeholder="Email">
-        <input type="password" [(ngModel)]="senha" placeholder="Senha">
-        <button (click)="entrar()">
-            Entrar
-        </button>
-    </section>
-</body>
+      <label for="senha">Senha</label>
+      <input id="senha" type="password" [(ngModel)]="senha" name="senha" placeholder="Senha" />
 
-</html>
+      <button class="btn btn-brand" type="button" (click)="entrar()">
+        <i class="bi bi-box-arrow-in-right"></i>
+        Entrar
+      </button>
+    </form>
+
+    <div class="demo-actions">
+      <button class="profile-button primary" type="button" (click)="entrarComoTecnico()">
+        <i class="bi bi-shield-check"></i>
+        <span>
+          <strong>Tecnico / ADM</strong>
+          <small>Entregas, substituicoes e historico</small>
+        </span>
+      </button>
+
+      <button class="profile-button" type="button" (click)="entrarComoFuncionario()">
+        <i class="bi bi-person-check"></i>
+        <span>
+          <strong>Funcionario</strong>
+          <small>Relatorio de estado do EPI</small>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
