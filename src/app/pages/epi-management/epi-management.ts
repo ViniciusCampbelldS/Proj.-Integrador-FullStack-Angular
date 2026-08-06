@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { AdminHistory } from '../../components/admin-history/admin-history';
 import { DeliveryForm } from '../../components/delivery-form/delivery-form';
 import { EpiRecord } from '../../models/epi.models';
@@ -9,7 +10,7 @@ type SstView = 'entrega' | 'historico';
 
 @Component({
   selector: 'app-epi-management',
-  imports: [CommonModule, AdminHistory, DeliveryForm],
+  imports: [CommonModule, RouterModule, AdminHistory, DeliveryForm],
   templateUrl: './epi-management.html',
   styleUrl: './epi-management.scss',
 })

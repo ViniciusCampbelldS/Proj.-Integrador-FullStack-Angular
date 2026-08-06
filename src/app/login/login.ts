@@ -28,7 +28,7 @@ export class LoginComponent {
       .subscribe({
         next: (res) => {
           this.authService.salvarToken(res.access_token);
-          this.router.navigateByUrl('/epis');
+          this.router.navigateByUrl('/epi');
         },
         error: () => {
           this.entrarComoTecnico();
@@ -37,7 +37,7 @@ export class LoginComponent {
   }
 
   entrarComoTecnico(): void {
-    this.router.navigateByUrl('/epis');
+    this.router.navigateByUrl('/epi');
   }
 
   entrarComoFuncionario(): void {
