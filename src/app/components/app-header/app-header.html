@@ -1,0 +1,50 @@
+<header class="topbar">
+  <a class="brand" routerLink="/epis" aria-label="MAR Metalurgica">
+    <img src="/logo-mar.svg" alt="MAR Metalurgica" />
+  </a>
+
+  <nav class="main-nav" aria-label="Navegacao principal">
+    <a class="nav-button" routerLink="/epis" routerLinkActive="active">
+      <i class="bi bi-house-door"></i>
+      Home
+    </a>
+    <a
+      class="nav-button"
+      routerLink="/funcionario/relatorio-epi"
+      routerLinkActive="active"
+    >
+      <i class="bi bi-person-badge"></i>
+      Portal do funcionario
+    </a>
+    <a class="nav-button" routerLink="/epis" routerLinkActive="active">
+      <i class="bi bi-shield-check"></i>
+      Gerenciar EPIs
+    </a>
+    <a class="nav-button disabled-link" aria-disabled="true">
+      <i class="bi bi-journal-check"></i>
+      Treinamentos
+    </a>
+    <div class="user-menu" aria-label="Usuario logado">
+      <div class="user-avatar" aria-hidden="true">{{ userInitials }}</div>
+      <div class="user-info">
+        <strong>{{ userName }}</strong>
+        <span>{{ userRole }}</span>
+      </div>
+      <button class="logout-icon" type="button" routerLink="/login" aria-label="Sair">
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<section class="page-switcher">
+  <span>Alternar perfil</span>
+  <a routerLink="/epis" routerLinkActive="active">
+    <i class="bi bi-tools"></i>
+    Pagina do tecnico/ADM
+  </a>
+  <a routerLink="/funcionario/relatorio-epi" routerLinkActive="active">
+    <i class="bi bi-person-check"></i>
+    Pagina do funcionario
+  </a>
+</section>

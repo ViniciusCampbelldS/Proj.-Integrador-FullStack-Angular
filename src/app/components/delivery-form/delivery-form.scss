@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+.delivery-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.delivery-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.delivery-list-head h4 {
+  margin: 0;
+  color: var(--mar-blue-900);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.delivery-item {
+  padding: 14px;
+  border: 1px solid var(--mar-line);
+  border-radius: var(--mar-radius);
+  background: #fbfdff;
+}
+
+@media (max-width: 680px) {
+  .delivery-list-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

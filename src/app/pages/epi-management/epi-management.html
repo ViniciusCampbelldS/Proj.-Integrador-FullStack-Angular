@@ -1,0 +1,110 @@
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Seguranca do trabalho</p>
+    <h1>Controle de EPI</h1>
+    <p>
+      Entregas em lote, fichas, substituicoes e historico administrativo em uma
+      tela objetiva para a equipe de SST.
+    </p>
+  </div>
+
+  <div class="hero-panel">
+    <div class="metric">
+      <strong>2</strong>
+      <span>EPIs no rascunho</span>
+    </div>
+    <div class="metric">
+      <strong>84%</strong>
+      <span>Conformidade geral</span>
+    </div>
+  </div>
+</section>
+
+<section class="content-area">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Inventario</p>
+      <h2>Equipamentos de protecao</h2>
+      <p>Consulte EPIs, registre entregas multiplas e acompanhe historicos.</p>
+    </div>
+    <button class="btn btn-brand" type="button">
+      <i class="bi bi-plus-lg"></i>
+      Novo EPI
+    </button>
+  </div>
+
+  <div class="view-tabs" role="tablist" aria-label="Secoes administrativas">
+    <button
+      type="button"
+      [class.active]="activeSstView === 'entrega'"
+      (click)="setSstView('entrega')"
+    >
+      <i class="bi bi-box-seam"></i>
+      Entrega de EPI
+    </button>
+    <button
+      type="button"
+      [class.active]="activeSstView === 'historico'"
+      (click)="setSstView('historico')"
+    >
+      <i class="bi bi-clock-history"></i>
+      Historico ADM
+    </button>
+  </div>
+
+  <ng-container *ngIf="activeSstView === 'entrega'">
+    <app-delivery-form />
+
+    <section class="panel table-panel">
+      <div class="panel-title">
+        <div>
+          <p class="eyebrow">Lista</p>
+          <h3>Avaliacoes atuais</h3>
+        </div>
+        <div class="filter-row">
+          <input class="form-control" placeholder="Filtrar CA" />
+          <input class="form-control" placeholder="Filtrar funcionario" />
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>CA</th>
+              <th>Nome</th>
+              <th>Funcionario</th>
+              <th>Validade</th>
+              <th>Status</th>
+              <th>Acoes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let epi of epis">
+              <td>{{ epi.ca }}</td>
+              <td>{{ epi.name }}</td>
+              <td>{{ epi.employee }}</td>
+              <td>{{ epi.due }}</td>
+              <td>
+                <span class="badge" [class]="'badge-' + epi.statusClass">
+                  {{ epi.status }}
+                </span>
+              </td>
+              <td>
+                <div class="table-actions">
+                  <button class="btn btn-sm btn-light" type="button">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button class="btn btn-sm btn-warning" type="button">Estado</button>
+                  <button class="btn btn-sm btn-danger" type="button">Substituir</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </ng-container>
+
+  <app-admin-history *ngIf="activeSstView === 'historico'" />
+</section>
