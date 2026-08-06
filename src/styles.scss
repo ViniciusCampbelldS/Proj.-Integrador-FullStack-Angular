@@ -1,1 +1,101 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+	--mar-blue-900: #003d6c; // Azul escuro 
+	--mar-blue-700: #04679e; // Azul medio
+	--mar-blue-500: #1996d0; // Azul claro
+
+	--mar-orange-700: #e27425; // Laranja escuro
+	--mar-orange-500: #f68d17; // Laranja claro
+
+	--mar-ink: #152536; // Texto principal
+	--mar-muted: #667485; // Texto secundario
+	--mar-line: #dce5ec; // Bordas/divisores
+	--mar-surface: #ffffff; // Cards, paineis, top
+	--mar-bg: #f3f7fa; // Fundo geral
+
+	--mar-success: #1c9b64;
+	--mar-warning: #ffc107;
+	--mar-danger: #dc3545;
+
+	--mar-radius: 8px;
+	--mar-shadow: 0 18px 40px rgba(0, 61, 108, 0.12);
+
+	--mar-font: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	min-width: 320px;
+	margin: 0;
+	background: var(--mar-bg);
+	color: var(--mar-ink);
+	font-family: var(--mar-font);
+}
+
+button,
+input,
+select,
+textarea {
+	font: inherit;
+}
+
+.form-control,
+.form-select {
+	min-height: 44px;
+	border-color: var(--mar-line);
+	border-radius: var(--mar-radius);
+}
+
+.form-control:focus,
+.form-select:focus {
+	border-color: var(--mar-blue-500);
+	box-shadow: 0 0 0 0.2rem rgba(25, 150, 208, 0.16);
+}
+
+.btn-brand {
+	border-color: var(--mar-orange-700);
+	background: var(--mar-orange-700);
+	color: #fff;
+}
+
+.btn-brand:hover {
+	border-color: var(--mar-orange-500);
+	background: var(--mar-orange-500);
+	color: #fff;
+}
+
+.btn-outline-brand {
+	border-color: var(--mar-blue-700);
+	color: var(--mar-blue-900);
+}
+
+.btn-outline-brand:hover {
+	border-color: var(--mar-blue-700);
+	background: #e8f5fc;
+	color: var(--mar-blue-900);
+}
+
+.btn-soft {
+	background: #e8f5fc;
+	color: var(--mar-blue-900);
+}
+
+.panel {
+	padding: 22px;
+	border: 1px solid var(--mar-line);
+	border-radius: var(--mar-radius);
+	background: var(--mar-surface);
+	box-shadow: 0 8px 28px rgba(21, 37, 54, 0.05);
+}
+
+.eyebrow {
+	margin: 0 0 8px;
+	color: var(--mar-blue-700);
+	font-size: 12px;
+	font-weight: 800;
+	letter-spacing: 0;
+	text-transform: uppercase;
+}

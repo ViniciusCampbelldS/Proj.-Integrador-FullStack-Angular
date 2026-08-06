@@ -20,5 +20,3 @@ return next(reqClone);
 // Se não tiver token, envia normal
 return next(req);
 };
-
-};

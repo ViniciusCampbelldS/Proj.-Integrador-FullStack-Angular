@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
     imports: [FormsModule], // ajuste
     templateUrl: './login.html'
 })
-export class LoginComponent {
+export class Login {
     email = '';
     senha = '';
     constructor(private authService: AuthService) { }
