@@ -1,4 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 	
@@ -15,7 +17,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 		return next(reqClone);
 	}
 	// Se não tiver token, envia normal
-	if (!token) {
+	else {
 		return next(req);
 	}
 

@@ -30,7 +30,7 @@
         <strong>{{ userName }}</strong>
         <span>{{ userRole }}</span>
       </div>
-      <button class="logout-icon" type="button" routerLink="/login" aria-label="Sair">
+      <button class="logout-icon" type="button" (click)="logout()" aria-label="Sair">
         <i class="bi bi-box-arrow-right"></i>
       </button>
     </div>
