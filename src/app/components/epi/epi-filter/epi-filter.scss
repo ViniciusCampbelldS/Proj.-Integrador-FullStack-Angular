@@ -1,77 +1,495 @@
-body {
-	background: #f5f7fb;
+// ======================================================
+// 1. VARIAVEIS
+// ======================================================
+
+$cor-principal: #0d6efd;
+$cor-azul-medio: #04679e;
+$cor-azul-escuro: #003d6c;
+$cor-azul-claro: #1996d0;
+$cor-laranja-escuro: #e27425;
+$cor-laranja-claro: #f68d17;
+$cor-vermelha: #dc3545;
+$cor-verde: #198754;
+
+$cor-texto: #495057;
+$cor-texto-secundario: #6c757d;
+
+$cor-fundo: #f5f7fb;
+$cor-branca: #ffffff;
+
+$radius-padrao: 14px;
+$sombra-padrao: 0 8px 24px rgba(0, 61, 108, 0.08);
+
+
+// ======================================================
+// 2. ESTRUTURA
+// ======================================================
+
+:host {
+  display: block;
+
+  padding: 24px 4%;
+
+  background: $cor-fundo;
 }
 
-.nav-tabs .nav-link {
-	padding: 16px;
-	font-size: 1.05rem;
+.tool-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+
+  gap: 22px;
+
+  align-items: start;
 }
 
+.panel {
+  border: 1px solid rgba(0, 61, 108, 0.08);
+  border-radius: $radius-padrao;
+
+  background: $cor-branca;
+
+  box-shadow: $sombra-padrao;
+}
+
+.filter-panel {
+  padding: 22px;
+}
+
+
+// ======================================================
+// 3. TITULOS
+// ======================================================
+
+.panel-title {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+
+  border-bottom: 1px solid rgba(0, 61, 108, 0.08);
+}
+
+.panel-title h3 {
+  margin: 0;
+
+  color: $cor-azul-escuro;
+
+  font-size: 1.45rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+
+  color: $cor-laranja-escuro;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.status-chip {
+  display: inline-flex;
+
+  width: 12px;
+  height: 12px;
+
+  border-radius: 999px;
+
+  background: $cor-laranja-claro;
+
+  box-shadow:
+    0 0 0 5px rgba(246, 141, 23, 0.14);
+}
+
+#linha,
+.linha {
+  width: 64px;
+  height: 4px;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    $cor-laranja-claro,
+    $cor-laranja-escuro
+  );
+}
+
+
+// ======================================================
+// 4. BLOCOS INTERNOS
+// ======================================================
+
+.filter-box,
 .list-card {
-	min-height: 420px;
+  margin-top: 18px;
+  padding: 16px;
+
+  border: 1px solid rgba(0, 61, 108, 0.08);
+  border-radius: 12px;
+
+  background: #f8fbfe;
 }
 
-.card {
-	border-radius: 12px;
+.filter-box-title {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 16px;
 }
 
-.form-control {
-	height: 45px;
+.filter-box-title h4,
+.delivery-list-head h4 {
+  margin: 0;
+
+  color: $cor-azul-escuro;
+
+  font-size: 1.05rem;
+  font-weight: 800;
 }
+
+.delivery-list-head {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 14px;
+}
+
+
+// ======================================================
+// 5. FORMULARIOS
+// ======================================================
+
+.form-label {
+  margin-bottom: 6px;
+
+  color: $cor-azul-escuro;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.form-control,
+.form-select {
+  min-height: 44px;
+
+  border: 1px solid rgba(0, 61, 108, 0.18);
+  border-radius: 9px;
+
+  color: $cor-texto;
+
+  font-size: 0.92rem;
+
+  box-shadow: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: $cor-azul-claro;
+
+  box-shadow:
+    0 0 0 0.2rem rgba(25, 150, 208, 0.14);
+}
+
+.input-group {
+  overflow: hidden;
+
+  border-radius: 9px;
+}
+
+.input-group .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+
+// ======================================================
+// 6. BOTOES
+// ======================================================
 
 .btn {
-	height: 45px;
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 42px;
+
+  border-radius: 9px;
+
+  font-size: 0.88rem;
+  font-weight: 700;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.display-3 {
-	font-weight: 300;
+.btn i {
+  font-size: 0.95rem;
 }
 
-.display-4 {
-	font-weight: 700;
+.btn-sm {
+  min-height: 34px;
+
+  padding: 6px 10px;
+
+  font-size: 0.78rem;
 }
 
-.list-group-item {
-	border: none;
-	padding-left: 0;
+.btn-outline-brand,
+.btn-icon-filter {
+  border: 1px solid rgba(0, 61, 108, 0.28);
+
+  background: $cor-branca;
+  color: $cor-azul-escuro;
 }
 
-.logo {
-	/*	vw = view width = % do tamanho da tela:		*/
-	/*	width: 17vw;								*/
+.btn-outline-brand:hover,
+.btn-outline-brand:focus,
+.btn-icon-filter:hover,
+.btn-icon-filter:focus {
+  border-color: $cor-azul-escuro;
 
-	/*	Manter proporção da imagem original:		*/
-	height: auto;
+  background: $cor-azul-escuro;
+  color: $cor-branca;
 
-	/*	40% do tamanho da tela, desde que não seja menor que 133px ou maior que 333px:	*/
-	width: clamp(133px, 40vw, 333px);
-	/*	se usar % em vez de vw, será 40% do tamanho do <div> ou outra tag onde a imagem estiver aninhada	*/
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 12px rgba(0, 61, 108, 0.16);
 }
 
-/*	Tamanho da tela entre 990 e 1250 px	*/
-@media (min-width: 990px) and (max-width: 1250px) {
-	/*	tag que contém <img> */
-	header div #logoDiv {
-		/* 30% do tamanho do header */
-		width: 30%;
-	}
+.btn-soft {
+  border: 1px solid rgba(246, 141, 23, 0.24);
 
-	
-	header div #logoDiv img {
-		width: 100%;
-	}
-
-	header div #metalDiv {
-		width: 40%;
-	}
-
-	header div #TSTDiv {
-		width: 30%;
-	}
+  background: rgba(246, 141, 23, 0.12);
+  color: $cor-laranja-escuro;
 }
 
-@media (max-width: 989px) {
-	header div #logoDiv img {
-		width: 50%;
-	}
+.btn-soft:hover,
+.btn-soft:focus {
+  border-color: $cor-laranja-escuro;
+
+  background: $cor-laranja-escuro;
+  color: $cor-branca;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 12px rgba(246, 141, 23, 0.2);
+}
+
+.btn-danger-brand {
+  border: 1px solid rgba(220, 53, 69, 0.24);
+
+  background: rgba(220, 53, 69, 0.10);
+  color: $cor-vermelha;
+}
+
+.btn-danger-brand:hover,
+.btn-danger-brand:focus {
+  border-color: $cor-vermelha;
+
+  background: $cor-vermelha;
+  color: $cor-branca;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 12px rgba(220, 53, 69, 0.18);
+}
+
+
+// ======================================================
+// 7. TABELA
+// ======================================================
+
+.table-responsive {
+  overflow-x: auto;
+
+  border-radius: 12px;
+}
+
+.epi-table {
+  min-width: 960px;
+
+  overflow: hidden;
+
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.epi-table thead th {
+  padding: 14px 16px;
+
+  border-bottom: 1px solid rgba(0, 61, 108, 0.10);
+
+  background: $cor-azul-escuro;
+  color: $cor-branca;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.epi-table tbody td {
+  padding: 14px 16px;
+
+  border-bottom: 1px solid rgba(0, 61, 108, 0.08);
+
+  color: $cor-texto;
+
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.epi-table tbody tr {
+  background: $cor-branca;
+
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.epi-table tbody tr:hover {
+  background: #fbfdff;
+
+  box-shadow:
+    inset 4px 0 0 $cor-laranja-claro;
+}
+
+.epi-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+
+// ======================================================
+// 8. STATUS
+// ======================================================
+
+.status-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 28px;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.status-good {
+  background: rgba(25, 135, 84, 0.12);
+  color: $cor-verde;
+}
+
+.status-warning {
+  background: rgba(246, 141, 23, 0.16);
+  color: $cor-laranja-escuro;
+}
+
+.status-expired {
+  background: rgba(220, 53, 69, 0.12);
+  color: $cor-vermelha;
+}
+
+
+// ======================================================
+// 9. RESPONSIVIDADE
+// ======================================================
+
+@media (max-width: 1100px) {
+  .filter-panel {
+    padding: 20px;
+  }
+
+  .table-actions {
+    min-width: 360px;
+  }
+}
+
+@media (max-width: 680px) {
+  :host {
+    padding: 16px 12px;
+  }
+
+  .filter-panel {
+    padding: 16px;
+  }
+
+  .panel-title,
+  .filter-box-title,
+  .delivery-list-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .filter-box,
+  .list-card {
+    padding: 14px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .input-group .btn {
+    width: 48px;
+  }
+
+  .table-actions {
+    min-width: 0;
+  }
+
+  .table-actions .btn {
+    width: 100%;
+  }
 }
