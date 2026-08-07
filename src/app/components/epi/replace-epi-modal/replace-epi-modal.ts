@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { output } from '@angular/core';
-import { EpiData } from '../../services/epi-data';
-import { PreviousEpi } from '../../models/epi.models';
+import { EpiData } from '../../../services/epi-data';
+import { PreviousEpi } from '../../../models/epi.models';
 
 @Component({
   selector: 'app-replace-epi-modal',

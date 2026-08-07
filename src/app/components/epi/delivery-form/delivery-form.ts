@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DeliveryItem, EpiOption } from '../../models/epi.models';
-import { EpiData } from '../../services/epi-data';
+import { DeliveryItem, EpiOption } from '../../../models/epi.models';
+import { EpiData } from '../../../services/epi-data';
 import { DigitalSheetModal } from '../digital-sheet-modal/digital-sheet-modal';
 import { ReplaceEpiModal } from '../replace-epi-modal/replace-epi-modal';
 

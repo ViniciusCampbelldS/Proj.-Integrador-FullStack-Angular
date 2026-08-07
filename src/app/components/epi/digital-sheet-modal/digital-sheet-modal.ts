@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { input, output } from '@angular/core';
-import { DeliveryItem } from '../../models/epi.models';
+import { DeliveryItem } from '../../../models/epi.models';
 
 @Component({
   selector: 'app-digital-sheet-modal',

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { NgIf } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { AppHeader } from './components/app-header/app-header';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { AppHeader } from './components/geral/app-header/app-header';
 
 @Component({
   selector: 'app-root',
-  imports: [AppHeader, NgIf, RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

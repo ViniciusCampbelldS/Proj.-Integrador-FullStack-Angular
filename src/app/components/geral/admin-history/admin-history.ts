@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HistoryEntry } from '../../models/epi.models';
-import { EpiData } from '../../services/epi-data';
+import { HistoryEntry } from '../../../models/epi.models';
+import { EpiData } from '../../../services/epi-data';
 
 @Component({
   selector: 'app-admin-history',
