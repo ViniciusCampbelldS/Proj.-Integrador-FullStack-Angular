@@ -47,41 +47,35 @@
 		<ul class="nav nav-tabs nav-fill justify-content-center p-3 row">
 
 		<li class="col-lg-2">
-			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center" href="#">
+			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center" routerLink="/">
 				<i class="bi bi-house-door"></i>
 				&nbsp;HOME
 			</a>
 		</li>
 
 		<li class="col-lg-2">
-			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center" href="#">
+			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center" routerLink="/funcionario">
 				<i class="bi bi-person-raised-hand"></i>
 				&nbsp;Portal do funcionário
 			</a>
 		</li>
 
 		<li class="col-lg-2 dropdown">
-			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center" routerLink="/epi" role="button">
 				<i class="bi bi-shield-shaded"></i>
 				&nbsp;Gerenciar EPIs
 			</a>
-			<ul class="dropdown-menu">
-				<li><a class="dropdown-item" routerLink="/components/digital-sheet-modal">Cadastro de EPIs no Estoque</a></li>
-				<li><a class="dropdown-item" routerLink="/components/epi-delivery-modal">Entrega de EPIs</a></li>
-				<li><a class="dropdown-item" routerLink="/epi/filtro">Pesquisar EPIs</a></li>
-			</ul>
 		</li>
 
 		<li class="col-lg-2">
-			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center" href="#">
+			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center" routerLink="/treinamento">
 				<i class="bi bi-file-text-fill"></i>
 				&nbsp;Gerenciar Treinamentos
 			</a>
 		</li>
 
 		<li class="col-lg-2">
-			<a href="src/app/login/login.html"
-				class="btn btn-outline-dark d-flex align-items-center justify-content-center">
+			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center" routerLink="/login">
 				<i class="bi bi-person-fill-x"></i>
 				&nbsp;Logout
 			</a>

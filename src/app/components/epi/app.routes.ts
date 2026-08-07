@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { EpiManagement } from '../../pages/epi-management/epi-management';
-import { EmployeeReport } from '../../pages/employee-report/employee-report';
 import { Login } from '../geral/login/login';
 import { EpiFilter } from './epi-filter/epi-filter';
 import { Unauthorized } from '../../auth/unauthorized/unauthorized';
@@ -10,13 +9,9 @@ export const routes: Routes = [
 	{ path: 'login', component: Login },
 	{ path: 'epi', component: EpiManagement },
 	{ path: '', component: Homepage },
-	//   depreciado:
-	//	{ path: 'epi/detalhe', component: EpiDetalhe },
-	//   { path: 'epi/cadastrar', component: EpiForm },
-	//   { path: 'epi/listar', component: EpiList },
 	{ path: 'epi/filtro', component: EpiFilter },
-	{ path: 'epis', redirectTo: 'epi' },
-	{ path: 'funcionario/relatorio-epi', component: EmployeeReport },
+	{ path: 'treinamento', loadComponent: () => import('../treinamento/gerenciar-treinamento').then((m) => m.GerenciarTreinamento) },
+	{ path: 'funcionario', loadChildren: () => import('../funcionario/funcionario.module').then((m) => m.FuncionarioModule) },
 	{ path: 'unauthorized', component: Unauthorized },
 	{ path: '**', redirectTo: '' },
 ];
