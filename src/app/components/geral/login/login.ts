@@ -11,36 +11,41 @@ import { Router } from '@angular/router';
   styleUrl: './login.scss',
 })
 export class Login {
-  email = '';
+  cpf = '';
   senha = '';
+
+  erroLogin = false;
+  exibirTelefoneTI = false;
 
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router,
   ) {}
 
-  entrar() {
+  entrar(): void {
+    this.erroLogin = false;
+
+    const cpfSemFormatacao = this.cpf.replace(/\D/g, '');
+
     this.authService
       .login({
-        email: this.email,
+        cpf: cpfSemFormatacao,
         senha: this.senha,
       })
       .subscribe({
         next: (res) => {
           this.authService.salvarToken(res.access_token);
+
           this.router.navigateByUrl('/epi');
         },
+
         error: () => {
-          this.entrarComoTecnico();
+          this.erroLogin = true;
         },
       });
   }
 
-  entrarComoTecnico(): void {
-    this.router.navigateByUrl('/epi');
-  }
-
-  entrarComoFuncionario(): void {
-    this.router.navigateByUrl('/funcionario/relatorio-epi');
+  mostrarTelefoneTI(): void {
+    this.exibirTelefoneTI = !this.exibirTelefoneTI;
   }
 }

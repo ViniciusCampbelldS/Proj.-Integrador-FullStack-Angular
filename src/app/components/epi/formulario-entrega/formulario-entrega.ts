@@ -8,6 +8,7 @@ import { ReplaceEpiModal } from '../replace-epi-modal/replace-epi-modal';
 
 @Component({
   selector: 'app-formulario-entrega',
+  standalone: true,
   imports: [CommonModule, FormsModule, FichaEntregaEPIModal, ReplaceEpiModal],
   templateUrl: './formulario-entrega.html',
   styleUrl: './formulario-entrega.scss',

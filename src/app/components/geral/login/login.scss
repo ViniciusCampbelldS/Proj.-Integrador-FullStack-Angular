@@ -1,5 +1,12 @@
 :host {
   display: block;
+
+  --azul-escuro: #003d6c;
+  --azul-medio: #04679e;
+  --azul-claro: #1996d0;
+  --laranja-escuro: #e27425;
+  --laranja-claro: #f68d17;
+
 }
 
 .login-page {
@@ -7,17 +14,21 @@
   min-height: 100vh;
   place-items: center;
   padding: 32px 16px;
+
   background:
-    linear-gradient(120deg, rgba(0, 61, 108, 0.96), rgba(4, 103, 158, 0.9)),
-    var(--mar-blue-900);
+    linear-gradient(120deg,
+      rgba(0, 61, 108, 0.96) rgba(4, 103, 158, 0.9)),
+    var(--azul-escuro);
 }
 
 .login-panel {
   width: min(100%, 480px);
   padding: 28px;
-  border-radius: var(--mar-radius);
+  border-radius: 12px;
   background: #fff;
-  box-shadow: var(--mar-shadow);
+
+  box-shadow:
+    0 15px 40px rgba(0, 61, 108, 0.22);
 }
 
 .login-panel img {
@@ -30,74 +41,143 @@
 
 .login-copy h1 {
   margin: 0;
-  color: var(--mar-blue-900);
+  color: var(--azul-escuro);
   font-size: 32px;
   font-weight: 800;
 }
 
-.login-copy p:last-child {
-  margin: 8px 0 0;
-  color: var(--mar-muted);
+.login-copy .eyebrow {
+  margin: 0 0 5px;
+  color: var(--laranja-escuro);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.login-form,
-.demo-actions {
+.login-copy p:last-child {
+  margin: 8px 0 0;
+  color: #555;
+}
+
+.login-form {
   display: grid;
   gap: 12px;
   margin-top: 24px;
 }
 
 .login-form label {
-  color: var(--mar-ink);
+  color: var(--azul-escuro);
   font-weight: 700;
 }
 
 .login-form input {
   min-height: 44px;
   padding: 8px 12px;
-  border: 1px solid var(--mar-line);
-  border-radius: var(--mar-radius);
+  border: 1px solid rgba(0, 61, 108, 0.3);
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
-.profile-button {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-  padding: 14px;
-  text-align: left;
-  border: 1px solid var(--mar-line);
-  border-radius: var(--mar-radius);
-  background: #fff;
-  color: var(--mar-ink);
+.login-form input:focus {
+  border-color: var(--azul-medio);
+
+  box-shadow:
+    0 0 0 3px rgba(25, 150, 208, 0.18)
 }
 
-.profile-button.primary {
-  border-color: rgba(226, 116, 37, 0.36);
-  background: #fff7ef;
-}
+/* botao pra entrar */
 
-.profile-button i {
-  display: grid;
-  width: 40px;
-  height: 40px;
-  place-items: center;
-  border-radius: var(--mar-radius);
-  background: var(--mar-blue-900);
+.btn-brand {
+  min-height: 44px;
+  margin-top: 6px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--azul-escuro);
   color: #fff;
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
 }
 
-.profile-button.primary i {
-  background: var(--mar-orange-700);
+.btn-brand:hover {
+  background: var(--azul-medio);
 }
 
-.profile-button strong,
-.profile-button small {
+.btn-brand:active {
+  transform: scale(0.98);
+}
+
+/* erro no login */
+
+.login-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-left: 4px solid var(--laranja-escuro);
+  border-radius: 6px;
+  background: rgba(246, 141, 23, 0.1);
+  color: var(--azul-escuro);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* esqueceu a senha */
+
+.forgot-password {
+  padding: 5px;
+  border: 0;
+  background: transparent;
+  color: var(--azul-medio);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+.forgot-password:hover {
+  color: var(--azul-claro);
+  text-decoration: underline;
+}
+
+/* contato do ti */
+
+.ti-contact {
+  margin-top: 4px;
+  padding: 14px;
+  border-left: 4px solid var(--laranja-escuro);
+  border-radius: 8px;
+  background: rgba(246, 141, 23, 0.08);
+  text-align: center;
+}
+
+.ti-contact strong {
   display: block;
+  color: var(--azul-escuro);
+  font-size: 15px;
 }
 
-.profile-button small {
-  margin-top: 3px;
-  color: var(--mar-muted);
+.ti-contact p {
+  margin: 6px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.ti-contact a {
+  color: var(--laranja-escuro);
+
+  font-size: 16px;
+  font-weight: 800;
+
+  text-decoration: none;
+}
+
+.ti-contact a:hover {
+  color: var(--laranja-claro);
+  text-decoration: underline;
 }

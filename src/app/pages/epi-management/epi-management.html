@@ -33,78 +33,81 @@
     </a>
   </div>
 
-  <div class="view-tabs" role="tablist" aria-label="Secoes administrativas">
+  <nav class="epi-tabs" role="tablist" aria-label="Secoes de EPI">
+    <button
+      type="button"
+      [class.active]="activeSstView === 'busca'"
+      (click)="setSstView('busca')"
+    >
+      Busca EPI
+    </button>
+    <button
+      type="button"
+      [class.active]="activeSstView === 'cadastro'"
+      (click)="setSstView('cadastro')"
+    >
+      Cadastro / Recebimento de EPIs
+    </button>
     <button
       type="button"
       [class.active]="activeSstView === 'entrega'"
       (click)="setSstView('entrega')"
     >
-      <i class="bi bi-box-seam"></i>
-      Entrega de EPI
+      Entrega de EPIs
     </button>
     <button
       type="button"
       [class.active]="activeSstView === 'historico'"
       (click)="setSstView('historico')"
     >
-      <i class="bi bi-clock-history"></i>
       Historico ADM
     </button>
-  </div>
+  </nav>
 
-  <ng-container *ngIf="activeSstView === 'entrega'">
-    <app-formulario-entrega />
-
-    <section class="panel table-panel">
-      <div class="panel-title">
-        <div>
-          <p class="eyebrow">Lista</p>
-          <h3>Avaliacoes atuais</h3>
+  <section class="epi-panel">
+    @if (activeSstView === 'busca') {
+      <div class="epi-dashboard">
+        <div class="epi-metrics">
+          <div class="metric card-blue-dark">
+            <strong>2</strong>
+            <span>EPIs no rascunho</span>
+          </div>
+          <div class="metric card-blue-medium">
+            <strong>84%</strong>
+            <span>Conformidade geral</span>
+          </div>
         </div>
-        <div class="filter-row">
-          <input class="form-control" placeholder="Filtrar CA" />
-          <input class="form-control" placeholder="Filtrar funcionario" />
+
+        <hr />
+
+        <section class="epi-filter-panel">
+          <p class="panel-title">Busca EPI</p>
+          <app-epi-filter></app-epi-filter>
+        </section>
+      </div>
+    }
+
+    @if (activeSstView === 'cadastro') {
+      <section class="panel cadastro-panel">
+        <div class="panel-title">
+          <p class="eyebrow">Cadastro / Recebimento</p>
+          <h3>Ficha de EPI preenchida</h3>
         </div>
-      </div>
+        <p class="panel-description">
+          Gerencie o cadastro e o recebimento de EPIs, incluindo conferência e controle de estoque.
+        </p>
+        <div class="cadastro-placeholder">
+          <p>Aqui vai o formulário de cadastro/recebimento e conferência de EPI.</p>
+        </div>
+      </section>
+    }
 
-      <div class="table-responsive">
-        <table class="table align-middle">
-          <thead>
-            <tr>
-              <th>CA</th>
-              <th>Nome</th>
-              <th>Funcionario</th>
-              <th>Validade</th>
-              <th>Status</th>
-              <th>Acoes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let epi of epis">
-              <td>{{ epi.ca }}</td>
-              <td>{{ epi.name }}</td>
-              <td>{{ epi.employee }}</td>
-              <td>{{ epi.due }}</td>
-              <td>
-                <span class="badge" [class]="'badge-' + epi.statusClass">
-                  {{ epi.status }}
-                </span>
-              </td>
-              <td>
-                <div class="table-actions">
-                  <button class="btn btn-sm btn-light" type="button">
-                    <i class="bi bi-pencil-square"></i>
-                  </button>
-                  <button class="btn btn-sm btn-warning" type="button">Estado</button>
-                  <button class="btn btn-sm btn-danger" type="button">Substituir</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </ng-container>
+    @if (activeSstView === 'entrega') {
+      <app-formulario-entrega></app-formulario-entrega>
+    }
 
-  <app-admin-history *ngIf="activeSstView === 'historico'" />
+    @if (activeSstView === 'historico') {
+      <app-admin-history></app-admin-history>
+    }
+  </section>
 </section>

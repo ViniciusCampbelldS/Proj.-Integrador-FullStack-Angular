@@ -2,6 +2,109 @@
   display: block;
 }
 
+.epi-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0 1rem;
+  padding: 0.5rem;
+  background: #f68d17;
+  border-radius: 1rem;
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.08);
+}
+
+.epi-tabs button {
+  flex: 1 1 auto;
+  min-width: 10rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  background: #04679e;
+  color: white;
+  font-weight: 700;
+  padding: 0.9rem 1.1rem;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease;
+}
+
+.epi-tabs button:hover {
+  background: #1996d0;
+}
+
+.epi-tabs button.active {
+  background: #003d6c;
+  border-color: #e27425;
+  box-shadow: 0 0 0 3px rgba(226, 116, 37, 0.16);
+}
+
+.epi-panel {
+  margin-top: 1.5rem;
+}
+
+.epi-dashboard {
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.epi-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric {
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  color: white;
+  display: grid;
+  row-gap: 0.5rem;
+  align-items: center;
+}
+
+.card-blue-dark {
+  background: #003d6c;
+}
+
+.card-blue-medium {
+  background: #04679e;
+}
+
+.epi-filter-panel {
+  padding-top: 1rem;
+}
+
+.panel-title {
+  margin-bottom: 1rem;
+}
+
+.panel-title .eyebrow {
+  color: #1996d0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.cadastro-panel {
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.panel-description {
+  margin: 1rem 0 1.5rem;
+  color: #333;
+}
+
+.cadastro-placeholder {
+  padding: 1.25rem;
+  border: 1px dashed #1996d0;
+  border-radius: 0.75rem;
+  background: rgba(25, 150, 208, 0.08);
+  color: #003d6c;
+}
+
 .table-panel {
   margin-top: 18px;
 }

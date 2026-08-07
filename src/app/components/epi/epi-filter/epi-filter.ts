@@ -4,6 +4,7 @@ import { Component, inject } from '@angular/core';
 
 @Component({
 	selector: 'app-epi-filter',
+	standalone: true,
 	imports: [], // importação do componente
 	templateUrl: './epi-filter.html',
 	styleUrl: './epi-filter.scss'
