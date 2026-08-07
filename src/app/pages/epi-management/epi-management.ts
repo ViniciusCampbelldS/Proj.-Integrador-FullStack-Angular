@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AdminHistory } from '../../components/admin-history/admin-history';
-import { DeliveryForm } from '../../components/delivery-form/delivery-form';
+import { DeliveryForm } from '../../epi/delivery-form/delivery-form';
 import { EpiRecord } from '../../models/epi.models';
 import { EpiData } from '../../services/epi-data';
 

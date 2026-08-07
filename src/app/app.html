@@ -1,7 +1,8 @@
-<!-- Banner / Cabeçalho-->
-<header class="bg-white shadow-sm rounded mt-3">
+<div *ngIf="showHeader">
+	<!-- Banner / Cabeçalho-->
+	<header class="bg-white shadow-sm rounded mt-3">
 
-	<div class="row align-items-center p-4 justify-content-center">
+		<div class="row align-items-center p-4 justify-content-center">
 
 		<div id="logoDiv" class="col-lg-3 col-md-3 col-sm-5 d-flex align-items-center justify-content-center ">
 
@@ -25,25 +26,25 @@
 
 		</div>
 
-		<div id="TSTDiv" class="col-lg-4 text-center">
+			<div id="TSTDiv" class="col-lg-4 text-center">
 
-			<h2 class="fw-light">
-				Sistema de Gerenciamento
-			</h2>
+				<h2 class="fw-light">
+					Sistema de Gerenciamento
+				</h2>
 
-			<p class="fs-4">
-				Segurança do Trabalho
-			</p>
+				<p class="fs-4">
+					Segurança do Trabalho
+				</p>
+
+			</div>
 
 		</div>
 
-	</div>
+	</header>
 
-</header>
-
-<!-- Menu de navegação -->
-<nav>
-	<ul class="nav nav-tabs nav-fill justify-content-center p-3 row">
+	<!-- Menu de navegação -->
+	<nav>
+		<ul class="nav nav-tabs nav-fill justify-content-center p-3 row">
 
 		<li class="col-lg-2">
 			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center" href="#">
@@ -59,11 +60,16 @@
 			</a>
 		</li>
 
-		<li class="col-lg-2">
-			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center" href="#">
+		<li class="col-lg-2 dropdown">
+			<a class="btn btn-outline-dark d-flex align-items-center justify-content-center dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 				<i class="bi bi-shield-shaded"></i>
 				&nbsp;Gerenciar EPIs
 			</a>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" routerLink="/components/digital-sheet-modal">Cadastro de EPIs no Estoque</a></li>
+				<li><a class="dropdown-item" routerLink="/components/epi-delivery-modal">Entrega de EPIs</a></li>
+				<li><a class="dropdown-item" routerLink="/epi/filtro">Pesquisar EPIs</a></li>
+			</ul>
 		</li>
 
 		<li class="col-lg-2">
@@ -81,15 +87,14 @@
 			</a>
 		</li>
 
-	</ul>
-</nav>
+		</ul>
+	</nav>
+</div>
 
 <!-- feito em aula: -->
-<section class="container py-4">
+<!-- <section class="container py-4">
 	<article class="text-center mb-4">
-		<span class="badge bg-primary mb-2">Sistema de Gestão</span>
-		<a id="login-button" routerLink="/login" class="btn btn-sm ms-2 mt-2">
-			Login</a>
+					
 		<h1 class="display-5 fw-bold">MAR Metalúgica</h1>
 		<h4 class="text-secondary">A metalúrgica da sua praia</h4>
 	</article>
@@ -109,27 +114,11 @@
 		</ul>
 
 	</div>
-</section>
+</section> -->
 
 <hr class="my-4">
 
-<nav class="container d-flex flex-wrap gap-2 justify-content-center mt-3">
 
-	<a routerLink="/epi" class="btn btn-outline-primary ms-2">
-
-		Lista de EPIs
-
-	</a>
-
-	<a routerLink="/epi/detalhe" class="btn btn-outline-secondary ms-2">
-
-		Detalhes do EPI
-
-	</a>
-	<a routerLink="/epi/cadastro" class="btn btn-outline-success ms-2">
-		Cadastrar EPI
-	</a>
-</nav>
 <!-- <app-epi-list></app-epi-list>
 <app-epi-detalhe></app-epi-detalhe> -->
 <router-outlet></router-outlet>
