@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DeliveryItem, EpiOption } from '../../../models/epi.models';
 import { EpiData } from '../../../services/epi-data';
-import { DigitalSheetModal } from '../digital-sheet-modal/digital-sheet-modal';
+import { FichaEntregaEPIModal } from '../ficha-entrega-epi-modal/ficha-entrega-epi-modal';
 import { ReplaceEpiModal } from '../replace-epi-modal/replace-epi-modal';
 
 @Component({
-  selector: 'app-delivery-form',
-  imports: [CommonModule, FormsModule, DigitalSheetModal, ReplaceEpiModal],
-  templateUrl: './delivery-form.html',
-  styleUrl: './delivery-form.scss',
+  selector: 'app-formulario-entrega',
+  imports: [CommonModule, FormsModule, FichaEntregaEPIModal, ReplaceEpiModal],
+  templateUrl: './formulario-entrega.html',
+  styleUrl: './formulario-entrega.scss',
 })
-export class DeliveryForm {
+export class FormularioEntrega {
   availableEpis: EpiOption[];
   deliveryItems: DeliveryItem[];
   showReplaceModal = false;
-  showDigitalSheetModal = false;
+  showFichaEntregaEPIModal = false;
   selectedFichaName = '';
   fichaPreviewUrl = '';
   deliverySaved = false;

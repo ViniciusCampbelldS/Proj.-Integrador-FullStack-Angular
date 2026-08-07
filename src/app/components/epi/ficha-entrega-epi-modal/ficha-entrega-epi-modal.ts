@@ -4,12 +4,12 @@ import { input, output } from '@angular/core';
 import { DeliveryItem } from '../../../models/epi.models';
 
 @Component({
-  selector: 'app-digital-sheet-modal',
+  selector: 'app-ficha-entrega-epi-modal',
   imports: [CommonModule],
-  templateUrl: './digital-sheet-modal.html',
-  styleUrl: './digital-sheet-modal.scss',
+  templateUrl: './ficha-entrega-epi-modal.html',
+  styleUrl: './ficha-entrega-epi-modal.scss',
 })
-export class DigitalSheetModal {
+export class FichaEntregaEPIModal {
   deliveryItems = input.required<DeliveryItem[]>();
   closed = output<void>();
 }

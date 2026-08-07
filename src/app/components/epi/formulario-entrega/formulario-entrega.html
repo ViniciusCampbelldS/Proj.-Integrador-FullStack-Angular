@@ -128,7 +128,7 @@
     </div>
 
     <div class="action-row">
-      <button class="btn btn-soft" type="button" (click)="showDigitalSheetModal = true">
+      <button class="btn btn-soft" type="button" (click)="showFichaEntregaEPIModal = true">
         <i class="bi bi-pen"></i>
         Preencher ficha digital
       </button>
@@ -168,8 +168,8 @@
   (closed)="showReplaceModal = false"
 />
 
-<app-digital-sheet-modal
-  *ngIf="showDigitalSheetModal"
+<app-ficha-entrega-epi-modal
+  *ngIf="showFichaEntregaEPIModal"
   [deliveryItems]="deliveryItems"
-  (closed)="showDigitalSheetModal = false"
+  (closed)="showFichaEntregaEPIModal = false"
 />
