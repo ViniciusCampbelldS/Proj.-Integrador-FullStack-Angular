@@ -1,113 +1,53 @@
-<section class="hero">
-  <div class="hero-content">
-    <p class="eyebrow">Seguranca do trabalho</p>
-    <h1>Controle de EPI</h1>
-    <p>
-      Entregas em lote, fichas, substituicoes e historico administrativo em uma
-      tela objetiva para a equipe de SST.
-    </p>
-  </div>
-
-  <div class="hero-panel">
-    <div class="metric">
-      <strong>2</strong>
-      <span>EPIs no rascunho</span>
-    </div>
-    <div class="metric">
-      <strong>84%</strong>
-      <span>Conformidade geral</span>
-    </div>
-  </div>
-</section>
-
 <section class="content-area">
-  <div class="section-heading">
-    <div>
-      <p class="eyebrow">Inventario</p>
-      <h2>Equipamentos de protecao</h2>
-      <p>Consulte EPIs, registre entregas multiplas e acompanhe historicos.</p>
-    </div>
-    <a class="btn btn-brand" routerLink="/epi/cadastrar">
-      <i class="bi bi-plus-lg"></i>
-      Novo EPI
-    </a>
-  </div>
+	
+<!-- Navegação
+ 
+	<nav class="epi-tabs" role="tablist" aria-label="Secoes de EPI">
+		<button type="button" [class.active]="activeSstView === 'busca'" (click)="setSstView('busca')">
+			Busca EPI
+		</button>
+		<button type="button" [class.active]="activeSstView === 'cadastro'" (click)="setSstView('cadastro')">
+			Cadastro / Recebimento de EPIs
+		</button>
+		<button type="button" [class.active]="activeSstView === 'entrega'" (click)="setSstView('entrega')">
+			Entrega de EPIs
+		</button>
+		<button type="button" [class.active]="activeSstView === 'historico'" (click)="setSstView('historico')">
+			Historico ADM
+		</button>
+	</nav> -->
+	
+<!-- Guias -->
+	<section class="epi-panel">
+		@if (activeSstView === 'busca') {
+		<div class="epi-dashboard">
+			<section class="epi-filter-panel">
+				<app-epi-filter></app-epi-filter>
+			</section>
+		</div>
+		}
 
-  <nav class="epi-tabs" role="tablist" aria-label="Secoes de EPI">
-    <button
-      type="button"
-      [class.active]="activeSstView === 'busca'"
-      (click)="setSstView('busca')"
-    >
-      Busca EPI
-    </button>
-    <button
-      type="button"
-      [class.active]="activeSstView === 'cadastro'"
-      (click)="setSstView('cadastro')"
-    >
-      Cadastro / Recebimento de EPIs
-    </button>
-    <button
-      type="button"
-      [class.active]="activeSstView === 'entrega'"
-      (click)="setSstView('entrega')"
-    >
-      Entrega de EPIs
-    </button>
-    <button
-      type="button"
-      [class.active]="activeSstView === 'historico'"
-      (click)="setSstView('historico')"
-    >
-      Historico ADM
-    </button>
-  </nav>
+		@if (activeSstView === 'cadastro') {
+		<section class="panel cadastro-panel">
+			<div class="panel-title">
+				<p class="eyebrow">Cadastro / Recebimento</p>
+				<h3>Ficha de EPI preenchida</h3>
+			</div>
+			<p class="panel-description">
+				Gerencie o cadastro e o recebimento de EPIs, incluindo conferência e controle de estoque.
+			</p>
+			<div class="cadastro-placeholder">
+				<p>Aqui vai o formulário de cadastro/recebimento e conferência de EPI.</p>
+			</div>
+		</section>
+		}
 
-  <section class="epi-panel">
-    @if (activeSstView === 'busca') {
-      <div class="epi-dashboard">
-        <div class="epi-metrics">
-          <div class="metric card-blue-dark">
-            <strong>2</strong>
-            <span>EPIs no rascunho</span>
-          </div>
-          <div class="metric card-blue-medium">
-            <strong>84%</strong>
-            <span>Conformidade geral</span>
-          </div>
-        </div>
+		@if (activeSstView === 'entrega') {
+		<app-formulario-entrega></app-formulario-entrega>
+		}
 
-        <hr />
-
-        <section class="epi-filter-panel">
-          <p class="panel-title">Busca EPI</p>
-          <app-epi-filter></app-epi-filter>
-        </section>
-      </div>
-    }
-
-    @if (activeSstView === 'cadastro') {
-      <section class="panel cadastro-panel">
-        <div class="panel-title">
-          <p class="eyebrow">Cadastro / Recebimento</p>
-          <h3>Ficha de EPI preenchida</h3>
-        </div>
-        <p class="panel-description">
-          Gerencie o cadastro e o recebimento de EPIs, incluindo conferência e controle de estoque.
-        </p>
-        <div class="cadastro-placeholder">
-          <p>Aqui vai o formulário de cadastro/recebimento e conferência de EPI.</p>
-        </div>
-      </section>
-    }
-
-    @if (activeSstView === 'entrega') {
-      <app-formulario-entrega></app-formulario-entrega>
-    }
-
-    @if (activeSstView === 'historico') {
-      <app-admin-history></app-admin-history>
-    }
-  </section>
+		@if (activeSstView === 'historico') {
+		<app-admin-history></app-admin-history>
+		}
+	</section>
 </section>

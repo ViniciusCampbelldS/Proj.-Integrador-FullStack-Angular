@@ -12,11 +12,11 @@ export class AuthService {
   }
 
   salvarToken(token: string) {
-    localStorage.setItem('token', token);
+    sessionStorage.setItem('token', token);
   }
 
   obterToken() {
-    return localStorage.getItem('token');
+    return sessionStorage.getItem('token');
   }
 
   isAuthenticated(): boolean {
@@ -24,6 +24,6 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
 }

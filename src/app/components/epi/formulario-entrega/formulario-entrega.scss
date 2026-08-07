@@ -1,42 +1,545 @@
+// ======================================================
+// 1. VARIAVEIS
+// ======================================================
+
+$cor-principal: #0d6efd;
+$cor-azul-medio: #04679e;
+$cor-azul-escuro: #003d6c;
+$cor-azul-claro: #1996d0;
+$cor-laranja-escuro: #e27425;
+$cor-laranja-claro: #f68d17;
+
+$cor-texto: #495057;
+$cor-texto-secundario: #6c757d;
+
+$cor-fundo: #f5f7fb;
+$cor-branca: #ffffff;
+
+$radius-padrao: 14px;
+$sombra-padrao: 0 8px 24px rgba(0, 61, 108, 0.08);
+
+
+// ======================================================
+// 2. ESTRUTURA
+// ======================================================
+
 :host {
   display: block;
+
+  padding: 24px 4%;
+
+  background: $cor-fundo;
 }
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+
+  gap: 22px;
+
+  align-items: start;
+}
+
+.panel {
+  border: 1px solid rgba(0, 61, 108, 0.08);
+  border-radius: $radius-padrao;
+
+  background: $cor-branca;
+
+  box-shadow: $sombra-padrao;
+}
+
+.delivery-panel {
+  padding: 22px;
+}
+
+.checklist-panel {
+  padding: 20px;
+}
+
+
+// ======================================================
+// 3. TITULOS
+// ======================================================
+
+.panel-title {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+
+  border-bottom: 1px solid rgba(0, 61, 108, 0.08);
+}
+
+.panel-title h3 {
+  margin: 0;
+
+  color: $cor-azul-escuro;
+
+  font-size: 1.45rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+
+  color: $cor-laranja-escuro;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.status-chip {
+  display: inline-flex;
+
+  width: 12px;
+  height: 12px;
+
+  border-radius: 999px;
+
+  background: $cor-laranja-claro;
+
+  box-shadow:
+    0 0 0 5px rgba(246, 141, 23, 0.14);
+}
+
+
+// ======================================================
+// 4. FORMULARIOS
+// ======================================================
+
+.form-label {
+  margin-bottom: 6px;
+
+  color: $cor-azul-escuro;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.form-control,
+.form-select {
+  min-height: 44px;
+
+  border: 1px solid rgba(0, 61, 108, 0.18);
+  border-radius: 9px;
+
+  color: $cor-texto;
+
+  font-size: 0.92rem;
+
+  box-shadow: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: $cor-azul-claro;
+
+  box-shadow:
+    0 0 0 0.2rem rgba(25, 150, 208, 0.14);
+}
+
+
+// ======================================================
+// 5. LISTA DE EPIS
+// ======================================================
 
 .delivery-list {
   display: grid;
+
   gap: 12px;
-  margin-top: 22px;
+
+  margin-top: 24px;
 }
 
 .delivery-list-head {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
+
   gap: 16px;
+
+  padding: 16px;
+
+  border: 1px solid rgba(0, 61, 108, 0.08);
+  border-radius: 12px;
+
+  background: #f8fbfe;
 }
 
 .delivery-list-head h4 {
   margin: 0;
-  color: var(--mar-blue-900);
-  font-size: 18px;
+
+  color: $cor-azul-escuro;
+
+  font-size: 1.05rem;
   font-weight: 800;
 }
 
 .delivery-item {
-  padding: 14px;
-  border: 1px solid var(--mar-line);
-  border-radius: var(--mar-radius);
+  padding: 16px;
+
+  border: 1px solid rgba(0, 61, 108, 0.10);
+  border-left: 4px solid $cor-azul-claro;
+  border-radius: 12px;
+
   background: #fbfdff;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
-@media (max-width: 680px) {
-  .delivery-list-head {
-    align-items: stretch;
-    flex-direction: column;
+.delivery-item:hover {
+  border-color: rgba(246, 141, 23, 0.45);
+
+  box-shadow:
+    0 8px 18px rgba(0, 61, 108, 0.08);
+
+  transform: translateY(-1px);
+}
+
+
+// ======================================================
+// 6. UPLOAD
+// ======================================================
+
+.upload-zone {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-top: 22px;
+  padding: 18px;
+
+  border: 1px dashed rgba(0, 61, 108, 0.28);
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(25, 150, 208, 0.08),
+    rgba(246, 141, 23, 0.08)
+  );
+}
+
+.upload-zone h4 {
+  margin: 0 0 5px;
+
+  color: $cor-azul-escuro;
+
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.upload-zone p {
+  margin: 0;
+
+  color: $cor-texto-secundario;
+
+  font-size: 0.9rem;
+}
+
+.preview-box {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-top: 12px;
+  padding: 14px 16px;
+
+  border: 1px solid rgba(0, 61, 108, 0.10);
+  border-radius: 12px;
+
+  background: #f8fbfe;
+}
+
+.preview-box div {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-box strong {
+  color: $cor-azul-escuro;
+
+  font-size: 0.95rem;
+}
+
+.preview-box span {
+  color: $cor-texto-secundario;
+
+  font-size: 0.82rem;
+}
+
+
+// ======================================================
+// 7. BOTOES
+// ======================================================
+
+.btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 42px;
+
+  border-radius: 9px;
+
+  font-size: 0.88rem;
+  font-weight: 700;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn i {
+  font-size: 0.95rem;
+}
+
+.btn-brand {
+  border: 1px solid $cor-laranja-escuro;
+
+  background: $cor-laranja-escuro;
+  color: $cor-branca;
+}
+
+.btn-brand:hover,
+.btn-brand:focus {
+  border-color: $cor-azul-escuro;
+
+  background: $cor-azul-escuro;
+  color: $cor-branca;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 12px rgba(0, 61, 108, 0.18);
+}
+
+.btn-outline-brand {
+  border: 1px solid rgba(0, 61, 108, 0.28);
+
+  background: $cor-branca;
+  color: $cor-azul-escuro;
+}
+
+.btn-outline-brand:hover,
+.btn-outline-brand:focus {
+  border-color: $cor-azul-escuro;
+
+  background: $cor-azul-escuro;
+  color: $cor-branca;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 12px rgba(0, 61, 108, 0.16);
+}
+
+.btn-soft {
+  border: 1px solid rgba(246, 141, 23, 0.24);
+
+  background: rgba(246, 141, 23, 0.12);
+  color: $cor-laranja-escuro;
+}
+
+.btn-soft:hover,
+.btn-soft:focus {
+  border-color: $cor-laranja-escuro;
+
+  background: $cor-laranja-escuro;
+  color: $cor-branca;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 12px rgba(246, 141, 23, 0.2);
+}
+
+.action-row {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.icon-button {
+  display: inline-grid;
+
+  width: 42px;
+  height: 42px;
+
+  place-items: center;
+
+  border: 1px solid rgba(0, 61, 108, 0.16);
+  border-radius: 9px;
+
+  background: $cor-branca;
+  color: $cor-azul-escuro;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.icon-button:hover:not(:disabled) {
+  background: $cor-laranja-escuro;
+  color: $cor-branca;
+
+  transform: translateY(-1px);
+}
+
+.icon-button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+
+// ======================================================
+// 8. CHECKLIST
+// ======================================================
+
+.checklist {
+  display: grid;
+
+  gap: 12px;
+
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+.checklist li {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: $cor-texto;
+
+  font-size: 0.92rem;
+}
+
+.checklist i {
+  color: $cor-laranja-claro;
+
+  font-size: 1rem;
+}
+
+.checklist .bi-check-circle-fill {
+  color: $cor-azul-claro;
+}
+
+
+// ======================================================
+// 9. ALERTA
+// ======================================================
+
+.alert-success {
+  border: 1px solid rgba(25, 150, 208, 0.22);
+  border-radius: 12px;
+
+  background: rgba(25, 150, 208, 0.10);
+  color: $cor-azul-escuro;
+
+  font-weight: 700;
+}
+
+
+// ======================================================
+// 10. LINHA
+// ======================================================
+
+#linha,
+.linha {
+  width: 64px;
+  height: 4px;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    $cor-laranja-claro,
+    $cor-laranja-escuro
+  );
+}
+
+
+// ======================================================
+// 11. RESPONSIVIDADE
+// ======================================================
+
+@media (max-width: 1100px) {
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .checklist-panel {
+    order: -1;
   }
 }
 
-#linha {
-  width: 100%;
-  border-bottom: 1px solid #000000;
+@media (max-width: 680px) {
+  :host {
+    padding: 16px 12px;
+  }
+
+  .delivery-panel,
+  .checklist-panel {
+    padding: 16px;
+  }
+
+  .delivery-list-head,
+  .upload-zone,
+  .preview-box {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .delivery-list-head .btn,
+  .upload-zone .btn,
+  .preview-box .btn,
+  .action-row .btn {
+    width: 100%;
+  }
+
+  .icon-button {
+    width: 100%;
+  }
 }

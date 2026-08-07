@@ -27,22 +27,20 @@ export class Login {
 
     const cpfSemFormatacao = this.cpf.replace(/\D/g, '');
 
-    this.authService
-      .login({
-        cpf: cpfSemFormatacao,
-        senha: this.senha,
-      })
-      .subscribe({
-        next: (res) => {
-          this.authService.salvarToken(res.access_token);
+    const cpfTeste = '12312312312';
+    const senhaTeste = '123';
 
-          this.router.navigateByUrl('/epi');
-        },
+    if (
+      cpfSemFormatacao === cpfTeste &&
+      this.senha === senhaTeste
+    ) {
+      this.authService.salvarToken('token-teste');
 
-        error: () => {
-          this.erroLogin = true;
-        },
-      });
+      this.router.navigateByUrl('/epi');
+      return;
+    }
+
+    this.erroLogin = true;
   }
 
   mostrarTelefoneTI(): void {

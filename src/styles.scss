@@ -1,40 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos globais do projeto */
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 
 :root {
-	--mar-blue-900: #003d6c; // Azul escuro 
-	--mar-blue-700: #04679e; // Azul medio
+	/* Cores oficiais MAR */
+	--mar-blue-900: #003d6c; // Azul escuro - principal
+	--mar-blue-700: #04679e; // Azul médio
 	--mar-blue-500: #1996d0; // Azul claro
 
 	--mar-orange-700: #e27425; // Laranja escuro
 	--mar-orange-500: #f68d17; // Laranja claro
 
-	--mar-ink: #152536; // Texto principal
-	--mar-muted: #667485; // Texto secundario
-	--mar-line: #dce5ec; // Bordas/divisores
-	--mar-surface: #ffffff; // Cards, paineis, top
-	--mar-bg: #f3f7fa; // Fundo geral
+	/* Cores auxiliares */
+	--mar-ink: #152536;
+	--mar-muted: #667485;
+	--mar-line: #dce5ec;
+	--mar-surface: #ffffff;
+	--mar-bg: #f3f7fa;
 
+	/* Estados */
 	--mar-success: #1c9b64;
 	--mar-warning: #ffc107;
 	--mar-danger: #dc3545;
 
+	/* Layout */
 	--mar-radius: 8px;
 	--mar-shadow: 0 18px 40px rgba(0, 61, 108, 0.12);
 
+	/* Fonte */
 	--mar-font: "Inter", "Segoe UI", Arial, sans-serif;
 }
+
+
 
 * {
 	box-sizing: border-box;
 }
 
+html,
+body {
+	min-height: 100%;
+}
+
 body {
 	min-width: 320px;
 	margin: 0;
+
 	background: var(--mar-bg);
 	color: var(--mar-ink);
+
 	font-family: var(--mar-font);
 }
 
@@ -45,60 +59,134 @@ textarea {
 	font: inherit;
 }
 
+
+
 .form-control,
 .form-select {
 	min-height: 44px;
+
 	border-color: var(--mar-line);
 	border-radius: var(--mar-radius);
+
+	transition:
+		border-color 0.2s,
+		box-shadow 0.2s;
 }
 
 .form-control:focus,
 .form-select:focus {
 	border-color: var(--mar-blue-500);
-	box-shadow: 0 0 0 0.2rem rgba(25, 150, 208, 0.16);
+
+	box-shadow:
+		0 0 0 0.2rem rgba(25, 150, 208, 0.16);
 }
+
+
 
 .btn-brand {
 	border-color: var(--mar-orange-700);
-	background: var(--mar-orange-700);
+	background-color: var(--mar-orange-700);
 	color: #fff;
+
+	font-weight: 700;
+
+	transition:
+		background-color 0.2s,
+		border-color 0.2s,
+		transform 0.1s;
 }
 
 .btn-brand:hover {
 	border-color: var(--mar-orange-500);
-	background: var(--mar-orange-500);
+	background-color: var(--mar-orange-500);
 	color: #fff;
 }
 
+.btn-brand:focus-visible {
+	border-color: var(--mar-orange-500);
+
+	box-shadow:
+		0 0 0 0.2rem rgba(246, 141, 23, 0.25);
+}
+
+.btn-brand:active {
+	transform: scale(0.98);
+}
+
+
+
 .btn-outline-brand {
 	border-color: var(--mar-blue-700);
+	background-color: transparent;
 	color: var(--mar-blue-900);
+
+	font-weight: 600;
+
+	transition:
+		background-color 0.2s,
+		border-color 0.2s,
+		color 0.2s;
 }
 
 .btn-outline-brand:hover {
 	border-color: var(--mar-blue-700);
-	background: #e8f5fc;
+	background-color: rgba(25, 150, 208, 0.1);
 	color: var(--mar-blue-900);
 }
 
+
 .btn-soft {
-	background: #e8f5fc;
+	border-color: transparent;
+	background-color: rgba(25, 150, 208, 0.1);
+	color: var(--mar-blue-900);
+
+	font-weight: 600;
+}
+
+.btn-soft:hover {
+	background-color: rgba(25, 150, 208, 0.18);
 	color: var(--mar-blue-900);
 }
+
 
 .panel {
 	padding: 22px;
+
 	border: 1px solid var(--mar-line);
 	border-radius: var(--mar-radius);
+
 	background: var(--mar-surface);
-	box-shadow: 0 8px 28px rgba(21, 37, 54, 0.05);
+
+	box-shadow:
+		0 8px 28px rgba(21, 37, 54, 0.05);
 }
+
 
 .eyebrow {
 	margin: 0 0 8px;
+
 	color: var(--mar-blue-700);
+
 	font-size: 12px;
 	font-weight: 800;
+
 	letter-spacing: 0;
 	text-transform: uppercase;
+}
+
+a {
+	color: var(--mar-blue-700);
+}
+
+a:hover {
+	color: var(--mar-blue-500);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+	outline: 2px solid var(--mar-blue-500);
+	outline-offset: 2px;
 }

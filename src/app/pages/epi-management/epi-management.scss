@@ -8,7 +8,7 @@
   gap: 0.5rem;
   margin: 1.5rem 0 1rem;
   padding: 0.5rem;
-  background: #f68d17;
+//   background: #f68d17;
   border-radius: 1rem;
   box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.08);
 }
@@ -18,21 +18,23 @@
   min-width: 10rem;
   border: 1px solid transparent;
   border-radius: 0.75rem;
-  background: #04679e;
-  color: white;
+//   background: #04679e;
+  color: Black;
   font-weight: 700;
   padding: 0.9rem 1.1rem;
   transition: transform 150ms ease, background 150ms ease, color 150ms ease;
 }
 
 .epi-tabs button:hover {
-  background: #1996d0;
+	// background: #04679e;
+	color: Black;
+	
+	transform: translateY(-2px);
 }
 
 .epi-tabs button.active {
-  background: #003d6c;
-  border-color: #e27425;
-  box-shadow: 0 0 0 3px rgba(226, 116, 37, 0.16);
+	color: Black;
+//   box-shadow: 0 0 0 3px rgba(226, 116, 37, 0.16);
 }
 
 .epi-panel {
@@ -56,7 +58,7 @@
 .metric {
   padding: 1.25rem 1.5rem;
   border-radius: 1rem;
-  color: white;
+  color: black;
   display: grid;
   row-gap: 0.5rem;
   align-items: center;
@@ -94,7 +96,7 @@
 
 .panel-description {
   margin: 1rem 0 1.5rem;
-  color: #333;
+//   color: #333;
 }
 
 .cadastro-placeholder {

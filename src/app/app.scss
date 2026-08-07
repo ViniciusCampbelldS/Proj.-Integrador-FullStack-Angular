@@ -1,129 +1,1136 @@
-//Parte copiada de src/app/epi/epi-filter/epi-filter.scss
-body {
-	background: #f5f7fb;
-}
+// ======================================================
+// 1. VARIAVEIS
+// ======================================================
 
-.nav-tabs .nav-link {
-	padding: 16px;
-	font-size: 1.05rem;
-}
-
-.list-card {
-	min-height: 420px;
-}
-
-.card {
-	border-radius: 12px;
-}
-
-.form-control {
-	height: 45px;
-}
-
-.btn {
-	height: 45px;
-}
-
-.display-3 {
-	font-weight: 300;
-}
-
-.display-4 {
-	font-weight: 700;
-}
-
-.list-group-item {
-	border: none;
-	padding-left: 0;
-}
-
-.logo {
-	/*	vw = view width = % do tamanho da tela:		*/
-	/*	width: 17vw;								*/
-
-	/*	Manter proporção da imagem original:		*/
-	height: auto;
-
-	/*	40% do tamanho da tela, desde que não seja menor que 133px ou maior que 333px:	*/
-	width: clamp(133px, 40vw, 333px);
-	/*	se usar % em vez de vw, será 40% do tamanho do <div> ou outra tag onde a imagem estiver aninhada	*/
-}
-
-/*	Tamanho da tela entre 990 e 1250 px	*/
-@media (min-width: 990px) and (max-width: 1250px) {
-	/*	tag que contém <img> */
-	header div #logoDiv {
-		/* 30% do tamanho do header */
-		width: 30%;
-	}
-
-	
-	header div #logoDiv img {
-		width: 100%;
-	}
-
-	header div #metalDiv {
-		width: 40%;
-	}
-
-	header div #TSTDiv {
-		width: 30%;
-	}
-}
-
-@media (max-width: 989px) {
-	header div #logoDiv img {
-		width: 50%;
-	}
-}
-// Final do copiado de epi-filter.scss
-
-// criação de variáveis
 $cor-principal: #0d6efd;
+
+$cor-azul-medio: #04679e;
+$cor-azul-escuro: #003d6c;
+$cor-azul-claro: #1996d0;
+
+$cor-laranja-escuro: #e27425;
+$cor-laranja-claro: #f68d17;
+
+$cor-vermelha: #dc3545;
+
 $cor-texto: #495057;
+$cor-texto-secundario: #6c757d;
+
+$cor-fundo: #f5f7fb;
+$cor-branca: #ffffff;
+
+$radius-padrao: 12px;
+
+$sombra-padrao:
+  0 8px 24px rgba(0, 61, 108, 0.08);
+
+
+// ======================================================
+// 2. ESTRUTURA GERAL
+// ======================================================
 
 :host {
-    display: block;
+  display: block;
 }
 
-.container {
-    max-width: 960px;
+body {
+  background: $cor-fundo;
 }
 
-h1 {
-    color: $cor-principal;
+
+// ======================================================
+// 3. CABECALHO
+// ======================================================
+
+header {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f7fbff 100%
+  );
+
+  border-bottom:
+    1px solid rgba(0, 61, 108, 0.08);
+
+  box-shadow: $sombra-padrao;
+
+  > .row {
+    min-height: 165px;
+
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+
+    margin: 0;
+  }
+}
+
+
+// ======================================================
+// LOGO
+// ======================================================
+
+#logoDiv {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  .logo {
+    width: clamp(
+      180px,
+      17vw,
+      250px
+    );
+
+    height: auto;
+
+    margin-right: 0 !important;
+
+    filter: drop-shadow(
+      0 6px 10px
+      rgba(0, 61, 108, 0.10)
+    );
+
+    transition:
+      transform 0.25s ease;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+}
+
+
+// ======================================================
+// NOME DA EMPRESA
+// ======================================================
+
+#metalDiv {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  > div {
+    padding: 10px 28px;
+  }
+
+  h1 {
+    margin-bottom: 4px !important;
+
+    color:
+      $cor-azul-escuro !important;
+
+    font-size:
+      clamp(
+        2rem,
+        3vw,
+        2.7rem
+      );
+
+    font-weight: 750;
+
+    line-height: 1.1;
+
+    letter-spacing: -1px;
+
     text-align: center;
-    margin-bottom: 0.5rem;
-}
+  }
 
-h4 {
-    color: #6c757d;
+  h2 {
+    margin: 0;
+
+    color:
+      $cor-laranja-claro !important;
+
+    font-size:
+      clamp(
+        1rem,
+        1.7vw,
+        1.35rem
+      );
+
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    letter-spacing: 0.3px;
+
     text-align: center;
+  }
 }
 
-p.Lead {
+
+// ======================================================
+// SISTEMA
+// ======================================================
+
+#TSTDiv {
+  padding-left: 0;
+
+  text-align: center;
+
+  h2 {
+    margin-bottom: 5px;
+
+    color: $cor-azul-escuro;
+
+    font-size: 1.35rem;
+
+    font-weight: 700 !important;
+
+    line-height: 1.2;
+
+    letter-spacing: 0.2px;
+  }
+
+  p {
+    margin-top: 4px;
+    margin-bottom: 0;
+
     color: $cor-texto;
-    text-align: center;
-    font-size: 1.1rem;
+
+    font-size: 0.95rem !important;
+
+    font-weight: 500;
+  }
 }
 
-.card {
-    background: #ffffff;
-    border-left: 4px solid $cor-principal;
+
+// ======================================================
+// 4. NAVEGACAO
+// ======================================================
+
+.nav-tabs {
+  border-bottom: 0;
+
+  .nav-link {
+    padding: 16px;
+    font-size: 1.05rem;
+  }
 }
 
-.card h5 {
-    color: $cor-principal;
+nav {
+  background: $cor-branca;
+
+  padding: 0 4% 18px;
+
+  .nav {
+    display: flex !important;
+
+    align-items: center;
+    justify-content: space-between !important;
+
+    width: 100%;
+
+    gap: 14px;
+
+    background: #f8fbfe;
+
+    border:
+      1px solid
+      rgba(0, 61, 108, 0.08);
+
+    border-radius: 14px;
+
+    padding: 12px 28px !important;
+
+    box-shadow:
+      0 4px 15px
+      rgba(0, 61, 108, 0.05);
+  }
+
+  li {
+    flex: 1 1 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    min-width: 0;
+
+    padding: 0;
+    margin: 0;
+  }
+
+  a.btn,
+  button.btn {
+    width: 100%;
+    max-width: 230px;
+    min-width: 0;
+    height: 46px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: $cor-azul-escuro;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover,
+    &:focus {
+      background:
+        $cor-azul-escuro;
+
+      color:
+        $cor-branca;
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 5px 12px
+        rgba(0, 61, 108, 0.18);
+    }
+
+    i {
+      margin-right: 6px;
+
+      color:
+        $cor-laranja-claro;
+
+      font-size: 1rem;
+
+      transition:
+        color 0.2s ease;
+    }
+
+    &:hover i,
+    &:focus i {
+      color:
+        $cor-branca;
+    }
+  }
 }
 
-nav a.btn {
-    min-width: 160px;
+
+// ======================================================
+// 5. AREA DE NOTIFICACOES
+// ======================================================
+
+.notification-area {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
 }
 
-#login-button {
-    background-color: #d67e0c;
-    color: #fff;
-    font-weight: bold;
-    position: fixed;    /* ou absolute */
-    left: 12%;
+.notification-button {
+  position: relative;
+
+  width: 100%;
+  max-width: 230px;
+  min-width: 0;
+}
+
+.notification-button i {
+  margin-right: 0;
+
+  color:
+    $cor-laranja-claro;
+}
+
+.notification-button:hover i,
+.notification-button:focus i {
+  color:
+    $cor-branca;
+}
+
+
+// ======================================================
+// BADGE DO SINO
+// ======================================================
+
+.notification-badge {
+  position: absolute;
+
+  top: 4px;
+  right: calc(50% - 22px);
+
+  display: grid;
+
+  min-width: 20px;
+  height: 20px;
+
+  place-items: center;
+
+  padding: 0 5px;
+
+  border:
+    2px solid
+    $cor-branca;
+
+  border-radius: 999px;
+
+  background:
+    $cor-laranja-escuro;
+
+  color:
+    $cor-branca;
+
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+
+// ======================================================
+// 6. PAINEL DE NOTIFICACOES
+// ======================================================
+
+.notification-panel {
+  position: absolute;
+
+  z-index: 9999;
+
+  top:
+    calc(100% + 12px);
+
+  right: 0;
+
+  width: 380px;
+
+  max-width:
+    calc(100vw - 32px);
+
+  border:
+    1px solid
+    rgba(0, 61, 108, 0.12);
+
+  border-radius:
+    $radius-padrao;
+
+  background:
+    $cor-branca;
+
+  box-shadow:
+    0 16px 36px
+    rgba(0, 61, 108, 0.18);
+
+  overflow: hidden;
+
+  text-align: left;
+}
+
+
+// ======================================================
+// CABECALHO DAS NOTIFICACOES
+// ======================================================
+
+.notification-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  padding: 16px;
+
+  border-bottom:
+    1px solid
+    rgba(0, 61, 108, 0.10);
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f7fbff 100%
+    );
+}
+
+.notification-title {
+  display: flex;
+
+  flex-direction: column;
+
+  strong {
+    color:
+      $cor-azul-escuro;
+
+    font-size: 16px;
+
+    font-weight: 800;
+  }
+
+  span {
+    margin-top: 2px;
+
+    color:
+      $cor-texto-secundario;
+
+    font-size: 12px;
+  }
+}
+
+
+// ======================================================
+// BOTAO CONFIGURACOES
+// ======================================================
+
+.notification-settings {
+  display: grid;
+
+  width: 36px;
+
+  height: 36px;
+
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background:
+    rgba(
+      246,
+      141,
+      23,
+      0.12
+    );
+
+  color:
+    $cor-laranja-escuro;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover,
+  &:focus {
+    background:
+      $cor-laranja-escuro;
+
+    color:
+      $cor-branca;
+
+    transform:
+      translateY(-1px);
+  }
+}
+
+
+// ======================================================
+// 7. CONFIGURACOES
+// ======================================================
+
+.notification-config {
+  display: grid;
+
+  gap: 10px;
+
+  padding: 16px;
+}
+
+.config-title {
+  margin-bottom: 4px;
+
+  color:
+    $cor-azul-escuro;
+
+  font-size: 15px;
+}
+
+.notification-config label {
+  margin-top: 4px;
+
+  color:
+    $cor-texto;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.days-input {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.days-input input {
+  width: 75px;
+
+  min-height: 40px;
+
+  padding:
+    6px 10px;
+
+  border:
+    1px solid
+    rgba(0, 61, 108, 0.18);
+
+  border-radius: 9px;
+
+  background:
+    $cor-branca;
+
+  color:
+    $cor-texto;
+
+  outline: none;
+
+  &:focus {
+    border-color:
+      $cor-laranja-claro;
+
+    box-shadow:
+      0 0 0 0.2rem
+      rgba(246, 141, 23, 0.18);
+  }
+}
+
+.days-input span {
+  color:
+    $cor-texto-secundario;
+
+  font-size: 13px;
+}
+
+.save-notification-config {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 42px;
+
+  margin-top: 8px;
+
+  padding:
+    8px 14px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background:
+    $cor-laranja-escuro;
+
+  color:
+    $cor-branca;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover,
+  &:focus {
+    background:
+      $cor-azul-escuro;
+
+    transform:
+      translateY(-1px);
+
+    box-shadow:
+      0 5px 12px
+      rgba(0, 61, 108, 0.18);
+  }
+}
+
+
+// ======================================================
+// 8. LISTA DE NOTIFICACOES
+// ======================================================
+
+.notification-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  max-height: 420px;
+
+  padding: 12px;
+
+  overflow-y: auto;
+
+  background: #f8fafc;
+}
+
+
+// ======================================================
+// ITEM DA NOTIFICACAO
+// ======================================================
+
+.notification-item {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  padding: 14px;
+
+  border:
+    1px solid
+    rgba(
+      226,
+      116,
+      37,
+      0.25
+    );
+
+  border-left:
+    4px solid
+    $cor-laranja-escuro;
+
+  border-radius: 10px;
+
+  background:
+    $cor-branca;
+
+  box-shadow:
+    0 3px 10px
+    rgba(0, 61, 108, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform:
+      translateY(-1px);
+
+    box-shadow:
+      0 5px 14px
+      rgba(0, 61, 108, 0.10);
+  }
+}
+
+
+// ======================================================
+// ITEM VENCIDO
+// ======================================================
+
+.notification-item-expired {
+  border-color:
+    rgba(
+      220,
+      53,
+      69,
+      0.22
+    );
+
+  border-left-color:
+    $cor-vermelha;
+}
+
+
+// ======================================================
+// ICONE DA NOTIFICACAO
+// ======================================================
+
+.notification-item-icon {
+  display: grid;
+
+  flex:
+    0 0 36px;
+
+  width: 36px;
+
+  height: 36px;
+
+  place-items: center;
+
+  border-radius: 9px;
+
+  background:
+    rgba(
+      246,
+      141,
+      23,
+      0.12
+    );
+
+  color:
+    $cor-laranja-escuro;
+
+  i {
+    margin: 0;
+
+    color: inherit;
+
+    font-size: 18px;
+  }
+}
+
+.notification-item-expired
+.notification-item-icon {
+  background:
+    rgba(
+      220,
+      53,
+      69,
+      0.10
+    );
+
+  color:
+    $cor-vermelha;
+}
+
+
+// ======================================================
+// CONTEUDO DA NOTIFICACAO
+// ======================================================
+
+.notification-item-content {
+  display: flex;
+
+  flex: 1;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  min-width: 0;
+}
+
+
+// ======================================================
+// STATUS
+// ======================================================
+
+.notification-status {
+  display: block;
+
+  margin-bottom: 2px;
+
+  font-size: 13px;
+
+  font-weight: 800;
+}
+
+.notification-status.warning {
+  color:
+    $cor-laranja-escuro;
+}
+
+.notification-status.expired {
+  color:
+    $cor-vermelha;
+}
+
+
+// ======================================================
+// NOME DO EPI
+// ======================================================
+
+.notification-epi-name {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color:
+    $cor-azul-escuro;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+
+// ======================================================
+// INFORMACOES MENORES
+// ======================================================
+
+.notification-item-content small {
+  display: block;
+
+  color:
+    $cor-texto-secundario;
+
+  font-size: 11.5px;
+
+  line-height: 1.45;
+}
+
+
+// ======================================================
+// DATA / TEMPO RESTANTE
+// ======================================================
+
+.notification-date {
+  margin-top: 5px;
+
+  color:
+    $cor-laranja-escuro !important;
+
+  font-size: 12px !important;
+
+  font-weight: 800;
+}
+
+.notification-date.expired {
+  color:
+    $cor-vermelha !important;
+}
+
+
+// ======================================================
+// BARRA DE ROLAGEM DAS NOTIFICACOES
+// ======================================================
+
+.notification-list::-webkit-scrollbar {
+  width: 7px;
+}
+
+.notification-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notification-list::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background:
+    rgba(
+      0,
+      61,
+      108,
+      0.20
+    );
+}
+
+.notification-list::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(
+      0,
+      61,
+      108,
+      0.35
+    );
+}
+
+
+// ======================================================
+// 9. NENHUMA NOTIFICACAO
+// ======================================================
+
+.notification-empty {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  padding:
+    28px 20px;
+
+  text-align: center;
+
+  i {
+    margin-bottom: 8px;
+
+    color:
+      $cor-laranja-claro;
+
+    font-size: 28px;
+  }
+
+  strong {
+    color:
+      $cor-texto;
+
+    font-size: 14px;
+  }
+
+  span {
+    margin-top: 5px;
+
+    color:
+      $cor-texto-secundario;
+
+    font-size: 12px;
+  }
+}
+
+
+// ======================================================
+// 10. RESPONSIVIDADE
+// ======================================================
+
+@media
+(min-width: 990px)
+and
+(max-width: 1250px) {
+  #logoDiv {
+    width: 30%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  #metalDiv {
+    width: 40%;
+  }
+
+  #TSTDiv {
+    width: 30%;
+  }
+
+  nav {
+    .nav {
+      display: grid !important;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      padding:
+        12px !important;
+    }
+
+    li {
+      width: 100%;
+    }
+
+    a.btn,
+    button.btn,
+    .notification-button {
+      max-width: none;
+    }
+  }
+}
+
+@media
+(max-width: 989px) {
+  header {
+    > .row {
+      min-height: auto;
+    }
+  }
+
+  #logoDiv {
+    width: 100%;
+
+    justify-content: center;
+
+    img {
+      width: 50%;
+
+      margin-right:
+        0 !important;
+    }
+  }
+
+  #metalDiv {
+    width: 100%;
+
+    margin-top: 1rem;
+  }
+
+  #TSTDiv {
+    width: 100%;
+
+    margin-top: 1rem;
+
+    border-left: none;
+
+    border-top:
+      1px solid #e9ecef;
+
+    padding-left: 0;
+
+    padding-top: 20px;
+  }
+
+  nav {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    .nav {
+      display: grid !important;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 10px;
+
+      padding:
+        12px !important;
+    }
+
+    li {
+      width: 100%;
+
+      margin-bottom: 0;
+    }
+
+    a.btn,
+    button.btn,
+    .notification-button {
+      width: 100%;
+      max-width: none;
+    }
+  }
+}
+
+@media
+(max-width: 680px) {
+  nav {
+    .nav {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .notification-panel {
+    position: fixed;
+
+    top: 80px;
+
+    right: 16px;
+
+    left: 16px;
+
+    width: auto;
+
+    max-width: none;
+  }
+
+  .notification-list {
+    max-height:
+      calc(100vh - 180px);
+
+    padding: 10px;
+  }
+
+  .notification-item {
+    padding: 12px;
+  }
 }

@@ -1,5 +1,650 @@
 <section class="homepage">
-  <h1>Bem-vindo</h1>
-  <p>Esta é a nova página inicial do sistema.</p>
-  <img src="/img/onda.gif" alt="Animação de onda" />
+
+  <!-- ==================================================
+       HERO
+  =================================================== -->
+
+  <section class="hero-dashboard">
+
+    <div class="hero-content">
+
+      <div class="hero-top">
+
+        <span class="hero-badge">
+          <i class="bi bi-shield-check"></i>
+          Painel de Segurança
+        </span>
+
+        <span class="hero-date">
+          <i class="bi bi-calendar3"></i>
+          {{ dataHoje }}
+        </span>
+
+      </div>
+
+
+      <div class="hero-text">
+
+        <p class="hero-eyebrow">
+          SEGURANÇA DO TRABALHO
+        </p>
+
+        <h1>
+          {{ saudacao }}!
+        </h1>
+
+        <p class="hero-description">
+          Acompanhe EPIs, vencimentos e treinamentos
+          da MAR Metalúrgica em um só lugar.
+        </p>
+
+      </div>
+
+
+      <div class="hero-actions">
+
+        <a
+          routerLink="/epi"
+          class="hero-button hero-button-primary"
+        >
+          <i class="bi bi-shield-plus"></i>
+          Gerenciar EPIs
+        </a>
+
+        <a
+          routerLink="/treinamento"
+          class="hero-button hero-button-secondary"
+        >
+          <i class="bi bi-mortarboard"></i>
+          Treinamentos
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- STATUS DO HERO -->
+
+    <div class="hero-status">
+
+      <div class="status-glow"></div>
+
+      <div class="hero-shield">
+
+        <i class="bi bi-shield-check"></i>
+
+      </div>
+
+      <span class="hero-status-label">
+        Status operacional
+      </span>
+
+      <strong class="hero-status-value">
+        {{ percentualValidos }}%
+      </strong>
+
+      <span class="hero-status-description">
+        dos EPIs monitorados estão válidos
+      </span>
+
+
+      <div class="hero-progress">
+
+        <div
+          class="hero-progress-bar"
+          [style.width.%]="percentualValidos"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       CARDS DE ESTATISTICAS
+  =================================================== -->
+
+  <section class="stats-grid">
+
+    <!-- TOTAL -->
+
+    <article class="stat-card stat-total">
+
+      <div class="stat-icon">
+        <i class="bi bi-shield-shaded"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          EPIs monitorados
+        </span>
+
+        <strong>
+          {{ totalEpis }}
+        </strong>
+
+        <small>
+          Total cadastrado
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <!-- EM DIA -->
+
+    <article class="stat-card stat-ok">
+
+      <div class="stat-icon">
+        <i class="bi bi-check-circle"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Em dia
+        </span>
+
+        <strong>
+          {{ episEmDia.length }}
+        </strong>
+
+        <small>
+          Sem alertas
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <!-- PROXIMOS -->
+
+    <article class="stat-card stat-warning">
+
+      <div class="stat-icon">
+        <i class="bi bi-clock-history"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Próximos
+        </span>
+
+        <strong>
+          {{ episProximos.length }}
+        </strong>
+
+        <small>
+          Perto do vencimento
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <!-- VENCIDOS -->
+
+    <article class="stat-card stat-danger">
+
+      <div class="stat-icon">
+        <i class="bi bi-exclamation-octagon"></i>
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Vencidos
+        </span>
+
+        <strong>
+          {{ episVencidos.length }}
+        </strong>
+
+        <small>
+          Requerem atenção
+        </small>
+
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- ==================================================
+       CONTEUDO PRINCIPAL
+  =================================================== -->
+
+  <section class="dashboard-grid">
+
+
+    <!-- =================================================
+         ATENCAO NECESSARIA
+    ================================================== -->
+
+    <article class="dashboard-panel attention-panel">
+
+      <div class="panel-header">
+
+        <div>
+
+          <span class="panel-eyebrow">
+            MONITORAMENTO
+          </span>
+
+          <h2>
+            Atenção necessária
+          </h2>
+
+          <p>
+            {{ mensagemPrioridade }}
+          </p>
+
+        </div>
+
+
+        @if (totalPendencias > 0) {
+
+          <span class="attention-counter">
+            {{ totalPendencias }}
+          </span>
+
+        }
+
+      </div>
+
+
+      @if (totalPendencias === 0) {
+
+        <div class="attention-empty">
+
+          <div class="attention-empty-icon">
+
+            <i class="bi bi-check-lg"></i>
+
+          </div>
+
+          <strong>
+            Tudo certo!
+          </strong>
+
+          <span>
+            Nenhum EPI precisa de atenção no momento.
+          </span>
+
+        </div>
+
+      } @else {
+
+        <div class="attention-list">
+
+          @for (
+            epi of episComNotificacao;
+            track epi.id
+          ) {
+
+            <div
+              class="attention-item"
+              [class.attention-expired]="estaVencido(epi)"
+            >
+
+              <div class="attention-icon">
+
+                @if (estaVencido(epi)) {
+
+                  <i class="bi bi-x-circle-fill"></i>
+
+                } @else {
+
+                  <i class="bi bi-exclamation-triangle-fill"></i>
+
+                }
+
+              </div>
+
+
+              <div class="attention-info">
+
+                <div class="attention-heading">
+
+                  <strong>
+                    {{ epi.nome }}
+                  </strong>
+
+
+                  @if (estaVencido(epi)) {
+
+                    <span class="status-tag expired">
+                      Vencido
+                    </span>
+
+                  } @else {
+
+                    <span class="status-tag warning">
+                      Próximo
+                    </span>
+
+                  }
+
+                </div>
+
+
+                <div class="attention-meta">
+
+                  <span>
+                    <i class="bi bi-upc-scan"></i>
+                    CA {{ epi.ca }}
+                  </span>
+
+                  <span>
+                    <i class="bi bi-person"></i>
+                    {{ epi.funcionario }}
+                  </span>
+
+                </div>
+
+
+                <span
+                  class="attention-time"
+                  [class.expired]="estaVencido(epi)"
+                >
+                  <i class="bi bi-clock"></i>
+                  {{ textoVencimento(epi) }}
+                </span>
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+      }
+
+
+      <a
+        routerLink="/epi/filtro"
+        class="panel-link"
+      >
+        Ver todos os EPIs
+
+        <i class="bi bi-arrow-right"></i>
+      </a>
+
+    </article>
+
+
+    <!-- =================================================
+         ACESSO RAPIDO
+    ================================================== -->
+
+    <article class="dashboard-panel quick-panel">
+
+      <div class="panel-header">
+
+        <div>
+
+          <span class="panel-eyebrow">
+            NAVEGAÇÃO
+          </span>
+
+          <h2>
+            Acesso rápido
+          </h2>
+
+          <p>
+            Vá direto para as principais áreas.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="quick-grid">
+
+        <a
+          routerLink="/epi"
+          class="quick-card"
+        >
+
+          <div class="quick-icon blue">
+            <i class="bi bi-shield-shaded"></i>
+          </div>
+
+          <div>
+
+            <strong>
+              Gerenciar EPIs
+            </strong>
+
+            <span>
+              Cadastro e consulta
+            </span>
+
+          </div>
+
+          <i class="bi bi-chevron-right quick-arrow"></i>
+
+        </a>
+
+
+        <a
+          routerLink="/epi/filtro"
+          class="quick-card"
+        >
+
+          <div class="quick-icon orange">
+            <i class="bi bi-funnel"></i>
+          </div>
+
+          <div>
+
+            <strong>
+              Filtrar EPIs
+            </strong>
+
+            <span>
+              Busca avançada
+            </span>
+
+          </div>
+
+          <i class="bi bi-chevron-right quick-arrow"></i>
+
+        </a>
+
+
+        <a
+          routerLink="/treinamento"
+          class="quick-card"
+        >
+
+          <div class="quick-icon cyan">
+            <i class="bi bi-mortarboard"></i>
+          </div>
+
+          <div>
+
+            <strong>
+              Treinamentos
+            </strong>
+
+            <span>
+              Controle de capacitação
+            </span>
+
+          </div>
+
+          <i class="bi bi-chevron-right quick-arrow"></i>
+
+        </a>
+
+
+        <a
+          routerLink="/funcionario"
+          class="quick-card"
+        >
+
+          <div class="quick-icon dark">
+            <i class="bi bi-people"></i>
+          </div>
+
+          <div>
+
+            <strong>
+              Funcionários
+            </strong>
+
+            <span>
+              Portal do funcionário
+            </span>
+
+          </div>
+
+          <i class="bi bi-chevron-right quick-arrow"></i>
+
+        </a>
+
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- ==================================================
+       INDICADOR
+  =================================================== -->
+
+  <section class="compliance-panel">
+
+    <div class="compliance-icon">
+
+      <i class="bi bi-activity"></i>
+
+    </div>
+
+
+    <div class="compliance-content">
+
+      <div class="compliance-heading">
+
+        <div>
+
+          <span>
+            INDICADOR DE SEGURANÇA
+          </span>
+
+          <h2>
+            Validade dos EPIs
+          </h2>
+
+        </div>
+
+
+        <strong>
+          {{ percentualValidos }}%
+        </strong>
+
+      </div>
+
+
+      <div
+        class="compliance-progress"
+        role="progressbar"
+        [attr.aria-valuenow]="percentualValidos"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+
+        <div
+          class="compliance-progress-bar"
+          [style.width.%]="percentualValidos"
+        ></div>
+
+      </div>
+
+
+      <div class="compliance-legend">
+
+        <span class="legend-ok">
+
+          <i class="bi bi-circle-fill"></i>
+
+          {{ totalEpis - episVencidos.length }}
+          válidos
+
+        </span>
+
+
+        <span class="legend-warning">
+
+          <i class="bi bi-circle-fill"></i>
+
+          {{ episProximos.length }}
+          em atenção
+
+        </span>
+
+
+        <span class="legend-danger">
+
+          <i class="bi bi-circle-fill"></i>
+
+          {{ episVencidos.length }}
+          vencidos
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       BANNER FINAL
+  =================================================== -->
+
+  <section class="safety-banner">
+
+    <div class="safety-decoration decoration-one"></div>
+    <div class="safety-decoration decoration-two"></div>
+
+    <div class="safety-banner-icon">
+
+      <i class="bi bi-shield-check"></i>
+
+    </div>
+
+    <div>
+
+      <span>
+        SEGURANÇA EM PRIMEIRO LUGAR
+      </span>
+
+      <h2>
+        Prevenção hoje é segurança para o amanhã.
+      </h2>
+
+      <p>
+        Informação, acompanhamento e prevenção fazem
+        parte de um ambiente de trabalho mais seguro.
+      </p>
+
+    </div>
+
+  </section>
+
 </section>
