@@ -4,14 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { DeliveryItem, EpiOption } from '../../../models/epi.models';
 import { EpiData } from '../../../services/epi-data';
 import { FichaEntregaEPIModal } from './ficha-entrega-epi-modal/ficha-entrega-epi-modal';
-import { ReplaceEpiModal } from '../replace-epi-modal/replace-epi-modal';
+import { ReplaceEpiModal } from './replace-epi-modal/replace-epi-modal';
 
 @Component({
   selector: 'app-formulario-entrega',
   standalone: true,
-  imports: [CommonModule, FormsModule, FichaEntregaEPIModal, ReplaceEpiModal],
+  imports: [
+    CommonModule,
+    FormsModule,
+    FichaEntregaEPIModal,
+    ReplaceEpiModal,
+  ],
   templateUrl: './formulario-entrega.html',
-  styleUrl: './formulario-entrega.scss',
+  styleUrls: ['./formulario-entrega.scss'],
 })
 export class FormularioEntrega {
   availableEpis: EpiOption[];

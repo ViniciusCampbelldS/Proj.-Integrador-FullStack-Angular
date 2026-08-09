@@ -60,7 +60,7 @@
 - [X] Tela de Gestão de Treinamentos
   - [ ] Permissão: Apenas TST altera, Gerência visualiza
   - [ ] Edição manual de treinamentos por funcionário
-  - [X] Histórico de alterações (nova página)
+  - [ ] Histórico de alterações (nova página)
     - [ ] Timestamp de cada modificação
     - [ ] Registrar quem fez a alteração
   - [X] Upload de documento
