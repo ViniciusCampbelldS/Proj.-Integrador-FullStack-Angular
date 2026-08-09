@@ -1,0 +1,26 @@
+<section class="report-section">
+  <h2>Relatorio de EPI</h2>
+
+  <div class="report-card">
+    <label for="employeeEpi">Selecione o EPI</label>
+    <select id="employeeEpi" [(ngModel)]="reportComment">
+      <option *ngFor="let item of employeeEpis" [value]="item.name">{{ item.name }}</option>
+    </select>
+  </div>
+
+  <div class="report-card">
+    <label for="reportImages">Anexar imagens</label>
+    <input id="reportImages" type="file" multiple (change)="onReportImages($event)" />
+  </div>
+
+  <div class="report-card">
+    <label for="reportComment">Comentario</label>
+    <textarea id="reportComment" rows="4" [(ngModel)]="reportComment"></textarea>
+  </div>
+
+  <button type="button" (click)="submitReport()">Enviar relatorio</button>
+
+  <div *ngIf="reportSent" class="success">
+    Relatorio enviado com sucesso.
+  </div>
+</section>

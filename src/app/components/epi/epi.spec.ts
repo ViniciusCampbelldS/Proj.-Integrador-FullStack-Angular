@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { EpiService } from './epi';
 
-import { Epi } from './epi';
-
-describe('Epi', () => {
-  let service: Epi;
+describe('EpiService', () => {
+  let service: EpiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Epi);
+    service = TestBed.inject(EpiService);
   });
 
   it('should be created', () => {

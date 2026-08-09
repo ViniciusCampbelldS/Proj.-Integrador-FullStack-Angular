@@ -8,8 +8,24 @@ const routes: Routes = [
     component: FuncionarioPortal,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'meus-epis',
+      },
+      {
+        path: 'meus-epis',
+        loadComponent: () => import('./meus-epis/meus-epis').then((m) => m.MeusEpis),
+      },
+      {
+        path: 'meus-treinamentos',
+        loadComponent: () =>
+          import('./meus-treinamentos/meus-treinamentos')
+            .then((m) => m.MeusTreinamentos),
+      },
+      {
         path: 'relatorio-epi',
-        loadComponent: () => import('../../pages/employee-report/employee-report').then((m) => m.EmployeeReport),
+        pathMatch: 'full',
+        redirectTo: 'meus-epis',
       },
     ],
   },

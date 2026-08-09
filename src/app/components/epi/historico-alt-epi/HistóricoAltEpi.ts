@@ -4,12 +4,13 @@ import { HistoryEntry } from '../../../models/epi.models';
 import { EpiData } from '../../../services/epi-data';
 
 @Component({
-  selector: 'app-admin-history',
+  selector: 'app-historico-alt-epi',
+  standalone: true,
   imports: [CommonModule],
-  templateUrl: './admin-history.html',
-  styleUrl: './admin-history.scss',
+  templateUrl: './historico-alt-epi.html',
+  styleUrl: './historico-alt-epi.scss',
 })
-export class AdminHistory {
+export class HistóricoAltEpi {
   history: HistoryEntry[];
 
   constructor(private readonly epiData: EpiData) {

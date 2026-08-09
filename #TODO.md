@@ -44,7 +44,7 @@
 - [ ] Histórico de alterações
 
 ### 1.e. Agenda mensal
-- [x] Remover / não implementar agenda mensal
+- [x] Não implementar agenda mensal
 
 ### 1.f. Relatório sobre o estado (informado pelo funcionário)
 - [x] Página separada para relatório de estado
@@ -57,22 +57,21 @@
 ## 2. Pedro Henrique (2 telas)
 
 ### 2.a. Gestão de Treinamentos
-- [ ] Tela de Gestão de Treinamentos
+- [X] Tela de Gestão de Treinamentos
   - [ ] Permissão: Apenas TST altera, Gerência visualiza
   - [ ] Edição manual de treinamentos por funcionário
-    - [ ] Para treinamentos anteriores ao sistema e fora da empresa
-  - [ ] Histórico de alterações (nova página)
+  - [X] Histórico de alterações (nova página)
     - [ ] Timestamp de cada modificação
     - [ ] Registrar quem fez a alteração
-  - [ ] Upload de documento
+  - [X] Upload de documento
 
 ### 2.b. Agendar treinamento
-- [ ] Tela de agendamento de treinamento
+- [X] Tela de agendamento de treinamento
   - [ ] Convidar funcionário
 
 ### 2.c. Abertura de turmas para treinamentos
-- [ ] Campos para criar nova turma
-  - [ ] Agendar data do treinamento
+- [X] Campos para criar nova turma
+  - [X] Agendar data do treinamento
   - [ ] Cadastrar funcionários na turma
   - [ ] Upload da lista de presença assinada
 
@@ -93,7 +92,7 @@
 ## 5. Thales Fontes
 
 ### 5.a. Gerenciar Funcionários
-- [ ] Tela de Gerenciamento de Funcionários
+- [X] Tela de Gerenciamento de Funcionários
   - [ ] Setor
   - [ ] Cargo
   - [ ] NRs necessárias para a função
@@ -118,15 +117,15 @@
 - [ ] Campo de data/hora do treinamento
 
 ### 7.c. Avisos de vencimento de EPIs
-- [ ] Lista de avisos de vencimento de EPIs na página
+- [X] Lista de avisos de vencimento de EPIs na página
 
 ### 7.d. Avisos de vencimento de NRs
-- [ ] Lista de avisos de vencimento de NRs na página
+- [X] Lista de avisos de vencimento de NRs na página
 
 ## 8. Thales Faria: Portal do Funcionário
 
 ### 8.a. Meus EPIs
-- [ ] Tela "Meus EPIs"
+- [X] Tela "Meus EPIs"
   - [ ] Relatar estado do EPI com pop-up para upload
   - [ ] Visualizar fichas de EPI
     - [ ] Botão para baixar arquivo
@@ -134,7 +133,7 @@
     - [ ] Usar ícones para essas ações
 
 ### 8.b. Meus Treinamentos (Thales Fontes)
-- [ ] Tela "Meus Treinamentos"
+- [X] Tela "Meus Treinamentos"
   - [ ] Visualizar treinamentos concluídos
   - [ ] Visualizar treinamentos pendentes
 

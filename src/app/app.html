@@ -34,40 +34,6 @@
 
 </header>
 
-<style>
-  .nav>li {
-    position: relative;
-  }
-
-  .nav>li .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    min-width: 12rem;
-    padding: 0.25rem 0;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, .15);
-  }
-
-  .nav>li:hover .dropdown-menu {
-    display: block;
-  }
-
-  .dropdown-menu .dropdown-item {
-    display: block;
-    padding: 0.5rem 1rem;
-    color: #212529;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .dropdown-menu .dropdown-item:hover {
-    background: #f8f9fa;
-  }
-</style>
-
 <nav>
 
   <ul class="nav nav-tabs nav-fill justify-content-center align-items-center">
@@ -84,6 +50,15 @@
         <i class="bi bi-person-raised-hand"></i>
         Portal do funcionario
       </a>
+
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item" [routerLink]="['/funcionario/meus-epis']">Meus EPIs</a>
+        </li>
+        <li>
+          <a class="dropdown-item" [routerLink]="['/funcionario/meus-treinamentos']">Meus Treinamentos</a>
+        </li>
+      </ul>
     </li>
 
     <li>
@@ -103,7 +78,7 @@
           <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'entrega'}">Entrega de EPIs</a>
         </li>
         <li>
-          <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'historico'}">Historico ADM</a>
+          <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'historico'}">Historico de Alterações</a>
         </li>
       </ul>
     </li>
@@ -113,9 +88,37 @@
         <i class="bi bi-file-text-fill"></i>
         Gerenciar Treinamentos
       </a>
+
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item" [routerLink]="['/treinamento/presenca']">Treinamentos e Presença</a>
+        </li>
+        <li>
+          <a class="dropdown-item" [routerLink]="['/treinamento/abrir-turma']">Abrir Turma</a>
+        </li>
+        <li>
+          <a class="dropdown-item" [routerLink]="['/treinamento/agendar']">Agendar</a>
+        </li>
+        <li>
+          <a class="dropdown-item" [routerLink]="['/treinamento/historico']">Histórico de Alterações</a>
+        </li>
+      </ul>
     </li>
 
-    <li class="notification-area">
+    <li>
+      <a class="btn d-flex align-items-center justify-content-center" routerLink="/gerenciar-funcionarios">
+        <i class="bi bi-people-fill"></i>
+        Gerenciar Funcionários
+      </a>
+    </li>
+
+  </ul>
+
+</nav>
+
+<div class="top-right-actions">
+
+  <div class="notification-area">
 
       <button class="btn notification-button d-flex align-items-center justify-content-center" type="button"
         (click)="alternarNotificacoes()" aria-label="Abrir notificacoes">
@@ -278,18 +281,14 @@
 
       }
 
-    </li>
+  </div>
 
-    <li>
-      <a class="btn d-flex align-items-center justify-content-center" routerLink="/login">
+  <a class="logout-link" routerLink="/login" aria-label="Logout">
         <i class="bi bi-person-fill-x"></i>
         Logout
-      </a>
-    </li>
+  </a>
 
-  </ul>
-
-</nav>
+</div>
 
 }
 

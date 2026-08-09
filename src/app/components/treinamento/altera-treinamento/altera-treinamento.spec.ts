@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EpiFilter } from './epi-filter';
+import { AlteraTreinamento } from './altera-treinamento';
 
-describe('EpiFilter', () => {
-  let component: EpiFilter;
-  let fixture: ComponentFixture<EpiFilter>;
+describe('AlteraTreinamento', () => {
+  let component: AlteraTreinamento;
+  let fixture: ComponentFixture<AlteraTreinamento>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EpiFilter],
+      imports: [AlteraTreinamento],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EpiFilter);
+    fixture = TestBed.createComponent(AlteraTreinamento);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
