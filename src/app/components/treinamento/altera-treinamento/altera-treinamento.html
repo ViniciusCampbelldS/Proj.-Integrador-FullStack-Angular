@@ -1,0 +1,164 @@
+<section class="treinamento-page">
+  <div class="hero">
+    <div>
+      <span class="eyebrow">TREINAMENTOS</span>
+      <h1>Gerenciar Treinamentos</h1>
+      <p>Área para cadastrar, agendar e acompanhar os treinamentos de segurança dos funcionários.</p>
+    </div>
+
+    <button class="btn-primary" type="button">+ Novo treinamento</button>
+  </div>
+
+  <div class="cards">
+    <div class="stat-card">
+      <div class="stat-icon">📚</div>
+      <div>
+        <small>Total de treinamentos</small>
+        <strong>24</strong>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📅</div>
+      <div>
+        <small>Agendados</small>
+        <strong>08</strong>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <div>
+        <small>Funcionários treinados</small>
+        <strong>47</strong>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">⚠️</div>
+      <div>
+        <small>Próximos do vencimento</small>
+        <strong>05</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Pesquisar treinamentos</h2>
+        <p>Filtre os treinamentos cadastrados no sistema.</p>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="field">
+        <label>ID</label>
+        <input type="text" class="form-control" placeholder="Digite o ID" />
+      </div>
+
+      <div class="field">
+        <label>Treinamento</label>
+        <input type="text" class="form-control" placeholder="Digite o treinamento" />
+      </div>
+
+      <div class="field">
+        <label>Funcionário</label>
+        <input type="text" class="form-control" placeholder="Digite o nome do funcionário" />
+      </div>
+
+      <div class="field">
+        <label>Data</label>
+        <input type="date" class="form-control" />
+      </div>
+
+      <div class="field">
+        <label>Vencimento</label>
+        <input type="date" class="form-control" />
+      </div>
+
+      <div class="field">
+        <label>Código da NR</label>
+        <select class="form-select">
+          <option>Todos</option>
+          <option>NR-10</option>
+          <option>NR-12</option>
+          <option>NR-18</option>
+          <option>NR-33</option>
+          <option>NR-35</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Situação</label>
+        <select class="form-select">
+          <option>Todos</option>
+          <option>Em dia</option>
+          <option>Próximo do vencimento</option>
+          <option>Vencido</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <button class="btn-secondary" type="button">🔎 Filtrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Treinamentos cadastrados</h2>
+        <p>Lista dos treinamentos registrados no sistema.</p>
+      </div>
+
+      <button class="btn-outline" type="button">Histórico de alterações</button>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NR</th>
+            <th>Treinamento</th>
+            <th>Funcionário</th>
+            <th>Data</th>
+            <th>Vencimento</th>
+            <th>Situação</th>
+            <th>Documento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1</strong></td>
+            <td><strong>NR-35</strong></td>
+            <td>Trabalho em Altura</td>
+            <td>Pedro Henrique</td>
+            <td>20/08/2026</td>
+            <td>20/08/2027</td>
+            <td><span class="status success">Em dia</span></td>
+            <td><button class="document-btn" type="button">📎 Visualizar</button></td>
+          </tr>
+          <tr>
+            <td><strong>2</strong></td>
+            <td><strong>NR-10</strong></td>
+            <td>Segurança em Eletricidade</td>
+            <td>João da Silva</td>
+            <td>10/08/2026</td>
+            <td>10/09/2026</td>
+            <td><span class="status warning">Próximo do vencimento</span></td>
+            <td><button class="document-btn" type="button">📎 Visualizar</button></td>
+          </tr>
+          <tr>
+            <td><strong>3</strong></td>
+            <td><strong>NR-12</strong></td>
+            <td>Segurança em Máquinas</td>
+            <td>Carlos Oliveira</td>
+            <td>05/05/2025</td>
+            <td>05/05/2026</td>
+            <td><span class="status danger">Vencido</span></td>
+            <td><button class="document-btn" type="button">📎 Visualizar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

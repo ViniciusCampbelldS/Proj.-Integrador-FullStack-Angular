@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-import { AdminHistory } from '../../components/geral/admin-history/admin-history';
-import { FormularioEntrega } from '../../components/epi/formulario-entrega/formulario-entrega';
-import { EpiFilter } from '../../components/epi/epi-filter/epi-filter';
-import { EpiRecord } from '../../models/epi.models';
-import { EpiData } from '../../services/epi-data';
+import { HistóricoAltEpi } from '../historico-alt-epi/HistóricoAltEpi';
+import { FormularioEntrega } from '../formulario-entrega/formulario-entrega';
+import { BuscaEpi } from '../busca-epi/busca-epi';
+import { EpiRecord } from '../../../models/epi.models';
+import { EpiData } from '../../../services/epi-data';
 
 type SstView = 'busca' | 'cadastro' | 'entrega' | 'historico';
 
 @Component({
-  selector: 'app-epi-management',
+  selector: 'app-cadastro-epi',
   standalone: true,
-  imports: [CommonModule, RouterModule, AdminHistory, FormularioEntrega, EpiFilter],
-  templateUrl: './epi-management.html',
-  styleUrl: './epi-management.scss',
+  imports: [CommonModule, RouterModule, HistóricoAltEpi, FormularioEntrega, BuscaEpi],
+  templateUrl: './cadastro-epi.html',
+  styleUrl: './cadastro-epi.scss',
 })
-export class EpiManagement implements OnInit {
+export class CadastroEpi implements OnInit {
   activeSstView: SstView = 'busca';
   // ****
   tempoParaVencimento: number = 30;

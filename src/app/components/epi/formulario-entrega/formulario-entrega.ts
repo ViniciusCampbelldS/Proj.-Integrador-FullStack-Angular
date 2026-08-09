@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DeliveryItem, EpiOption } from '../../../models/epi.models';
 import { EpiData } from '../../../services/epi-data';
-import { FichaEntregaEPIModal } from '../ficha-entrega-epi-modal/ficha-entrega-epi-modal';
+import { FichaEntregaEPIModal } from './ficha-entrega-epi-modal/ficha-entrega-epi-modal';
 import { ReplaceEpiModal } from '../replace-epi-modal/replace-epi-modal';
 
 @Component({

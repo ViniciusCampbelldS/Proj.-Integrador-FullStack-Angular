@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { EmployeeEpi } from '../../models/epi.models';
-import { EpiData } from '../../services/epi-data';
+import { EmployeeEpi } from '../../../models/epi.models';
+import { EpiData } from '../../../services/epi-data';
 
 @Component({
-  selector: 'app-employee-report',
+  selector: 'app-meus-epis',
+  standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './employee-report.html',
-  styleUrl: './employee-report.scss',
+  templateUrl: './meus-epis.html',
+  styleUrl: './meus-epis.scss',
 })
-export class EmployeeReport {
+export class MeusEpis {
   employeeEpis: EmployeeEpi[];
   selectedReportImages: string[] = [];
   reportComment = '';

@@ -1,0 +1,59 @@
+<div class="panel">
+  <div class="panel-header">
+    <div>
+      <h2>Abertura de turma</h2>
+      <p>Agende um novo treinamento e cadastre os funcionários participantes.</p>
+    </div>
+  </div>
+
+  <div class="form-grid">
+    <div class="field">
+      <label>Treinamento *</label>
+      <select class="form-select">
+        <option>Selecione o treinamento</option>
+        <option>NR-10 - Segurança em Eletricidade</option>
+        <option>NR-35 - Trabalho em Altura</option>
+        <option>NR-12 - Segurança em Máquinas</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Data *</label>
+      <input type="date" class="form-control" />
+    </div>
+
+    <div class="field">
+      <label>Horário *</label>
+      <input type="time" class="form-control" />
+    </div>
+
+    <div class="field">
+      <label>Funcionários</label>
+      <select class="form-select">
+        <option>Selecionar funcionário</option>
+        <option>Pedro Henrique</option>
+        <option>João da Silva</option>
+        <option>Carlos Oliveira</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="upload-area">
+    <div class="upload-icon">📄</div>
+
+    <div>
+      <strong>Lista de presença</strong>
+      <p>Faça upload da lista de presença assinada.</p>
+    </div>
+
+    <label class="upload-btn">
+      Selecionar arquivo
+      <input type="file" hidden />
+    </label>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn-secondary" type="button">Limpar</button>
+    <button class="btn-primary" type="button">Criar treinamento</button>
+  </div>
+</div>

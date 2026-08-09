@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { EpiService } from '../../epi/epi';
-import { Epi } from '../../epi/epi.model';
+import { Epi } from '../../../models/epi.models';
 
 @Component({
 	selector: 'app-epi-list',

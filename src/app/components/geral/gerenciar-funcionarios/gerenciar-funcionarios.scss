@@ -1,0 +1,41 @@
+.funcionarios-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.header-area {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #04679e;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+h1 {
+  margin: 0;
+  color: #003d6c;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+}
+
+.placeholder-card {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem;
+  border: 1px solid rgba(0, 61, 108, 0.12);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.placeholder-card strong {
+  color: #003d6c;
+}
+
+.placeholder-card span {
+  color: #495057;
+}
