@@ -96,7 +96,7 @@ export class MeusEpis {
     try {
       localStorage.setItem('mar-employee-epi-reports', JSON.stringify(reports));
     } catch {
-      // Mantem o fluxo mesmo se o navegador bloquear localStorage.
+      // Mantém o fluxo mesmo se o navegador bloquear localStorage.
     }
 
     this.fecharModal();
@@ -140,7 +140,7 @@ export class MeusEpis {
       return 'bi-headphones';
     }
 
-    if (nome.includes('oculos') || nome.includes('óculos')) {
+    if (nome.includes('Óculos') || nome.includes('óculos')) {
       return 'bi-eyeglasses';
     }
 

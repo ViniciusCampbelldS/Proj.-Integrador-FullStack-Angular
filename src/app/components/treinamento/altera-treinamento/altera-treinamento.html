@@ -98,8 +98,11 @@
       </div>
 
       <div class="actions">
-        <button class="btn-secondary" type="button">🔎 Filtrar</button>
-        <button class="btn-primary" type="button">Novo treinamento/Abrir Turma</button>
+        <button class="btn-secondary" type="button">
+          <i class="bi bi-search"></i>
+          Filtrar
+        </button>
+        <button class="btn-primary" type="button" routerLink="/treinamento/abrir-turma">Novo treinamento/Abrir Turma</button>
       </div>
     </div>
   </div>
@@ -111,8 +114,18 @@
         <p>Lista dos treinamentos registrados no sistema.</p>
       </div>
 
-      <button class="btn-outline" type="button">Histórico de alterações</button>
+      <button class="btn-outline" type="button" routerLink="/treinamento/historico">
+        <i class="bi bi-clock-history"></i>
+        Histórico de alterações
+      </button>
     </div>
+
+    @if (mensagem) {
+      <div class="form-message" role="status">
+        <i class="bi bi-info-circle"></i>
+        {{ mensagem }}
+      </div>
+    }
 
     <div class="table-container">
       <table>
@@ -121,48 +134,32 @@
             <th>ID</th>
             <th>NR</th>
             <th>Treinamento</th>
-            <th>Funcionário</th>
-            <th>Aplicação</th>
+            <th>Funcion?rio</th>
+            <th>Aplica??o</th>
             <th>Vencimento</th>
-            <th>Situação</th>
+            <th>Situa??o</th>
             <th>Documento</th>
             <th>Editar</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><strong>1</strong></td>
-            <td><strong>NR-35</strong></td>
-            <td>Trabalho em Altura</td>
-            <td>Pedro Henrique</td>
-            <td>20/08/2026</td>
-            <td>20/08/2027</td>
-            <td><span class="status success">Em dia</span></td>
-            <td><button class="document-btn" type="button">📎 Visualizar</button></td>
-            <td><button class="edit-btn" type="button">✏️ Editar</button></td>
-          </tr>
-          <tr>
-            <td><strong>2</strong></td>
-            <td><strong>NR-10</strong></td>
-            <td>Segurança em Eletricidade</td>
-            <td>João da Silva</td>
-            <td>10/08/2026</td>
-            <td>10/09/2026</td>
-            <td><span class="status warning">Próximo do vencimento</span></td>
-            <td><button class="document-btn" type="button">📎 Visualizar</button></td>
-            <td><button class="edit-btn" type="button">✏️ Editar</button></td>
-          </tr>
-          <tr>
-            <td><strong>3</strong></td>
-            <td><strong>NR-12</strong></td>
-            <td>Segurança em Máquinas</td>
-            <td>Carlos Oliveira</td>
-            <td>05/05/2025</td>
-            <td>05/05/2026</td>
-            <td><span class="status danger">Vencido</span></td>
-            <td><button class="document-btn" type="button">📎 Visualizar</button></td>
-            <td><button class="edit-btn" type="button">✏️ Editar</button></td>
-          </tr>
+          @for (treinamento of treinamentos; track treinamento.id) {
+            <tr>
+              <td><strong>{{ treinamento.id }}</strong></td>
+              <td><strong>{{ treinamento.nr }}</strong></td>
+              <td>{{ treinamento.treinamento }}</td>
+              <td>{{ treinamento.funcionario }}</td>
+              <td>{{ treinamento.aplicacao | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ treinamento.vencimento | date: 'dd/MM/yyyy' }}</td>
+              <td><span class="status" [class]="situacaoClass(treinamento.situacao)">{{ treinamento.situacao }}</span></td>
+              <td><button class="document-btn" type="button"><i class="bi bi-paperclip"></i> Visualizar</button></td>
+              <td>
+                <button class="edit-btn" type="button" [disabled]="!podeEditarTreinamento" [title]="!podeEditarTreinamento ? 'Perfil sem permiss?o de edi??o' : ''" (click)="abrirEdicaoTreinamento(treinamento)">
+                  <i class="bi bi-pencil-fill"></i> Editar
+                </button>
+              </td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>
@@ -177,7 +174,9 @@
             <h3>Selecionar Funcionários</h3>
           </div>
 
-          <button class="close-btn" type="button" aria-label="Fechar" (click)="closeFuncionarioModal()">✕</button>
+          <button class="close-btn" type="button" aria-label="Fechar" (click)="closeFuncionarioModal()">
+            <i class="bi bi-x-lg"></i>
+          </button>
         </header>
 
         <div class="modal-search-grid">
@@ -298,4 +297,39 @@
       </section>
     </div>
   }
+  @if (isEditModalOpen) {
+    <div class="modal-overlay" role="dialog" aria-modal="true" aria-label="Editar treinamento" (click)="fecharEdicaoTreinamento()">
+      <section class="employee-modal" (click)="$event.stopPropagation()">
+        <header class="modal-header">
+          <div>
+            <span class="eyebrow">TREINAMENTO</span>
+            <h3>Editar treinamento</h3>
+          </div>
+          <button class="close-btn" type="button" aria-label="Fechar" (click)="fecharEdicaoTreinamento()"><i class="bi bi-x-lg"></i></button>
+        </header>
+
+        <div class="modal-search-grid">
+          <div class="field"><label>NR</label><input class="form-control" [(ngModel)]="formTreinamento.nr" /></div>
+          <div class="field"><label>Treinamento</label><input class="form-control" [(ngModel)]="formTreinamento.treinamento" /></div>
+          <div class="field"><label>Funcion?rio</label><input class="form-control" [(ngModel)]="formTreinamento.funcionario" /></div>
+          <div class="field"><label>Aplica??o</label><input class="form-control" type="date" [(ngModel)]="formTreinamento.aplicacao" /></div>
+          <div class="field"><label>Vencimento</label><input class="form-control" type="date" [(ngModel)]="formTreinamento.vencimento" /></div>
+          <div class="field">
+            <label>Situa??o</label>
+            <select class="form-select" [(ngModel)]="formTreinamento.situacao">
+              @for (situacao of situacoes; track situacao) {
+                <option [value]="situacao">{{ situacao }}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <footer class="modal-actions">
+          <button class="btn-outline" type="button" (click)="fecharEdicaoTreinamento()">Cancelar</button>
+          <button class="btn-primary" type="button" (click)="salvarEdicaoTreinamento()">Salvar altera??es</button>
+        </footer>
+      </section>
+    </div>
+  }
+
 </section>

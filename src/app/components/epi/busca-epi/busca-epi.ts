@@ -1,7 +1,10 @@
 import { EpiService } from '../epi-status/epi-status';
 import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { NotificacaoService, EpiMonitorado } from '../../../service/notificacao';
 import type { Epi } from '../epi.models';
+import { AuthService } from '../../../service/auth';
 
 type StatusClass = 'status-expired' | 'status-warning' | 'status-good';
 
@@ -18,7 +21,7 @@ interface BuscaEpiRow {
 @Component({
 	selector: 'app-busca-epi',
 	standalone: true,
-	imports: [],
+	imports: [CommonModule, FormsModule],
 	templateUrl: './busca-epi.html',
 	styleUrl: './busca-epi.scss'
 })
@@ -27,8 +30,26 @@ export class BuscaEpi implements OnInit {
 	// epiService é uma instância de EpiService, que fornece métodos para interagir com a API de EPI.
 	private epiService = inject(EpiService);
 	private notificacaoService = inject(NotificacaoService);
+	private authService = inject(AuthService);
 
 	resultados: BuscaEpiRow[] = [];
+	exportMessage = '';
+	modalEstadoAberto = false;
+	modalDescarteAberto = false;
+	itemSelecionado: BuscaEpiRow | null = null;
+	estadoSelecionado = 'Bom Estado';
+	observacaoEstado = '';
+	motivoDescarte = '';
+
+	readonly estadosEpi = ['Bom Estado', 'Atenção', 'Danificado', 'Vencido'];
+
+	get podeEditar(): boolean {
+		return this.authService.podeEditarEpi();
+	}
+
+	get perfilAtual(): string {
+		return this.authService.obterPerfil();
+	}
 
 	ngOnInit(): void {
 		this.carregarFallbackLocal();
@@ -45,6 +66,136 @@ export class BuscaEpi implements OnInit {
 			},
 			error: () => {},
 		});
+	}
+
+	exportarRelatorio(formato: 'pdf' | 'odf' | 'xlsx' | 'xml'): void {
+		const linhas = this.resultados.map((item) => ({
+			funcionario: item.funcionario,
+			epi: item.nome,
+			ca: item.ca,
+			vencimento: item.vencimento,
+			status: item.status,
+		}));
+
+		const conteudo = formato === 'xml'
+			? this.gerarXml(linhas)
+			: this.gerarTextoRelatorio(linhas, formato);
+
+		const blob = new Blob([conteudo], { type: 'text/plain;charset=utf-8' });
+		const url = URL.createObjectURL(blob);
+		const link = document.createElement('a');
+
+		link.href = url;
+		link.download = `relatorio-epis.${formato}`;
+		document.body.appendChild(link);
+		link.click();
+		link.remove();
+		URL.revokeObjectURL(url);
+
+		this.exportMessage = `Relatório .${formato} gerado localmente.`;
+	}
+
+	abrirEstado(item: BuscaEpiRow): void {
+		if (!this.podeEditar) {
+			this.exportMessage = `Perfil ${this.perfilAtual} possui apenas visualização administrativa de EPIs.`;
+			return;
+		}
+
+		this.itemSelecionado = item;
+		this.estadoSelecionado = item.status;
+		this.observacaoEstado = '';
+		this.modalEstadoAberto = true;
+	}
+
+	salvarEstado(): void {
+		if (!this.itemSelecionado) {
+			return;
+		}
+
+		this.resultados = this.resultados.map((item) =>
+			item.id === this.itemSelecionado?.id
+				? {
+					...item,
+					status: this.estadoSelecionado,
+					statusClass: this.statusClassPorTexto(this.estadoSelecionado),
+				}
+				: item
+		);
+
+		this.exportMessage = `Estado do EPI atualizado localmente${this.observacaoEstado ? ' com observação' : ''}.`;
+		this.fecharModais();
+	}
+
+	abrirDescarte(item: BuscaEpiRow): void {
+		if (!this.podeEditar) {
+			this.exportMessage = `Perfil ${this.perfilAtual} não possui permissão para descarte.`;
+			return;
+		}
+
+		this.itemSelecionado = item;
+		this.motivoDescarte = '';
+		this.modalDescarteAberto = true;
+	}
+
+	confirmarDescarte(): void {
+		if (!this.itemSelecionado) {
+			return;
+		}
+
+		this.resultados = this.resultados.filter((item) => item.id !== this.itemSelecionado?.id);
+		this.exportMessage = `EPI descartado localmente${this.motivoDescarte ? ': ' + this.motivoDescarte : '.'}`;
+		this.fecharModais();
+	}
+
+	fecharModais(): void {
+		this.modalEstadoAberto = false;
+		this.modalDescarteAberto = false;
+		this.itemSelecionado = null;
+	}
+
+	private statusClassPorTexto(status: string): StatusClass {
+		if (status === 'Vencido' || status === 'Danificado') {
+			return 'status-expired';
+		}
+
+		if (status === 'Atenção' || status === 'Próximo do vencimento') {
+			return 'status-warning';
+		}
+
+		return 'status-good';
+	}
+
+	private gerarTextoRelatorio(linhas: Array<Record<string, string>>, formato: string): string {
+		return [
+			`Relatório de EPIs (${formato.toUpperCase()})`,
+			`Gerado em ${new Intl.DateTimeFormat('pt-BR').format(new Date())}`,
+			'',
+			...linhas.map((linha, index) =>
+				`${index + 1}. ${linha['funcionario']} | ${linha['epi']} | CA ${linha['ca']} | ${linha['vencimento']} | ${linha['status']}`
+			),
+		].join('\n');
+	}
+
+	private gerarXml(linhas: Array<Record<string, string>>): string {
+		const itens = linhas.map((linha) => `
+  <epi>
+    <funcionario>${this.escapeXml(linha['funcionario'])}</funcionario>
+    <nome>${this.escapeXml(linha['epi'])}</nome>
+    <ca>${this.escapeXml(linha['ca'])}</ca>
+    <vencimento>${this.escapeXml(linha['vencimento'])}</vencimento>
+    <status>${this.escapeXml(linha['status'])}</status>
+  </epi>`).join('');
+
+		return `<?xml version="1.0" encoding="UTF-8"?>\n<relatorio>${itens}\n</relatorio>`;
+	}
+
+	private escapeXml(value: string): string {
+		return value
+			.replace(/&/g, '&amp;')
+			.replace(/</g, '&lt;')
+			.replace(/>/g, '&gt;')
+			.replace(/"/g, '&quot;')
+			.replace(/'/g, '&apos;');
 	}
 
 	private extrairListaEpis(epis: unknown): Epi[] {
@@ -150,7 +301,7 @@ export class BuscaEpi implements OnInit {
 		// Próximo do Vencimento se data atual >= vencimento + diasAvisoEpi
 		if (hoje.getTime() >= limiteAviso.getTime()) {
 			return {
-				status: 'Proximo do Vencimento',
+				status: 'Próximo do vencimento',
 				statusClass: 'status-warning',
 			};
 		}

@@ -10,7 +10,9 @@
   --fundo: #f5f8fa;
 
   display: block;
+  padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
   color: var(--texto);
+  background: var(--mar-bg);
 }
 
 * {
@@ -27,8 +29,8 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  padding-top: 8px;
-  padding-bottom: 28px;
+  max-width: var(--mar-page-max-width);
+  margin: 0 auto;
 }
 
 .portal-heading {
@@ -682,6 +684,10 @@ textarea {
 }
 
 @media (max-width: 520px) {
+  :host {
+    padding: 22px 14px 42px;
+  }
+
   .trainings-card,
   .epi-panel,
   .summary-card,

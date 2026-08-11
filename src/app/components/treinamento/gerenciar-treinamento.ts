@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AbreTurmaTreinamento } from './abre-turma-treinamento/AbreTurmaTreinamento';
 import { AlteraTreinamento } from './altera-treinamento/altera-treinamento';
 
@@ -22,15 +23,28 @@ type TreinamentoView =
     }
   `
 })
-export class GerenciarTreinamento implements OnInit {
+export class GerenciarTreinamento implements OnInit, OnDestroy {
   activeView: TreinamentoView = 'presenca';
+  private routeDataSubscription?: Subscription;
 
   constructor(private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const view = this.route.snapshot.data['view'] as TreinamentoView | undefined;
+    this.routeDataSubscription = this.route.data.subscribe((data) => {
+      this.setActiveView(data['view'] as TreinamentoView | undefined);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.routeDataSubscription?.unsubscribe();
+  }
+
+  private setActiveView(view: TreinamentoView | undefined): void {
     if (view === 'presenca' || view === 'abrir-turma') {
       this.activeView = view;
+      return;
     }
+
+    this.activeView = 'presenca';
   }
 }

@@ -1,17 +1,23 @@
 <section class="panel history-panel">
-	<div class="panel-title">
-		<div>
-			<h3>Histórico de Alteracoes Manuais (EPI)</h3>
-		</div>
-	</div>
+  <div class="panel-title">
+    <div>
+      <p class="eyebrow">Auditoria</p>
+      <h3>Histórico de Alterações Manuais de EPI</h3>
+    </div>
+  </div>
 
-	<div class="history-list">
-		<article *ngFor="let item of history">
-			<div>
-				<strong>{{ item.action }}</strong>
-				<span>{{ item.detail }}</span>
-			</div>
-			<small>{{ item.user }} - {{ item.date }}</small>
-		</article>
-	</div>
+  <div class="history-list">
+    <article *ngFor="let item of history">
+      <div class="history-icon">
+        <i class="bi bi-clock-history"></i>
+      </div>
+
+      <div class="history-content">
+        <strong>{{ item.action }}</strong>
+        <span>{{ item.detail }}</span>
+      </div>
+
+      <small>{{ item.user }} - {{ item.date }}</small>
+    </article>
+  </div>
 </section>

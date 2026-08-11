@@ -1,6 +1,6 @@
 <div class="tool-grid">
-	<div class="stacked-block">
-	</div>
+	<div class="stacked-block"></div>
+
 	<section class="panel delivery-panel">
 		<div class="panel-title">
 			<div>
@@ -12,18 +12,20 @@
 			<div class="col-md-5">
 				<label class="form-label" for="employee">Funcionário</label>
 				<select class="form-select" id="employee">
-					<option>Joao Pedro da Rocha</option>
+					<option>João Pedro da Rocha</option>
 					<option>Fernanda Beatriz</option>
 					<option>Marcos Paulo Ferreira</option>
 				</select>
 			</div>
+
 			<div class="col-md-3">
 				<label class="form-label" for="delivery-date">Data da entrega</label>
 				<input class="form-control" id="delivery-date" type="date" value="2026-08-06" />
 			</div>
+
 			<div class="col-md-4">
-				<label class="form-label" for="delivery-responsible">Responsavel</label>
-				<input class="form-control" id="delivery-responsible" value="Tecnico SST" />
+				<label class="form-label" for="delivery-responsible">Responsável</label>
+				<input class="form-control" id="delivery-responsible" value="Técnico SST" />
 			</div>
 		</form>
 
@@ -33,6 +35,7 @@
 					<p class="eyebrow">Itens da entrega</p>
 					<h4>{{ deliveryItems.length }} EPIs selecionados</h4>
 				</div>
+
 				<button class="btn btn-outline-brand" type="button" (click)="addDeliveryItem()">
 					<i class="bi bi-plus-lg"></i>
 					Adicionar EPI
@@ -43,29 +46,53 @@
 				<div class="row g-3 align-items-end">
 					<div class="col-lg-5">
 						<label class="form-label" [for]="'epi-' + i">EPI</label>
-						<select class="form-select" [id]="'epi-' + i" [(ngModel)]="item.epi"
-							[ngModelOptions]="{ standalone: true }" (change)="syncDeliveryItem(i)">
+						<select
+							class="form-select"
+							[id]="'epi-' + i"
+							[(ngModel)]="item.epi"
+							[ngModelOptions]="{ standalone: true }"
+							(change)="syncDeliveryItem(i)"
+						>
 							<option *ngFor="let epi of availableEpis">{{ epi.name }}</option>
 						</select>
 					</div>
+
 					<div class="col-sm-4 col-lg-2">
 						<label class="form-label" [for]="'ca-' + i">CA</label>
-						<input class="form-control" [id]="'ca-' + i" [(ngModel)]="item.ca"
-							[ngModelOptions]="{ standalone: true }" />
+						<input class="form-control" [id]="'ca-' + i" [(ngModel)]="item.ca" [ngModelOptions]="{ standalone: true }" />
 					</div>
+
 					<div class="col-sm-4 col-lg-2">
 						<label class="form-label" [for]="'qty-' + i">Qtd.</label>
-						<input class="form-control" [id]="'qty-' + i" type="number" min="1" [(ngModel)]="item.quantity"
-							[ngModelOptions]="{ standalone: true }" />
+						<input
+							class="form-control"
+							[id]="'qty-' + i"
+							type="number"
+							min="1"
+							[(ngModel)]="item.quantity"
+							[ngModelOptions]="{ standalone: true }"
+						/>
 					</div>
+
 					<div class="col-sm-4 col-lg-2">
 						<label class="form-label" [for]="'validity-' + i">Validade</label>
-						<input class="form-control" [id]="'validity-' + i" type="date" [(ngModel)]="item.validity"
-							[ngModelOptions]="{ standalone: true }" />
+						<input
+							class="form-control"
+							[id]="'validity-' + i"
+							type="date"
+							[(ngModel)]="item.validity"
+							[ngModelOptions]="{ standalone: true }"
+						/>
 					</div>
+
 					<div class="col-lg-1">
-						<button class="icon-button danger" type="button" (click)="removeDeliveryItem(i)"
-							[disabled]="deliveryItems.length === 1" aria-label="Remover EPI da entrega">
+						<button
+							class="icon-button danger"
+							type="button"
+							(click)="removeDeliveryItem(i)"
+							[disabled]="deliveryItems.length === 1"
+							aria-label="Remover EPI da entrega"
+						>
 							<i class="bi bi-trash"></i>
 						</button>
 					</div>
@@ -75,10 +102,10 @@
 
 		<div class="upload-zone">
 			<div>
-
 				<h4>Ficha de EPI preenchida</h4>
-				<p>Envie PDF ou imagem para anexar na entrega completa.</p>
+				<p>Envie PDF ou imagem para anexar à entrega completa.</p>
 			</div>
+
 			<label class="btn btn-outline-brand">
 				<i class="bi bi-upload"></i>
 				Upload
@@ -89,8 +116,9 @@
 		<div class="preview-box" *ngIf="selectedFichaName">
 			<div>
 				<strong>{{ selectedFichaName }}</strong>
-				<span>Pre-visualizacao disponivel</span>
+				<span>Pré-visualização disponível</span>
 			</div>
+
 			<a class="btn btn-light btn-sm" [href]="fichaPreviewUrl" target="_blank">
 				<i class="bi bi-eye"></i>
 				Abrir
@@ -102,10 +130,12 @@
 				<i class="bi bi-pen"></i>
 				Preencher ficha digital
 			</button>
+
 			<button class="btn btn-outline-brand" type="button" (click)="showReplaceModal = true">
 				<i class="bi bi-arrow-repeat"></i>
-				Marcar EPI substituido
+				Marcar EPI substituído
 			</button>
+
 			<button class="btn btn-brand" type="button" (click)="registerDelivery()">
 				<i class="bi bi-check2-circle"></i>
 				Registrar entrega
@@ -113,27 +143,31 @@
 		</div>
 
 		<div class="alert alert-success mt-3 mb-0" *ngIf="deliverySaved" role="alert">
-			Entrega registrada com {{ deliveryItems.length }} EPIs no prototipo.
+			Entrega registrada com {{ deliveryItems.length }} EPIs no protótipo.
 		</div>
 	</section>
 
 	<aside class="panel checklist-panel">
 		<div class="panel-title">
 			<div>
-				<p class="eyebrow">Conferencia</p>
+				<p class="eyebrow">Conferência</p>
 				<h3>Antes de salvar</h3>
 			</div>
 		</div>
+
 		<ul class="checklist">
-			<li><i class="bi bi-check-circle-fill"></i> Funcionario selecionado</li>
+			<li><i class="bi bi-check-circle-fill"></i> Funcionário selecionado</li>
 			<li><i class="bi bi-check-circle-fill"></i> Lista de EPIs revisada</li>
 			<li><i class="bi bi-circle"></i> Ficha anexada ou digital</li>
-			<li><i class="bi bi-circle"></i> Substituicao avaliada</li>
+			<li><i class="bi bi-circle"></i> Substituição avaliada</li>
 		</ul>
 	</aside>
 </div>
 
 <app-replace-epi-modal *ngIf="showReplaceModal" (closed)="showReplaceModal = false" />
 
-<app-ficha-entrega-epi-modal *ngIf="showFichaEntregaEPIModal" [deliveryItems]="deliveryItems"
-	(closed)="showFichaEntregaEPIModal = false" />
+<app-ficha-entrega-epi-modal
+	*ngIf="showFichaEntregaEPIModal"
+	[deliveryItems]="deliveryItems"
+	(closed)="showFichaEntregaEPIModal = false"
+/>

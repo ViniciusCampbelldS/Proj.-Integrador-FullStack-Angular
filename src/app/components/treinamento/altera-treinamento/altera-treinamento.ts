@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../service/auth';
 
 type Funcionario = {
   id: number;
@@ -9,15 +12,32 @@ type Funcionario = {
   area: string;
 };
 
+type SituacaoTreinamento = 'Em dia' | 'Próximo do vencimento' | 'Vencido';
+
+interface TreinamentoRegistro {
+  id: number;
+  nr: string;
+  treinamento: string;
+  funcionario: string;
+  aplicacao: string;
+  vencimento: string;
+  situacao: SituacaoTreinamento;
+}
+
 @Component({
   selector: 'app-altera-treinamento',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './altera-treinamento.html',
   styleUrl: './altera-treinamento.scss'
 })
 export class AlteraTreinamento {
   isFuncionarioModalOpen = false;
+  isEditModalOpen = false;
+  mensagem = '';
+
+  treinamentoEditando: TreinamentoRegistro | null = null;
+  formTreinamento: TreinamentoRegistro = this.criarTreinamentoVazio();
 
   filtroMatricula = '';
   filtroNome = '';
@@ -32,6 +52,48 @@ export class AlteraTreinamento {
     { id: 5, matricula: '1005', nome: 'Marcos Pereira', cargo: 'Soldador', area: 'Metalurgia' },
     { id: 6, matricula: '1006', nome: 'Ana Costa', cargo: 'Auxiliar', area: 'Logística' }
   ];
+
+  treinamentos: TreinamentoRegistro[] = [
+    {
+      id: 1,
+      nr: 'NR-35',
+      treinamento: 'Trabalho em Altura',
+      funcionario: 'Pedro Henrique',
+      aplicacao: '2026-08-20',
+      vencimento: '2027-08-20',
+      situacao: 'Em dia',
+    },
+    {
+      id: 2,
+      nr: 'NR-10',
+      treinamento: 'Segurança em Eletricidade',
+      funcionario: 'João da Silva',
+      aplicacao: '2026-08-10',
+      vencimento: '2026-09-10',
+      situacao: 'Próximo do vencimento',
+    },
+    {
+      id: 3,
+      nr: 'NR-12',
+      treinamento: 'Segurança em Máquinas',
+      funcionario: 'Carlos Oliveira',
+      aplicacao: '2025-05-05',
+      vencimento: '2026-05-05',
+      situacao: 'Vencido',
+    },
+  ];
+
+  readonly situacoes: SituacaoTreinamento[] = ['Em dia', 'Próximo do vencimento', 'Vencido'];
+
+  constructor(private readonly authService: AuthService) {}
+
+  get podeEditarTreinamento(): boolean {
+    return this.authService.podeEditarTreinamento();
+  }
+
+  get perfilAtual(): string {
+    return this.authService.obterPerfil();
+  }
 
   checkedFuncionarioIds = new Set<number>();
   selectedFuncionarioIds = new Set<number>();
@@ -146,5 +208,61 @@ export class AlteraTreinamento {
   applyFuncionariosSelecionados(): void {
     this.appliedFuncionarioIds = new Set(this.selectedFuncionarioIds);
     this.closeFuncionarioModal();
+  }
+
+  abrirEdicaoTreinamento(treinamento: TreinamentoRegistro): void {
+    if (!this.podeEditarTreinamento) {
+      this.mensagem = `Perfil ${this.perfilAtual} possui apenas visualização administrativa de treinamentos.`;
+      return;
+    }
+
+    this.treinamentoEditando = treinamento;
+    this.formTreinamento = { ...treinamento };
+    this.isEditModalOpen = true;
+  }
+
+  fecharEdicaoTreinamento(): void {
+    this.isEditModalOpen = false;
+    this.treinamentoEditando = null;
+    this.formTreinamento = this.criarTreinamentoVazio();
+  }
+
+  salvarEdicaoTreinamento(): void {
+    if (!this.treinamentoEditando) {
+      return;
+    }
+
+    this.treinamentos = this.treinamentos.map((treinamento) =>
+      treinamento.id === this.treinamentoEditando?.id
+        ? { ...this.formTreinamento }
+        : treinamento
+    );
+
+    this.mensagem = 'Treinamento atualizado localmente no frontend.';
+    this.fecharEdicaoTreinamento();
+  }
+
+  situacaoClass(situacao: SituacaoTreinamento): string {
+    if (situacao === 'Vencido') {
+      return 'danger';
+    }
+
+    if (situacao === 'Próximo do vencimento') {
+      return 'warning';
+    }
+
+    return 'success';
+  }
+
+  private criarTreinamentoVazio(): TreinamentoRegistro {
+    return {
+      id: 0,
+      nr: '',
+      treinamento: '',
+      funcionario: '',
+      aplicacao: '',
+      vencimento: '',
+      situacao: 'Em dia',
+    };
   }
 }

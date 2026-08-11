@@ -173,7 +173,7 @@ export class EmployeeReport {
       return 'bi-headphones';
     }
 
-    if (nome.includes('oculos') || nome.includes('óculos')) {
+    if (nome.includes('Óculos') || nome.includes('óculos')) {
       return 'bi-eyeglasses';
     }
 

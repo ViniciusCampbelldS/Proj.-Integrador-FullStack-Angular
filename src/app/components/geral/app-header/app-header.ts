@@ -48,13 +48,13 @@ export class AppHeader {
 
   get userName(): string {
     return this.isEmployeePage
-      ? 'Joao Pedro'
+      ? 'João Pedro'
       : 'Arthur Moretti';
   }
 
   get userRole(): string {
     return this.isEmployeePage
-      ? 'Funcionario'
+      ? 'Funcionário'
       : 'Diretor';
   }
 

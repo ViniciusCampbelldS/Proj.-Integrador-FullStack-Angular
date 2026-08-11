@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  padding-inline: 16px;
+  padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
   box-sizing: border-box;
   background: var(--mar-bg);
 }
@@ -12,12 +12,12 @@
   display: grid;
   gap: 20px;
   width: 100%;
-  max-width: 100%;
+  max-width: var(--mar-page-max-width);
+  margin: 0 auto;
   min-width: 0;
 }
 
 .epi-panel {
-  margin-top: var(--mar-panel-padding);
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -25,7 +25,7 @@
 
 @media (max-width: 680px) {
   :host {
-    padding-inline: 12px;
+    padding: 22px 14px 42px;
   }
 }
 

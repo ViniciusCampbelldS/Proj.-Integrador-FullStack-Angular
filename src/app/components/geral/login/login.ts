@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../service/auth';
+import { AuthService, UserRole } from '../../../service/auth';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -17,6 +17,8 @@ interface LoginResponse {
 export class Login {
   cpf = '';
   senha = '';
+  perfil: UserRole = 'TST';
+  readonly perfis: UserRole[] = ['TST', 'Operário'];
 
   erroLogin = false;
   exibirTelefoneTI = false;
@@ -53,6 +55,7 @@ export class Login {
           }
 
           this.authService.salvarToken(token);
+          this.authService.salvarPerfil(this.perfil);
 
           this.router
             .navigateByUrl('/')

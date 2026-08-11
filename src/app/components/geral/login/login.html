@@ -1,6 +1,5 @@
 <section class="login-page">
   <div class="login-panel">
-
     <img src="/logo-mar.svg" alt="MAR Metalúrgica" />
 
     <div class="login-copy">
@@ -13,12 +12,11 @@
       </h1>
 
       <p>
-        Entre com seu CPF e sua senha.
+        Entre com seu CPF, senha e perfil de acesso.
       </p>
     </div>
 
     <form class="login-form" (ngSubmit)="entrar()">
-
       <label for="cpf">
         CPF
       </label>
@@ -33,10 +31,20 @@
       <input id="senha" type="password" [(ngModel)]="senha" name="senha" placeholder="Digite sua senha"
         autocomplete="current-password" required />
 
+      <label for="perfil">
+        Entrar como
+      </label>
+
+      <select id="perfil" [(ngModel)]="perfil" name="perfil" required>
+        @for (item of perfis; track item) {
+          <option [value]="item">{{ item }}</option>
+        }
+      </select>
+
       @if (erroLogin) {
-      <p class="login-error" aria-live="polite">
-        CPF ou senha inválidos.
-      </p>
+        <p class="login-error" aria-live="polite">
+          CPF ou senha inválidos.
+        </p>
       }
 
       <button class="btn btn-brand" type="submit" [disabled]="carregando">
@@ -49,24 +57,20 @@
       </button>
 
       @if (exibirTelefoneTI) {
-      <div class="ti-contact">
+        <div class="ti-contact">
+          <strong>
+            Problemas para acessar?
+          </strong>
 
-        <strong>
-          Problemas para acessar?
-        </strong>
+          <p>
+            Entre em contato com o setor de TI:
+          </p>
 
-        <p>
-          Entre em contato com o setor de TI:
-        </p>
-
-        <a href="tel:+552100000000">
-          (21) 0000-0000
-        </a>
-
-      </div>
+          <a href="tel:+552100000000">
+            (21) 0000-0000
+          </a>
+        </div>
       }
-
     </form>
-
   </div>
 </section>

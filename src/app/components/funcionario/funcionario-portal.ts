@@ -6,9 +6,17 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   template: `
-    <section class="funcionario-portal container py-4">
+    <section class="funcionario-portal">
       <router-outlet></router-outlet>
     </section>
   `,
+  styles: [`
+    :host,
+    .funcionario-portal {
+      display: block;
+      min-width: 0;
+      background: var(--mar-bg);
+    }
+  `],
 })
 export class FuncionarioPortal {}

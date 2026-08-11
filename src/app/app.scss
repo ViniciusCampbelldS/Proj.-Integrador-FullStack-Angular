@@ -17,16 +17,29 @@ body {
 
 header {
 	background: var(--mar-bg);
-	box-shadow: var(--mar-shadow-soft);
+	box-shadow: 0 6px 20px rgba(0, 61, 108, 0.06);
 
 	>.row {
-		min-height: 165px;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+		align-items: center;
 
-		padding-top: 28px !important;
-		padding-bottom: 28px !important;
+		min-height: 132px;
+
+		padding-top: 18px !important;
+		padding-right: clamp(130px, 11vw, 210px);
+		padding-bottom: 18px !important;
+		padding-left: clamp(130px, 11vw, 210px);
 
 		margin: 0;
 	}
+}
+
+header #logoDiv,
+header #metalDiv,
+header #TSTDiv {
+	width: 100%;
+	max-width: none;
 }
 
 
@@ -41,9 +54,9 @@ header {
 	justify-content: center;
 
 	.logo {
-		width: clamp(180px,
-				17vw,
-				250px);
+		width: clamp(145px,
+				13vw,
+				205px);
 
 		height: auto;
 
@@ -72,7 +85,7 @@ header {
 	justify-content: center;
 
 	>div {
-		padding: 10px 28px;
+		padding: 6px 24px;
 	}
 
 	h1 {
@@ -82,9 +95,9 @@ header {
 			var(--mar-azul-escuro) !important;
 
 		font-size:
-			clamp(2rem,
-				3vw,
-				2.7rem);
+			clamp(1.75rem,
+				2.5vw,
+				2.35rem);
 
 		font-weight: 750;
 
@@ -102,9 +115,9 @@ header {
 			var(--mar-laranja-claro) !important;
 
 		font-size:
-			clamp(1rem,
-				1.7vw,
-				1.35rem);
+			clamp(0.95rem,
+				1.35vw,
+				1.18rem);
 
 		font-weight: 600;
 
@@ -132,6 +145,7 @@ header {
 		color: var(--mar-azul-escuro);
 
 		font-size: 1.35rem;
+		font-size: 1.16rem;
 
 		font-weight: 700 !important;
 
@@ -146,7 +160,7 @@ header {
 
 		color: var(--mar-text);
 
-		font-size: 0.95rem !important;
+		font-size: 0.82rem !important;
 
 		font-weight: 500;
 	}
@@ -169,7 +183,7 @@ header {
 nav {
 	background: var(--mar-bg);
 
-	padding: 0 4% 18px;
+	padding: 0 4% 14px;
 
 	.nav {
 		display: flex !important;
@@ -179,7 +193,7 @@ nav {
 
 		width: 100%;
 
-		gap: 14px;
+		gap: 12px;
 
 		background: var(--mar-surface);
 
@@ -188,7 +202,7 @@ nav {
 
 		border-radius: var(--mar-radius-lg);
 
-		padding: 12px 28px !important;
+		padding: 10px 24px !important;
 
 		box-shadow:
 			0 4px 15px rgba(0, 61, 108, 0.05);
@@ -212,7 +226,7 @@ nav {
 		width: 100%;
 		max-width: 230px;
 		min-width: 0;
-		height: 46px;
+		height: 42px;
 
 		border: 1px solid var(--mar-line);
 		border-radius: 9px;
@@ -221,7 +235,8 @@ nav {
 
 		color: var(--mar-azul-escuro);
 
-		font-weight: 600;
+		font-size: 0.9rem;
+		font-weight: 700;
 
 		text-decoration: none;
 
@@ -234,7 +249,8 @@ nav {
 			box-shadow 0.2s ease;
 
 		&:hover,
-		&:focus {
+		&:focus,
+		&.nav-active {
 			background:
 				var(--mar-azul-escuro);
 
@@ -261,11 +277,37 @@ nav {
 		}
 
 		&:hover i,
-		&:focus i {
+		&:focus i,
+		&.nav-active i {
 			color:
 				var(--mar-surface);
 		}
 	}
+}
+
+.nav.portal-nav {
+	justify-content: center !important;
+	gap: 16px;
+	max-width: 860px;
+	margin: 0 auto;
+}
+
+.nav.portal-nav>li {
+	flex: 0 1 230px;
+}
+
+.nav.portal-nav a.btn {
+	max-width: none;
+}
+
+.nav>li.is-active>a.btn {
+	background: var(--mar-azul-escuro);
+	color: var(--mar-surface);
+	box-shadow: 0 5px 12px rgba(0, 61, 108, 0.18);
+}
+
+.nav>li.is-active>a.btn i {
+	color: var(--mar-surface);
 }
 
 
@@ -1036,19 +1078,19 @@ nav {
 
 @media (min-width: 990px) and (max-width: 1250px) {
 	#logoDiv {
-		width: 30%;
+		width: 100%;
 
 		img {
-			width: 100%;
+			width: clamp(135px, 16vw, 180px);
 		}
 	}
 
 	#metalDiv {
-		width: 40%;
+		width: 100%;
 	}
 
 	#TSTDiv {
-		width: 30%;
+		width: 100%;
 	}
 
 	nav {
@@ -1066,6 +1108,13 @@ nav {
 			width: 100%;
 		}
 
+		.nav.portal-nav {
+			grid-template-columns:
+				repeat(3, minmax(0, 1fr));
+
+			max-width: 860px;
+		}
+
 		a.btn,
 		button.btn,
 		.notification-button {
@@ -1077,7 +1126,10 @@ nav {
 @media (max-width: 989px) {
 	header {
 		>.row {
+			grid-template-columns: 1fr;
 			min-height: auto;
+			padding-right: 18px;
+			padding-left: 18px;
 		}
 	}
 
@@ -1137,6 +1189,11 @@ nav {
 			margin-bottom: 0;
 		}
 
+		.nav.portal-nav {
+			grid-template-columns:
+				repeat(3, minmax(0, 1fr));
+		}
+
 		a.btn,
 		button.btn,
 		.notification-button {
@@ -1164,6 +1221,10 @@ nav {
 		.nav {
 			grid-template-columns: 1fr;
 		}
+	}
+
+	nav .nav.portal-nav {
+		grid-template-columns: 1fr;
 	}
 
 	.notification-panel {

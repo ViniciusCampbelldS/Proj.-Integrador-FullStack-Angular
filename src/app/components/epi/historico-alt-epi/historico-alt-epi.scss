@@ -58,14 +58,24 @@
 }
 
 .history-list article {
-  display: flex;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   padding: 16px;
   border: 1px solid rgba(0, 61, 108, 0.08);
   border-radius: var(--mar-radius-md);
   background: var(--mar-bg);
+}
+
+.history-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(25, 150, 208, 0.1);
+  color: var(--mar-azul-medio);
 }
 
 .history-list strong {
@@ -90,7 +100,10 @@
 
   .panel-title,
   .history-list article {
-    flex-direction: column;
     align-items: flex-start;
+  }
+
+  .history-list article {
+    grid-template-columns: 1fr;
   }
 }

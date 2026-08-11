@@ -3,7 +3,7 @@ import { EpiSeletor } from './components/epi/epi-seletor';
 import { Login } from './components/geral/login/login';
 import { Unauthorized } from './auth/unauthorized/unauthorized';
 import { Homepage } from './components/geral/homepage/homepage';
-import { authGuard } from './auth/auth.guard';
+import { authGuard, tstGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
 
@@ -24,7 +24,7 @@ export const routes: Routes = [
   {
     path: 'epi',
     component: EpiSeletor,
-    canActivate: [authGuard]
+    canActivate: [tstGuard]
   },
 
   // treinamento
@@ -33,7 +33,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/treinamento/gerenciar-treinamento')
         .then((m) => m.GerenciarTreinamento),
-    canActivate: [authGuard]
+    canActivate: [tstGuard]
   },
 
   // treinamento - presenca
@@ -43,7 +43,17 @@ export const routes: Routes = [
       import('./components/treinamento/gerenciar-treinamento')
         .then((m) => m.GerenciarTreinamento),
     data: { view: 'presenca' },
-    canActivate: [authGuard]
+    canActivate: [tstGuard]
+  },
+
+  // treinamento - abrir turma
+  {
+    path: 'treinamento/abrir-turma',
+    loadComponent: () =>
+      import('./components/treinamento/gerenciar-treinamento')
+        .then((m) => m.GerenciarTreinamento),
+    data: { view: 'abrir-turma' },
+    canActivate: [tstGuard]
   },
 
   // treinamento - historico
@@ -52,7 +62,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/treinamento/historico-treinamento/historico-treinamento')
         .then((m) => m.HistoricoTreinamento),
-    canActivate: [authGuard]
+    canActivate: [tstGuard]
   },
 
   // funcionario
@@ -70,14 +80,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/geral/gerenciar-funcionarios/gerenciar-funcionarios')
         .then((m) => m.GerenciarFuncionarios),
-    canActivate: [authGuard]
+    canActivate: [tstGuard]
   },
 
   // acesso nao autorizado
   {
     path: 'unauthorized',
     component: Unauthorized,
-    canActivate: [authGuard]
+    canActivate: [tstGuard]
   },
 
   // rota invalida

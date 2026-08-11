@@ -12,10 +12,10 @@ import {
 export class EpiData {
   getAvailableEpis(): EpiOption[] {
     return [
-      { name: 'Capacete de seguranca', ca: '101022', validity: '2026-09-12' },
+      { name: 'Capacete de segurança', ca: '101022', validity: '2026-09-12' },
       { name: 'Luva anticorte Cut Oil Volk', ca: '34456', validity: '2026-08-28' },
       { name: 'Bota de borracha isolante', ca: '321124', validity: '2026-08-02' },
-      { name: 'Oculos de seguranca incolor', ca: '88912', validity: '2027-01-10' },
+      { name: 'Óculos de segurança incolor', ca: '88912', validity: '2027-01-10' },
       { name: 'Protetor auricular plug', ca: '67543', validity: '2027-03-04' },
     ];
   }
@@ -23,7 +23,7 @@ export class EpiData {
   getDeliveryDraft(): DeliveryItem[] {
     return [
       {
-        epi: 'Capacete de seguranca',
+        epi: 'Capacete de segurança',
         ca: '101022',
         quantity: 1,
         validity: '2026-09-12',
@@ -42,7 +42,7 @@ export class EpiData {
       {
         ca: '101022',
         name: 'Capacete com viseira e faixa refletiva',
-        employee: 'Joao Pedro da Rocha de Alcantara',
+        employee: 'João Pedro da Rocha de Alcântara',
         status: 'Bom estado',
         statusClass: 'success',
         due: '12/09/2026',
@@ -51,7 +51,7 @@ export class EpiData {
         ca: '34456',
         name: 'Luva anticorte Cut Oil Volk',
         employee: 'Fernanda Beatriz de Lima Barreto',
-        status: 'Proximo do vencimento',
+        status: 'Próximo do vencimento',
         statusClass: 'warning',
         due: '28/08/2026',
       },
@@ -91,9 +91,9 @@ export class EpiData {
 
   getPreviousEpis(): PreviousEpi[] {
     return [
-      { ca: '88912', name: 'Oculos de seguranca incolor', deliveredAt: '10/01/2026' },
+      { ca: '88912', name: 'Óculos de segurança incolor', deliveredAt: '10/01/2026' },
       { ca: '67543', name: 'Protetor auricular plug', deliveredAt: '04/03/2026' },
-      { ca: '55301', name: 'Luva nitrilica', deliveredAt: '19/04/2026' },
+      { ca: '55301', name: 'Luva nitrílica', deliveredAt: '19/04/2026' },
     ];
   }
 
@@ -103,19 +103,19 @@ export class EpiData {
         date: '06/08/2026 09:48',
         user: 'Admin SST',
         action: 'Entrega registrada',
-        detail: 'Ficha digital criada para Joao Pedro com 2 EPIs.',
+        detail: 'Ficha digital criada para João Pedro com 2 EPIs.',
       },
       {
         date: '05/08/2026 16:20',
         user: 'Admin SST',
-        action: 'Alteracao manual',
-        detail: 'CA 34456 marcado como proximo do vencimento.',
+        action: 'Alteração manual',
+        detail: 'CA 34456 marcado como próximo do vencimento.',
       },
       {
         date: '02/08/2026 11:05',
         user: 'Admin SST',
-        action: 'Substituicao',
-        detail: 'Bota isolante anterior substituida por vencimento.',
+        action: 'Substituição',
+        detail: 'Bota isolante anterior substituída por vencimento.',
       },
     ];
   }

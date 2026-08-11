@@ -1,297 +1,227 @@
 @if (showHeader) {
 
 <header>
-
   <div class="row align-items-center justify-content-center">
-
     <div id="logoDiv" class="col-lg-3 col-md-3 col-sm-12 d-flex align-items-center justify-content-center">
       <img src="img/logo.png" class="logo" alt="Logo da MAR Metalurgica." />
     </div>
 
     <div id="metalDiv" class="col-lg-4 col-md-5 col-sm-12 d-flex align-items-center justify-content-center">
       <div>
-        <h1>
-          A Metalurgica
-        </h1>
-
-        <h2>
-          Especialista na sua praia
-        </h2>
+        <h1>A Metalúrgica</h1>
+        <h2>Especialista na sua praia</h2>
       </div>
     </div>
 
     <div id="TSTDiv" class="col-lg-4 col-md-4 col-sm-12 text-center">
-      <h2>
-        Sistema de Gerenciamento
-      </h2>
-
-      <p>
-        Seguranca do Trabalho
-      </p>
+      <h2>{{ tituloArea }}</h2>
+      <p>{{ subtituloArea }}</p>
     </div>
-
   </div>
-
 </header>
 
 <nav>
+  <ul class="nav nav-tabs nav-fill justify-content-center align-items-center" [class.portal-nav]="isOperario">
+    @if (isOperario) {
+      <li>
+        <a class="btn d-flex align-items-center justify-content-center" routerLink="/" routerLinkActive="nav-active" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="bi bi-house-door"></i>
+          Home
+        </a>
+      </li>
 
-  <ul class="nav nav-tabs nav-fill justify-content-center align-items-center">
+      <li>
+        <a class="btn d-flex align-items-center justify-content-center" [routerLink]="rotaMeusEpis" routerLinkActive="nav-active">
+          <i class="bi bi-shield-check"></i>
+          Meus EPIs
+        </a>
+      </li>
 
-    <li>
-      <a class="btn d-flex align-items-center justify-content-center" routerLink="/">
-        <i class="bi bi-house-door"></i>
-        HOME
-      </a>
-    </li>
-
-    <li>
-      <a class="btn d-flex align-items-center justify-content-center" routerLink="/funcionario">
-        <i class="bi bi-person-raised-hand"></i>
-        Portal do funcionario
-      </a>
-
-      <ul class="dropdown-menu">
+      <li>
+        <a class="btn d-flex align-items-center justify-content-center" [routerLink]="rotaMeusTreinamentos" routerLinkActive="nav-active">
+          <i class="bi bi-journal-check"></i>
+          Meus Treinamentos
+        </a>
+      </li>
+    } @else {
+      @if (isTst) {
         <li>
-          <a class="dropdown-item" [routerLink]="rotaMeusEpis">Meus EPIs</a>
+          <a class="btn d-flex align-items-center justify-content-center" routerLink="/" routerLinkActive="nav-active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="bi bi-house-door"></i>
+            HOME
+          </a>
         </li>
-        <li>
-          <a class="dropdown-item" [routerLink]="rotaMeusTreinamentos">Meus Treinamentos</a>
-        </li>
-      </ul>
-    </li>
 
-    <li>
-      <a class="btn d-flex align-items-center justify-content-center">
-        <i class="bi bi-shield-shaded"></i>
-        Gerenciar EPIs
-      </a>
+        <li>
+          <a class="btn d-flex align-items-center justify-content-center" routerLink="/funcionario" routerLinkActive="nav-active">
+            <i class="bi bi-person-badge"></i>
+            Minha área
+          </a>
+        </li>
 
-      <ul class="dropdown-menu">
-        <li>
-          <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'busca'}">Busca EPI</a>
-        </li>
-        <li>
-          <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'cadastro'}">Cadastro / Recebimento</a>
-        </li>
-        <li>
-          <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'entrega'}">Entrega de EPIs</a>
-        </li>
-        <li>
-          <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'historico'}">Historico de Alterações</a>
-        </li>
-      </ul>
-    </li>
+        <li routerLinkActive="is-active">
+          <a class="btn d-flex align-items-center justify-content-center">
+            <i class="bi bi-shield-shaded"></i>
+            Gerenciar EPIs
+          </a>
 
-    <li>
-      <a class="btn d-flex align-items-center justify-content-center" routerLink="/treinamento">
-        <i class="bi bi-file-text-fill"></i>
-        Gerenciar Treinamentos
-      </a>
-
-      <ul class="dropdown-menu">
-        <li>
-          <a class="dropdown-item" [routerLink]="['/treinamento/presenca']">Treinamentos e Presença</a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'busca'}">Busca EPI</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'cadastro'}">Cadastro / Recebimento</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'entrega'}">Entrega de EPIs</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'historico'}">Histórico de Alterações</a>
+            </li>
+          </ul>
         </li>
+
         <li>
-          <a class="dropdown-item" [routerLink]="['/treinamento/historico']">Histórico de Alterações</a>
+          <a class="btn d-flex align-items-center justify-content-center" routerLink="/treinamento" routerLinkActive="nav-active">
+            <i class="bi bi-file-text-fill"></i>
+            Gerenciar Treinamentos
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/treinamento/presenca']">Treinamentos e Presença</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/treinamento/abrir-turma']">Abrir Turma</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/treinamento/historico']">Histórico de Alterações</a>
+            </li>
+          </ul>
         </li>
-      </ul>
-    </li>
 
-    <li>
-      <a class="btn d-flex align-items-center justify-content-center" routerLink="/gerenciar-funcionarios">
-        <i class="bi bi-people-fill"></i>
-        Gerenciar Funcionários
-      </a>
-    </li>
-
+        <li>
+          <a class="btn d-flex align-items-center justify-content-center" routerLink="/gerenciar-funcionarios" routerLinkActive="nav-active">
+            <i class="bi bi-people-fill"></i>
+            Gerenciar Funcionários
+          </a>
+        </li>
+      }
+    }
   </ul>
-
 </nav>
 
 <div class="top-right-actions">
-
   <div class="notification-area">
+    <button
+      class="btn notification-button d-flex align-items-center justify-content-center"
+      type="button"
+      [class.is-open]="notificacoesAbertas"
+      (click)="alternarNotificacoes($event)"
+      aria-label="Abrir notificações"
+    >
+      <i class="bi bi-bell-fill"></i>
 
-      <button class="btn notification-button d-flex align-items-center justify-content-center" type="button"
-        [class.is-open]="notificacoesAbertas"
-        (click)="alternarNotificacoes($event)" aria-label="Abrir notificacoes">
-        <i class="bi bi-bell-fill"></i>
-
-        @if (totalNotificacoes > 0) {
+      @if (totalNotificacoes > 0) {
         <span class="notification-badge">
           {{ totalNotificacoes }}
         </span>
-        }
-      </button>
+      }
+    </button>
 
-      @if (notificacoesAbertas) {
-
+    @if (notificacoesAbertas) {
       <div class="notification-panel" (click)="$event.stopPropagation()">
-
         <div class="notification-header">
-
           <div class="notification-title">
-            <strong>
-              Notificacoes
-            </strong>
-
-            <span>
-              Avisos de vencimento
-            </span>
+            <strong>Notificações</strong>
+            <span>Avisos de vencimento</span>
           </div>
 
-          <button type="button" class="notification-settings" (click)="alternarConfiguracao($event)"
-            aria-label="Configurar notificacoes">
+          <button
+            type="button"
+            class="notification-settings"
+            (click)="alternarConfiguracao($event)"
+            aria-label="Configurar notificações"
+          >
             <i class="bi bi-gear-fill"></i>
           </button>
-
         </div>
 
         @if (configuracaoAberta) {
+          <div class="notification-config">
+            <strong class="config-title">Configurar aviso prévio</strong>
 
-        <div class="notification-config">
+            <label for="diasAvisoEpi">Avisar sobre vencimento de EPI com:</label>
 
-          <strong class="config-title">
-            Configurar aviso previo
-          </strong>
-
-          <label for="diasAvisoEpi">
-            Avisar sobre vencimento de EPI com:
-          </label>
-
-          <div class="days-input">
-
-            <input id="diasAvisoEpi" type="number" min="0" [(ngModel)]="diasAvisoEpi" />
-
-            <span>
-              dias de antecedencia
-            </span>
-
-          </div>
-
-          <label for="diasAvisoNr">
-            Avisar sobre vencimento de NR com:
-          </label>
-
-          <div class="days-input">
-
-            <input id="diasAvisoNr" type="number" min="0" [(ngModel)]="diasAvisoNr" />
-
-            <span>
-              dias de antecedencia
-            </span>
-
-          </div>
-
-          <button class="save-notification-config" type="button" (click)="salvarConfiguracao($event)">
-            <i class="bi bi-check-lg"></i>
-            Salvar configuracao
-          </button>
-
-        </div>
-
-        } @else {
-
-        @if (totalNotificacoes === 0) {
-
-        <div class="notification-empty">
-
-          <i class="bi bi-check-circle-fill"></i>
-
-          <strong>
-            Nenhum vencimento proximo
-          </strong>
-
-          <span>
-            Os avisos de EPI e NR aparecerao aqui.
-          </span>
-
-        </div>
-
-        } @else {
-
-        <div class="notification-list">
-
-          @for (epi of episComNotificacao; track epi.id) {
-
-          <div class="notification-item" [class.notification-item-expired]="estaVencido(epi)">
-
-            <div class="notification-item-icon">
-
-              @if (estaVencido(epi)) {
-              <i class="bi bi-x-circle-fill"></i>
-              } @else {
-              <i class="bi bi-exclamation-triangle-fill"></i>
-              }
-
+            <div class="days-input">
+              <input id="diasAvisoEpi" type="number" min="0" [(ngModel)]="diasAvisoEpi" />
+              <span>dias de antecedência</span>
             </div>
 
-            <div class="notification-item-content">
+            <label for="diasAvisoNr">Avisar sobre vencimento de NR com:</label>
 
-              @if (estaVencido(epi)) {
-
-              <strong class="notification-status expired">
-                EPI vencido
-              </strong>
-
-              } @else {
-
-              <strong class="notification-status warning">
-                EPI proximo do vencimento
-              </strong>
-
-              }
-
-              <span class="notification-epi-name">
-                {{ epi.nome }}
-              </span>
-
-              <small>
-                CA: {{ epi.ca }}
-              </small>
-
-              <small>
-                Funcionario: {{ epi.funcionario }}
-              </small>
-
-              <small class="notification-date" [class.expired]="estaVencido(epi)">
-                {{ textoVencimento(epi) }}
-              </small>
-
+            <div class="days-input">
+              <input id="diasAvisoNr" type="number" min="0" [(ngModel)]="diasAvisoNr" />
+              <span>dias de antecedência</span>
             </div>
 
+            <button class="save-notification-config" type="button" (click)="salvarConfiguracao($event)">
+              <i class="bi bi-check-lg"></i>
+              Salvar configuração
+            </button>
           </div>
+        } @else {
+          @if (totalNotificacoes === 0) {
+            <div class="notification-empty">
+              <i class="bi bi-check-circle-fill"></i>
+              <strong>Nenhum vencimento próximo</strong>
+              <span>Os avisos de EPI e NR aparecerão aqui.</span>
+            </div>
+          } @else {
+            <div class="notification-list">
+              @for (epi of episComNotificacao; track epi.id) {
+                <div class="notification-item" [class.notification-item-expired]="estaVencido(epi)">
+                  <div class="notification-item-icon">
+                    @if (estaVencido(epi)) {
+                      <i class="bi bi-x-circle-fill"></i>
+                    } @else {
+                      <i class="bi bi-exclamation-triangle-fill"></i>
+                    }
+                  </div>
 
+                  <div class="notification-item-content">
+                    @if (estaVencido(epi)) {
+                      <strong class="notification-status expired">EPI vencido</strong>
+                    } @else {
+                      <strong class="notification-status warning">EPI próximo do vencimento</strong>
+                    }
+
+                    <span class="notification-epi-name">{{ epi.nome }}</span>
+                    <small>CA: {{ epi.ca }}</small>
+                    <small>Funcionário: {{ epi.funcionario }}</small>
+                    <small class="notification-date" [class.expired]="estaVencido(epi)">
+                      {{ textoVencimento(epi) }}
+                    </small>
+                  </div>
+                </div>
+              }
+            </div>
           }
-
-        </div>
-
         }
-
-        }
-
       </div>
-
-      }
-
+    }
   </div>
 
   @if (estaNoTopo) {
-
-  <a class="logout-link" routerLink="/login" aria-label="Logout">
-    <i class="bi bi-person-fill-x"></i>
-    Logout
-  </a>
-
+    <a class="logout-link" routerLink="/login" aria-label="Logout">
+      <i class="bi bi-person-fill-x"></i>
+      Logout
+    </a>
   } @else {
-
-  <button class="back-to-top-button" type="button" (click)="voltarAoTopo()" aria-label="Voltar ao topo">
-    <i class="bi bi-chevron-up"></i>
-  </button>
+    <button class="back-to-top-button" type="button" (click)="voltarAoTopo()" aria-label="Voltar ao topo">
+      <i class="bi bi-chevron-up"></i>
+    </button>
   }
-
 </div>
 
 }

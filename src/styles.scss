@@ -39,6 +39,10 @@
 	--mar-shadow-soft: 0 8px 24px rgba(0, 61, 108, 0.08);
 	--mar-shadow-card: 0 12px 30px rgba(0, 61, 108, 0.08);
 	--mar-panel-padding: 16px;
+	--mar-page-max-width: 1450px;
+	--mar-page-padding-x: clamp(18px, 4.8vw, 68px);
+	--mar-page-padding-top: 38px;
+	--mar-page-padding-bottom: 60px;
 
 	/* Fonte */
 	--mar-font: "Inter", "Segoe UI", Arial, sans-serif;

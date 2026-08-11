@@ -5,7 +5,7 @@
 		<article class="filter-box">
 
 			<div class="filter-box-title">
-				<h4>EPI - Parametros de Busca:</h4>
+				<h4>EPI - Parâmetros de busca:</h4>
 			</div>
 
 			<div class="row g-3">
@@ -39,15 +39,15 @@
 				</div>
 
 				<div class="col-lg-3 col-md-6">
-					<label class="form-label" for="filter-employee">
-						Funcionario
+						<label class="form-label" for="filter-employee">
+						Funcionário
 					</label>
 
 					<div class="input-group">
 						<input id="filter-employee" type="text" class="form-control"
-							placeholder="Filtrar funcionario" />
+							placeholder="Filtrar funcionário" />
 
-						<button class="btn btn-icon-filter" type="button" aria-label="Filtrar funcionario">
+						<button class="btn btn-icon-filter" type="button" aria-label="Filtrar funcionário">
 							<i class="bi bi-funnel"></i>
 						</button>
 					</div>
@@ -68,14 +68,14 @@
 				</div>
 
 				<div class="col-lg-3 col-md-6">
-					<label class="form-label" for="filter-status">
-						Situacao
+						<label class="form-label" for="filter-status">
+						Situação
 					</label>
 
 					<div class="input-group">
-						<input id="filter-status" type="text" class="form-control" placeholder="Filtrar situacao" />
+						<input id="filter-status" type="text" class="form-control" placeholder="Filtrar situação" />
 
-						<button class="btn btn-icon-filter" type="button" aria-label="Filtrar situacao">
+						<button class="btn btn-icon-filter" type="button" aria-label="Filtrar situação">
 							<i class="bi bi-funnel"></i>
 						</button>
 					</div>
@@ -92,6 +92,16 @@
 			<div class="delivery-list-head">
 				<div>
 					<h4>Resultados:</h4>
+					@if (exportMessage) {
+						<span class="export-message">{{ exportMessage }}</span>
+					}
+				</div>
+
+				<div class="export-actions" aria-label="Exportar relatório de EPIs">
+					<button class="btn btn-sm btn-outline-brand" type="button" (click)="exportarRelatorio('pdf')">PDF</button>
+					<button class="btn btn-sm btn-outline-brand" type="button" (click)="exportarRelatorio('xlsx')">XLSX</button>
+					<button class="btn btn-sm btn-outline-brand" type="button" (click)="exportarRelatorio('xml')">XML</button>
+					<button class="btn btn-sm btn-outline-brand" type="button" (click)="exportarRelatorio('odf')">ODF</button>
 				</div>
 			</div>
 
@@ -101,7 +111,7 @@
 
 					<thead>
 						<tr>
-							<th>Funcionario</th>
+							<th>Funcionário</th>
 							<th>EPI</th>
 							<th>CA</th>
 							<th>Vencimento</th>
@@ -135,15 +145,15 @@
 
 							<td>
 								<div class="table-actions">
-									<button class="btn btn-sm btn-outline-brand" type="button">
+									<button class="btn btn-sm btn-outline-brand" type="button" [disabled]="!podeEditar" [title]="!podeEditar ? 'Perfil sem permissão de edição' : ''">
 										Editar
 									</button>
 
-									<button class="btn btn-sm btn-soft" type="button">
+									<button class="btn btn-sm btn-soft" type="button" [disabled]="!podeEditar" [title]="!podeEditar ? 'Perfil sem permissão de edição' : ''" (click)="abrirEstado(item)">
 										Estado do EPI
 									</button>
 
-									<button class="btn btn-sm btn-danger-brand" type="button">
+									<button class="btn btn-sm btn-danger-brand" type="button" [disabled]="!podeEditar" [title]="!podeEditar ? 'Perfil sem permissão de descarte' : ''" (click)="abrirDescarte(item)">
 										Descarte
 									</button>
 								</div>
@@ -169,7 +179,7 @@
 					<table class="epi-table-mirror">
 						<tbody>
 							<tr>
-								<th>Funcionario</th>
+								<th>Funcionário</th>
 								@for (item of resultados; track item.id) {
 								<td>{{ item.funcionario }}</td>
 								}
@@ -242,3 +252,66 @@
 		</article>
 	</section>
 </div>
+
+@if (modalEstadoAberto && itemSelecionado) {
+	<div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="estado-epi-title" (click)="fecharModais()">
+		<section class="epi-modal" (click)="$event.stopPropagation()">
+			<header class="modal-header">
+				<div>
+					<p class="eyebrow">Estado do EPI</p>
+					<h3 id="estado-epi-title">{{ itemSelecionado.nome }}</h3>
+					<span>CA {{ itemSelecionado.ca }} - {{ itemSelecionado.funcionario }}</span>
+				</div>
+				<button class="modal-close" type="button" aria-label="Fechar" (click)="fecharModais()">
+					<i class="bi bi-x-lg"></i>
+				</button>
+			</header>
+
+			<label class="modal-field" for="estado-epi">
+				Situação
+				<select id="estado-epi" class="form-select" [(ngModel)]="estadoSelecionado">
+					@for (estado of estadosEpi; track estado) {
+						<option [value]="estado">{{ estado }}</option>
+					}
+				</select>
+			</label>
+
+			<label class="modal-field" for="observacao-estado">
+				Observação
+				<textarea id="observacao-estado" class="form-control" rows="4" [(ngModel)]="observacaoEstado" placeholder="Descreva a condição observada"></textarea>
+			</label>
+
+			<footer class="modal-actions">
+				<button class="btn btn-soft" type="button" (click)="fecharModais()">Cancelar</button>
+				<button class="btn btn-brand" type="button" (click)="salvarEstado()">Salvar estado</button>
+			</footer>
+		</section>
+	</div>
+}
+
+@if (modalDescarteAberto && itemSelecionado) {
+	<div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="descarte-epi-title" (click)="fecharModais()">
+		<section class="epi-modal" (click)="$event.stopPropagation()">
+			<header class="modal-header">
+				<div>
+					<p class="eyebrow">Descarte</p>
+					<h3 id="descarte-epi-title">{{ itemSelecionado.nome }}</h3>
+					<span>CA {{ itemSelecionado.ca }} - {{ itemSelecionado.funcionario }}</span>
+				</div>
+				<button class="modal-close" type="button" aria-label="Fechar" (click)="fecharModais()">
+					<i class="bi bi-x-lg"></i>
+				</button>
+			</header>
+
+			<label class="modal-field" for="motivo-descarte">
+				Motivo do descarte
+				<textarea id="motivo-descarte" class="form-control" rows="4" [(ngModel)]="motivoDescarte" placeholder="Ex.: EPI danificado ou vencido"></textarea>
+			</label>
+
+			<footer class="modal-actions">
+				<button class="btn btn-soft" type="button" (click)="fecharModais()">Cancelar</button>
+				<button class="btn btn-danger-brand" type="button" (click)="confirmarDescarte()">Confirmar descarte</button>
+			</footer>
+		</section>
+	</div>
+}

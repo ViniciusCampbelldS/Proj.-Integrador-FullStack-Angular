@@ -1,10 +1,11 @@
-import {
+﻿import {
   Component,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   Router,
   RouterLink,
+  RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
 
@@ -12,6 +13,7 @@ import {
   NotificacaoService,
   EpiMonitorado,
 } from './service/notificacao';
+import { AuthService } from './service/auth';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +23,7 @@ import {
   },
   imports: [
     RouterLink,
+    RouterLinkActive,
     RouterOutlet,
     FormsModule,
   ],
@@ -43,6 +46,7 @@ export class App {
   constructor(
     private readonly router: Router,
     private readonly notificacaoService: NotificacaoService,
+    private readonly authService: AuthService,
   ) {
     this.diasAvisoEpi =
       this.notificacaoService.obterDiasAvisoEpi();
@@ -61,6 +65,35 @@ export class App {
     return this.router.url !== '/login';
   }
 
+  get isTst(): boolean {
+    return this.authService.obterPerfil() === 'TST';
+  }
+
+  get isOperario(): boolean {
+    return this.authService.obterPerfil() === 'Operário';
+  }
+
+  get isFuncionarioArea(): boolean {
+    return this.router.url.startsWith('/funcionario');
+  }
+
+  get tituloArea(): string {
+    if (this.isOperario) {
+      return 'Portal do funcionário';
+    }
+
+    if (!this.isFuncionarioArea) {
+      return 'Sistema de Gerenciamento';
+    }
+
+    return 'Minha área';
+  }
+
+  get subtituloArea(): string {
+    return this.isFuncionarioArea || this.isOperario
+      ? 'Área individual de segurança'
+      : 'Segurança do Trabalho';
+  }
  /* =========================================
      SOMENTE EPIs PRÓXIMOS DO VENCIMENTO
   ========================================= */
@@ -235,3 +268,4 @@ export class App {
     return this.notificacaoService.obterDataAtualFormatada();
   }
 };
+

@@ -1,12 +1,87 @@
 <section class="panel cadastro-panel">
-        <div class="panel-title">
-          <p class="eyebrow">Cadastro / Recebimento</p>
-          <h3>Ficha de EPI preenchida</h3>
-        </div>
-        <p class="panel-description">
-          Gerencie o cadastro e o recebimento de EPIs, incluindo conferência e controle de estoque.
-        </p>
-        <div class="cadastro-placeholder">
-          <p>Aqui vai o formulário de cadastro/recebimento e conferência de EPI.</p>
-        </div>
+  <div class="panel-title">
+    <div>
+      <p class="eyebrow">Cadastro / Recebimento</p>
+      <h3>Cadastro de EPI</h3>
+    </div>
+  </div>
+
+  <p class="panel-description">
+    Gerencie o cadastro e o recebimento de EPIs, incluindo conferência e controle de estoque.
+  </p>
+
+  @if (mensagem) {
+    <div class="form-message" role="status">
+      <i class="bi bi-info-circle"></i>
+      {{ mensagem }}
+    </div>
+  }
+
+  <div class="cadastro-grid">
+    <div class="field">
+      <label for="epi-nome">Nome *</label>
+      <input id="epi-nome" class="form-control" type="text" placeholder="Ex.: Luva anticorte" [(ngModel)]="form.nome" />
+    </div>
+
+    <div class="field">
+      <label for="epi-ca">CA *</label>
+      <input id="epi-ca" class="form-control" type="text" placeholder="Número do CA" [(ngModel)]="form.ca" />
+    </div>
+
+    <div class="field">
+      <label for="epi-lote">Lote *</label>
+      <input id="epi-lote" class="form-control" type="text" placeholder="Lote do fabricante" [(ngModel)]="form.lote" />
+    </div>
+
+    <div class="field">
+      <label for="epi-validade">Validade *</label>
+      <input id="epi-validade" class="form-control" type="date" [(ngModel)]="form.validade" />
+    </div>
+
+    <div class="field">
+      <label for="epi-quantidade">Quantidade *</label>
+      <input id="epi-quantidade" class="form-control" type="number" min="1" [(ngModel)]="form.quantidade" />
+    </div>
+  </div>
+
+  <div class="cadastro-actions">
+    <button class="btn btn-soft" type="button" (click)="limpar()">Limpar</button>
+    <button class="btn btn-brand" type="button" [disabled]="!podeSalvar" (click)="salvarEpi()">
+      <i class="bi bi-check-lg"></i>
+      Salvar EPI
+    </button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>EPI</th>
+          <th>CA</th>
+          <th>Lote</th>
+          <th>Validade</th>
+          <th>Qtd.</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (epi of epis; track epi.id) {
+          <tr>
+            <td>{{ epi.id }}</td>
+            <td>{{ epi.nome }}</td>
+            <td>{{ epi.ca }}</td>
+            <td>{{ epi.lote }}</td>
+            <td>{{ epi.validade | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ epi.quantidade }}</td>
+            <td>
+              <span class="status-badge" [class]="statusClass(epi.status)">
+                {{ epi.status }}
+              </span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </section>

@@ -1,13 +1,20 @@
 :host {
   display: block;
+  padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
+  background: var(--mar-bg);
 }
 
 .panel {
-  background: white;
-  border: 1px solid #e0e7ed;
+  max-width: var(--mar-page-max-width);
+  margin: 0 auto;
+}
+
+.panel {
+  background: var(--mar-surface);
+  border: 1px solid var(--mar-line-soft);
   border-radius: var(--mar-radius-md);
   padding: var(--mar-panel-padding);
-  box-shadow: 0 3px 12px rgba(20, 50, 70, 0.04);
+  box-shadow: var(--mar-shadow-soft);
 }
 
 .panel-header {
@@ -19,7 +26,9 @@
 
 .panel-header h2 {
   margin: 0 0 5px;
+  color: var(--mar-azul-escuro);
   font-size: 19px;
+  font-weight: 800;
 }
 
 .panel-header p {
@@ -30,7 +39,7 @@
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -42,17 +51,17 @@
 
 .field label {
   font-size: 13px;
-  font-weight: 600;
-  color: #40576a;
+  font-weight: 800;
+  color: var(--mar-azul-escuro);
 }
 
 .form-control,
 .form-select {
   min-height: 42px;
-  border: 1px solid #d5dfe7;
-  border-radius: 8px;
+  border: 1px solid var(--mar-line);
+  border-radius: var(--mar-radius);
   padding: 0 12px;
-  background: white;
+  background: var(--mar-surface);
   color: #263e51;
   outline: none;
 }
@@ -62,19 +71,88 @@
   border-color: #0b5f8f;
 }
 
+.form-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--mar-panel-padding);
+  padding: 10px 12px;
+  border: 1px solid rgba(25, 150, 208, 0.18);
+  border-radius: 10px;
+  background: rgba(25, 150, 208, 0.08);
+  color: var(--mar-azul-escuro);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.inline-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px;
+  gap: 8px;
+}
+
+.icon-only {
+  padding: 0;
+}
+
+.participants-panel {
+  display: grid;
+  gap: 10px;
+  margin-top: var(--mar-panel-padding);
+  padding: 14px;
+  border: 1px solid var(--mar-line-soft);
+  border-radius: 10px;
+  background: var(--mar-bg);
+}
+
+.participants-panel strong {
+  color: var(--mar-azul-escuro);
+  font-size: 0.9rem;
+}
+
+.participant-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--mar-muted-2);
+  font-size: 0.86rem;
+}
+
+.participant-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 5px 9px;
+  border: 1px solid rgba(4, 103, 158, 0.18);
+  border-radius: 999px;
+  background: #e8f3f9;
+  color: var(--mar-azul-escuro);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 .upload-area {
   margin-top: var(--mar-panel-padding);
   padding: var(--mar-panel-padding);
-  border: 2px dashed #cbd9e3;
+  border: 2px dashed rgba(4, 103, 158, 0.24);
   border-radius: 10px;
   display: flex;
   align-items: center;
   gap: 15px;
-  background: #f9fbfc;
+  background: #f8fbfd;
 }
 
 .upload-icon {
-  font-size: 28px;
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(4, 103, 158, 0.1);
+  color: var(--mar-azul-medio);
+  font-size: 22px;
 }
 
 .upload-area strong {
@@ -89,41 +167,62 @@
 
 .upload-btn {
   margin-left: auto;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
   padding: 9px 14px;
-  background: #e9f1f6;
+  border: 1px solid rgba(21, 89, 124, 0.22);
+  background: #edf4f8;
   color: #15597c;
-  border-radius: 7px;
+  border-radius: 10px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 800;
   cursor: pointer;
+}
+
+.upload-btn:hover {
+  background: #e1eef5;
 }
 
 .btn-primary,
 .btn-secondary {
-  border: none;
-  border-radius: 8px;
-  padding: 11px 18px;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-size: 0.88rem;
+  font-weight: 750;
   cursor: pointer;
   transition: 0.2s;
 }
 
 .btn-primary {
-  background: #075783;
-  color: white;
+  border: 1px solid var(--mar-laranja-escuro);
+  background: var(--mar-laranja-escuro);
+  color: var(--mar-surface);
 }
 
 .btn-primary:hover {
-  background: #06476b;
+  border-color: var(--mar-laranja-claro);
+  background: var(--mar-laranja-claro);
 }
 
 .btn-secondary {
-  background: #e9eef3;
-  color: #24445d;
+  border: 1px solid transparent;
+  background: rgba(25, 150, 208, 0.1);
+  color: var(--mar-azul-escuro);
 }
 
 .btn-secondary:hover {
-  background: var(--mar-line);
+  background: rgba(25, 150, 208, 0.18);
+}
+
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .form-actions {
@@ -133,8 +232,92 @@
   gap: 10px;
 }
 
+.table-panel {
+  margin-top: 18px;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #c7d5df;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 11px 12px;
+  border-right: 1px solid #e2eaf0;
+  border-bottom: 1px solid #e2eaf0;
+  color: var(--mar-text);
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+th {
+  background: var(--mar-azul-escuro);
+  color: var(--mar-surface);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+th:last-child,
+td:last-child {
+  border-right: 0;
+}
+
+tbody tr:nth-child(even) {
+  background: #f8fbfd;
+}
+
+.status-badge {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #dceee8;
+  color: #008f61;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.status-badge.is-pending {
+  background: #fff0dc;
+  color: #c86713;
+}
+
 @media (max-width: 900px) {
   .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  :host {
+    padding: 22px 14px 42px;
+  }
+
+  .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .upload-area,
+  .form-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .upload-btn,
+  .form-actions button {
+    width: 100%;
+    justify-content: center;
   }
 }
