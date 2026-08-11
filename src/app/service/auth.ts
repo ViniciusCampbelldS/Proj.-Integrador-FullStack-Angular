@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { timeout } from 'rxjs';
 
 export type UserRole = 'TST' | 'Operário';
 
@@ -11,7 +12,9 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(dados: any) {
-    return this.http.post<any>(`${this.apiUrl}/login`, dados);
+    return this.http.post<any>(`${this.apiUrl}/login`, dados).pipe(
+      timeout(8000),
+    );
   }
 
   salvarToken(token: string) {

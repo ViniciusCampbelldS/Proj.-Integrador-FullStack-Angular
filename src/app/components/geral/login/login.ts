@@ -21,6 +21,7 @@ export class Login {
   readonly perfis: UserRole[] = ['TST', 'Operário'];
 
   erroLogin = false;
+  mensagemErroLogin = 'CPF ou senha inválidos.';
   exibirTelefoneTI = false;
   carregando = false;
 
@@ -35,6 +36,7 @@ export class Login {
     }
 
     this.erroLogin = false;
+    this.mensagemErroLogin = 'CPF ou senha inválidos.';
     this.carregando = true;
 
     const cpfSemFormatacao = this.cpf.replace(/\D/g, '');
@@ -49,6 +51,7 @@ export class Login {
           const token = response.access_token;
 
           if (!token) {
+            this.mensagemErroLogin = 'CPF ou senha inválidos.';
             this.erroLogin = true;
             this.carregando = false;
             return;
@@ -67,6 +70,7 @@ export class Login {
             });
         },
         error: () => {
+          this.mensagemErroLogin = 'Não foi possível conectar ao servidor de login.';
           this.erroLogin = true;
           this.carregando = false;
         },

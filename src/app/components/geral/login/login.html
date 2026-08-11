@@ -1,4 +1,4 @@
-<section class="login-page">
+﻿<section class="login-page">
   <div class="login-panel">
     <img src="/logo-mar.svg" alt="MAR Metalúrgica" />
 
@@ -42,9 +42,7 @@
       </select>
 
       @if (erroLogin) {
-        <p class="login-error" aria-live="polite">
-          CPF ou senha inválidos.
-        </p>
+        <p class="login-error" aria-live="polite">`r`n          {{ mensagemErroLogin }}`r`n        </p>
       }
 
       <button class="btn btn-brand" type="submit" [disabled]="carregando">
@@ -74,3 +72,4 @@
     </form>
   </div>
 </section>
+

@@ -20,10 +20,9 @@ export class Homepage {
   dataHoje: string;
 
 
-  // =====================================================
+
   // TREINAMENTOS
-  // =====================================================
-  // Ainda não existe uma base real de treinamentos/NRs
+  // Vinicius, Ainda não existe uma base real de treinamentos/NRs
   // ligada à homepage.
   //
   // Por isso deixamos 0 e exibimos "Sem dados".
