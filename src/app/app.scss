@@ -1,30 +1,4 @@
 // ======================================================
-// 1. VARIAVEIS
-// ======================================================
-
-$cor-principal: #0d6efd;
-
-$cor-azul-medio: #04679e;
-$cor-azul-escuro: #003d6c;
-$cor-azul-claro: #1996d0;
-
-$cor-laranja-escuro: #e27425;
-$cor-laranja-claro: #f68d17;
-
-$cor-vermelha: #dc3545;
-
-$cor-texto: #495057;
-$cor-texto-secundario: #6c757d;
-
-$cor-fundo: #f5f7fb;
-$cor-branca: #ffffff;
-
-$radius-padrao: 12px;
-
-$sombra-padrao: 0 8px 24px rgba(0, 61, 108, 0.08);
-
-
-// ======================================================
 // 2. ESTRUTURA GERAL
 // ======================================================
 
@@ -33,7 +7,7 @@ $sombra-padrao: 0 8px 24px rgba(0, 61, 108, 0.08);
 }
 
 body {
-	background: $cor-fundo;
+	background: var(--mar-bg);
 }
 
 
@@ -42,14 +16,8 @@ body {
 // ======================================================
 
 header {
-	background: linear-gradient(135deg,
-			#ffffff 0%,
-			#f7fbff 100%);
-
-	border-bottom:
-		1px solid rgba(0, 61, 108, 0.08);
-
-	box-shadow: $sombra-padrao;
+	background: var(--mar-bg);
+	box-shadow: var(--mar-shadow-soft);
 
 	>.row {
 		min-height: 165px;
@@ -111,7 +79,7 @@ header {
 		margin-bottom: 4px !important;
 
 		color:
-			$cor-azul-escuro !important;
+			var(--mar-azul-escuro) !important;
 
 		font-size:
 			clamp(2rem,
@@ -131,7 +99,7 @@ header {
 		margin: 0;
 
 		color:
-			$cor-laranja-claro !important;
+			var(--mar-laranja-claro) !important;
 
 		font-size:
 			clamp(1rem,
@@ -161,7 +129,7 @@ header {
 	h2 {
 		margin-bottom: 5px;
 
-		color: $cor-azul-escuro;
+		color: var(--mar-azul-escuro);
 
 		font-size: 1.35rem;
 
@@ -176,7 +144,7 @@ header {
 		margin-top: 4px;
 		margin-bottom: 0;
 
-		color: $cor-texto;
+		color: var(--mar-text);
 
 		font-size: 0.95rem !important;
 
@@ -199,7 +167,7 @@ header {
 }
 
 nav {
-	background: $cor-branca;
+	background: var(--mar-bg);
 
 	padding: 0 4% 18px;
 
@@ -213,12 +181,12 @@ nav {
 
 		gap: 14px;
 
-		background: #f8fbfe;
+		background: var(--mar-surface);
 
 		border:
 			1px solid rgba(0, 61, 108, 0.08);
 
-		border-radius: 14px;
+		border-radius: var(--mar-radius-lg);
 
 		padding: 12px 28px !important;
 
@@ -246,12 +214,12 @@ nav {
 		min-width: 0;
 		height: 46px;
 
-		border: none;
+		border: 1px solid var(--mar-line);
 		border-radius: 9px;
 
-		background: transparent;
+		background: var(--mar-surface);
 
-		color: $cor-azul-escuro;
+		color: var(--mar-azul-escuro);
 
 		font-weight: 600;
 
@@ -268,10 +236,10 @@ nav {
 		&:hover,
 		&:focus {
 			background:
-				$cor-azul-escuro;
+				var(--mar-azul-escuro);
 
 			color:
-				$cor-branca;
+				var(--mar-surface);
 
 			transform:
 				translateY(-2px);
@@ -284,7 +252,7 @@ nav {
 			margin-right: 6px;
 
 			color:
-				$cor-laranja-claro;
+				var(--mar-laranja-claro);
 
 			font-size: 1rem;
 
@@ -295,7 +263,7 @@ nav {
 		&:hover i,
 		&:focus i {
 			color:
-				$cor-branca;
+				var(--mar-surface);
 		}
 	}
 }
@@ -322,13 +290,13 @@ nav {
 	margin-right: 0;
 
 	color:
-		$cor-laranja-claro;
+		var(--mar-laranja-claro);
 }
 
 .notification-button:hover i,
 .notification-button:focus i {
 	color:
-		$cor-branca;
+		var(--mar-surface);
 }
 
 
@@ -369,14 +337,68 @@ nav {
 
 	padding: 0;
 
+	border: 1px solid rgba(0, 61, 108, 0.18);
 	border-radius: 999px;
 
+	background: transparent;
+
+	transition:
+		background-color 0.2s ease,
+		border-color 0.2s ease,
+		transform 0.2s ease;
+
 	max-width: none;
+}
+
+.top-right-actions .notification-button:hover,
+.top-right-actions .notification-button:focus-visible {
+	background: var(--mar-laranja-escuro);
+	border-color: var(--mar-laranja-escuro);
+	transform: translateY(-1px);
 }
 
 .top-right-actions .notification-badge {
 	top: 0;
 	right: -6px;
+}
+
+.back-to-top-button {
+	align-items: center;
+	gap: 6px;
+	color: var(--mar-azul-escuro);
+	display: grid;
+	width: 32px;
+	height: 32px;
+	place-items: center;
+	padding: 0;
+	border:
+		1px solid rgba(0, 61, 108, 0.18);
+
+	border-radius: 999px;
+	background: transparent;
+	cursor: pointer;
+	opacity: 0.9;
+	transition:
+		opacity 0.2s ease,
+		color 0.2s ease,
+		border-color 0.2s ease,
+		transform 0.2s ease;
+}
+
+.back-to-top-button i {
+	margin: 0;
+
+	font-size: 0.82rem;
+
+	line-height: 1;
+}
+
+.back-to-top-button:hover,
+.back-to-top-button:focus {
+	border-color: var(--mar-laranja-escuro);
+	color: var(--mar-laranja-escuro);
+	opacity: 1;
+	transform: translateY(-1px);
 }
 
 .logout-link {
@@ -387,7 +409,7 @@ nav {
 
 	padding: 0 2px;
 
-	color: $cor-azul-escuro;
+	color: var(--mar-azul-escuro);
 
 	font-size: 0.86rem;
 	font-weight: 700;
@@ -404,17 +426,16 @@ nav {
 .logout-link i {
 	margin-right: 0;
 
-	color: $cor-laranja-escuro;
+	color: var(--mar-laranja-escuro);
 
 	font-size: 0.9rem;
 }
 
 .logout-link:hover,
 .logout-link:focus {
-	color: $cor-laranja-escuro;
+	color: var(--mar-laranja-escuro);
 	opacity: 1;
 }
-
 
 // ======================================================
 // BADGE DO SINO
@@ -436,15 +457,15 @@ nav {
 	padding: 0 5px;
 
 	border:
-		2px solid $cor-branca;
+		2px solid var(--mar-surface);
 
 	border-radius: 999px;
 
 	background:
-		$cor-laranja-escuro;
+		var(--mar-laranja-escuro);
 
 	color:
-		$cor-branca;
+		var(--mar-surface);
 
 	font-size: 11px;
 	font-weight: 800;
@@ -475,10 +496,10 @@ nav {
 		1px solid rgba(0, 61, 108, 0.12);
 
 	border-radius:
-		$radius-padrao;
+		var(--mar-radius-md);
 
 	background:
-		$cor-branca;
+		var(--mar-surface);
 
 	box-shadow:
 		0 16px 36px rgba(0, 61, 108, 0.18);
@@ -508,8 +529,8 @@ nav {
 
 	background:
 		linear-gradient(135deg,
-			#ffffff 0%,
-			#f7fbff 100%);
+			var(--mar-surface) 0%,
+			var(--mar-bg) 100%);
 }
 
 .notification-title {
@@ -519,7 +540,7 @@ nav {
 
 	strong {
 		color:
-			$cor-azul-escuro;
+			var(--mar-azul-escuro);
 
 		font-size: 16px;
 
@@ -530,7 +551,7 @@ nav {
 		margin-top: 2px;
 
 		color:
-			$cor-texto-secundario;
+			var(--mar-text-secondary);
 
 		font-size: 12px;
 	}
@@ -557,13 +578,10 @@ nav {
 	border-radius: 9px;
 
 	background:
-		rgba(246,
-			141,
-			23,
-			0.12);
+		rgba(246,141,23,0.12);
 
 	color:
-		$cor-laranja-escuro;
+		var(--mar-laranja-escuro);
 
 	cursor: pointer;
 
@@ -575,10 +593,10 @@ nav {
 	&:hover,
 	&:focus {
 		background:
-			$cor-laranja-escuro;
+			var(--mar-laranja-escuro);
 
 		color:
-			$cor-branca;
+			var(--mar-surface);
 
 		transform:
 			translateY(-1px);
@@ -602,7 +620,7 @@ nav {
 	margin-bottom: 4px;
 
 	color:
-		$cor-azul-escuro;
+		var(--mar-azul-escuro);
 
 	font-size: 15px;
 }
@@ -611,7 +629,7 @@ nav {
 	margin-top: 4px;
 
 	color:
-		$cor-texto;
+		var(--mar-text);
 
 	font-size: 13px;
 
@@ -640,16 +658,16 @@ nav {
 	border-radius: 9px;
 
 	background:
-		$cor-branca;
+		var(--mar-surface);
 
 	color:
-		$cor-texto;
+		var(--mar-text);
 
 	outline: none;
 
 	&:focus {
 		border-color:
-			$cor-laranja-claro;
+			var(--mar-laranja-claro);
 
 		box-shadow:
 			0 0 0 0.2rem rgba(246, 141, 23, 0.18);
@@ -658,7 +676,7 @@ nav {
 
 .days-input span {
 	color:
-		$cor-texto-secundario;
+		var(--mar-text-secondary);
 
 	font-size: 13px;
 }
@@ -684,10 +702,10 @@ nav {
 	border-radius: 9px;
 
 	background:
-		$cor-laranja-escuro;
+		var(--mar-laranja-escuro);
 
 	color:
-		$cor-branca;
+		var(--mar-surface);
 
 	font-size: 14px;
 
@@ -703,7 +721,7 @@ nav {
 	&:hover,
 	&:focus {
 		background:
-			$cor-azul-escuro;
+			var(--mar-azul-escuro);
 
 		transform:
 			translateY(-1px);
@@ -731,7 +749,7 @@ nav {
 
 	overflow-y: auto;
 
-	background: #f8fafc;
+	background: var(--mar-bg);
 }
 
 
@@ -755,12 +773,12 @@ nav {
 			0.25);
 
 	border-left:
-		4px solid $cor-laranja-escuro;
+		4px solid var(--mar-laranja-escuro);
 
 	border-radius: 10px;
 
 	background:
-		$cor-branca;
+		var(--mar-surface);
 
 	box-shadow:
 		0 3px 10px rgba(0, 61, 108, 0.06);
@@ -791,7 +809,7 @@ nav {
 			0.22);
 
 	border-left-color:
-		$cor-vermelha;
+		var(--danger);
 }
 
 
@@ -814,13 +832,10 @@ nav {
 	border-radius: 9px;
 
 	background:
-		rgba(246,
-			141,
-			23,
-			0.12);
+		rgba(246,141,23,0.12);
 
 	color:
-		$cor-laranja-escuro;
+		var(--mar-laranja-escuro);
 
 	i {
 		margin: 0;
@@ -833,13 +848,10 @@ nav {
 
 .notification-item-expired .notification-item-icon {
 	background:
-		rgba(220,
-			53,
-			69,
-			0.10);
+		rgba(220,53,69,0.10);
 
 	color:
-		$cor-vermelha;
+		var(--danger);
 }
 
 
@@ -876,12 +888,12 @@ nav {
 
 .notification-status.warning {
 	color:
-		$cor-laranja-escuro;
+		var(--mar-laranja-escuro);
 }
 
 .notification-status.expired {
 	color:
-		$cor-vermelha;
+		var(--danger);
 }
 
 
@@ -895,7 +907,7 @@ nav {
 	margin-bottom: 3px;
 
 	color:
-		$cor-azul-escuro;
+		var(--mar-azul-escuro);
 
 	font-size: 13px;
 
@@ -915,7 +927,7 @@ nav {
 	display: block;
 
 	color:
-		$cor-texto-secundario;
+		var(--mar-text-secondary);
 
 	font-size: 11.5px;
 
@@ -931,7 +943,7 @@ nav {
 	margin-top: 5px;
 
 	color:
-		$cor-laranja-escuro !important;
+		var(--mar-laranja-escuro) !important;
 
 	font-size: 12px !important;
 
@@ -940,7 +952,7 @@ nav {
 
 .notification-date.expired {
 	color:
-		$cor-vermelha !important;
+		var(--danger) !important;
 }
 
 
@@ -960,18 +972,12 @@ nav {
 	border-radius: 999px;
 
 	background:
-		rgba(0,
-			61,
-			108,
-			0.20);
+		rgba(0,61,108,0.20);
 }
 
 .notification-list::-webkit-scrollbar-thumb:hover {
 	background:
-		rgba(0,
-			61,
-			108,
-			0.35);
+		rgba(0,61,108,0.35);
 }
 
 
@@ -995,14 +1001,14 @@ nav {
 		margin-bottom: 8px;
 
 		color:
-			$cor-laranja-claro;
+			var(--mar-laranja-claro);
 
 		font-size: 28px;
 	}
 
 	strong {
 		color:
-			$cor-texto;
+			var(--mar-text);
 
 		font-size: 14px;
 	}
@@ -1011,7 +1017,7 @@ nav {
 		margin-top: 5px;
 
 		color:
-			$cor-texto-secundario;
+			var(--mar-text-secondary);
 
 		font-size: 12px;
 	}
@@ -1136,10 +1142,10 @@ nav {
 
 @media (max-width: 680px) {
 	.top-right-actions {
-		top: 10px;
-		right: 12px;
+		top: 9px;
+		right: 10px;
 
-		padding: 7px 8px;
+		padding: 6px 7px;
 
 		gap: 8px;
 	}
@@ -1188,7 +1194,8 @@ nav {
 	display: none;
 	position: absolute;
 	top: 100%;
-	left: 0;
+	left: 50%;
+	transform: translateX(-50%);
 	z-index: 1000;
 	min-width: 12rem;
 	padding: 0.25rem 0;
@@ -1209,5 +1216,5 @@ nav {
 }
 
 .dropdown-menu .dropdown-item:hover {
-	background: #f8f9fa;
+	background: var(--mar-bg);
 }

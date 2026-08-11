@@ -1,53 +1,12 @@
-<section class="content-area">
-	
-<!-- Navegação removida
- 
-	<nav class="epi-tabs" role="tablist" aria-label="Secoes de EPI">
-		<button type="button" [class.active]="activeSstView === 'busca'" (click)="setSstView('busca')">
-			Busca EPI
-		</button>
-		<button type="button" [class.active]="activeSstView === 'cadastro'" (click)="setSstView('cadastro')">
-			Cadastro / Recebimento de EPIs
-		</button>
-		<button type="button" [class.active]="activeSstView === 'entrega'" (click)="setSstView('entrega')">
-			Entrega de EPIs
-		</button>
-		<button type="button" [class.active]="activeSstView === 'historico'" (click)="setSstView('historico')">
-			Historico ADM
-		</button>
-	</nav> -->
-	
-<!-- Guias -->
-	<section class="epi-panel">
-		@if (activeSstView === 'busca') {
-		<div class="epi-dashboard">
-			<section class="epi-filter-panel">
-				<app-epi-filter></app-epi-filter>
-			</section>
-		</div>
-		}
-
-		@if (activeSstView === 'cadastro') {
-		<section class="panel cadastro-panel">
-			<div class="panel-title">
-				<p class="eyebrow">Cadastro / Recebimento</p>
-				<h3>Ficha de EPI preenchida</h3>
-			</div>
-			<p class="panel-description">
-				Gerencie o cadastro e o recebimento de EPIs, incluindo conferência e controle de estoque.
-			</p>
-			<div class="cadastro-placeholder">
-				<p>Aqui vai o formulário de cadastro/recebimento e conferência de EPI.</p>
-			</div>
-		</section>
-		}
-
-		@if (activeSstView === 'entrega') {
-		<app-formulario-entrega></app-formulario-entrega>
-		}
-
-		@if (activeSstView === 'historico') {
-		<app-historico-alt-epi></app-historico-alt-epi>
-		}
-	</section>
+<section class="panel cadastro-panel">
+        <div class="panel-title">
+          <p class="eyebrow">Cadastro / Recebimento</p>
+          <h3>Ficha de EPI preenchida</h3>
+        </div>
+        <p class="panel-description">
+          Gerencie o cadastro e o recebimento de EPIs, incluindo conferência e controle de estoque.
+        </p>
+        <div class="cadastro-placeholder">
+          <p>Aqui vai o formulário de cadastro/recebimento e conferência de EPI.</p>
+        </div>
 </section>

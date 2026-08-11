@@ -1,33 +1,4 @@
 // ======================================================
-// PALETA MAR
-// ======================================================
-
-$azul-escuro: #003d6c;
-$azul-medio: #04679e;
-$azul-claro: #1996d0;
-
-$laranja-escuro: #e27425;
-$laranja-claro: #f68d17;
-
-$verde: #198754;
-$vermelho: #dc3545;
-
-$texto: #24384b;
-$texto-secundario: #687b8c;
-
-$fundo: #f3f7fa;
-$branco: #ffffff;
-
-$borda: #dce6ee;
-
-$radius: 16px;
-
-$sombra:
-  0 12px 30px
-  rgba(0, 61, 108, 0.08);
-
-
-// ======================================================
 // COMPONENTE
 // ======================================================
 
@@ -52,11 +23,11 @@ $sombra:
   background:
     linear-gradient(
       180deg,
-      #f3f7fa 0%,
+      var(--mar-bg) 0%,
       #f8fafc 100%
     );
 
-  color: $texto;
+  color: var(--mar-text-strong);
 }
 
 
@@ -78,7 +49,7 @@ $sombra:
 
   max-width: 1450px;
 
-  margin: 0 auto 24px;
+  margin: 0 auto var(--mar-panel-padding);
 
   padding:
     38px
@@ -91,8 +62,8 @@ $sombra:
   background:
     linear-gradient(
       135deg,
-      $azul-escuro 0%,
-      $azul-medio 68%,
+      var(--mar-azul-escuro) 0%,
+      var(--mar-azul-medio) 68%,
       #0874aa 100%
     );
 
@@ -160,7 +131,7 @@ $sombra:
 
   gap: 20px;
 
-  margin-bottom: 32px;
+  margin-bottom: var(--mar-panel-padding);
 }
 
 
@@ -220,7 +191,7 @@ $sombra:
     0 0 7px;
 
   color:
-    $laranja-claro;
+    var(--mar-laranja-claro);
 
   font-size: 12px;
 
@@ -234,7 +205,7 @@ $sombra:
 
   margin: 0;
 
-  color: $branco;
+  color: var(--mar-surface);
 
   font-size:
     clamp(
@@ -256,7 +227,7 @@ $sombra:
   max-width: 650px;
 
   margin:
-    16px 0 0;
+    var(--mar-panel-padding) 0 0;
 
   color:
     rgba(255, 255, 255, 0.76);
@@ -279,7 +250,7 @@ $sombra:
 
   gap: 10px;
 
-  margin-top: 26px;
+  margin-top: var(--mar-panel-padding);
 }
 
 
@@ -323,10 +294,10 @@ $sombra:
 .hero-button-primary {
 
   background:
-    $laranja-claro;
+    var(--mar-laranja-claro);
 
   color:
-    #ffffff;
+    var(--mar-surface);
 
   box-shadow:
     0 8px 18px
@@ -336,9 +307,9 @@ $sombra:
   &:hover {
 
     background:
-      $laranja-escuro;
+      var(--mar-laranja-escuro);
 
-    color: #ffffff;
+    color: var(--mar-surface);
   }
 }
 
@@ -353,7 +324,7 @@ $sombra:
     rgba(255, 255, 255, 0.08);
 
   color:
-    #ffffff;
+    var(--mar-surface);
 
 
   &:hover {
@@ -361,7 +332,7 @@ $sombra:
     background:
       rgba(255, 255, 255, 0.15);
 
-    color: #ffffff;
+    color: var(--mar-surface);
   }
 }
 
@@ -386,7 +357,7 @@ $sombra:
 
   min-height: 230px;
 
-  padding: 24px;
+  padding: var(--mar-panel-padding);
 
   overflow: hidden;
 
@@ -440,13 +411,13 @@ $sombra:
     1px solid
     rgba(255, 255, 255, 0.15);
 
-  border-radius: 16px;
+  border-radius: var(--mar-radius-xl);
 
   background:
     rgba(255, 255, 255, 0.12);
 
   color:
-    $laranja-claro;
+    var(--mar-laranja-claro);
 
   font-size: 26px;
 }
@@ -476,7 +447,7 @@ $sombra:
   margin-top: 2px;
 
   color:
-    #ffffff;
+    var(--mar-surface);
 
   font-size: 2.5rem;
 
@@ -502,7 +473,7 @@ $sombra:
   width: 100%;
   height: 6px;
 
-  margin-top: 17px;
+  margin-top: var(--mar-panel-padding);
 
   overflow: hidden;
 
@@ -522,7 +493,7 @@ $sombra:
   background:
     linear-gradient(
       90deg,
-      $laranja-claro,
+      var(--mar-laranja-claro),
       #ffb356
     );
 
@@ -547,7 +518,7 @@ $sombra:
   max-width: 1450px;
 
   margin:
-    0 auto 24px;
+    0 auto var(--mar-panel-padding);
 }
 
 
@@ -563,16 +534,16 @@ $sombra:
 
   min-height: 118px;
 
-  padding: 20px;
+  padding: var(--mar-panel-padding);
 
   overflow: hidden;
 
   border:
-    1px solid $borda;
+    1px solid var(--mar-line-soft);
 
-  border-radius: $radius;
+  border-radius: var(--mar-radius-xl);
 
-  background: $branco;
+  background: var(--mar-surface);
 
   box-shadow:
     0 6px 20px
@@ -589,7 +560,7 @@ $sombra:
       translateY(-3px);
 
     box-shadow:
-      $sombra;
+      var(--mar-shadow-card);
   }
 }
 
@@ -605,7 +576,7 @@ $sombra:
 
   place-items: center;
 
-  border-radius: 14px;
+  border-radius: var(--mar-radius-lg);
 
   font-size: 21px;
 }
@@ -622,7 +593,7 @@ $sombra:
 .stat-content > span {
 
   color:
-    $texto-secundario;
+    var(--mar-muted-2);
 
   font-size: 12px;
 
@@ -636,7 +607,7 @@ $sombra:
     1px 0;
 
   color:
-    $azul-escuro;
+    var(--mar-azul-escuro);
 
   font-size: 1.9rem;
 
@@ -659,7 +630,7 @@ $sombra:
     rgba(4, 103, 158, 0.10);
 
   color:
-    $azul-medio;
+    var(--mar-azul-medio);
 }
 
 
@@ -669,7 +640,7 @@ $sombra:
     rgba(25, 135, 84, 0.10);
 
   color:
-    $verde;
+    var(--mar-success-legacy);
 }
 
 
@@ -679,7 +650,7 @@ $sombra:
     rgba(246, 141, 23, 0.12);
 
   color:
-    $laranja-escuro;
+    var(--mar-laranja-escuro);
 }
 
 
@@ -689,7 +660,7 @@ $sombra:
     rgba(220, 53, 69, 0.10);
 
   color:
-    $vermelho;
+    var(--danger);
 }
 
 
@@ -710,21 +681,21 @@ $sombra:
   max-width: 1450px;
 
   margin:
-    0 auto 24px;
+    0 auto var(--mar-panel-padding);
 }
 
 
 .dashboard-panel {
 
-  padding: 25px;
+  padding: var(--mar-panel-padding);
 
   border:
-    1px solid $borda;
+    1px solid var(--mar-line-soft);
 
-  border-radius: $radius;
+  border-radius: var(--mar-radius-xl);
 
   background:
-    $branco;
+    var(--mar-surface);
 
   box-shadow:
     0 6px 20px
@@ -747,7 +718,7 @@ $sombra:
 
   gap: 15px;
 
-  margin-bottom: 20px;
+  margin-bottom: var(--mar-panel-padding);
 }
 
 
@@ -758,7 +729,7 @@ $sombra:
   margin-bottom: 4px;
 
   color:
-    $azul-medio;
+    var(--mar-azul-medio);
 
   font-size: 10px;
 
@@ -773,7 +744,7 @@ $sombra:
   margin: 0;
 
   color:
-    $azul-escuro;
+    var(--mar-azul-escuro);
 
   font-size: 1.25rem;
 
@@ -787,7 +758,7 @@ $sombra:
     4px 0 0;
 
   color:
-    $texto-secundario;
+    var(--mar-muted-2);
 
   font-size: 12px;
 }
@@ -808,7 +779,7 @@ $sombra:
     rgba(226, 116, 37, 0.11);
 
   color:
-    $laranja-escuro;
+    var(--mar-laranja-escuro);
 
   font-size: 13px;
 
@@ -846,15 +817,15 @@ $sombra:
 
   border-left:
     4px solid
-    $laranja-claro;
+    var(--mar-laranja-claro);
 
-  border-radius: 12px;
+  border-radius: var(--mar-radius-md);
 
   background:
     linear-gradient(
       90deg,
       rgba(246, 141, 23, 0.04),
-      #ffffff 32%
+      var(--mar-surface) 32%
     );
 }
 
@@ -865,13 +836,13 @@ $sombra:
     rgba(220, 53, 69, 0.18);
 
   border-left-color:
-    $vermelho;
+    var(--danger);
 
   background:
     linear-gradient(
       90deg,
       rgba(220, 53, 69, 0.035),
-      #ffffff 32%
+      var(--mar-surface) 32%
     );
 }
 
@@ -893,7 +864,7 @@ $sombra:
     rgba(246, 141, 23, 0.10);
 
   color:
-    $laranja-escuro;
+    var(--mar-laranja-escuro);
 
   font-size: 17px;
 }
@@ -906,7 +877,7 @@ $sombra:
     rgba(220, 53, 69, 0.09);
 
   color:
-    $vermelho;
+    var(--danger);
 }
 
 
@@ -934,7 +905,7 @@ $sombra:
 .attention-heading strong {
 
   color:
-    $texto;
+    var(--mar-text-strong);
 
   font-size: 12.5px;
 
@@ -967,7 +938,7 @@ $sombra:
     rgba(246, 141, 23, 0.12);
 
   color:
-    $laranja-escuro;
+    var(--mar-laranja-escuro);
 }
 
 
@@ -977,7 +948,7 @@ $sombra:
     rgba(220, 53, 69, 0.10);
 
   color:
-    $vermelho;
+    var(--danger);
 }
 
 
@@ -993,7 +964,7 @@ $sombra:
   margin-top: 7px;
 
   color:
-    $texto-secundario;
+    var(--mar-muted-2);
 
   font-size: 10.5px;
 }
@@ -1020,7 +991,7 @@ $sombra:
   margin-top: 7px;
 
   color:
-    $laranja-escuro;
+    var(--mar-laranja-escuro);
 
   font-size: 10.5px;
 
@@ -1031,7 +1002,7 @@ $sombra:
 .attention-time.expired {
 
   color:
-    $vermelho;
+    var(--danger);
 }
 
 
@@ -1054,7 +1025,7 @@ $sombra:
   text-align: center;
 
   color:
-    $texto-secundario;
+    var(--mar-muted-2);
 }
 
 
@@ -1075,7 +1046,7 @@ $sombra:
     rgba(25, 135, 84, 0.10);
 
   color:
-    $verde;
+    var(--mar-success-legacy);
 
   font-size: 21px;
 }
@@ -1084,7 +1055,7 @@ $sombra:
 .attention-empty strong {
 
   color:
-    $texto;
+    var(--mar-text-strong);
 
   font-size: 14px;
 }
@@ -1110,10 +1081,10 @@ $sombra:
 
   gap: 7px;
 
-  margin-top: 17px;
+  margin-top: var(--mar-panel-padding);
 
   color:
-    $azul-medio;
+    var(--mar-azul-medio);
 
   font-size: 11px;
 
@@ -1125,7 +1096,7 @@ $sombra:
   &:hover {
 
     color:
-      $laranja-escuro;
+      var(--mar-laranja-escuro);
   }
 }
 
@@ -1159,7 +1130,7 @@ $sombra:
     10px 12px;
 
   border:
-    1px solid $borda;
+    1px solid var(--mar-line-soft);
 
   border-radius: 11px;
 
@@ -1209,7 +1180,7 @@ $sombra:
     rgba(4, 103, 158, 0.10);
 
   color:
-    $azul-medio;
+    var(--mar-azul-medio);
 }
 
 
@@ -1219,7 +1190,7 @@ $sombra:
     rgba(246, 141, 23, 0.11);
 
   color:
-    $laranja-escuro;
+    var(--mar-laranja-escuro);
 }
 
 
@@ -1229,7 +1200,7 @@ $sombra:
     rgba(25, 150, 208, 0.10);
 
   color:
-    $azul-claro;
+    var(--mar-azul-claro);
 }
 
 
@@ -1239,7 +1210,7 @@ $sombra:
     rgba(0, 61, 108, 0.09);
 
   color:
-    $azul-escuro;
+    var(--mar-azul-escuro);
 }
 
 
@@ -1248,7 +1219,7 @@ $sombra:
   display: block;
 
   color:
-    $texto;
+    var(--mar-text-strong);
 
   font-size: 12px;
 }
@@ -1261,7 +1232,7 @@ $sombra:
   margin-top: 2px;
 
   color:
-    $texto-secundario;
+    var(--mar-muted-2);
 
   font-size: 9.5px;
 }
@@ -1291,17 +1262,17 @@ $sombra:
   max-width: 1450px;
 
   margin:
-    0 auto 24px;
+    0 auto var(--mar-panel-padding);
 
   padding:
     22px 26px;
 
   border:
-    1px solid $borda;
+    1px solid var(--mar-line-soft);
 
-  border-radius: $radius;
+  border-radius: var(--mar-radius-xl);
 
-  background: $branco;
+  background: var(--mar-surface);
 
   box-shadow:
     0 6px 20px
@@ -1321,13 +1292,13 @@ $sombra:
 
   place-items: center;
 
-  border-radius: 14px;
+  border-radius: var(--mar-radius-lg);
 
   background:
     rgba(4, 103, 158, 0.09);
 
   color:
-    $azul-medio;
+    var(--mar-azul-medio);
 
   font-size: 22px;
 }
@@ -1355,7 +1326,7 @@ $sombra:
 .compliance-heading span {
 
   color:
-    $texto-secundario;
+    var(--mar-muted-2);
 
   font-size: 9px;
 
@@ -1371,7 +1342,7 @@ $sombra:
     2px 0 0;
 
   color:
-    $azul-escuro;
+    var(--mar-azul-escuro);
 
   font-size: 15px;
 }
@@ -1380,7 +1351,7 @@ $sombra:
 .compliance-heading > strong {
 
   color:
-    $azul-escuro;
+    var(--mar-azul-escuro);
 
   font-size: 22px;
 }
@@ -1411,8 +1382,8 @@ $sombra:
   background:
     linear-gradient(
       90deg,
-      $azul-medio,
-      $azul-claro
+      var(--mar-azul-medio),
+      var(--mar-azul-claro)
     );
 
   transition:
@@ -1453,21 +1424,21 @@ $sombra:
 .legend-ok {
 
   color:
-    $verde;
+    var(--mar-success-legacy);
 }
 
 
 .legend-warning {
 
   color:
-    $laranja-escuro;
+    var(--mar-laranja-escuro);
 }
 
 
 .legend-danger {
 
   color:
-    $vermelho;
+    var(--danger);
 }
 
 
@@ -1499,7 +1470,7 @@ $sombra:
   background:
     linear-gradient(
       120deg,
-      $azul-escuro 0%,
+      var(--mar-azul-escuro) 0%,
       #034f82 100%
     );
 
@@ -1508,7 +1479,7 @@ $sombra:
     rgba(0, 61, 108, 0.13);
 
   color:
-    #ffffff;
+    var(--mar-surface);
 }
 
 
@@ -1531,13 +1502,13 @@ $sombra:
     1px solid
     rgba(255, 255, 255, 0.14);
 
-  border-radius: 16px;
+  border-radius: var(--mar-radius-xl);
 
   background:
     rgba(255, 255, 255, 0.09);
 
   color:
-    $laranja-claro;
+    var(--mar-laranja-claro);
 
   font-size: 27px;
 }
@@ -1556,7 +1527,7 @@ $sombra:
 .safety-banner span {
 
   color:
-    $laranja-claro;
+    var(--mar-laranja-claro);
 
   font-size: 9px;
 
@@ -1571,7 +1542,7 @@ $sombra:
   margin:
     3px 0 4px;
 
-  color: #ffffff;
+  color: var(--mar-surface);
 
   font-size:
     clamp(
@@ -1674,7 +1645,7 @@ $sombra:
     grid-template-columns:
       1fr;
 
-    padding: 25px;
+    padding: var(--mar-panel-padding);
   }
 
 
@@ -1684,7 +1655,7 @@ $sombra:
 
     align-items: flex-start;
 
-    margin-bottom: 25px;
+    margin-bottom: var(--mar-panel-padding);
   }
 
 
@@ -1703,7 +1674,7 @@ $sombra:
 
   .dashboard-panel {
 
-    padding: 18px;
+    padding: var(--mar-panel-padding);
   }
 
 
@@ -1717,7 +1688,7 @@ $sombra:
 
     align-items: flex-start;
 
-    padding: 20px;
+    padding: var(--mar-panel-padding);
   }
 
 
@@ -1735,7 +1706,7 @@ $sombra:
 
     align-items: flex-start;
 
-    padding: 23px;
+    padding: var(--mar-panel-padding);
 
     flex-direction: column;
   }

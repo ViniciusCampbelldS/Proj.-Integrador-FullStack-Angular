@@ -1,11 +1,11 @@
 :host {
   display: block;
 
-  --azul-escuro: #003d6c;
-  --azul-medio: #04679e;
-  --azul-claro: #1996d0;
-  --laranja-escuro: #e27425;
-  --laranja-claro: #f68d17;
+  --azul-escuro: var(--mar-azul-escuro);
+  --azul-medio: var(--mar-azul-medio);
+  --azul-claro: var(--mar-azul-claro);
+  --laranja-escuro: var(--mar-laranja-escuro);
+  --laranja-claro: var(--mar-laranja-claro);
 
 }
 
@@ -13,7 +13,7 @@
   display: grid;
   min-height: 100vh;
   place-items: center;
-  padding: 32px 16px;
+  padding: var(--mar-panel-padding);
 
   background:
     linear-gradient(120deg,
@@ -23,9 +23,9 @@
 
 .login-panel {
   width: min(100%, 480px);
-  padding: 28px;
-  border-radius: 12px;
-  background: #fff;
+  padding: var(--mar-panel-padding);
+  border-radius: var(--mar-radius-md);
+  background: var(--mar-surface);
 
   box-shadow:
     0 15px 40px rgba(0, 61, 108, 0.22);
@@ -36,7 +36,7 @@
   width: 240px;
   max-width: 100%;
   height: auto;
-  margin-bottom: 24px;
+  margin-bottom: var(--mar-panel-padding);
 }
 
 .login-copy h1 {
@@ -62,7 +62,7 @@
 .login-form {
   display: grid;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: var(--mar-panel-padding);
 }
 
 .login-form label {
@@ -97,7 +97,7 @@
   border: 0;
   border-radius: 8px;
   background: var(--azul-escuro);
-  color: #fff;
+  color: var(--mar-surface);
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;

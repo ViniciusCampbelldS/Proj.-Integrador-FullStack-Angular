@@ -25,7 +25,7 @@
   border-radius: var(--mar-radius);
 
   background: var(--mar-surface);
-  color: var(--mar-blue-900);
+  color: var(--mar-azul-escuro);
 
   font-size: 19px;
 
@@ -38,9 +38,9 @@
 }
 
 .notification-button:hover {
-  border-color: var(--mar-blue-500);
+  border-color: var(--mar-azul-claro);
   background: #e8f5fc;
-  color: var(--mar-blue-700);
+  color: var(--mar-azul-medio);
 }
 
 /* CONTADOR */
@@ -63,8 +63,8 @@
   border: 2px solid var(--mar-surface);
   border-radius: 999px;
 
-  background: var(--mar-orange-700);
-  color: #fff;
+  background: var(--mar-laranja-escuro);
+  color: var(--mar-surface);
 
   font-size: 11px;
   font-weight: 800;
@@ -114,7 +114,7 @@
 }
 
 .notification-header strong {
-  color: var(--mar-blue-900);
+  color: var(--mar-azul-escuro);
 
   font-size: 16px;
 }
@@ -143,7 +143,7 @@
   border-radius: var(--mar-radius);
 
   background: #e8f5fc;
-  color: var(--mar-blue-900);
+  color: var(--mar-azul-escuro);
 
   cursor: pointer;
 
@@ -156,7 +156,7 @@
   background:
     rgba(25, 150, 208, 0.2);
 
-  color: var(--mar-blue-700);
+  color: var(--mar-azul-medio);
 }
 
 /* CONFIGURAÇÃO */
@@ -172,7 +172,7 @@
 .notification-config > strong {
   margin-bottom: 4px;
 
-  color: var(--mar-blue-900);
+  color: var(--mar-azul-escuro);
 }
 
 .notification-config label {
@@ -209,7 +209,7 @@
 
 .days-input input:focus {
   border-color:
-    var(--mar-blue-500);
+    var(--mar-azul-claro);
 
   box-shadow:
     0 0 0 0.2rem
@@ -235,7 +235,7 @@
 
   place-items: center;
 
-  padding: 30px 20px;
+  padding: var(--mar-panel-padding);
 
   text-align: center;
 }
@@ -243,7 +243,7 @@
 .notification-empty i {
   margin-bottom: 8px;
 
-  color: var(--mar-success);
+  color: var(--success);
 
   font-size: 30px;
 }

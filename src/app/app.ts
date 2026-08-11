@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   Router,
@@ -13,6 +15,9 @@ import {
 
 @Component({
   selector: 'app-root',
+  host: {
+    '(window:scroll)': 'onWindowScroll()',
+  },
   imports: [
     RouterLink,
     RouterOutlet,
@@ -22,6 +27,8 @@ import {
   styleUrl: './app.scss',
 })
 export class App {
+
+  estaNoTopo = true;
 
   notificacoesAbertas = false;
   configuracaoAberta = false;
@@ -38,8 +45,9 @@ export class App {
 
     this.diasAvisoNr =
       this.notificacaoService.obterDiasAvisoNr();
-  }
 
+    this.atualizarPosicaoScroll();
+  }
 
   /* =========================================
      HEADER
@@ -49,32 +57,7 @@ export class App {
     return this.router.url !== '/login';
   }
 
-
-  /* =========================================
-     LISTA DE NOTIFICAÇÕES
-  ========================================= */
-
-  get episComNotificacao(): EpiMonitorado[] {
-    return this.notificacaoService
-      .obterEpisComNotificacao();
-  }
-
-
-  /* =========================================
-     SOMENTE EPIs VENCIDOS
-  ========================================= */
-
-  get episVencidos(): EpiMonitorado[] {
-    return this.episComNotificacao.filter(
-      (epi) =>
-        this.notificacaoService.estaVencido(
-          epi.vencimento
-        )
-    );
-  }
-
-
-  /* =========================================
+ /* =========================================
      SOMENTE EPIs PRÓXIMOS DO VENCIMENTO
   ========================================= */
 
@@ -99,17 +82,6 @@ export class App {
     return this.episComNotificacao.length;
   }
 
-
-  /* =========================================
-     VERIFICAR SE O EPI ESTÁ VENCIDO
-  ========================================= */
-
-  estaVencido(epi: EpiMonitorado): boolean {
-    return this.notificacaoService
-      .estaVencido(epi.vencimento);
-  }
-
-
   /* =========================================
      DIAS RESTANTES
   ========================================= */
@@ -123,44 +95,6 @@ export class App {
         epi.vencimento
       );
   }
-
-
-  /* =========================================
-     TEXTO DO VENCIMENTO
-  ========================================= */
-
-  textoVencimento(
-    epi: EpiMonitorado
-  ): string {
-
-    const dias =
-      this.diasRestantes(epi);
-
-    if (dias === null) {
-      return 'Data de vencimento inválida';
-    }
-
-    if (dias < 0) {
-
-      const diasVencido =
-        Math.abs(dias);
-
-      return diasVencido === 1
-        ? 'Vencido há 1 dia'
-        : `Vencido há ${diasVencido} dias`;
-    }
-
-    if (dias === 0) {
-      return 'Vence hoje';
-    }
-
-    if (dias === 1) {
-      return 'Vence em 1 dia';
-    }
-
-    return `Vence em ${dias} dias`;
-  }
-
 
   /* =========================================
      ABRIR / FECHAR NOTIFICAÇÕES
@@ -213,4 +147,73 @@ export class App {
 
     this.configuracaoAberta = false;
   }
-}
+
+  onWindowScroll(): void {
+    this.atualizarPosicaoScroll();
+  }
+
+  voltarAoTopo(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
+
+  // =====================================================
+  // STATUS COMPARTILHADO DOS EPIs
+  // =====================================================
+
+  get todosEpis(): EpiMonitorado[] {
+    return this.notificacaoService.todosEpis;
+  }
+
+  get totalEpis(): number {
+    return this.notificacaoService.totalEpis;
+  }
+
+  get episComNotificacao(): EpiMonitorado[] {
+    return this.notificacaoService.episComNotificacao;
+  }
+
+  get episVencidos(): EpiMonitorado[] {
+    return this.notificacaoService.episVencidos;
+  }
+
+  get episProximos(): EpiMonitorado[] {
+    return this.notificacaoService.episProximos;
+  }
+
+  get episEmDia(): EpiMonitorado[] {
+    return this.notificacaoService.episEmDia;
+  }
+
+  get totalPendencias(): number {
+    return this.notificacaoService.totalPendencias;
+  }
+
+  get percentualValidos(): number {
+    return this.notificacaoService.percentualValidos;
+  }
+
+  get mensagemPrioridade(): string {
+    return this.notificacaoService.mensagemPrioridade;
+  }
+
+  estaVencido(epi: EpiMonitorado): boolean {
+    return this.notificacaoService.estaVencidoEpi(epi);
+  }
+
+  textoVencimento(epi: EpiMonitorado): string {
+    return this.notificacaoService.textoVencimento(epi);
+  }
+
+  private atualizarPosicaoScroll(): void {
+    this.estaNoTopo =
+      typeof window === 'undefined' ||
+      window.scrollY <= 8;
+  }
+
+  private formatarDataAtual(): string {
+    return this.notificacaoService.obterDataAtualFormatada();
+  }
+};

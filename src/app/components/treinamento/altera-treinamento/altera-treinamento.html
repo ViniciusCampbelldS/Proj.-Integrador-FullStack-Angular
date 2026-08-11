@@ -5,8 +5,6 @@
       <h1>Gerenciar Treinamentos</h1>
       <p>Área para cadastrar, agendar e acompanhar os treinamentos de segurança dos funcionários.</p>
     </div>
-
-    <button class="btn-primary" type="button">+ Novo treinamento</button>
   </div>
 
   <div class="cards">
@@ -60,8 +58,11 @@
       </div>
 
       <div class="field">
-        <label>Funcionário</label>
-        <input type="text" class="form-control" placeholder="Digite o nome do funcionário" />
+        <label>Funcionários</label>
+        <button class="employee-picker" type="button" (click)="openFuncionarioModal()">
+          <span>{{ funcionariosSelecionadosLabel }}</span>
+          <span class="picker-icon" aria-hidden="true">▾</span>
+        </button>
       </div>
 
       <div class="field">
@@ -98,6 +99,7 @@
 
       <div class="actions">
         <button class="btn-secondary" type="button">🔎 Filtrar</button>
+        <button class="btn-primary" type="button">Novo treinamento/Abrir Turma</button>
       </div>
     </div>
   </div>
@@ -120,10 +122,11 @@
             <th>NR</th>
             <th>Treinamento</th>
             <th>Funcionário</th>
-            <th>Data</th>
+            <th>Aplicação</th>
             <th>Vencimento</th>
             <th>Situação</th>
             <th>Documento</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -136,6 +139,7 @@
             <td>20/08/2027</td>
             <td><span class="status success">Em dia</span></td>
             <td><button class="document-btn" type="button">📎 Visualizar</button></td>
+            <td><button class="edit-btn" type="button">✏️ Editar</button></td>
           </tr>
           <tr>
             <td><strong>2</strong></td>
@@ -146,6 +150,7 @@
             <td>10/09/2026</td>
             <td><span class="status warning">Próximo do vencimento</span></td>
             <td><button class="document-btn" type="button">📎 Visualizar</button></td>
+            <td><button class="edit-btn" type="button">✏️ Editar</button></td>
           </tr>
           <tr>
             <td><strong>3</strong></td>
@@ -156,9 +161,141 @@
             <td>05/05/2026</td>
             <td><span class="status danger">Vencido</span></td>
             <td><button class="document-btn" type="button">📎 Visualizar</button></td>
+            <td><button class="edit-btn" type="button">✏️ Editar</button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+
+  @if (isFuncionarioModalOpen) {
+    <div class="modal-overlay" role="dialog" aria-modal="true" aria-label="Selecionar funcionários" (click)="closeFuncionarioModal()">
+      <section class="employee-modal" (click)="$event.stopPropagation()">
+        <header class="modal-header">
+          <div>
+            <span class="eyebrow">FUNCIONÁRIOS</span>
+            <h3>Selecionar Funcionários</h3>
+          </div>
+
+          <button class="close-btn" type="button" aria-label="Fechar" (click)="closeFuncionarioModal()">✕</button>
+        </header>
+
+        <div class="modal-search-grid">
+          <div class="field">
+            <label for="funcionario-matricula">Matrícula</label>
+            <input
+              id="funcionario-matricula"
+              type="text"
+              class="form-control"
+              [value]="filtroMatricula"
+              (input)="filtroMatricula = $any($event.target).value"
+              placeholder="Pesquisar por matrícula"
+            />
+          </div>
+
+          <div class="field">
+            <label for="funcionario-nome">Nome</label>
+            <input
+              id="funcionario-nome"
+              type="text"
+              class="form-control"
+              [value]="filtroNome"
+              (input)="filtroNome = $any($event.target).value"
+              placeholder="Pesquisar por nome"
+            />
+          </div>
+
+          <div class="field">
+            <label for="funcionario-cargo">Cargo</label>
+            <input
+              id="funcionario-cargo"
+              type="text"
+              class="form-control"
+              [value]="filtroCargo"
+              (input)="filtroCargo = $any($event.target).value"
+              placeholder="Pesquisar por cargo"
+            />
+          </div>
+
+          <div class="field">
+            <label for="funcionario-area">Área</label>
+            <input
+              id="funcionario-area"
+              type="text"
+              class="form-control"
+              [value]="filtroArea"
+              (input)="filtroArea = $any($event.target).value"
+              placeholder="Pesquisar por área"
+            />
+          </div>
+        </div>
+
+        <div class="modal-table-container">
+          <table class="modal-table">
+            <thead>
+              <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    [checked]="allFilteredChecked"
+                    (change)="toggleAllFiltered($any($event.target).checked)"
+                    aria-label="Selecionar todos os resultados filtrados"
+                  />
+                </th>
+                <th>Matrícula</th>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>Área</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (funcionario of filteredFuncionarios; track funcionario.id) {
+                <tr>
+                  <td>
+                    <input
+                      type="checkbox"
+                      [checked]="checkedFuncionarioIds.has(funcionario.id)"
+                      (change)="toggleFuncionarioChecked(funcionario.id, $any($event.target).checked)"
+                      [attr.aria-label]="'Selecionar ' + funcionario.nome"
+                    />
+                  </td>
+                  <td>{{ funcionario.matricula }}</td>
+                  <td>{{ funcionario.nome }}</td>
+                  <td>{{ funcionario.cargo }}</td>
+                  <td>{{ funcionario.area }}</td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="5" class="empty-row">Nenhum funcionário encontrado com os filtros informados.</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="selected-preview">
+          <strong>Selecionados:</strong>
+          @if (funcionariosSelecionadosNoModal.length > 0) {
+            <span>
+              {{ funcionariosSelecionadosNoModal.map((funcionario) => funcionario.nome).join(', ') }}
+            </span>
+          } @else {
+            <span>Nenhum funcionário selecionado.</span>
+          }
+        </div>
+
+        <footer class="modal-actions">
+          <button class="btn-secondary" type="button" [disabled]="!hasCheckedFuncionarios" (click)="addSelectedFuncionarios()">
+            Adicionar selecionados
+          </button>
+          <button class="btn-outline" type="button" [disabled]="!hasCheckedFuncionarios" (click)="removeSelectedFuncionarios()">
+            Remover selecionados
+          </button>
+          <button class="btn-primary" type="button" [disabled]="!hasSelectedFuncionarios" (click)="applyFuncionariosSelecionados()">
+            Aplicar
+          </button>
+        </footer>
+      </section>
+    </div>
+  }
 </section>

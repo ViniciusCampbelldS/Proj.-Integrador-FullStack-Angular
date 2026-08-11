@@ -1,278 +1,240 @@
-<div class="tool-grid">
+<div class="panel cadastro-panel filter-pannel">
+	<section class="epi-filter-panel">
+		<!-- ================= FILTROS ================= -->
 
-  <section class="panel filter-panel">
+		<article class="filter-box">
 
-    <div class="panel-title">
-      <div>
-        <p class="eyebrow linha"></p>
-        <h3>Busca de EPIs</h3>
-      </div>
+			<div class="filter-box-title">
+				<h4>EPI - Parametros de Busca:</h4>
+			</div>
 
-      <span class="status-chip"></span>
-    </div>
+			<div class="row g-3">
 
-    <!-- ================= FILTROS ================= -->
+				<div class="col-lg-3 col-md-6">
+					<label class="form-label" for="filter-epi">
+						EPI
+					</label>
 
-    <div class="filter-box">
+					<div class="input-group">
+						<input id="filter-epi" type="text" class="form-control" placeholder="Filtrar EPI" />
 
-      <div class="filter-box-title">
-        <div>
-          <p class="eyebrow">Filtros</p>
-          <h4>Localizar equipamentos</h4>
-        </div>
-      </div>
+						<button class="btn btn-icon-filter" type="button" aria-label="Filtrar EPI">
+							<i class="bi bi-funnel"></i>
+						</button>
+					</div>
+				</div>
 
-      <div class="row g-3">
+				<div class="col-lg-3 col-md-6">
+					<label class="form-label" for="filter-ca">
+						CA
+					</label>
 
-        <div class="col-lg-3 col-md-6">
-          <label class="form-label" for="filter-epi">
-            EPI
-          </label>
+					<div class="input-group">
+						<input id="filter-ca" type="text" class="form-control" placeholder="Filtrar CA" />
 
-          <div class="input-group">
-            <input
-              id="filter-epi"
-              type="text"
-              class="form-control"
-              placeholder="Filtrar EPI"
-            />
+						<button class="btn btn-icon-filter" type="button" aria-label="Filtrar CA">
+							<i class="bi bi-funnel"></i>
+						</button>
+					</div>
+				</div>
 
-            <button class="btn btn-icon-filter" type="button" aria-label="Filtrar EPI">
-              <i class="bi bi-funnel"></i>
-            </button>
-          </div>
-        </div>
+				<div class="col-lg-3 col-md-6">
+					<label class="form-label" for="filter-employee">
+						Funcionario
+					</label>
 
-        <div class="col-lg-3 col-md-6">
-          <label class="form-label" for="filter-ca">
-            CA
-          </label>
+					<div class="input-group">
+						<input id="filter-employee" type="text" class="form-control"
+							placeholder="Filtrar funcionario" />
 
-          <div class="input-group">
-            <input
-              id="filter-ca"
-              type="text"
-              class="form-control"
-              placeholder="Filtrar CA"
-            />
+						<button class="btn btn-icon-filter" type="button" aria-label="Filtrar funcionario">
+							<i class="bi bi-funnel"></i>
+						</button>
+					</div>
+				</div>
 
-            <button class="btn btn-icon-filter" type="button" aria-label="Filtrar CA">
-              <i class="bi bi-funnel"></i>
-            </button>
-          </div>
-        </div>
+				<div class="col-lg-3 col-md-6">
+					<label class="form-label" for="filter-name">
+						Vencimento
+					</label>
 
-        <div class="col-lg-3 col-md-6">
-          <label class="form-label" for="filter-employee">
-            Funcionario
-          </label>
+					<div class="input-group">
+						<input id="filter-name" type="text" class="form-control" placeholder="Filtrar Vencimento" />
 
-          <div class="input-group">
-            <input
-              id="filter-employee"
-              type="text"
-              class="form-control"
-              placeholder="Filtrar funcionario"
-            />
+						<button class="btn btn-icon-filter" type="button" aria-label="Filtrar Vencimento">
+							<i class="bi bi-funnel"></i>
+						</button>
+					</div>
+				</div>
 
-            <button class="btn btn-icon-filter" type="button" aria-label="Filtrar funcionario">
-              <i class="bi bi-funnel"></i>
-            </button>
-          </div>
-        </div>
-		
-		<div class="col-lg-3 col-md-6">
-          <label class="form-label" for="filter-name">
-            Vencimento
-          </label>
+				<div class="col-lg-3 col-md-6">
+					<label class="form-label" for="filter-status">
+						Situacao
+					</label>
 
-          <div class="input-group">
-            <input
-              id="filter-name"
-              type="text"
-              class="form-control"
-              placeholder="Filtrar Vencimento"
-            />
+					<div class="input-group">
+						<input id="filter-status" type="text" class="form-control" placeholder="Filtrar situacao" />
 
-            <button class="btn btn-icon-filter" type="button" aria-label="Filtrar Vencimento">
-              <i class="bi bi-funnel"></i>
-            </button>
-          </div>
-        </div>
+						<button class="btn btn-icon-filter" type="button" aria-label="Filtrar situacao">
+							<i class="bi bi-funnel"></i>
+						</button>
+					</div>
+				</div>
 
-        <div class="col-lg-3 col-md-6">
-          <label class="form-label" for="filter-status">
-            Situacao
-          </label>
+			</div>
 
-          <div class="input-group">
-            <input
-              id="filter-status"
-              type="text"
-              class="form-control"
-              placeholder="Filtrar situacao"
-            />
+		</article>
 
-            <button class="btn btn-icon-filter" type="button" aria-label="Filtrar situacao">
-              <i class="bi bi-funnel"></i>
-            </button>
-          </div>
-        </div>
+		<!-- ================= TABELA ================= -->
 
-      </div>
+		<article class="list-card">
 
-    </div>
+			<div class="delivery-list-head">
+				<div>
+					<h4>Resultados:</h4>
+				</div>
+			</div>
 
-    <!-- ================= TABELA ================= -->
+			<div class="table-responsive desktop-table">
+				<table class="table table-hover align-middle mb-0 epi-table">
 
-    <div class="list-card">
+					<thead>
+						<tr>
+							<th>Funcionario</th>
+							<th>EPI</th>
+							<th>CA</th>
+							<th>Vencimento</th>
+							<th>Status</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
 
-      <div class="delivery-list-head">
-        <div>
-          <p class="eyebrow">Resultado</p>
-          <h4>EPIs encontrados</h4>
-        </div>
-      </div>
+					<tbody>
+						@for (item of resultados; track item.id) {
+						<tr>
+							<td>
+								{{ item.funcionario }}
+							</td>
 
-      <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0 epi-table">
+							<td>
+								{{ item.nome }}
+							</td>
 
-          <thead>
-            <tr>
-              <th>Funcionario</th>
-              <th>EPI</th>
-              <th>CA</th>
-			  <th>Vencimento</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
+							<td>{{ item.ca }}</td>
 
-          <tbody>
+							<td>
+								{{ item.vencimento }}
+							</td>
 
-            <tr>
-              <td>
-                Joao Pedro da Rocha de Alcantara
-              </td>
-			  
-              <td>
-                Capacete em Termoplastico de Bombeiro Visor de 6" Modelo LTX Amarelo Bullard
-              </td>
+							<td>
+								<span class="status-badge" [class]="'status-badge ' + item.statusClass">
+									{{ item.status }}
+								</span>
+							</td>
 
-              <td>18695</td>
-			  
-			  <td>
-                31/12/2030
-              </td>
+							<td>
+								<div class="table-actions">
+									<button class="btn btn-sm btn-outline-brand" type="button">
+										Editar
+									</button>
 
-              <td>
-                <span class="status-badge status-good">
-                  Bom Estado
-                </span>
-              </td>
+									<button class="btn btn-sm btn-soft" type="button">
+										Estado do EPI
+									</button>
 
-              <td>
-                <div class="table-actions">
-                  <button class="btn btn-sm btn-outline-brand" type="button">
-                    Editar
-                  </button>
+									<button class="btn btn-sm btn-danger-brand" type="button">
+										Descarte
+									</button>
+								</div>
+							</td>
+						</tr>
+						}
+						@empty {
+						<tr>
+							<td colspan="6" class="text-center py-4">
+								Nenhum resultado encontrado.
+							</td>
+						</tr>
+						}
 
-                  <button class="btn btn-sm btn-soft" type="button">
-                    Estado do EPI
-                  </button>
+					</tbody>
 
-                  <button class="btn btn-sm btn-danger-brand" type="button">
-                    Descarte/Substituicao
-                  </button>
-                </div>
-              </td>
-            </tr>
+				</table>
+			</div>
 
-            <tr>
-              <td>
-                Fernanda Beatriz de Lima Barreto
-              </td>
+			<div class="mobile-mirror-wrap">
+				<table class="epi-table-mirror">
+					<tbody>
+						<tr>
+							<th>Funcionario</th>
+							@for (item of resultados; track item.id) {
+							<td>{{ item.funcionario }}</td>
+							}
+						</tr>
 
-              <td>
-                Luva Anticorte Cut Oil Volk
-              </td>
+						<tr>
+							<th>EPI</th>
+							@for (item of resultados; track item.id) {
+							<td>{{ item.nome }}</td>
+							}
+						</tr>
 
-              <td>34456</td>
-			  
-			  
-			  <td>
-                31/11/2026
-              </td>
+						<tr>
+							<th>CA</th>
+							@for (item of resultados; track item.id) {
+							<td>{{ item.ca }}</td>
+							}
+						</tr>
 
-              <td>
-                <span class="status-badge status-warning">
-                  Proximo do Vencimento
-                </span>
-              </td>
+						<tr>
+							<th>Vencimento</th>
+							@for (item of resultados; track item.id) {
+							<td>{{ item.vencimento }}</td>
+							}
+						</tr>
 
-              <td>
-                <div class="table-actions">
-                  <button class="btn btn-sm btn-outline-brand" type="button">
-                    Editar
-                  </button>
+						<tr>
+							<th>Status</th>
+							@for (item of resultados; track item.id) {
+							<td>
+								<span class="status-badge" [class]="'status-badge ' + item.statusClass">
+									{{ item.status }}
+								</span>
+							</td>
+							}
+						</tr>
 
-                  <button class="btn btn-sm btn-soft" type="button">
-                    Estado do EPI
-                  </button>
+						<tr>
+							<th>Ações</th>
+							@for (item of resultados; track item.id) {
+							<td>
+								<div class="table-actions table-actions-mirror">
+									<button class="btn btn-sm btn-outline-brand" type="button">
+										Editar
+									</button>
 
-                  <button class="btn btn-sm btn-danger-brand" type="button">
-                    Descarte/Substituicao
-                  </button>
-                </div>
-              </td>
-            </tr>
+									<button class="btn btn-sm btn-soft" type="button">
+										Estado do EPI
+									</button>
 
-            <tr>
-              <td>
-                Marcos Paulo Ferreira Pereira Filho
-              </td>
+									<button class="btn btn-sm btn-danger-brand" type="button">
+										Descarte
+									</button>
+								</div>
+							</td>
+							}
+						</tr>
 
-              <td>
-                Bota de Seguranca Gogowear KW2024 100% Couro Marrom Eletricista
-              </td>
+						@if (resultados.length === 0) {
+						<tr>
+							<th>Resultado</th>
+							<td>Nenhum resultado encontrado.</td>
+						</tr>
+						}
+					</tbody>
+				</table>
+			</div>
 
-              <td>51403</td>
-			  
-			  
-			  <td>
-                31/06/2026
-              </td>
-
-              <td>
-                <span class="status-badge status-expired">
-                  Vencido
-                </span>
-              </td>
-
-              <td>
-                <div class="table-actions">
-                  <button class="btn btn-sm btn-outline-brand" type="button">
-                    Editar
-                  </button>
-
-                  <button class="btn btn-sm btn-soft" type="button">
-                    Estado do EPI
-                  </button>
-
-                  <button class="btn btn-sm btn-danger-brand" type="button">
-                    Descarte/Substituicao
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-          </tbody>
-
-        </table>
-      </div>
-
-    </div>
-
-  </section>
-
+		</article>
+	</section>
 </div>

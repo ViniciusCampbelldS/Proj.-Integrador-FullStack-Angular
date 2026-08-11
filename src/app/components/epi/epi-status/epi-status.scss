@@ -1,0 +1,288 @@
+// ======================================================
+// CARDS DE ESTATISTICAS
+// ======================================================
+
+:host {
+  display: block;
+  min-width: 0;
+  background: var(--mar-bg);
+}
+
+.stats-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 16px;
+
+  padding-inline: 16px;
+
+  box-sizing: border-box;
+
+  width: 100%;
+  max-width: 1450px;
+  min-width: 0;
+
+  margin:
+    0 auto var(--mar-panel-padding);
+}
+
+
+.stat-card {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  min-height: 118px;
+  min-width: 0;
+
+  padding: var(--mar-panel-padding);
+
+  overflow: hidden;
+
+  border:
+    1px solid var(--mar-line);
+
+  border-radius: var(--mar-radius-xl);
+
+  background: var(--mar-surface);
+
+  box-shadow:
+    0 6px 20px
+    rgba(0, 61, 108, 0.045);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+
+  &:hover {
+
+    transform:
+      translateY(-3px);
+
+    box-shadow:
+      0 12px 30px rgba(0, 61, 108, 0.08);
+  }
+}
+
+
+.stat-icon {
+
+  display: grid;
+
+  flex: 0 0 50px;
+
+  width: 50px;
+  height: 50px;
+
+  place-items: center;
+
+  border-radius: var(--mar-radius-lg);
+
+  font-size: 21px;
+}
+
+
+.stat-content {
+
+  display: flex;
+
+  flex-direction: column;
+  min-width: 0;
+}
+
+
+.stat-content > span {
+
+  color:
+    var(--mar-muted-2);
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+.stat-content strong {
+
+  margin:
+    1px 0;
+
+  color:
+    var(--mar-azul-escuro);
+
+  font-size: 1.9rem;
+
+  line-height: 1.15;
+  word-break: break-word;
+}
+
+@media (max-width: 1100px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+
+    padding-inline: 12px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .stat-content strong {
+    font-size: 1.45rem;
+  }
+}
+
+
+.stat-content small {
+
+  color:
+    #93a1ad;
+
+  font-size: 10px;
+}
+
+
+.stat-total .stat-icon {
+
+  background:
+    rgba(4, 103, 158, 0.10);
+
+  color:
+    var(--mar-azul-medio);
+}
+
+
+.stat-ok .stat-icon {
+
+  background:
+    rgba(25, 135, 84, 0.10);
+
+  color:
+    var(--success);
+}
+
+
+.stat-warning .stat-icon {
+
+  background:
+    rgba(246, 141, 23, 0.12);
+
+  color:
+    var(--mar-laranja-escuro);
+}
+
+
+.stat-danger .stat-icon {
+
+  background:
+    rgba(220, 53, 69, 0.10);
+
+  color:
+    var(--danger);
+}
+
+// ======================================================
+// GUIAS DE EPI
+// ======================================================
+
+// .content-area {
+//   display: grid;
+//   gap: 20px;
+// }
+
+// .epi-panel {
+//   margin-top: 1.5rem;
+// }
+
+// .epi-tabs {
+//   display: flex;
+//   flex-wrap: wrap;
+//   gap: 0.5rem;
+//   margin: 1.5rem 0 1rem;
+//   padding: 0.5rem;
+//   border-radius: 1rem;
+//   box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.08);
+//   background: var(--mar-surface);
+// }
+
+// .epi-tab {
+//   flex: 1 1 auto;
+//   min-width: 10rem;
+//   border: 1px solid transparent;
+//   border-radius: 0.75rem;
+//   color: #000;
+//   font-weight: 700;
+//   padding: 0.9rem 1.1rem;
+//   background: transparent;
+//   transition: transform 150ms ease, background 150ms ease, color 150ms ease;
+// }
+
+// .epi-tab:hover {
+//   color: #000;
+//   transform: translateY(-2px);
+// }
+
+// .epi-tab.active {
+//   background: var(--mar-laranja-claro);
+//   color: var(--mar-surface);
+// }
+
+// .epi-dashboard {
+//   background: var(--mar-surface);
+//   border: 1px solid rgba(0, 61, 108, 0.08);
+//   border-radius: var(--mar-radius-lg);
+//   padding: var(--mar-panel-padding);
+//   box-shadow: var(--mar-shadow-soft);
+// }
+
+// .epi-filter-panel {
+//   padding-top: 1rem;
+// }
+
+// .panel {
+//   background: var(--mar-surface);
+//   border: 1px solid rgba(0, 61, 108, 0.08);
+//   border-radius: var(--mar-radius-lg);
+//   padding: var(--mar-panel-padding);
+//   box-shadow: var(--mar-shadow-soft);
+// }
+
+// .panel-title {
+//   margin-bottom: 1rem;
+// }
+
+// .panel-title .eyebrow {
+//   color: var(--mar-azul-claro);
+//   font-weight: 700;
+//   text-transform: uppercase;
+//   letter-spacing: 0.12em;
+// }
+
+// .panel-description {
+//   margin: 1rem 0 1.5rem;
+// }
+
+// .cadastro-placeholder {
+//   padding: 1.25rem;
+//   border: 1px dashed var(--mar-azul-claro);
+//   border-radius: 0.75rem;
+//   background: rgba(25, 150, 208, 0.08);
+//   color: var(--mar-azul-escuro);
+// }
+

@@ -260,6 +260,115 @@ export class NotificacaoService {
     );
   }
 
+  // =====================================================
+  // STATUS COMPARTILHADO DOS EPIs
+  // =====================================================
+
+  get todosEpis(): EpiMonitorado[] {
+    return this.episMonitorados;
+  }
+
+  get totalEpis(): number {
+    return this.todosEpis.length;
+  }
+
+  get episComNotificacao(): EpiMonitorado[] {
+    return this.obterEpisComNotificacao();
+  }
+
+  get episVencidos(): EpiMonitorado[] {
+    return this.todosEpis.filter((epi) => this.estaVencido(epi.vencimento));
+  }
+
+  get episProximos(): EpiMonitorado[] {
+    return this.todosEpis.filter(
+      (epi) =>
+        !this.estaVencido(epi.vencimento) && this.deveAvisarEpi(epi.vencimento)
+    );
+  }
+
+  get episEmDia(): EpiMonitorado[] {
+    return this.todosEpis.filter(
+      (epi) =>
+        !this.estaVencido(epi.vencimento) && !this.deveAvisarEpi(epi.vencimento)
+    );
+  }
+
+  get totalPendencias(): number {
+    return this.episComNotificacao.length;
+  }
+
+  get percentualValidos(): number {
+    if (this.totalEpis === 0) {
+      return 100;
+    }
+
+    const validos = this.totalEpis - this.episVencidos.length;
+    return Math.round((validos / this.totalEpis) * 100);
+  }
+
+  get mensagemPrioridade(): string {
+    if (this.episVencidos.length > 0) {
+      if (this.episVencidos.length === 1) {
+        return '1 EPI vencido requer ação imediata.';
+      }
+
+      return `${this.episVencidos.length} EPIs vencidos requerem ação imediata.`;
+    }
+
+    if (this.episProximos.length > 0) {
+      if (this.episProximos.length === 1) {
+        return '1 EPI está próximo do vencimento.';
+      }
+
+      return `${this.episProximos.length} EPIs estão próximos do vencimento.`;
+    }
+
+    return 'Nenhuma pendência crítica no momento.';
+  }
+
+  estaVencidoEpi(epi: EpiMonitorado): boolean {
+    return this.estaVencido(epi.vencimento);
+  }
+
+  textoVencimento(epi: EpiMonitorado): string {
+    const dias = this.calcularDiasRestantes(epi.vencimento);
+
+    if (dias === null) {
+      return 'Data inválida';
+    }
+
+    if (dias < 0) {
+      const diasVencido = Math.abs(dias);
+
+      if (diasVencido === 1) {
+        return 'Vencido há 1 dia';
+      }
+
+      return `Vencido há ${diasVencido} dias`;
+    }
+
+    if (dias === 0) {
+      return 'Vence hoje';
+    }
+
+    if (dias === 1) {
+      return 'Vence em 1 dia';
+    }
+
+    return `Vence em ${dias} dias`;
+  }
+
+  obterDataAtualFormatada(): string {
+    const data = new Intl.DateTimeFormat('pt-BR', {
+      weekday: 'long',
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    }).format(new Date());
+
+    return data.charAt(0).toUpperCase() + data.slice(1);
+  }
 
   /* =========================================
      QUANTIDADE DE NOTIFICAÇÕES DE EPI

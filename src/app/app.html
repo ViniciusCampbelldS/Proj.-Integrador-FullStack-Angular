@@ -62,7 +62,7 @@
     </li>
 
     <li>
-      <a class="btn d-flex align-items-center justify-content-center" routerLink="/epi">
+      <a class="btn d-flex align-items-center justify-content-center">
         <i class="bi bi-shield-shaded"></i>
         Gerenciar EPIs
       </a>
@@ -283,10 +283,19 @@
 
   </div>
 
+  @if (estaNoTopo) {
+
   <a class="logout-link" routerLink="/login" aria-label="Logout">
-        <i class="bi bi-person-fill-x"></i>
-        Logout
+    <i class="bi bi-person-fill-x"></i>
+    Logout
   </a>
+
+  } @else {
+
+  <button class="back-to-top-button" type="button" (click)="voltarAoTopo()" aria-label="Voltar ao topo">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+  }
 
 </div>
 

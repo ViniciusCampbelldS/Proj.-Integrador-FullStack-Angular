@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
-import { CadastroEpi } from './components/epi/cadastro-epi/CadastroEpi';
+import { EpiSeletor } from './components/epi/epi-seletor';
 import { Login } from './components/geral/login/login';
-import { BuscaEpi } from './components/epi/busca-epi/busca-epi';
 import { Unauthorized } from './auth/unauthorized/unauthorized';
 import { Homepage } from './components/geral/homepage/homepage';
 import { authGuard } from './auth/auth.guard';
@@ -24,14 +23,7 @@ export const routes: Routes = [
   // epi
   {
     path: 'epi',
-    component: CadastroEpi,
-    canActivate: [authGuard]
-  },
-
-  // epi filter
-  {
-    path: 'epi/filtro',
-    component: BuscaEpi,
+    component: EpiSeletor,
     canActivate: [authGuard]
   },
 
@@ -51,25 +43,6 @@ export const routes: Routes = [
       import('./components/treinamento/gerenciar-treinamento')
         .then((m) => m.GerenciarTreinamento),
     data: { view: 'presenca' },
-    canActivate: [authGuard]
-  },
-
-  // treinamento - abrir turma
-  {
-    path: 'treinamento/abrir-turma',
-    loadComponent: () =>
-      import('./components/treinamento/gerenciar-treinamento')
-        .then((m) => m.GerenciarTreinamento),
-    data: { view: 'abrir-turma' },
-    canActivate: [authGuard]
-  },
-
-  // treinamento - agendar
-  {
-    path: 'treinamento/agendar',
-    loadComponent: () =>
-      import('./components/treinamento/agendar-treinamento/agendar-treinamento')
-        .then((m) => m.AgendarTreinamento),
     canActivate: [authGuard]
   },
 

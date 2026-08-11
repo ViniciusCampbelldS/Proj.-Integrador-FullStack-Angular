@@ -44,6 +44,6 @@ export interface Epi {
   id: number;
   nome: string;
   ca: string;
-  funcionarios: string;
+  funcionario: string;
   vencimento: Date | string | null;
 }

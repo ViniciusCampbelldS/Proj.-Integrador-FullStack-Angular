@@ -10,7 +10,7 @@
 
 .eyebrow {
   margin: 0;
-  color: #04679e;
+  color: var(--mar-azul-medio);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -18,7 +18,7 @@
 
 h1 {
   margin: 0;
-  color: #003d6c;
+  color: var(--mar-azul-escuro);
   font-size: clamp(1.6rem, 2.5vw, 2.2rem);
   font-weight: 800;
 }
@@ -28,14 +28,14 @@ h1 {
   gap: 0.4rem;
   padding: 1rem;
   border: 1px solid rgba(0, 61, 108, 0.12);
-  border-radius: 12px;
-  background: #ffffff;
+  border-radius: var(--mar-radius-md);
+  background: var(--mar-surface);
 }
 
 .placeholder-card strong {
-  color: #003d6c;
+  color: var(--mar-azul-escuro);
 }
 
 .placeholder-card span {
-  color: #495057;
+  color: var(--mar-text);
 }
