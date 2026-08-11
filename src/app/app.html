@@ -53,10 +53,10 @@
 
       <ul class="dropdown-menu">
         <li>
-          <a class="dropdown-item" [routerLink]="['/funcionario/meus-epis']">Meus EPIs</a>
+          <a class="dropdown-item" [routerLink]="rotaMeusEpis">Meus EPIs</a>
         </li>
         <li>
-          <a class="dropdown-item" [routerLink]="['/funcionario/meus-treinamentos']">Meus Treinamentos</a>
+          <a class="dropdown-item" [routerLink]="rotaMeusTreinamentos">Meus Treinamentos</a>
         </li>
       </ul>
     </li>
@@ -94,12 +94,6 @@
           <a class="dropdown-item" [routerLink]="['/treinamento/presenca']">Treinamentos e Presença</a>
         </li>
         <li>
-          <a class="dropdown-item" [routerLink]="['/treinamento/abrir-turma']">Abrir Turma</a>
-        </li>
-        <li>
-          <a class="dropdown-item" [routerLink]="['/treinamento/agendar']">Agendar</a>
-        </li>
-        <li>
           <a class="dropdown-item" [routerLink]="['/treinamento/historico']">Histórico de Alterações</a>
         </li>
       </ul>
@@ -121,7 +115,8 @@
   <div class="notification-area">
 
       <button class="btn notification-button d-flex align-items-center justify-content-center" type="button"
-        (click)="alternarNotificacoes()" aria-label="Abrir notificacoes">
+        [class.is-open]="notificacoesAbertas"
+        (click)="alternarNotificacoes($event)" aria-label="Abrir notificacoes">
         <i class="bi bi-bell-fill"></i>
 
         @if (totalNotificacoes > 0) {
@@ -133,7 +128,7 @@
 
       @if (notificacoesAbertas) {
 
-      <div class="notification-panel">
+      <div class="notification-panel" (click)="$event.stopPropagation()">
 
         <div class="notification-header">
 
@@ -147,7 +142,7 @@
             </span>
           </div>
 
-          <button type="button" class="notification-settings" (click)="alternarConfiguracao()"
+          <button type="button" class="notification-settings" (click)="alternarConfiguracao($event)"
             aria-label="Configurar notificacoes">
             <i class="bi bi-gear-fill"></i>
           </button>
@@ -190,7 +185,7 @@
 
           </div>
 
-          <button class="save-notification-config" type="button" (click)="salvarConfiguracao()">
+          <button class="save-notification-config" type="button" (click)="salvarConfiguracao($event)">
             <i class="bi bi-check-lg"></i>
             Salvar configuracao
           </button>

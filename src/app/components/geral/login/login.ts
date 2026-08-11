@@ -3,6 +3,10 @@ import { AuthService } from '../../../service/auth';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
+interface LoginResponse {
+  access_token?: string;
+}
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -16,6 +20,7 @@ export class Login {
 
   erroLogin = false;
   exibirTelefoneTI = false;
+  carregando = false;
 
   constructor(
     private readonly authService: AuthService,
@@ -23,24 +28,46 @@ export class Login {
   ) {}
 
   entrar(): void {
-    this.erroLogin = false;
-
-    const cpfSemFormatacao = this.cpf.replace(/\D/g, '');
-
-    const cpfTeste = '12312312312';
-    const senhaTeste = '123';
-
-    if (
-      cpfSemFormatacao === cpfTeste &&
-      this.senha === senhaTeste
-    ) {
-      this.authService.salvarToken('token-teste');
-
-      this.router.navigateByUrl('/epi');
+    if (this.carregando) {
       return;
     }
 
-    this.erroLogin = true;
+    this.erroLogin = false;
+    this.carregando = true;
+
+    const cpfSemFormatacao = this.cpf.replace(/\D/g, '');
+
+    this.authService
+      .login({
+        email: cpfSemFormatacao,
+        senha: this.senha,
+      })
+      .subscribe({
+        next: (response: LoginResponse) => {
+          const token = response.access_token;
+
+          if (!token) {
+            this.erroLogin = true;
+            this.carregando = false;
+            return;
+          }
+
+          this.authService.salvarToken(token);
+
+          this.router
+            .navigateByUrl('/')
+            .catch(() => {
+              this.erroLogin = true;
+            })
+            .finally(() => {
+              this.carregando = false;
+            });
+        },
+        error: () => {
+          this.erroLogin = true;
+          this.carregando = false;
+        },
+      });
   }
 
   mostrarTelefoneTI(): void {

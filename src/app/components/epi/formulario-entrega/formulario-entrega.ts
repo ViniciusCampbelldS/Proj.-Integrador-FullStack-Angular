@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DeliveryItem, EpiOption } from '../../../models/epi.models';
+import { DeliveryItem, EpiOption } from '../epi.models';
 import { EpiData } from '../../../services/epi-data';
-import { FichaEntregaEPIModal } from '../../../models/ficha-entrega-epi-modal/ficha-entrega-epi-modal';
-import { ReplaceEpiModal } from '../../../models/replace-epi-modal/replace-epi-modal';
+import { FichaEntregaEPIModal } from '../../../modals/ficha-entrega-epi-modal/ficha-entrega-epi-modal';
+import { ReplaceEpiModal } from '../../../modals/replace-epi-modal/replace-epi-modal';
 
 @Component({
   selector: 'app-formulario-entrega',

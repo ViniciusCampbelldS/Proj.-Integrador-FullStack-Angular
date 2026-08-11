@@ -2,7 +2,7 @@ import { Component, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import type { Epi } from '../../../models/epi.models';
+import type { Epi } from '../epi.models';
 import { NotificacaoService } from '../../../service/notificacao';
 
 @Component({

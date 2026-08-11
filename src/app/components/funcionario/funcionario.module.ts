@@ -10,22 +10,12 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'meus-epis',
-      },
-      {
-        path: 'meus-epis',
-        loadComponent: () => import('./meus-epis/meus-epis').then((m) => m.MeusEpis),
-      },
-      {
-        path: 'meus-treinamentos',
-        loadComponent: () =>
-          import('./meus-treinamentos/meus-treinamentos')
-            .then((m) => m.MeusTreinamentos),
+        redirectTo: 'relatorio-epi',
       },
       {
         path: 'relatorio-epi',
-        pathMatch: 'full',
-        redirectTo: 'meus-epis',
+        loadComponent: () =>
+          import('./employee-report/employee-report').then((m) => m.EmployeeReport),
       },
     ],
   },

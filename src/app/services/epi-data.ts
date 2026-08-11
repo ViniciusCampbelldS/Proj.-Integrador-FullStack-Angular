@@ -6,7 +6,7 @@ import {
   EpiRecord,
   HistoryEntry,
   PreviousEpi,
-} from '../models/epi.models';
+} from '../components/epi/epi.models';
 
 @Injectable({ providedIn: 'root' })
 export class EpiData {

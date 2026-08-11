@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EpiRecord } from '../../../models/epi.models';
+import { EpiRecord } from '../epi.models';
 import { EpiData } from '../../../services/epi-data';
 
 @Component({

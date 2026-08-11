@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { input, output } from '@angular/core';
-import { DeliveryItem } from '../epi.models';
+import { DeliveryItem } from '../../components/epi/epi.models';
 
 @Component({
   selector: 'app-ficha-entrega-epi-modal',

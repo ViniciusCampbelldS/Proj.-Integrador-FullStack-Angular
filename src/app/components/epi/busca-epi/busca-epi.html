@@ -96,7 +96,8 @@
 			</div>
 
 			<div class="table-responsive desktop-table">
-				<table class="table table-hover align-middle mb-0 epi-table">
+				<div class="table-clip">
+					<table class="table table-hover align-middle mb-0 epi-table">
 
 					<thead>
 						<tr>
@@ -159,80 +160,83 @@
 
 					</tbody>
 
-				</table>
+					</table>
+				</div>
 			</div>
 
 			<div class="mobile-mirror-wrap">
-				<table class="epi-table-mirror">
-					<tbody>
-						<tr>
-							<th>Funcionario</th>
-							@for (item of resultados; track item.id) {
-							<td>{{ item.funcionario }}</td>
+				<div class="table-mirror-clip">
+					<table class="epi-table-mirror">
+						<tbody>
+							<tr>
+								<th>Funcionario</th>
+								@for (item of resultados; track item.id) {
+								<td>{{ item.funcionario }}</td>
+								}
+							</tr>
+
+							<tr>
+								<th>EPI</th>
+								@for (item of resultados; track item.id) {
+								<td>{{ item.nome }}</td>
+								}
+							</tr>
+
+							<tr>
+								<th>CA</th>
+								@for (item of resultados; track item.id) {
+								<td>{{ item.ca }}</td>
+								}
+							</tr>
+
+							<tr>
+								<th>Vencimento</th>
+								@for (item of resultados; track item.id) {
+								<td>{{ item.vencimento }}</td>
+								}
+							</tr>
+
+							<tr>
+								<th>Status</th>
+								@for (item of resultados; track item.id) {
+								<td>
+									<span class="status-badge" [class]="'status-badge ' + item.statusClass">
+										{{ item.status }}
+									</span>
+								</td>
+								}
+							</tr>
+
+							<tr>
+								<th>Ações</th>
+								@for (item of resultados; track item.id) {
+								<td>
+									<div class="table-actions table-actions-mirror">
+										<button class="btn btn-sm btn-outline-brand" type="button">
+											Editar
+										</button>
+
+										<button class="btn btn-sm btn-soft" type="button">
+											Estado do EPI
+										</button>
+
+										<button class="btn btn-sm btn-danger-brand" type="button">
+											Descarte
+										</button>
+									</div>
+								</td>
+								}
+							</tr>
+
+							@if (resultados.length === 0) {
+							<tr>
+								<th>Resultado</th>
+								<td>Nenhum resultado encontrado.</td>
+							</tr>
 							}
-						</tr>
-
-						<tr>
-							<th>EPI</th>
-							@for (item of resultados; track item.id) {
-							<td>{{ item.nome }}</td>
-							}
-						</tr>
-
-						<tr>
-							<th>CA</th>
-							@for (item of resultados; track item.id) {
-							<td>{{ item.ca }}</td>
-							}
-						</tr>
-
-						<tr>
-							<th>Vencimento</th>
-							@for (item of resultados; track item.id) {
-							<td>{{ item.vencimento }}</td>
-							}
-						</tr>
-
-						<tr>
-							<th>Status</th>
-							@for (item of resultados; track item.id) {
-							<td>
-								<span class="status-badge" [class]="'status-badge ' + item.statusClass">
-									{{ item.status }}
-								</span>
-							</td>
-							}
-						</tr>
-
-						<tr>
-							<th>Ações</th>
-							@for (item of resultados; track item.id) {
-							<td>
-								<div class="table-actions table-actions-mirror">
-									<button class="btn btn-sm btn-outline-brand" type="button">
-										Editar
-									</button>
-
-									<button class="btn btn-sm btn-soft" type="button">
-										Estado do EPI
-									</button>
-
-									<button class="btn btn-sm btn-danger-brand" type="button">
-										Descarte
-									</button>
-								</div>
-							</td>
-							}
-						</tr>
-
-						@if (resultados.length === 0) {
-						<tr>
-							<th>Resultado</th>
-							<td>Nenhum resultado encontrado.</td>
-						</tr>
-						}
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</div>
 			</div>
 
 		</article>

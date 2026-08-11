@@ -346,12 +346,26 @@
 	border-radius: var(--mar-radius-md);
 }
 
-.epi-table {
-	width: max-content;
-	min-width: 960px;
-	border-radius: var(--mar-radius-md);
-
+.table-clip,
+.table-mirror-clip {
+	display: block;
 	overflow: hidden;
+	border-radius: 10px;
+}
+
+.table-clip {
+	width: 100%;
+}
+
+.table-mirror-clip {
+	width: max-content;
+	min-width: 100%;
+	background: var(--mar-surface);
+}
+
+.epi-table {
+	width: 100%;
+	min-width: 960px;
 
 	border-collapse: collapse;
 }
@@ -434,8 +448,6 @@
 	border-collapse: collapse;
 	min-width: 620px;
 	width: max-content;
-	overflow: hidden;
-	border-radius: var(--mar-radius-md);
 	background: var(--mar-surface);
 }
 

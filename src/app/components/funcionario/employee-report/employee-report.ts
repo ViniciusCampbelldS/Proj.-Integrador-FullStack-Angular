@@ -1,8 +1,15 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EmployeeEpi } from '../../epi/epi.models';
 import { EpiData } from '../../../services/epi-data';
+
+interface EmployeeTraining {
+  id: number;
+  nr: string;
+  trainingDate: string;
+  dueDate: string;
+}
 
 interface EpiDocument {
   id: number;
@@ -11,20 +18,43 @@ interface EpiDocument {
 }
 
 @Component({
-  selector: 'app-meus-epis',
-  standalone: true,
+  selector: 'app-employee-report',
   imports: [CommonModule, FormsModule],
-  templateUrl: './meus-epis.html',
-  styleUrl: './meus-epis.scss',
+  templateUrl: './employee-report.html',
+  styleUrl: './employee-report.scss',
 })
-export class MeusEpis {
+export class EmployeeReport {
   employeeEpis: EmployeeEpi[];
+
   selectedEpi: EmployeeEpi | null = null;
   reportState = 'Bom estado';
+  reportComment = '';
   selectedReportImages: string[] = [];
   selectedReportFileNames: string[] = [];
-  reportComment = '';
   reportSent = false;
+
+  trainingsVisible = false;
+
+  readonly employeeTrainings: EmployeeTraining[] = [
+    {
+      id: 1,
+      nr: 'NR 06',
+      trainingDate: '05/08/2026',
+      dueDate: '05/08/2027',
+    },
+    {
+      id: 2,
+      nr: 'NR 10',
+      trainingDate: '11/04/2026',
+      dueDate: '11/04/2028',
+    },
+    {
+      id: 3,
+      nr: 'NR 35',
+      trainingDate: '20/08/2025',
+      dueDate: '20/08/2026',
+    },
+  ];
 
   readonly documents: EpiDocument[] = [
     {
@@ -41,6 +71,10 @@ export class MeusEpis {
 
   constructor(private readonly epiData: EpiData) {
     this.employeeEpis = this.epiData.getEmployeeEpis();
+  }
+
+  alternarTreinamentos(): void {
+    this.trainingsVisible = !this.trainingsVisible;
   }
 
   abrirModal(epi: EmployeeEpi): void {
@@ -96,11 +130,10 @@ export class MeusEpis {
     try {
       localStorage.setItem('mar-employee-epi-reports', JSON.stringify(reports));
     } catch {
-      // Mantem o fluxo mesmo se o navegador bloquear localStorage.
+      // O envio continua funcionando mesmo se o navegador bloquear o localStorage.
     }
 
     this.fecharModal();
-    this.reportComment = '';
     this.reportSent = true;
   }
 
@@ -144,6 +177,10 @@ export class MeusEpis {
       return 'bi-eyeglasses';
     }
 
+    if (nome.includes('bota')) {
+      return 'bi-shield-check';
+    }
+
     return 'bi-shield-check';
   }
 
@@ -155,6 +192,37 @@ export class MeusEpis {
     }
 
     if (status.includes('atenção') || status.includes('atencao') || status.includes('desgaste')) {
+      return 'warning';
+    }
+
+    return 'good';
+  }
+
+  situacaoTreinamento(treinamento: EmployeeTraining): string {
+    const vencimento = this.dataBrParaDate(treinamento.dueDate);
+    const hoje = this.inicioDoDia(new Date());
+    const limite = new Date(hoje);
+    limite.setDate(limite.getDate() + 30);
+
+    if (vencimento < hoje) {
+      return 'Vencido';
+    }
+
+    if (vencimento <= limite) {
+      return 'Próximo do vencimento';
+    }
+
+    return 'Ativo';
+  }
+
+  classeTreinamento(treinamento: EmployeeTraining): string {
+    const situacao = this.situacaoTreinamento(treinamento);
+
+    if (situacao === 'Vencido') {
+      return 'danger';
+    }
+
+    if (situacao === 'Próximo do vencimento') {
       return 'warning';
     }
 
@@ -219,6 +287,15 @@ export class MeusEpis {
     this.selectedReportImages.forEach((url) => URL.revokeObjectURL(url));
     this.selectedReportImages = [];
     this.selectedReportFileNames = [];
+  }
+
+  private dataBrParaDate(data: string): Date {
+    const [dia, mes, ano] = data.split('/').map(Number);
+    return new Date(ano, mes - 1, dia);
+  }
+
+  private inicioDoDia(data: Date): Date {
+    return new Date(data.getFullYear(), data.getMonth(), data.getDate());
   }
 
   private nomeArquivoSeguro(nome: string): string {

@@ -1,0 +1,263 @@
+<section class="portal-dashboard">
+  <div class="portal-heading">
+    <div>
+      <p class="eyebrow">Área do funcionário</p>
+      <h2>Meus equipamentos de proteção</h2>
+      <p class="portal-description">
+        Consulte seus EPIs, visualize fichas, acompanhe seus treinamentos e informe o estado dos equipamentos.
+      </p>
+    </div>
+
+    <button
+      class="btn btn-outline-brand training-toggle"
+      type="button"
+      (click)="alternarTreinamentos()"
+      [attr.aria-expanded]="trainingsVisible"
+      aria-controls="meus-treinamentos"
+    >
+      <i class="bi bi-journal-check"></i>
+      {{ trainingsVisible ? 'Ocultar treinamentos' : 'Ver meus treinamentos' }}
+    </button>
+  </div>
+
+  @if (reportSent) {
+    <div class="alert alert-success portal-alert" role="alert">
+      <i class="bi bi-check-circle-fill"></i>
+      Relatório enviado para análise da equipe de segurança.
+    </div>
+  }
+
+  @if (trainingsVisible) {
+    <section class="panel trainings-card" id="meus-treinamentos">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Treinamentos</p>
+          <h3>Meus treinamentos</h3>
+          <p class="section-description">Consulte as NRs vinculadas ao seu cadastro e seus vencimentos.</p>
+        </div>
+        <span class="item-count">{{ employeeTrainings.length }} treinamentos</span>
+      </div>
+
+      <div class="training-table-wrapper">
+        <table class="training-table">
+          <thead>
+            <tr>
+              <th>Código da NR</th>
+              <th>Data do treinamento</th>
+              <th>Data do vencimento</th>
+              <th>Situação</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (treinamento of employeeTrainings; track treinamento.id) {
+              <tr>
+                <td><span class="nr-badge">{{ treinamento.nr }}</span></td>
+                <td>{{ treinamento.trainingDate }}</td>
+                <td>{{ treinamento.dueDate }}</td>
+                <td>
+                  <span class="status-badge" [ngClass]="classeTreinamento(treinamento)">
+                    <span class="status-dot"></span>
+                    {{ situacaoTreinamento(treinamento) }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  }
+
+  <div class="portal-grid">
+    <section class="panel epi-panel">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Equipamentos</p>
+          <h3>Meus EPIs</h3>
+        </div>
+        <span class="item-count">{{ employeeEpis.length }} equipamentos</span>
+      </div>
+
+      <div class="epi-list">
+        @for (epi of employeeEpis; track epi.ca) {
+          <article class="epi-card">
+            <div class="epi-icon" aria-hidden="true">
+              <i class="bi" [ngClass]="iconeEpi(epi)"></i>
+            </div>
+
+            <div class="epi-info">
+              <h4>{{ epi.name }}</h4>
+              <div class="epi-meta">
+                <span><small>CA</small>{{ epi.ca }}</span>
+                <span><small>Data da entrega</small>{{ epi.deliveredAt }}</span>
+              </div>
+            </div>
+
+            <div class="epi-actions">
+              <span class="status-badge" [ngClass]="classeEstado(epi)">
+                <span class="status-dot"></span>
+                {{ epi.status }}
+              </span>
+
+              <button class="btn btn-outline-brand report-button" type="button" (click)="abrirModal(epi)">
+                <i class="bi bi-clipboard2-pulse"></i>
+                Relatar estado
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <aside class="panel summary-card">
+      <p class="eyebrow">Resumo</p>
+      <h3>Situação dos EPIs</h3>
+
+      <div class="summary-number">{{ employeeEpis.length }}</div>
+      <p class="summary-description">Equipamentos vinculados a você</p>
+
+      <div class="summary-list">
+        <div>
+          <span class="summary-icon good"><i class="bi bi-check-lg"></i></span>
+          EPIs atualmente em uso
+        </div>
+        <div>
+          <span class="summary-icon warning"><i class="bi bi-exclamation-lg"></i></span>
+          Relate desgaste ou dano
+        </div>
+        <div>
+          <span class="summary-icon info"><i class="bi bi-file-earmark-text"></i></span>
+          Fichas disponíveis abaixo
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="panel documents-card">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Documentos</p>
+        <h3>Fichas de EPI</h3>
+        <p class="section-description">Abra uma ficha em uma nova guia ou baixe uma cópia.</p>
+      </div>
+    </div>
+
+    <div class="document-list">
+      @for (documento of documents; track documento.id) {
+        <article class="document-row">
+          <div class="document-icon"><i class="bi bi-file-earmark-text"></i></div>
+
+          <div class="document-info">
+            <strong>{{ documento.name }}</strong>
+            <span>Emitida em {{ documento.date }}</span>
+          </div>
+
+          <div class="document-actions">
+            <button
+              type="button"
+              title="Abrir em nova guia"
+              aria-label="Abrir ficha em nova guia"
+              (click)="visualizarFicha(documento)"
+            >
+              <i class="bi bi-box-arrow-up-right"></i>
+            </button>
+
+            <button
+              class="download"
+              type="button"
+              title="Baixar arquivo"
+              aria-label="Baixar ficha"
+              (click)="baixarFicha(documento)"
+            >
+              <i class="bi bi-download"></i>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</section>
+
+@if (selectedEpi) {
+  <div class="modal-backdrop-custom" (click)="fecharModal()">
+    <section
+      class="report-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="report-modal-title"
+      (click)="$event.stopPropagation()"
+    >
+      <header class="modal-header-custom">
+        <div>
+          <p class="eyebrow">Relatório de EPI</p>
+          <h3 id="report-modal-title">Relatar estado do EPI</h3>
+        </div>
+
+        <button class="modal-close" type="button" aria-label="Fechar" (click)="fecharModal()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </header>
+
+      <div class="selected-epi">
+        <div class="epi-icon small"><i class="bi" [ngClass]="iconeEpi(selectedEpi)"></i></div>
+        <div>
+          <small>Equipamento selecionado</small>
+          <strong>{{ selectedEpi.name }}</strong>
+          <span>CA {{ selectedEpi.ca }}</span>
+        </div>
+      </div>
+
+      <div class="form-group-custom">
+        <label for="report-state">Estado atual</label>
+        <select id="report-state" class="form-select" [(ngModel)]="reportState">
+          <option>Bom estado</option>
+          <option>Apresenta desgaste</option>
+          <option>Danificado</option>
+          <option>Perdido</option>
+          <option>Solicita substituição</option>
+        </select>
+      </div>
+
+      <div class="form-group-custom">
+        <label for="report-comment">Observações</label>
+        <textarea
+          id="report-comment"
+          class="form-control"
+          rows="4"
+          [(ngModel)]="reportComment"
+          placeholder="Descreva o estado do equipamento..."
+        ></textarea>
+      </div>
+
+      <label class="upload-zone" for="report-images">
+        <span class="upload-icon"><i class="bi bi-cloud-arrow-up"></i></span>
+        <span>
+          <strong>Adicionar foto do EPI</strong>
+          <small>Clique para selecionar uma ou mais imagens.</small>
+        </span>
+        <input id="report-images" type="file" accept="image/*" multiple hidden (change)="onReportImages($event)" />
+      </label>
+
+      @if (selectedReportImages.length) {
+        <div class="image-preview-grid">
+          @for (image of selectedReportImages; track image; let index = $index) {
+            <div class="image-preview">
+              <img [src]="image" alt="Foto anexada do EPI" />
+              <button type="button" aria-label="Remover imagem" (click)="removerImagem(index)">
+                <i class="bi bi-x"></i>
+              </button>
+            </div>
+          }
+        </div>
+      }
+
+      <footer class="modal-actions">
+        <button class="btn btn-light" type="button" (click)="fecharModal()">Cancelar</button>
+        <button class="btn btn-brand" type="button" (click)="submitReport()">
+          <i class="bi bi-send"></i>
+          Enviar relatório
+        </button>
+      </footer>
+    </section>
+  </div>
+}

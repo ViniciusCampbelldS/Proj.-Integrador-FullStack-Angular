@@ -17,6 +17,7 @@ import {
   selector: 'app-root',
   host: {
     '(window:scroll)': 'onWindowScroll()',
+    '(document:click)': 'fecharNotificacoesSeClicarFora($event)',
   },
   imports: [
     RouterLink,
@@ -27,6 +28,9 @@ import {
   styleUrl: './app.scss',
 })
 export class App {
+
+  readonly rotaMeusEpis = ['/funcionario/meus-epis'];
+  readonly rotaMeusTreinamentos = ['/funcionario/meus-treinamentos'];
 
   estaNoTopo = true;
 
@@ -100,7 +104,8 @@ export class App {
      ABRIR / FECHAR NOTIFICAÇÕES
   ========================================= */
 
-  alternarNotificacoes(): void {
+  alternarNotificacoes(event?: MouseEvent): void {
+    event?.stopPropagation();
 
     this.notificacoesAbertas =
       !this.notificacoesAbertas;
@@ -115,7 +120,8 @@ export class App {
      ABRIR CONFIGURAÇÕES
   ========================================= */
 
-  alternarConfiguracao(): void {
+  alternarConfiguracao(event?: MouseEvent): void {
+    event?.stopPropagation();
 
     this.configuracaoAberta =
       !this.configuracaoAberta;
@@ -126,7 +132,8 @@ export class App {
      SALVAR CONFIGURAÇÃO
   ========================================= */
 
-  salvarConfiguracao(): void {
+  salvarConfiguracao(event?: MouseEvent): void {
+    event?.stopPropagation();
 
     if (
       this.diasAvisoEpi < 0 ||
@@ -145,6 +152,17 @@ export class App {
         this.diasAvisoNr
       );
 
+    this.configuracaoAberta = false;
+  }
+
+  fecharNotificacoesSeClicarFora(event: MouseEvent): void {
+    const target = event.target as HTMLElement | null;
+
+    if (target?.closest('.notification-area')) {
+      return;
+    }
+
+    this.notificacoesAbertas = false;
     this.configuracaoAberta = false;
   }
 

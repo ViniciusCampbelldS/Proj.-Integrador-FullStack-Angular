@@ -39,9 +39,9 @@
       </p>
       }
 
-      <button class="btn btn-brand" type="submit">
+      <button class="btn btn-brand" type="submit" [disabled]="carregando">
         <i class="bi bi-box-arrow-in-right"></i>
-        Entrar
+        {{ carregando ? 'Entrando...' : 'Entrar' }}
       </button>
 
       <button class="forgot-password" type="button" (click)="mostrarTelefoneTI()">

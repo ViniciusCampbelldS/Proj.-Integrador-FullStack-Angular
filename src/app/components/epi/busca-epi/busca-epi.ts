@@ -1,7 +1,7 @@
 import { EpiService } from '../epi-status/epi-status';
 import { Component, OnInit, inject } from '@angular/core';
 import { NotificacaoService, EpiMonitorado } from '../../../service/notificacao';
-import type { Epi } from '../../../models/epi.models';
+import type { Epi } from '../epi.models';
 
 type StatusClass = 'status-expired' | 'status-warning' | 'status-good';
 
