@@ -26,7 +26,7 @@ describe('App', () => {
       target: document.createElement('div'),
     } as unknown as MouseEvent);
 
-    expect(app.notificacoesAbertas).toBeFalse();
-    expect(app.configuracaoAberta).toBeFalse();
+    expect(app.notificacoesAbertas).toBeFalsy();
+    expect(app.configuracaoAberta).toBeFalsy();
   });
 });

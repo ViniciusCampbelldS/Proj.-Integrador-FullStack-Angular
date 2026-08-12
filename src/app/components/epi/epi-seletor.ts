@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { BuscaEpi } from './busca-epi/busca-epi';
-import { FormularioEntrega } from './formulario-entrega/formulario-entrega';
+import { EntregaEpi } from './entrega-epi/entrega-epi';
 import { HistóricoAltEpi } from './historico-alt-epi/historico-alt-epi';
 import { CadastroEpi } from './cadastro-epi/cadastro-epi';
 import { EpiStatus } from './epi-status/epi-status';
@@ -12,7 +12,7 @@ type SstView = 'busca' | 'cadastro' | 'entrega' | 'historico';
 @Component({
   selector: 'app-epi-seletor',
   standalone: true,
-  imports: [CommonModule, RouterModule, BuscaEpi, EpiStatus, FormularioEntrega, HistóricoAltEpi, CadastroEpi],
+  imports: [CommonModule, RouterModule, BuscaEpi, EpiStatus, EntregaEpi, HistóricoAltEpi, CadastroEpi],
   templateUrl: './epi-seletor.html',
   styleUrl: './epi-seletor.scss',
 })
@@ -22,6 +22,13 @@ export class EpiSeletor implements OnInit {
   constructor(private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.route.data.subscribe((data) => {
+      const view = data['view'] as SstView | undefined;
+      if (view === 'busca' || view === 'cadastro' || view === 'entrega' || view === 'historico') {
+        this.activeSstView = view;
+      }
+    });
+
     this.route.queryParams.subscribe((params) => {
       const view = params['view'] as SstView | undefined;
       if (view === 'busca' || view === 'cadastro' || view === 'entrega' || view === 'historico') {

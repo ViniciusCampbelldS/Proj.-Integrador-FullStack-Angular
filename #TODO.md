@@ -2,41 +2,41 @@
 
 ## Escopo Atual
 - Frontend apenas neste ciclo.
-- Perfis simulados no frontend: `TST` e `Oper?rio`.
-- TST: gerencia EPIs, treinamentos, funcion?rios e NRs.
-- Oper?rio: acessa o portal e visualiza telas administrativas sem editar.
+- Perfis simulados no frontend: `TST` e `Operário`.
+- TST: gerencia EPIs, treinamentos, funcionários e NRs.
+- Operário: acessa o portal e visualiza telas administrativas sem editar.
 
 ## Feito
-- Login com sele??o de perfil TST/Oper?rio.
-- Home, menu principal e notifica??es.
-- Portal do Funcion?rio.
+- Login com seleção de perfil TST/Operário.
+- Home, menu principal e notificações.
+- Portal do Funcionário.
 - Meus EPIs com relato de estado, upload de imagens e documentos.
 - Meus Treinamentos.
-- Gest?o de EPIs com busca, status, exporta??o local e a??es administrativas.
-- Cadastro/recebimento de EPI com formul?rio e lista local.
-- Entrega de EPI com upload, ficha e substitui??o.
-- Hist?rico de altera??es de EPI.
-- Gest?o de Treinamentos com tabela, sele??o de funcion?rios e edi??o local.
+- Gestão de EPIs com busca, status, exportação local e ações administrativas.
+- Cadastro/recebimento de EPI com formulário e lista local.
+- Entrega de EPI com upload, ficha e substituição.
+- Histórico de alterações de EPI.
+- Gestão de Treinamentos com tabela, seleção de funcionários e edição local.
 - Abertura de turma com participantes, upload de lista e tabela local.
-- Hist?rico de altera??es de treinamentos.
-- Gerenciar Funcion?rios com cadastro, edi??o, remo??o, NRs e filtros locais.
-- Padr?o visual de largura/responsividade entre as p?ginas principais.
+- Histórico de alterações de treinamentos.
+- Gerenciar Funcionários com cadastro, edição, remoção, NRs e filtros locais.
+- Padrão visual de largura/responsividade entre as páginas principais.
 
 ## Regras De Perfil No Frontend
-- TST pode editar EPIs, descartar EPIs, alterar estados, exportar relat?rios, editar treinamentos e gerenciar funcion?rios/NRs.
-- Oper?rio acessa o portal do funcion?rio e fica sem permiss?o nas a??es administrativas.
+- TST pode editar EPIs, descartar EPIs, alterar estados, exportar relatórios, editar treinamentos e gerenciar funcionários/NRs.
+- Operário acessa o portal do funcionário e fica sem permissão nas ações administrativas.
 
-## Ainda Pendente Para Integra??o Real
-- Conectar formul?rios ao backend.
-- Persistir cadastros, edi??es, descartes e turmas no banco.
-- Autentica??o real por perfil vinda do backend.
-- Exporta??o real para PDF/XLSX/XML/ODF com conte?do formatado.
+## Ainda Pendente Para Integração Real
+- Conectar formulários ao backend.
+- Persistir cadastros, edições, descartes e turmas no banco.
+- Autenticação real por perfil vinda do backend.
+- Exportação real para PDF/XLSX/XML/ODF com conteúdo formatado.
 - Filtros administrativos consumindo dados reais.
 - Upload real de documentos e imagens.
-- Hist?rico real com timestamp, usu?rio e altera??es vindas do backend.
+- Histórico real com timestamp, usuário e alterações vindas do backend.
 
 ## Ajustes Finais De Frontend
-- Revis?o visual mobile em todas as rotas.
+- Revisão visual mobile em todas as rotas.
 - Conferir textos e acentos finais.
 - Revisar estados vazios e mensagens de erro/sucesso.
-- Remover arquivos antigos em `lixeira` se n?o forem mais necess?rios.
+- Remover arquivos antigos em `lixeira` se não forem mais necessários.

@@ -1,3 +1,7 @@
+@use "../../../../styles/shared" as shared;
+
+@include shared.form-message;
+
 :host {
   display: block;
   padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
@@ -156,20 +160,6 @@
   margin: 0;
   color: #71808d;
   font-size: 14px;
-}
-
-.form-message {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: var(--mar-panel-padding);
-  padding: 10px 12px;
-  border: 1px solid rgba(25, 150, 208, 0.18);
-  border-radius: 10px;
-  background: rgba(25, 150, 208, 0.08);
-  color: var(--mar-azul-escuro);
-  font-size: 0.86rem;
-  font-weight: 700;
 }
 
 .filters {

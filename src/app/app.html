@@ -8,7 +8,7 @@
 
     <div id="metalDiv" class="col-lg-4 col-md-5 col-sm-12 d-flex align-items-center justify-content-center">
       <div>
-        <h1>A Metalúrgica</h1>
+        <h1>A Metalurgica</h1>
         <h2>Especialista na sua praia</h2>
       </div>
     </div>
@@ -52,31 +52,40 @@
           </a>
         </li>
 
-        <li>
+        <li routerLinkActive="is-active">
           <a class="btn d-flex align-items-center justify-content-center" routerLink="/funcionario" routerLinkActive="nav-active">
             <i class="bi bi-person-badge"></i>
-            Minha área
+            Minha area
           </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="rotaMeusEpis">Meus EPIs</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="rotaMeusTreinamentos">Meus Treinamentos</a>
+            </li>
+          </ul>
         </li>
 
         <li routerLinkActive="is-active">
-          <a class="btn d-flex align-items-center justify-content-center">
+          <a class="btn d-flex align-items-center justify-content-center" [routerLink]="rotaEpiBusca">
             <i class="bi bi-shield-shaded"></i>
             Gerenciar EPIs
           </a>
 
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'busca'}">Busca EPI</a>
+              <a class="dropdown-item" [routerLink]="rotaEpiBusca">Busca EPI</a>
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'cadastro'}">Cadastro / Recebimento</a>
+              <a class="dropdown-item" [routerLink]="rotaEpiCadastro">Cadastro / Recebimento</a>
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'entrega'}">Entrega de EPIs</a>
+              <a class="dropdown-item" [routerLink]="rotaEpiEntrega">Entrega de EPIs</a>
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['/epi']" [queryParams]="{view: 'historico'}">Histórico de Alterações</a>
+              <a class="dropdown-item" [routerLink]="rotaEpiHistorico">Historico de Alteracoes</a>
             </li>
           </ul>
         </li>
@@ -89,13 +98,13 @@
 
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" [routerLink]="['/treinamento/presenca']">Treinamentos e Presença</a>
+              <a class="dropdown-item" [routerLink]="['/treinamento/presenca']">Treinamentos e Presenca</a>
             </li>
             <li>
               <a class="dropdown-item" [routerLink]="['/treinamento/abrir-turma']">Abrir Turma</a>
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['/treinamento/historico']">Histórico de Alterações</a>
+              <a class="dropdown-item" [routerLink]="['/treinamento/historico']">Historico de Alteracoes</a>
             </li>
           </ul>
         </li>
@@ -103,7 +112,7 @@
         <li>
           <a class="btn d-flex align-items-center justify-content-center" routerLink="/gerenciar-funcionarios" routerLinkActive="nav-active">
             <i class="bi bi-people-fill"></i>
-            Gerenciar Funcionários
+            Gerenciar Funcionarios
           </a>
         </li>
       }
@@ -118,7 +127,7 @@
       type="button"
       [class.is-open]="notificacoesAbertas"
       (click)="alternarNotificacoes($event)"
-      aria-label="Abrir notificações"
+      aria-label="Abrir notificacoes"
     >
       <i class="bi bi-bell-fill"></i>
 
@@ -133,7 +142,7 @@
       <div class="notification-panel" (click)="$event.stopPropagation()">
         <div class="notification-header">
           <div class="notification-title">
-            <strong>Notificações</strong>
+            <strong>Notificacoes</strong>
             <span>Avisos de vencimento</span>
           </div>
 
@@ -141,7 +150,7 @@
             type="button"
             class="notification-settings"
             (click)="alternarConfiguracao($event)"
-            aria-label="Configurar notificações"
+            aria-label="Configurar notificacoes"
           >
             <i class="bi bi-gear-fill"></i>
           </button>
@@ -149,33 +158,33 @@
 
         @if (configuracaoAberta) {
           <div class="notification-config">
-            <strong class="config-title">Configurar aviso prévio</strong>
+            <strong class="config-title">Configurar aviso previo</strong>
 
             <label for="diasAvisoEpi">Avisar sobre vencimento de EPI com:</label>
 
             <div class="days-input">
               <input id="diasAvisoEpi" type="number" min="0" [(ngModel)]="diasAvisoEpi" />
-              <span>dias de antecedência</span>
+              <span>dias de antecedencia</span>
             </div>
 
             <label for="diasAvisoNr">Avisar sobre vencimento de NR com:</label>
 
             <div class="days-input">
               <input id="diasAvisoNr" type="number" min="0" [(ngModel)]="diasAvisoNr" />
-              <span>dias de antecedência</span>
+              <span>dias de antecedencia</span>
             </div>
 
             <button class="save-notification-config" type="button" (click)="salvarConfiguracao($event)">
               <i class="bi bi-check-lg"></i>
-              Salvar configuração
+              Salvar configuracao
             </button>
           </div>
         } @else {
           @if (totalNotificacoes === 0) {
             <div class="notification-empty">
               <i class="bi bi-check-circle-fill"></i>
-              <strong>Nenhum vencimento próximo</strong>
-              <span>Os avisos de EPI e NR aparecerão aqui.</span>
+              <strong>Nenhum vencimento proximo</strong>
+              <span>Os avisos de EPI e NR aparecerao aqui.</span>
             </div>
           } @else {
             <div class="notification-list">
@@ -193,12 +202,12 @@
                     @if (estaVencido(epi)) {
                       <strong class="notification-status expired">EPI vencido</strong>
                     } @else {
-                      <strong class="notification-status warning">EPI próximo do vencimento</strong>
+                      <strong class="notification-status warning">EPI proximo do vencimento</strong>
                     }
 
                     <span class="notification-epi-name">{{ epi.nome }}</span>
                     <small>CA: {{ epi.ca }}</small>
-                    <small>Funcionário: {{ epi.funcionario }}</small>
+                    <small>Funcionario: {{ epi.funcionario }}</small>
                     <small class="notification-date" [class.expired]="estaVencido(epi)">
                       {{ textoVencimento(epi) }}
                     </small>

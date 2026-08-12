@@ -34,6 +34,10 @@ export class App {
 
   readonly rotaMeusEpis = ['/funcionario/meus-epis'];
   readonly rotaMeusTreinamentos = ['/funcionario/meus-treinamentos'];
+  readonly rotaEpiBusca = ['/epi/busca'];
+  readonly rotaEpiCadastro = ['/epi/cadastro'];
+  readonly rotaEpiEntrega = ['/epi/entrega'];
+  readonly rotaEpiHistorico = ['/epi/historico'];
 
   estaNoTopo = true;
 
@@ -208,6 +212,10 @@ export class App {
       top: 0,
       behavior: 'smooth',
     });
+  }
+
+  irParaEpi(view: 'busca' | 'cadastro' | 'entrega' | 'historico'): void {
+    void this.router.navigate(['/epi', view]);
   }
 
   // =====================================================

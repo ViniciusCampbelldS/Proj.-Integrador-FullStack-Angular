@@ -64,8 +64,8 @@ O cabeçalho também permite configurar os dias de aviso de vencimento para EPIs
 ### Componentes de EPI
 - `src/app/components/epi/epi-filter/epi-filter.ts`: componente de busca e filtro de EPIs (atualmente apenas template sem lógica de filtro implementada).
 - `src/app/components/epi/epi-filter/epi-filter.html`: interface de filtro e tabela de resultados de EPIs.
-- `src/app/components/epi/formulario-entrega/formulario-entrega.ts`: lógica de entrega de EPIs, seleção de itens e upload de ficha.
-- `src/app/components/epi/formulario-entrega/formulario-entrega.html`: formulário de entrega com upload e listagem de itens.
+- `src/app/components/epi/entrega-epi/entrega-epi.ts`: lógica de entrega de EPIs, seleção de itens e upload de ficha.
+- `src/app/components/epi/entrega-epi/entrega-epi.html`: formulário de entrega com upload e listagem de itens.
 - `src/app/components/epi/ficha-entrega-epi-modal/ficha-entrega-epi-modal.ts`: modal de ficha digital para entrega de EPIs.
 - `src/app/components/epi/ficha-entrega-epi-modal/ficha-entrega-epi-modal.html`: template do modal de ficha digital.
 - `src/app/components/epi/replace-epi-modal/replace-epi-modal.ts`: modal para marcar um EPI como substituído.

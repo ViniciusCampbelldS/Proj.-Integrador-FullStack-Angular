@@ -14,11 +14,6 @@ const routes: Routes = [
           import('./funcionario-home').then((m) => m.FuncionarioHome),
       },
       {
-        path: 'relatorio-epi',
-        loadComponent: () =>
-          import('./employee-report/employee-report').then((m) => m.EmployeeReport),
-      },
-      {
         path: 'meus-epis',
         loadComponent: () =>
           import('./meus-epis/meus-epis').then((m) => m.MeusEpis),

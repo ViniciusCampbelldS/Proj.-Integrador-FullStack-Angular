@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { PainelAdministrativo } from './painel-administrativo/painel-administrativo';
+import { PainelOperario } from './painel-operario/painel-operario';
 
 import { NotificacaoService } from '../../../service/notificacao';
 import { AuthService } from '../../../service/auth';
@@ -10,7 +11,8 @@ import { AuthService } from '../../../service/auth';
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
+    PainelOperario,
+    PainelAdministrativo,
   ],
   templateUrl: './homepage.html',
   styleUrl: './homepage.scss',

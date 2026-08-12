@@ -3,6 +3,10 @@
 // ======================================================
 
 :host {
+  --mar-eyebrow-color: var(--mar-laranja-escuro);
+  --mar-eyebrow-spacing: 0.5px;
+  --mar-panel-title-size: 1.45rem;
+
   display: block;
   box-sizing: border-box;
   background: var(--mar-bg);
@@ -42,56 +46,6 @@
 // ======================================================
 // 3. TITULOS
 // ======================================================
-
-.panel-title {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 16px;
-
-  margin-bottom: var(--mar-panel-padding);
-  padding-bottom: 16px;
-
-  border-bottom: 1px solid rgba(0, 61, 108, 0.08);
-}
-
-.panel-title h3 {
-  margin: 0;
-
-  color: var(--mar-azul-escuro);
-
-  font-size: 1.45rem;
-  font-weight: 750;
-  line-height: 1.2;
-}
-
-.eyebrow {
-  margin: 0 0 6px;
-
-  color: var(--mar-laranja-escuro);
-
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.status-chip {
-  display: inline-flex;
-
-  width: 12px;
-  height: 12px;
-
-  border-radius: 999px;
-
-  background: var(--mar-laranja-claro);
-
-  box-shadow:
-    0 0 0 5px rgba(246, 141, 23, 0.14);
-}
-
 
 // ======================================================
 // 4. FORMULARIOS
@@ -142,14 +96,15 @@
 
   gap: 12px;
 
-  margin-top: var(--mar-panel-padding);
+  margin-top: 0;
 }
 
 .delivery-list-head {
   display: flex;
+  flex-direction: column;
 
-  align-items: center;
-  justify-content: space-between;
+  align-items: stretch;
+  justify-content: flex-start;
 
   gap: 16px;
 
@@ -161,39 +116,14 @@
   background: var(--mar-bg);
 }
 
-.delivery-list-head h4 {
+.delivery-list-head > * {
+  width: 100%;
+  margin-top: 0;
+}
+
+.delivery-list-head form {
   margin: 0;
-
-  color: var(--mar-azul-escuro);
-
-  font-size: 1.05rem;
-  font-weight: 800;
 }
-
-.delivery-item {
-  padding: 16px;
-
-  border: 1px solid rgba(0, 61, 108, 0.10);
-  border-left: 4px solid var(--mar-azul-claro);
-  border-radius: var(--mar-radius-md);
-
-  background: var(--mar-bg);
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
-}
-
-.delivery-item:hover {
-  border-color: rgba(246, 141, 23, 0.45);
-
-  box-shadow:
-    0 8px 18px rgba(0, 61, 108, 0.08);
-
-  transform: translateY(-1px);
-}
-
 
 // ======================================================
 // 6. UPLOAD
@@ -207,16 +137,17 @@
 
   gap: 16px;
 
-  margin-top: var(--mar-panel-padding);
+  margin-top: 0;
   padding: var(--mar-panel-padding);
 
   border: 1px dashed rgba(0, 61, 108, 0.28);
   border-radius: var(--mar-radius-md);
 
   background: linear-gradient(
-    135deg,
-    rgba(25, 150, 208, 0.08),
-    rgba(246, 141, 23, 0.08)
+    90deg,
+	
+    rgba(246, 141, 23, 0.08),
+    rgba(25, 150, 208, 0.08)
   );
 }
 
@@ -235,6 +166,13 @@
   color: var(--mar-text-secondary);
 
   font-size: 0.9rem;
+}
+
+.upload-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .preview-box {
@@ -370,44 +308,12 @@
 
   gap: 10px;
 
-  margin-top: var(--mar-panel-padding);
+  margin-top: 0;
 }
 
-.icon-button {
-  display: inline-grid;
-
-  width: 42px;
-  height: 42px;
-
-  place-items: center;
-
-  border: 1px solid rgba(0, 61, 108, 0.16);
-  border-radius: 9px;
-
-  background: var(--mar-surface);
-  color: var(--mar-azul-escuro);
-
-  cursor: pointer;
-
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+.register-delivery-button {
+  margin-left: auto;
 }
-
-.icon-button:hover:not(:disabled) {
-  background: var(--mar-laranja-escuro);
-  color: var(--mar-surface);
-
-  transform: translateY(-1px);
-}
-
-.icon-button:disabled {
-  opacity: 0.45;
-
-  cursor: not-allowed;
-}
-
 
 // ======================================================
 // 8. CHECKLIST
@@ -501,7 +407,8 @@
     width: 100%;
   }
 
-  .icon-button {
-    width: 100%;
+  .upload-actions {
+    flex-direction: column;
   }
+
 }

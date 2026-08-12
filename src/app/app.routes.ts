@@ -23,7 +23,31 @@ export const routes: Routes = [
   // epi
   {
     path: 'epi',
+    pathMatch: 'full',
+    redirectTo: 'epi/busca'
+  },
+  {
+    path: 'epi/busca',
     component: EpiSeletor,
+    data: { view: 'busca' },
+    canActivate: [tstGuard]
+  },
+  {
+    path: 'epi/cadastro',
+    component: EpiSeletor,
+    data: { view: 'cadastro' },
+    canActivate: [tstGuard]
+  },
+  {
+    path: 'epi/entrega',
+    component: EpiSeletor,
+    data: { view: 'entrega' },
+    canActivate: [tstGuard]
+  },
+  {
+    path: 'epi/historico',
+    component: EpiSeletor,
+    data: { view: 'historico' },
     canActivate: [tstGuard]
   },
 

@@ -3,6 +3,9 @@
 // ======================================================
 
 :host {
+	--mar-status-badge-font-size: 0.76rem;
+	--mar-panel-title-size: 1.45rem;
+
 	display: block;
 	background: var(--mar-bg);
 	min-width: 0;
@@ -10,34 +13,12 @@
 	box-sizing: border-box;
 }
 
-// .epi-dashboard {
-//   display: grid;
-//   gap: 20px;
-//   padding: var(--mar-panel-padding);
-//   border: 1px solid rgba(0, 61, 108, 0.08);
-//   border-radius: var(--mar-radius-lg);
-//   background: var(--mar-bg);
-//   box-shadow: var(--mar-shadow-soft);
-// }
-
 .epi-filter-panel {
 	display: grid;
 	gap: 18px;
 	max-width: 100%;
 	min-width: 0;
 }
-
-// .tool-grid {
-//   display: grid;
-//   grid-template-columns: minmax(0, 1fr);
-//   gap: 22px;
-//   align-items: start;
-// }
-
-// .stacked-block {
-//   display: block;
-//   width: 100%;
-// }
 
 .panel {
 	border: 1px solid rgba(0, 61, 108, 0.08);
@@ -50,80 +31,6 @@
 	padding-inline: 16px;
 	box-sizing: border-box;
 }
-
-// .filter-panel {
-//   background: var(--mar-bg);
-//   padding: var(--mar-panel-padding);
-// }
-
-
-// ======================================================
-// 3. TITULOS
-// ======================================================
-
-.panel-title {
-	display: flex;
-
-	align-items: center;
-	justify-content: space-between;
-
-	gap: 16px;
-
-	margin-bottom: var(--mar-panel-padding);
-	padding-bottom: 16px;
-
-	border-bottom: 1px solid rgba(0, 61, 108, 0.08);
-}
-
-.panel-title h3 {
-	margin: 0;
-
-	color: var(--mar-azul-escuro);
-
-	font-size: 1.45rem;
-	font-weight: 750;
-	line-height: 1.2;
-}
-
-// .eyebrow {
-//   margin: 0 0 6px;
-
-//   color: var(--mar-laranja-escuro);
-
-//   font-size: 0.72rem;
-//   font-weight: 800;
-//   letter-spacing: 0.5px;
-//   text-transform: uppercase;
-// }
-
-// .status-chip {
-//   display: inline-flex;
-
-//   width: 12px;
-//   height: 12px;
-
-//   border-radius: 999px;
-
-//   background: var(--mar-laranja-claro);
-
-//   box-shadow:
-//     0 0 0 5px rgba(246, 141, 23, 0.14);
-// }
-
-// #linha,
-// .linha {
-//   width: 64px;
-//   height: 4px;
-
-//   border: 0;
-//   border-radius: 999px;
-
-//   background: linear-gradient(
-//     90deg,
-//     var(--mar-laranja-claro),
-//     var(--mar-laranja-escuro)
-//   );
-// }
 
 
 // ======================================================
@@ -571,98 +478,6 @@
 // 8. STATUS
 // ======================================================
 
-.status-badge {
-	display: inline-flex;
-
-	align-items: center;
-	justify-content: center;
-
-	min-height: 28px;
-
-	padding: 5px 10px;
-
-	border-radius: 999px;
-
-	font-size: 0.76rem;
-	font-weight: 800;
-	line-height: 1;
-	white-space: nowrap;
-}
-
-.status-good {
-	background: rgba(25, 135, 84, 0.12);
-	color: var(--mar-success-legacy);
-}
-
-.status-warning {
-	background: rgba(246, 141, 23, 0.16);
-	color: var(--mar-laranja-escuro);
-}
-
-.status-expired {
-	background: rgba(220, 53, 69, 0.12);
-	color: var(--danger);
-}
-
-.modal-overlay {
-	position: fixed;
-	inset: 0;
-	z-index: 1060;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 20px;
-	background: rgba(0, 38, 66, 0.58);
-	backdrop-filter: blur(2px);
-}
-
-.epi-modal {
-	width: min(560px, 100%);
-	max-height: 92vh;
-	overflow-y: auto;
-	padding: 22px;
-	border: 1px solid rgba(0, 61, 108, 0.14);
-	border-radius: var(--mar-radius-lg);
-	background: var(--mar-surface);
-	box-shadow: 0 24px 70px rgba(0, 35, 62, 0.3);
-}
-
-.modal-header {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 16px;
-	margin-bottom: 18px;
-	padding-bottom: 14px;
-	border-bottom: 1px solid var(--mar-line-soft);
-}
-
-.modal-header h3 {
-	margin: 0;
-	color: var(--mar-azul-escuro);
-	font-size: 1.25rem;
-	font-weight: 800;
-}
-
-.modal-header span {
-	display: block;
-	margin-top: 4px;
-	color: var(--mar-muted-2);
-	font-size: 0.82rem;
-}
-
-.modal-close {
-	display: grid;
-	width: 38px;
-	height: 38px;
-	flex: 0 0 38px;
-	place-items: center;
-	border: 1px solid var(--mar-line);
-	border-radius: 10px;
-	background: var(--mar-surface);
-	color: var(--mar-azul-escuro);
-}
-
 .modal-field {
 	display: grid;
 	gap: 7px;
@@ -672,25 +487,12 @@
 	font-weight: 800;
 }
 
-.modal-actions {
-	display: flex;
-	justify-content: flex-end;
-	gap: 10px;
-	margin-top: 18px;
-	padding-top: 14px;
-	border-top: 1px solid var(--mar-line-soft);
-}
-
 
 // ======================================================
 // 9. RESPONSIVIDADE
 // ======================================================
 
 @media (max-width: 1100px) {
-	.filter-panel {
-		padding: var(--mar-panel-padding);
-	}
-
 	.table-actions {
 		min-width: 360px;
 	}
@@ -700,10 +502,6 @@
 	:host {
 		padding-inline: 16px;
 		max-width: 100%;
-	}
-
-	.filter-panel {
-		padding: 16px;
 	}
 
 	.desktop-table {

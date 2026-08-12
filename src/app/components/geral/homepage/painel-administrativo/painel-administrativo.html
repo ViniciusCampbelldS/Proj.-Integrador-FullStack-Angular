@@ -1,0 +1,21 @@
+<section class="admin-dashboard">
+  <app-hero-administrativo [dataHoje]="dataHoje()" [saudacao]="saudacao()" />
+
+  <app-painel-conformidade
+    [percentualEpisValidos]="percentualEpisValidos()"
+    [possuiDadosTreinamento]="possuiDadosTreinamento()"
+    [totalEpis]="totalEpis()"
+    [episEmDia]="episEmDia()"
+    [episProximos]="episProximos()"
+    [episVencidos]="episVencidos()"
+    [episDentroDaValidade]="episDentroDaValidade()"
+  />
+
+  <app-painel-pendencias
+    [totalPendencias]="totalPendencias()"
+    [mensagemPrioridade]="mensagemPrioridade()"
+    [episComNotificacao]="episComNotificacao()"
+    [estaVencido]="estaVencido()"
+    [textoVencimento]="textoVencimento()"
+  />
+</section>
