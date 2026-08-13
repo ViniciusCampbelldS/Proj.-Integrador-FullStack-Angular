@@ -1,7 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DeliveryItem } from '../../../components/epi/epi.models';
-import { DeliveryItemsReview } from '../../../components/epi/delivery-items-review/delivery-items-review';
+import { DeliveryItemsReview } from '../delivery-items-review/delivery-items-review';
 
 @Component({
 	selector: 'app-confirmar-entrega-modal',
@@ -14,7 +14,6 @@ export class ConfirmarEntregaModal {
 	deliveryItems = input.required<DeliveryItem[]>();
 	employeeName = input<string>('João Pedro da Rocha');
 	deliveryDate = input<string>('2026-08-06');
-	responsibleName = input<string>('Técnico SST');
 	signatureType = input<string>('Física');
 
 	closed = output<void>();

@@ -20,7 +20,7 @@ interface EpiDocument {
 export class MeusEpis {
   employeeEpis: EmployeeEpi[];
   selectedEpi: EmployeeEpi | null = null;
-  reportState = 'Bom estado';
+  reportState = 'Distante do vencimento';
   selectedReportImages: string[] = [];
   selectedReportFileNames: string[] = [];
   reportComment = '';
@@ -46,7 +46,7 @@ export class MeusEpis {
   abrirModal(epi: EmployeeEpi): void {
     this.limparImagensSelecionadas();
     this.selectedEpi = epi;
-    this.reportState = 'Bom estado';
+    this.reportState = 'Distante do vencimento';
     this.reportComment = '';
     this.reportSent = false;
   }
@@ -55,7 +55,7 @@ export class MeusEpis {
     this.limparImagensSelecionadas();
     this.selectedEpi = null;
     this.reportComment = '';
-    this.reportState = 'Bom estado';
+    this.reportState = 'Distante do vencimento';
   }
 
   onReportImages(event: Event): void {

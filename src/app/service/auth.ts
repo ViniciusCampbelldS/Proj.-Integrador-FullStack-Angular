@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { timeout } from 'rxjs';
 
-export type UserRole = 'TST' | 'Operário';
+export type UserRole = 'Técnico de Segurança do Trabalho' | 'Funcionário de campo';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -31,23 +31,23 @@ export class AuthService {
 
   obterPerfil(): UserRole {
     const perfil = sessionStorage.getItem(this.roleKey) as UserRole | null;
-    return perfil ?? 'TST';
+    return perfil ?? 'Técnico de Segurança do Trabalho';
   }
 
   podeEditarEpi(): boolean {
-    return this.obterPerfil() === 'TST';
+    return this.obterPerfil() === 'Técnico de Segurança do Trabalho';
   }
 
   podeEditarTreinamento(): boolean {
-    return this.obterPerfil() === 'TST';
+    return this.obterPerfil() === 'Técnico de Segurança do Trabalho';
   }
 
   podeCadastrarFuncionario(): boolean {
-    return this.obterPerfil() === 'TST';
+    return this.obterPerfil() === 'Técnico de Segurança do Trabalho';
   }
 
   apenasVisualizacao(): boolean {
-    return this.obterPerfil() === 'Operário';
+    return this.obterPerfil() === 'Funcionário de campo';
   }
 
   isAuthenticated(): boolean {

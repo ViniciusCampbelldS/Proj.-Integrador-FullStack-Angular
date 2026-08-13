@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DeliveryItem, EpiOption } from '../epi.models';
 import { EpiData } from '../../../services/epi-data';
-import { ReplaceEpiModal } from '../../../modals/entrega-epi/replace-epi-modal/replace-epi-modal';
 import { ConfirmarEntregaModal } from '../../../modals/entrega-epi/confirmar-entrega-modal/confirmar-entrega-modal';
-import { DeliveryItemsReview } from '../delivery-items-review/delivery-items-review';
+import { DeliveryItemsReview } from '../../../modals/entrega-epi/delivery-items-review/delivery-items-review';
 
 @Component({
   selector: 'app-entrega-epi',
@@ -13,21 +12,29 @@ import { DeliveryItemsReview } from '../delivery-items-review/delivery-items-rev
   imports: [
     CommonModule,
     FormsModule,
-	ReplaceEpiModal,
     ConfirmarEntregaModal,
-    DeliveryItemsReview
+    DeliveryItemsReview,
   ],
   templateUrl: './entrega-epi.html',
   styleUrls: ['./entrega-epi.scss'],
 })
 export class EntregaEpi {
+  employeeOptions = [
+    'João Pedro da Rocha',
+    'Fernanda Beatriz',
+    'Marcos Paulo Ferreira',
+  ];
+
   availableEpis: EpiOption[];
   deliveryItems: DeliveryItem[];
-  showReplaceModal = false;
+  showReplacedEpiSection = false;
   showConfirmarEntregaModal = false;
-  selectedEmployee = 'João Pedro da Rocha';
-  deliveryDate = '2026-08-06';
-  deliveryResponsible = 'Técnico SST';
+  selectedEmployee = this.employeeOptions[0];
+  deliveryDate = this.getTodayDate();
+  employeeCpf = '';
+  replacedEpiName = '';
+  replacedEpiCa = '';
+  replacedEpiValidity = '';
   selectedFichaName = '';
   fichaPreviewUrl = '';
   signatureType = 'Física';
@@ -35,7 +42,10 @@ export class EntregaEpi {
 
   constructor(private readonly epiData: EpiData) {
     this.availableEpis = this.epiData.getAvailableEpis();
-    this.deliveryItems = this.epiData.getDeliveryDraft();
+    this.deliveryItems = this.epiData.getDeliveryDraft().map((item) => ({
+      ...item,
+      quantity: 1,
+    }));
   }
 
   addDeliveryItem(): void {
@@ -70,6 +80,7 @@ export class EntregaEpi {
 
     item.ca = selected.ca;
     item.validity = selected.validity;
+    item.quantity = 1;
   }
 
   onFichaUpload(event: Event): void {
@@ -89,6 +100,10 @@ export class EntregaEpi {
     this.signatureType = 'Digital';
   }
 
+  revealReplacedEpiSection(): void {
+    this.showReplacedEpiSection = true;
+  }
+
   registerDelivery(): void {
     this.showConfirmarEntregaModal = true;
   }
@@ -96,5 +111,14 @@ export class EntregaEpi {
   onConfirmDelivery(): void {
     this.deliverySaved = true;
     this.showConfirmarEntregaModal = false;
+  }
+
+  private getTodayDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 }

@@ -1,23 +1,44 @@
-<section class="panel history-panel">
-  <div class="panel-title">
+<section class="treinamento-view">
+  <div class="header-area">
     <div>
-      <p class="eyebrow">Auditoria</p>
-      <h3>Histórico de Alterações Manuais de EPI</h3>
+      <p class="eyebrow">EPI</p>
+      <h1>Histórico de Alterações de EPI</h1>
+      <p>Consulte alterações manuais, entregas e substituições registradas nos EPIs.</p>
     </div>
   </div>
 
-  <div class="history-list">
-    <article *ngFor="let item of history">
-      <div class="history-icon">
-        <i class="bi bi-clock-history"></i>
+  <article class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Alterações registradas</h2>
+        <p>Últimas movimentações administrativas relacionadas aos EPIs.</p>
       </div>
+    </div>
 
-      <div class="history-content">
-        <strong>{{ item.action }}</strong>
-        <span>{{ item.detail }}</span>
-      </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Usuário</th>
+            <th>Registro</th>
+            <th>Ação</th>
+            <th>Detalhe</th>
+          </tr>
+        </thead>
 
-      <small>{{ item.user }} - {{ item.date }}</small>
-    </article>
-  </div>
+        <tbody>
+          <tr *ngFor="let item of history">
+            <td>{{ item.date }}</td>
+            <td>{{ item.user }}</td>
+            <td>{{ getRegistro(item) }}</td>
+            <td>
+              <span class="status" [ngClass]="getActionClass(item.action)">{{ item.action }}</span>
+            </td>
+            <td>{{ item.detail }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
 </section>

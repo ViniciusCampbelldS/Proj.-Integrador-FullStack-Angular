@@ -17,8 +17,8 @@ interface LoginResponse {
 export class Login {
   cpf = '';
   senha = '';
-  perfil: UserRole = 'TST';
-  readonly perfis: UserRole[] = ['TST', 'Operário'];
+  perfil: UserRole = 'Técnico de Segurança do Trabalho';
+  readonly perfis: UserRole[] = ['Técnico de Segurança do Trabalho', 'Funcionário de campo'];
 
   erroLogin = false;
   mensagemErroLogin = 'CPF ou senha inválidos.';

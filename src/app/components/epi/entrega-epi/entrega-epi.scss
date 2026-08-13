@@ -3,18 +3,15 @@
 // ======================================================
 
 :host {
-  --mar-eyebrow-color: var(--mar-laranja-escuro);
-  --mar-eyebrow-spacing: 0.5px;
-  --mar-panel-title-size: 1.45rem;
-
   display: block;
-  box-sizing: border-box;
+  padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
   background: var(--mar-bg);
+  color: var(--mar-ink);
 }
 
 .tool-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  grid-template-columns: minmax(0, 1fr);
   gap: 22px;
   align-items: start;
 }
@@ -35,13 +32,6 @@
 .delivery-panel {
   padding: var(--mar-panel-padding);
 }
-
-.checklist-panel {
-  padding: var(--mar-panel-padding);
-  position: sticky;
-  top: 16px;
-}
-
 
 // ======================================================
 // 3. TITULOS
@@ -123,6 +113,36 @@
 
 .delivery-list-head form {
   margin: 0;
+}
+
+.section-caption {
+  margin: 0;
+
+  color: var(--mar-azul-escuro);
+
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.section-divider {
+  padding-top: 4px;
+  border-top: 1px solid var(--mar-line);
+}
+
+.replace-section {
+  display: grid;
+  gap: 16px;
+}
+
+.form-note {
+  margin: 0;
+
+  color: var(--mar-text-secondary);
+
+  font-size: 0.8rem;
+  line-height: 1.45;
 }
 
 // ======================================================
@@ -316,45 +336,7 @@
 }
 
 // ======================================================
-// 8. CHECKLIST
-// ======================================================
-
-.checklist {
-  display: grid;
-
-  gap: 12px;
-
-  padding: 0;
-  margin: 0;
-
-  list-style: none;
-}
-
-.checklist li {
-  display: flex;
-
-  align-items: center;
-
-  gap: 9px;
-
-  color: var(--mar-text);
-
-  font-size: 0.92rem;
-}
-
-.checklist i {
-  color: var(--mar-laranja-claro);
-
-  font-size: 1rem;
-}
-
-.checklist .bi-check-circle-fill {
-  color: var(--mar-azul-claro);
-}
-
-
-// ======================================================
-// 9. ALERTA
+// 8. ALERTA
 // ======================================================
 
 .alert-success {
@@ -369,17 +351,12 @@
 
 
 // ======================================================
-// 10. RESPONSIVIDADE
+// 9. RESPONSIVIDADE
 // ======================================================
 
 @media (max-width: 1100px) {
   .tool-grid {
     grid-template-columns: 1fr;
-  }
-
-  .checklist-panel {
-    order: -1;
-    position: static;
   }
 }
 
@@ -388,8 +365,7 @@
     padding-inline: 0;
   }
 
-  .delivery-panel,
-  .checklist-panel {
+  .delivery-panel {
     padding: 16px;
   }
 

@@ -12,7 +12,7 @@ interface Funcionario {
   cpf: string;
   setor: string;
   cargo: string;
-  perfil: 'Operário' | 'TST';
+  perfil: 'Funcionário de campo' | 'Técnico de Segurança do Trabalho';
   status: FuncionarioStatus;
   nrs: string[];
 }
@@ -38,7 +38,7 @@ interface FuncionarioForm {
 export class GerenciarFuncionarios {
   readonly setores = ['Operacões', 'Manutenção', 'Produção', 'Qualidade', 'Logística', 'Administrativo'];
   readonly cargos = ['Operador', 'Soldador', 'Eletricista', 'Supervisor', 'Auxiliar', 'Técnico de Segurança'];
-  readonly perfis: Funcionario['perfil'][] = ['Operário', 'TST'];
+  readonly perfis: Funcionario['perfil'][] = ['Funcionário de campo', 'Técnico de Segurança do Trabalho'];
   readonly statusOptions: FuncionarioStatus[] = ['Ativo', 'Afastado', 'Inativo'];
   readonly nrOptions = ['NR 06', 'NR 10', 'NR 12', 'NR 18', 'NR 33', 'NR 35'];
 
@@ -57,7 +57,7 @@ export class GerenciarFuncionarios {
       cpf: '123.456.789-10',
       setor: 'Operações',
       cargo: 'Operador',
-      perfil: 'Operário',
+      perfil: 'Funcionário de campo',
       status: 'Ativo',
       nrs: ['NR 06', 'NR 12'],
     },
@@ -68,7 +68,7 @@ export class GerenciarFuncionarios {
       cpf: '987.654.321-00',
       setor: 'Qualidade',
       cargo: 'Supervisor',
-      perfil: 'TST',
+      perfil: 'Técnico de Segurança do Trabalho',
       status: 'Ativo',
       nrs: ['NR 06', 'NR 35'],
     },
@@ -79,7 +79,7 @@ export class GerenciarFuncionarios {
       cpf: '456.789.123-44',
       setor: 'Manutenção',
       cargo: 'Eletricista',
-      perfil: 'Operário',
+      perfil: 'Funcionário de campo',
       status: 'Afastado',
       nrs: ['NR 06', 'NR 10', 'NR 35'],
     },
@@ -90,7 +90,7 @@ export class GerenciarFuncionarios {
       cpf: '321.654.987-22',
       setor: 'Administrativo',
       cargo: 'Técnico de Segurança',
-      perfil: 'TST',
+      perfil: 'Técnico de Segurança do Trabalho',
       status: 'Ativo',
       nrs: ['NR 06', 'NR 33'],
     },
@@ -245,7 +245,7 @@ export class GerenciarFuncionarios {
       cpf: '',
       setor: 'Operacões',
       cargo: 'Operador',
-      perfil: 'Operário',
+      perfil: 'Funcionário de campo',
       status: 'Ativo',
       nrs: [],
     };

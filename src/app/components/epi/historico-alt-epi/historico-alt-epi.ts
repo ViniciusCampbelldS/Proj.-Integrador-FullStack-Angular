@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { HistoryEntry } from '../epi.models';
 import { EpiData } from '../../../services/epi-data';
 
@@ -15,5 +15,24 @@ export class HistóricoAltEpi {
 
   constructor(private readonly epiData: EpiData) {
     this.history = this.epiData.getHistory();
+  }
+
+  getActionClass(action: string): 'success' | 'warning' | 'danger' {
+    const normalizedAction = action.toLowerCase();
+
+    if (normalizedAction.includes('entrega')) {
+      return 'success';
+    }
+
+    if (normalizedAction.includes('altera')) {
+      return 'warning';
+    }
+
+    return 'danger';
+  }
+
+  getRegistro(item: HistoryEntry): string {
+    const [firstSentence] = item.detail.split('.');
+    return firstSentence.trim();
   }
 }

@@ -50,7 +50,7 @@ export class Homepage {
 
     return (
       this.authService.obterPerfil() ===
-      'Operário'
+      'Funcionário de campo'
     );
   }
 

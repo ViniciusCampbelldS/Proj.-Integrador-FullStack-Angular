@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { DeliveryItem } from '../epi.models';
+import { DeliveryItem } from '../../../components/epi/epi.models';
 
 @Component({
   selector: 'app-delivery-items-review',

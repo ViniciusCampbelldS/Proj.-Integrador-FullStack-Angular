@@ -70,11 +70,11 @@ export class App {
   }
 
   get isTst(): boolean {
-    return this.authService.obterPerfil() === 'TST';
+    return this.authService.obterPerfil() === 'Técnico de Segurança do Trabalho';
   }
 
   get isOperario(): boolean {
-    return this.authService.obterPerfil() === 'Operário';
+    return this.authService.obterPerfil() === 'Funcionário de campo';
   }
 
   get isFuncionarioArea(): boolean {

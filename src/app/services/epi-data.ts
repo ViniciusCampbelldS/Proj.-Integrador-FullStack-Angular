@@ -43,7 +43,7 @@ export class EpiData {
         ca: '101022',
         name: 'Capacete com viseira e faixa refletiva',
         employee: 'João Pedro da Rocha de Alcântara',
-        status: 'Bom estado',
+        status: 'Distante do vencimento',
         statusClass: 'success',
         due: '12/09/2026',
       },

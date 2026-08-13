@@ -221,10 +221,13 @@ nav {
 	border-color: var(--mar-laranja-escuro);
 }
 
-.notification-button.is-open i,
 .notification-button:hover i,
 .notification-button:focus-visible i {
 	color: var(--mar-surface);
+}
+
+.notification-button.is-open:not(:hover):not(:focus-visible) i {
+	color: var(--mar-laranja-claro);
 }
 
 .top-right-actions {

@@ -1,109 +1,137 @@
 :host {
   display: block;
-  padding-inline: 16px;
-  box-sizing: border-box;
+  padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
   background: var(--mar-bg);
+  color: var(--mar-ink);
+}
+
+.treinamento-view {
+  display: grid;
+  gap: 18px;
+  max-width: var(--mar-page-max-width);
+  margin: 0 auto;
+}
+
+.header-area h1,
+.panel-header h2 {
+  margin: 0;
+  color: var(--mar-azul-escuro);
+  font-weight: 800;
+}
+
+.header-area h1 {
+  font-size: clamp(1.7rem, 2.4vw, 2.25rem);
+}
+
+.header-area p,
+.panel-header p {
+  margin: 6px 0 0;
+  color: var(--mar-text);
+  font-size: 0.92rem;
 }
 
 .panel {
-  border: 1px solid rgba(0, 61, 108, 0.08);
-  border-radius: var(--mar-radius-lg);
+  padding: var(--mar-panel-padding);
+  border: 1px solid var(--mar-line-soft);
+  border-radius: var(--mar-radius-md);
   background: var(--mar-surface);
   box-shadow: var(--mar-shadow-soft);
-  padding: var(--mar-panel-padding);
 }
 
-.panel-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: var(--mar-panel-padding);
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(0, 61, 108, 0.08);
+.panel-header {
+  margin-bottom: 14px;
 }
 
-.panel-title h3 {
-  margin: 0;
-  color: var(--mar-azul-escuro);
-  font-size: 1.45rem;
-  font-weight: 750;
-  line-height: 1.2;
+.panel-header h2 {
+  font-size: 1.08rem;
 }
 
-// .eyebrow {
-//   margin: 0 0 6px;
-//   color: var(--mar-laranja-escuro);
-//   font-size: 0.72rem;
-//   font-weight: 800;
-//   letter-spacing: 0.5px;
-//   text-transform: uppercase;
-// }
-
-// .admin-chip {
-//   display: inline-flex;
-//   align-items: center;
-//   gap: 8px;
-//   padding: 8px 12px;
-//   border-radius: 999px;
-//   background: rgba(25, 150, 208, 0.12);
-//   color: var(--mar-azul-escuro);
-//   font-size: 0.85rem;
-//   font-weight: 700;
-// }
-
-.history-list {
-  display: grid;
-  gap: 12px;
-}
-
-.history-list article {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 14px;
-  padding: 16px;
-  border: 1px solid rgba(0, 61, 108, 0.08);
-  border-radius: var(--mar-radius-md);
-  background: var(--mar-bg);
-}
-
-.history-icon {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
+.table-container {
+  width: 100%;
+  overflow-x: auto;
   border-radius: 10px;
-  background: rgba(25, 150, 208, 0.1);
-  color: var(--mar-azul-medio);
 }
 
-.history-list strong {
-  display: block;
-  color: var(--mar-azul-escuro);
-  margin-bottom: 4px;
+table {
+  width: 100%;
+  min-width: 920px;
+  border: 1px solid #b8c6d1;
+  border-top: 0;
+  border-radius: 10px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
 }
 
-.history-list span,
-.history-list small {
-  color: var(--mar-text-secondary);
+thead {
+  background: var(--mar-azul-escuro);
 }
 
-@media (max-width: 680px) {
+th,
+td {
+  padding: 11px 12px;
+  border-right: 1px solid #d7e1e9;
+  border-bottom: 1px solid #d7e1e9;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+th {
+  color: var(--mar-surface);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+td {
+  color: var(--mar-text);
+}
+
+td:last-child,
+th:last-child {
+  border-right: 0;
+}
+
+tbody tr:hover {
+  background: #f8fbfd;
+  box-shadow: inset 4px 0 0 var(--mar-laranja-claro);
+}
+
+tbody tr:nth-child(even) {
+  background: #fbfdfe;
+}
+
+.status {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.status.success {
+  background: #dceee8;
+  color: #008f61;
+}
+
+.status.warning {
+  background: #fff0dc;
+  color: #c86713;
+}
+
+.status.danger {
+  background: #ffe3e9;
+  color: #e3173f;
+}
+
+@media (max-width: 620px) {
   :host {
-    padding-inline: 12px;
-  }
-
-  .panel {
-    padding: 16px;
-  }
-
-  .panel-title,
-  .history-list article {
-    align-items: flex-start;
-  }
-
-  .history-list article {
-    grid-template-columns: 1fr;
+    padding: 22px 14px 42px;
   }
 }
