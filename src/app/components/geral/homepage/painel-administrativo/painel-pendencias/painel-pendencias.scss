@@ -1,11 +1,12 @@
+@use "../../../../../../styles/shared" as shared;
+
 :host { display: block; }
-.attention-panel { margin: 0 auto 22px; padding: 26px; border: 1px solid var(--mar-line-soft); border-radius: var(--mar-radius-xl); background: var(--mar-surface); box-shadow: 0 7px 24px rgba(0, 61, 108, 0.045); }
+@include shared.dashboard-panel(".attention-panel");
+
 .section-heading, .attention-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
 .attention-heading-main { margin-bottom: 18px; }
-.section-eyebrow { display: block; margin-bottom: 4px; color: var(--mar-azul-medio); font-size: 10px; font-weight: 800; letter-spacing: 1.3px; }
-.section-heading h2 { margin: 0; color: var(--mar-azul-escuro); font-size: 1.25rem; font-weight: 750; }
-.section-heading p { margin: 5px 0 0; color: var(--mar-text-secondary); font-size: 12px; }
-.attention-counter { display: grid; min-width: 36px; height: 36px; place-items: center; border-radius: 10px; background: rgba(226, 116, 37, 0.11); color: var(--mar-laranja-escuro); font-size: 13px; font-weight: 800; }
+.attention-heading-main > div { min-width: 0; }
+.attention-counter { display: grid; align-self: flex-start; min-width: 36px; height: 36px; place-items: center; border-radius: 10px; background: rgba(226, 116, 37, 0.11); color: var(--mar-laranja-escuro); font-size: 13px; font-weight: 800; }
 .attention-list { display: grid; gap: 11px; }
 .attention-item { display: flex; align-items: flex-start; gap: 13px; padding: 15px; border: 1px solid rgba(246, 141, 23, 0.2); border-left: 4px solid var(--mar-laranja-claro); border-radius: 12px; background: linear-gradient(90deg, rgba(246, 141, 23, 0.04), var(--mar-surface) 30%); transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .attention-item:hover { transform: translateX(2px); box-shadow: 0 4px 14px rgba(0, 61, 108, 0.06); }
@@ -28,5 +29,5 @@
 .attention-empty-icon { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%; background: rgba(25, 135, 84, 0.1); color: #198754; font-size: 19px; }
 .attention-empty strong { display: block; font-size: 13px; }
 .attention-empty span { display: block; margin-top: 3px; color: var(--mar-text-secondary); font-size: 10px; }
-@media (max-width: 750px) { .section-heading, .attention-title-row { flex-direction: column; } .attention-panel { padding: 18px; } }
+@media (max-width: 750px) { .section-heading, .attention-title-row { flex-direction: column; } }
 @media (max-width: 480px) { .attention-meta { flex-direction: column; } }

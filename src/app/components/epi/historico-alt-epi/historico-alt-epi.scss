@@ -1,15 +1,15 @@
 :host {
   display: block;
-  padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
   background: var(--mar-bg);
   color: var(--mar-ink);
 }
 
-.treinamento-view {
+.epi-view {
   display: grid;
   gap: 18px;
   max-width: var(--mar-page-max-width);
   margin: 0 auto;
+  padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
 }
 
 .header-area h1,
@@ -131,7 +131,7 @@ tbody tr:nth-child(even) {
 }
 
 @media (max-width: 620px) {
-  :host {
+  .epi-view {
     padding: 22px 14px 42px;
   }
 }

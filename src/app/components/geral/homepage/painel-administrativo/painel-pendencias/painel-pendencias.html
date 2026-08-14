@@ -1,8 +1,7 @@
 <section class="attention-panel">
   <div class="section-heading attention-heading-main">
     <div>
-      <span class="section-eyebrow">PENDENCIAS</span>
-      <h2>Atencao necessaria</h2>
+      <h2>Pendências</h2>
       <p>{{ mensagemPrioridade() }}</p>
     </div>
 
@@ -16,7 +15,7 @@
       <div class="attention-empty-icon"><i class="bi bi-check-lg"></i></div>
       <div>
         <strong>Tudo certo!</strong>
-        <span>Nenhum EPI precisa de atencao no momento.</span>
+        <span>Nenhum EPI precisa de atenção no momento.</span>
       </div>
     </div>
   } @else {
@@ -37,7 +36,7 @@
               @if (estaVencido()(epi)) {
                 <span class="status-tag expired">Vencido</span>
               } @else {
-                <span class="status-tag warning">Proximo</span>
+                <span class="status-tag warning">Próximo</span>
               }
             </div>
 

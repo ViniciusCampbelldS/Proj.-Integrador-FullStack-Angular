@@ -169,3 +169,125 @@
 		font-weight: 700;
 	}
 }
+
+@mixin page-shell($root-selector, $page-min-height: null) {
+	:host {
+		display: block;
+		background: var(--mar-bg);
+		color: var(--mar-ink);
+	}
+
+	#{$root-selector} {
+		padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
+
+		@if $page-min-height !=null {
+			min-height: $page-min-height;
+		}
+	}
+
+	.page-shell,
+	#{$root-selector} {
+		display: grid;
+		gap: 18px;
+	}
+
+	.page-shell {
+		max-width: var(--mar-page-max-width);
+		margin: 0 auto;
+	}
+
+	.header-area,
+	.section-title {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 16px;
+	}
+
+	.header-area h1,
+	.section-title h2 {
+		margin: 0;
+		color: var(--mar-azul-escuro);
+		font-weight: 800;
+	}
+
+	.header-area h1 {
+		font-size: clamp(1.7rem, 2.4vw, 2.25rem);
+	}
+
+	.header-area p,
+	.section-title p {
+		margin: 6px 0 0;
+		color: var(--mar-text);
+		font-size: 0.92rem;
+	}
+
+	@media (max-width: 768px) {
+
+		.header-area,
+		.section-title {
+			flex-direction: column;
+		}
+	}
+}
+
+@mixin surface-card($selectors...) {
+	@each $selector in $selectors {
+		#{$selector} {
+			border: 1px solid var(--mar-line-soft);
+			border-radius: var(--mar-radius-md);
+			background: var(--mar-surface);
+			box-shadow: var(--mar-shadow-soft);
+		}
+	}
+}
+
+@mixin dashboard-panel($selector) {
+	#{$selector} {
+		margin: 0 auto 22px;
+		padding: 26px;
+		border: 1px solid var(--mar-line-soft);
+		border-radius: var(--mar-radius-xl);
+		background: var(--mar-surface);
+		box-shadow: 0 7px 24px rgba(0, 61, 108, 0.045);
+	}
+
+	.section-heading {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 20px;
+	}
+
+	.section-eyebrow {
+		display: block;
+		margin-bottom: 4px;
+		color: var(--mar-azul-medio);
+		font-size: 10px;
+		font-weight: 800;
+		letter-spacing: 1.3px;
+	}
+
+	.section-heading h2 {
+		margin: 0;
+		color: var(--mar-azul-escuro);
+		font-size: 1.25rem;
+		font-weight: 750;
+	}
+
+	.section-heading p {
+		margin: 5px 0 0;
+		color: var(--mar-text-secondary);
+		font-size: 12px;
+	}
+
+	@media (max-width: 750px) {
+		.section-heading {
+			flex-direction: column;
+		}
+
+		#{$selector} {
+			padding: 18px;
+		}
+	}
+}

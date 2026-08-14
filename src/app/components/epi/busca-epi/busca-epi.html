@@ -1,5 +1,15 @@
-<div class="panel cadastro-panel filter-pannel">
-	<section class="epi-filter-panel">
+<section class="epi-view">
+	<div class="page-shell">
+		<div class="header-area">
+			<div>
+				<p class="eyebrow">EPI</p>
+				<h1>Cadastro e Busca de EPI</h1>
+				<p>Gerencie cadastros, consulte entregas e acompanhe a situação dos equipamentos.</p>
+			</div>
+		</div>
+
+		<div class="panel cadastro-panel filter-pannel">
+			<section class="epi-filter-panel">
 		<article class="filter-box">
 			<div class="filter-box-title">
 				<h4>EPI - Cadastro e busca</h4>
@@ -272,8 +282,10 @@
 				</div>
 			</div>
 		</article>
-	</section>
-</div>
+			</section>
+		</div>
+	</div>
+</section>
 
 @if (modalEdicaoAberto && itemEditando) {
 	<div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="edicao-epi-title" (click)="fecharModais()">

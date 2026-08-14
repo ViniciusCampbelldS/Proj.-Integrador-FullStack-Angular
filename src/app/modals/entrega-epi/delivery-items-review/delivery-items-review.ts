@@ -13,7 +13,6 @@ export class DeliveryItemsReview {
   deliveryItems = input.required<DeliveryItem[]>();
   employeeName = input<string>('');
   deliveryDate = input<string>('');
-  signatureType = input<string>('');
   showRemoveButton = input(false);
 
   removeItem = output<number>();

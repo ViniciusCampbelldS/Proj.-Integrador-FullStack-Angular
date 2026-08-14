@@ -18,7 +18,7 @@ export class Login {
   cpf = '';
   senha = '';
   perfil: UserRole = 'Técnico de Segurança do Trabalho';
-  readonly perfis: UserRole[] = ['Técnico de Segurança do Trabalho', 'Funcionário de campo'];
+  readonly perfis: UserRole[] = ['Técnico de Segurança do Trabalho', 'Funcionário'];
 
   erroLogin = false;
   mensagemErroLogin = 'CPF ou senha inválidos.';

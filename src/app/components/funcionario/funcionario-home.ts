@@ -8,7 +8,6 @@ import { RouterLink } from '@angular/router';
   template: `
     <section class="funcionario-home">
       <div class="home-heading">
-        <p class="eyebrow">AREA INDIVIDUAL</p>
         <h1>Minha área</h1>
         <p>Consulte seus equipamentos e treinamentos vinculados.</p>
       </div>

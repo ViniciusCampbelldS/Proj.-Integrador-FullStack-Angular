@@ -1,8 +1,7 @@
 <section class="treinamento-page">
   <div class="hero">
     <div>
-      <span class="eyebrow">TREINAMENTOS</span>
-      <h1>Gerenciar Treinamentos</h1>
+            <h1>Gerenciar Treinamentos</h1>
       <p>Área para cadastrar, agendar e acompanhar os treinamentos de segurança dos funcionários.</p>
     </div>
   </div>
@@ -79,11 +78,44 @@
         <label>Código da NR</label>
         <select class="form-select">
           <option>Todos</option>
+          <option>NR-01</option>
+          <option>NR-02 (Revogada)</option>
+          <option>NR-03</option>
+          <option>NR-04</option>
+          <option>NR-05</option>
+		  <option>NR-06</option>
+          <option>NR-07</option>
+          <option>NR-08</option>
+          <option>NR-09</option>
           <option>NR-10</option>
+		  <option>NR-11</option>
           <option>NR-12</option>
+          <option>NR-13</option>
+          <option>NR-14</option>
+          <option>NR-15</option>
+		  <option>NR-16</option>
+          <option>NR-17</option>
           <option>NR-18</option>
+          <option>NR-19</option>
+          <option>NR-20</option>
+		  <option>NR-21</option>
+          <option>NR-22</option>
+          <option>NR-23</option>
+          <option>NR-24</option>
+          <option>NR-25</option>
+		  <option>NR-26</option>
+          <option>NR-27 (Revogada)</option>
+          <option>NR-28</option>
+          <option>NR-29</option>
+          <option>NR-30</option>
+		  <option>NR-31</option>
+          <option>NR-32</option>
           <option>NR-33</option>
+          <option>NR-34</option>
           <option>NR-35</option>
+		  <option>NR-36</option>
+          <option>NR-37</option>
+          <option>NR-38</option>
         </select>
       </div>
 
@@ -98,11 +130,11 @@
       </div>
 
       <div class="actions">
-        <button class="btn-secondary" type="button">
+        <button class="btn btn-soft" type="button">
           <i class="bi bi-search"></i>
           Filtrar
         </button>
-        <button class="btn-primary" type="button" routerLink="/treinamento/abrir-turma">Novo treinamento/Abrir Turma</button>
+        <button class="btn btn-brand" type="button" routerLink="/treinamento/abrir-turma">Novo treinamento/Abrir Turma</button>
       </div>
     </div>
   </div>
@@ -114,7 +146,7 @@
         <p>Lista dos treinamentos registrados no sistema.</p>
       </div>
 
-      <button class="btn-outline" type="button" routerLink="/treinamento/historico">
+      <button class="btn btn-outline-brand" type="button" routerLink="/treinamento/historico">
         <i class="bi bi-clock-history"></i>
         Histórico de alterações
       </button>
@@ -134,10 +166,10 @@
             <th>ID</th>
             <th>NR</th>
             <th>Treinamento</th>
-            <th>Funcion?rio</th>
-            <th>Aplica??o</th>
+            <th>Funcionário</th>
+            <th>Aplicação</th>
             <th>Vencimento</th>
-            <th>Situa??o</th>
+            <th>Situação</th>
             <th>Documento</th>
             <th>Editar</th>
           </tr>
@@ -151,10 +183,10 @@
               <td>{{ treinamento.funcionario }}</td>
               <td>{{ treinamento.aplicacao | date: 'dd/MM/yyyy' }}</td>
               <td>{{ treinamento.vencimento | date: 'dd/MM/yyyy' }}</td>
-              <td><span class="status" [class]="situacaoClass(treinamento.situacao)">{{ treinamento.situacao }}</span></td>
-              <td><button class="document-btn" type="button"><i class="bi bi-paperclip"></i> Visualizar</button></td>
+              <td><span class="status-badge" [class]="'status-badge ' + situacaoClass(treinamento.situacao)">{{ treinamento.situacao }}</span></td>
+              <td><button class="btn btn-sm btn-soft" type="button"><i class="bi bi-eye"></i> Visualizar</button></td>
               <td>
-                <button class="edit-btn" type="button" [disabled]="!podeEditarTreinamento" [title]="!podeEditarTreinamento ? 'Perfil sem permiss?o de edi??o' : ''" (click)="abrirEdicaoTreinamento(treinamento)">
+                <button class="btn btn-sm btn-outline-brand" type="button" [disabled]="!podeEditarTreinamento" [title]="!podeEditarTreinamento ? 'Perfil sem permissão de edição' : ''" (click)="abrirEdicaoTreinamento(treinamento)">
                   <i class="bi bi-pencil-fill"></i> Editar
                 </button>
               </td>
@@ -284,13 +316,13 @@
         </div>
 
         <footer class="modal-actions">
-          <button class="btn-secondary" type="button" [disabled]="!hasCheckedFuncionarios" (click)="addSelectedFuncionarios()">
+          <button class="btn btn-soft" type="button" [disabled]="!hasCheckedFuncionarios" (click)="addSelectedFuncionarios()">
             Adicionar selecionados
           </button>
-          <button class="btn-outline" type="button" [disabled]="!hasCheckedFuncionarios" (click)="removeSelectedFuncionarios()">
+          <button class="btn btn-outline-brand" type="button" [disabled]="!hasCheckedFuncionarios" (click)="removeSelectedFuncionarios()">
             Remover selecionados
           </button>
-          <button class="btn-primary" type="button" [disabled]="!hasSelectedFuncionarios" (click)="applyFuncionariosSelecionados()">
+          <button class="btn btn-brand" type="button" [disabled]="!hasSelectedFuncionarios" (click)="applyFuncionariosSelecionados()">
             Aplicar
           </button>
         </footer>
@@ -311,11 +343,11 @@
         <div class="modal-search-grid">
           <div class="field"><label>NR</label><input class="form-control" [(ngModel)]="formTreinamento.nr" /></div>
           <div class="field"><label>Treinamento</label><input class="form-control" [(ngModel)]="formTreinamento.treinamento" /></div>
-          <div class="field"><label>Funcion?rio</label><input class="form-control" [(ngModel)]="formTreinamento.funcionario" /></div>
-          <div class="field"><label>Aplica??o</label><input class="form-control" type="date" [(ngModel)]="formTreinamento.aplicacao" /></div>
+          <div class="field"><label>Funcionário</label><input class="form-control" [(ngModel)]="formTreinamento.funcionario" /></div>
+          <div class="field"><label>Aplicação</label><input class="form-control" type="date" [(ngModel)]="formTreinamento.aplicacao" /></div>
           <div class="field"><label>Vencimento</label><input class="form-control" type="date" [(ngModel)]="formTreinamento.vencimento" /></div>
           <div class="field">
-            <label>Situa??o</label>
+            <label>Situação</label>
             <select class="form-select" [(ngModel)]="formTreinamento.situacao">
               @for (situacao of situacoes; track situacao) {
                 <option [value]="situacao">{{ situacao }}</option>
@@ -325,8 +357,8 @@
         </div>
 
         <footer class="modal-actions">
-          <button class="btn-outline" type="button" (click)="fecharEdicaoTreinamento()">Cancelar</button>
-          <button class="btn-primary" type="button" (click)="salvarEdicaoTreinamento()">Salvar altera??es</button>
+          <button class="btn btn-outline-brand" type="button" (click)="fecharEdicaoTreinamento()">Cancelar</button>
+          <button class="btn btn-brand" type="button" (click)="salvarEdicaoTreinamento()">Salvar alterações</button>
         </footer>
       </section>
     </div>

@@ -1,32 +1,17 @@
+@use "../../../../styles/shared" as shared;
+
+@include shared.page-shell(".epi-view");
+
 // ======================================================
 // 2. ESTRUTURA
 // ======================================================
 
-:host {
-  display: block;
-  padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
-  background: var(--mar-bg);
-  color: var(--mar-ink);
-}
-
 .epi-filter-panel {
-	display: grid;
-	gap: 18px;
 	max-width: var(--mar-page-max-width);
 	margin: 0 auto;
+	display: grid;
+	gap: 18px;
 	min-width: 0;
-}
-
-.panel {
-	border: 1px solid rgba(0, 61, 108, 0.08);
-	border-radius: var(--mar-radius-md);
-	background: var(--mar-surface);
-	box-shadow: var(--mar-shadow-soft);
-	width: 100%;
-	max-width: 100%;
-	padding: var(--mar-panel-padding);
-	padding-inline: 10px;
-	box-sizing: border-box;
 }
 
 
@@ -36,7 +21,6 @@
 
 .filter-box,
 .list-card {
-	margin-top: var(--mar-panel-padding);
 	padding: 12px;
 
 	border: 1px solid rgba(0, 61, 108, 0.08);
@@ -106,32 +90,6 @@
 	font-weight: 700;
 }
 
-.form-control,
-.form-select {
-	min-height: 44px;
-
-	border: 1px solid rgba(0, 61, 108, 0.18);
-	border-radius: 10px;
-
-	color: var(--mar-text);
-
-	font-size: 0.92rem;
-
-	box-shadow: none;
-
-	transition:
-		border-color 0.2s ease,
-		box-shadow 0.2s ease;
-}
-
-.form-control:focus,
-.form-select:focus {
-	border-color: var(--mar-azul-claro);
-
-	box-shadow:
-		0 0 0 0.2rem rgba(25, 150, 208, 0.14);
-}
-
 .input-group {
 	overflow: hidden;
 	border-radius: 10px;
@@ -152,42 +110,6 @@
 // 6. BOTOES
 // ======================================================
 
-.btn {
-	display: inline-flex;
-
-	align-items: center;
-	justify-content: center;
-
-	gap: 7px;
-
-	min-height: 42px;
-
-	border-radius: 10px;
-
-	font-size: 0.88rem;
-	font-weight: 700;
-
-	transition:
-		background-color 0.2s ease,
-		border-color 0.2s ease,
-		color 0.2s ease,
-		transform 0.2s ease,
-		box-shadow 0.2s ease;
-}
-
-.btn i {
-	font-size: 0.95rem;
-}
-
-.btn-sm {
-	min-height: 34px;
-
-	padding: 6px 10px;
-
-	font-size: 0.78rem;
-}
-
-.btn-outline-brand,
 .btn-icon-filter {
 	border: 1px solid rgba(0, 61, 108, 0.28);
 
@@ -195,8 +117,6 @@
 	color: var(--mar-azul-escuro);
 }
 
-.btn-outline-brand:hover,
-.btn-outline-brand:focus,
 .btn-icon-filter:hover,
 .btn-icon-filter:focus {
 	border-color: var(--mar-azul-escuro);
@@ -248,13 +168,6 @@
 
 	box-shadow:
 		0 5px 12px rgba(220, 53, 69, 0.18);
-}
-
-.btn:disabled {
-	opacity: 0.55;
-	cursor: not-allowed;
-	transform: none;
-	box-shadow: none;
 }
 
 
@@ -535,9 +448,8 @@
 }
 
 @media (max-width: 820px) {
-	:host {
+	.epi-view {
 		padding: 22px 12px 42px;
-		max-width: 100%;
 	}
 
 	.desktop-table {
@@ -578,10 +490,22 @@
 	.table-actions .btn {
 		width: 100%;
 	}
+
+	.export-actions .btn {
+		width: auto;
+	}
 }
 
 @media (max-width: 680px) {
-	:host {
+	.epi-view {
 		padding: 20px 10px 36px;
+	}
+
+	.panel {
+		padding: 14px;
+	}
+
+	.header-area p:not(.eyebrow) {
+		font-size: 0.88rem;
 	}
 }

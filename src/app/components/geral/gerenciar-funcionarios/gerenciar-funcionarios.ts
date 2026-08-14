@@ -12,19 +12,17 @@ interface Funcionario {
   cpf: string;
   setor: string;
   cargo: string;
-  perfil: 'Funcionário de campo' | 'Técnico de Segurança do Trabalho';
+  perfil: 'Funcionário' | 'Técnico de Segurança do Trabalho';
   status: FuncionarioStatus;
   nrs: string[];
 }
 
 interface FuncionarioForm {
-  matricula: string;
   nome: string;
   cpf: string;
   setor: string;
   cargo: string;
   perfil: Funcionario['perfil'];
-  status: FuncionarioStatus;
   nrs: string[];
 }
 
@@ -36,18 +34,61 @@ interface FuncionarioForm {
   styleUrl: './gerenciar-funcionarios.scss',
 })
 export class GerenciarFuncionarios {
-  readonly setores = ['Operacões', 'Manutenção', 'Produção', 'Qualidade', 'Logística', 'Administrativo'];
+  readonly setores = ['Operações', 'Manutenção', 'Produção', 'Qualidade', 'Logística', 'Administrativo'];
   readonly cargos = ['Operador', 'Soldador', 'Eletricista', 'Supervisor', 'Auxiliar', 'Técnico de Segurança'];
-  readonly perfis: Funcionario['perfil'][] = ['Funcionário de campo', 'Técnico de Segurança do Trabalho'];
+  readonly perfis: Funcionario['perfil'][] = ['Funcionário', 'Técnico de Segurança do Trabalho'];
   readonly statusOptions: FuncionarioStatus[] = ['Ativo', 'Afastado', 'Inativo'];
-  readonly nrOptions = ['NR 06', 'NR 10', 'NR 12', 'NR 18', 'NR 33', 'NR 35'];
+  readonly nrOptions = [
+    'NR 01 — Disposições gerais',
+    'NR 02 — Inspeção prévia (Revogada)',
+    'NR 03 — Comissão Interna de Prevenção de Acidentes (CIPA)',
+    'NR 04 — Serviços Especializados em Engenharia de Segurança e em Medicina do Trabalho (SESMT)',
+    'NR 05 — Comissão Interna de Prevenção de Acidentes',
+    'NR 06 — Equipamentos de Proteção Individual (EPI)',
+    'NR 07 — Programa de Controle Médico de Saúde Ocupacional (PCMSO)',
+    'NR 08 — Edificações',
+    'NR 09 — Programa de Prevenção de Riscos Ambientais (PPRA)',
+    'NR 10 — Segurança em Instalações e Serviços em Eletricidade',
+    'NR 11 — Transporte, Movimentação, Armazenagem e Manuseio de Materiais',
+    'NR 12 — Segurança no Trabalho em Máquinas e Equipamentos',
+    'NR 13 — Caldeiras, Vasos de Pressão e Tubulações',
+    'NR 14 — Fornos',
+    'NR 15 — Atividades e Operações Insalubres',
+    'NR 16 — Atividades e Operações Perigosas',
+    'NR 17 — Ergonomia',
+    'NR 18 — Condições e Meio Ambiente de Trabalho na Indústria da Construção',
+    'NR 19 — Explosivos',
+    'NR 20 — Segurança e Saúde no Trabalho com Inflamáveis e Combustíveis',
+    'NR 21 — Trabalho a Céu Aberto',
+    'NR 22 — Mineração',
+    'NR 23 — Proteção Contra Incêndios',
+    'NR 24 — Condições Sanitárias e de Conforto nos Locais de Trabalho',
+    'NR 25 — Resíduos Industriais',
+    'NR 26 — Sinalização de Segurança',
+    'NR 27 — Registro Profissional do Técnico de Segurança (Revogada)',
+    'NR 28 — Fiscalização e Penalidades',
+    'NR 29 — Segurança e Saúde no Trabalho Portuário',
+    'NR 30 — Segurança e Saúde no Trabalho Aquaviário',
+    'NR 31 — Segurança e Saúde no Trabalho na Agricultura, Pecuária, Silvicultura, Exploração Florestal e Aqüicultura',
+    'NR 32 — Segurança e Saúde no Trabalho em Serviços de Saúde',
+    'NR 33 — Segurança e Saúde no Trabalho em Espaços Confinados',
+    'NR 34 — Condições e Meio Ambiente de Trabalho na Indústria de Construção Naval',
+    'NR 35 — Trabalho em Altura',
+    'NR 36 — Segurança e Saúde no Trabalho em Empresas de Abate e Processamento de Carnes e Derivados',
+    'NR 37 — Plataformas de Petróleo',
+    'NR 38 — Limpeza Urbana e Manejo de Resíduos Sólidos',
+  ];
 
   filtroBusca = '';
   filtroSetor = '';
   filtroStatus = '';
+  nrBusca = '';
 
   modalAberto = false;
+  modalStatusAberto = false;
   funcionarioEditandoId: number | null = null;
+  funcionarioStatusSelecionado: Funcionario | null = null;
+  statusTemporario: FuncionarioStatus | null = null;
 
   funcionarios: Funcionario[] = [
     {
@@ -57,9 +98,12 @@ export class GerenciarFuncionarios {
       cpf: '123.456.789-10',
       setor: 'Operações',
       cargo: 'Operador',
-      perfil: 'Funcionário de campo',
+      perfil: 'Funcionário',
       status: 'Ativo',
-      nrs: ['NR 06', 'NR 12'],
+      nrs: [
+        'NR 06 — Equipamentos de Proteção Individual (EPI)',
+        'NR 12 — Segurança no Trabalho em Máquinas e Equipamentos',
+      ],
     },
     {
       id: 2,
@@ -70,7 +114,10 @@ export class GerenciarFuncionarios {
       cargo: 'Supervisor',
       perfil: 'Técnico de Segurança do Trabalho',
       status: 'Ativo',
-      nrs: ['NR 06', 'NR 35'],
+      nrs: [
+        'NR 06 — Equipamentos de Proteção Individual (EPI)',
+        'NR 35 — Trabalho em Altura',
+      ],
     },
     {
       id: 3,
@@ -79,9 +126,13 @@ export class GerenciarFuncionarios {
       cpf: '456.789.123-44',
       setor: 'Manutenção',
       cargo: 'Eletricista',
-      perfil: 'Funcionário de campo',
+      perfil: 'Funcionário',
       status: 'Afastado',
-      nrs: ['NR 06', 'NR 10', 'NR 35'],
+      nrs: [
+        'NR 06 — Equipamentos de Proteção Individual (EPI)',
+        'NR 10 — Segurança em Instalações e Serviços em Eletricidade',
+        'NR 35 — Trabalho em Altura',
+      ],
     },
     {
       id: 4,
@@ -92,7 +143,10 @@ export class GerenciarFuncionarios {
       cargo: 'Técnico de Segurança',
       perfil: 'Técnico de Segurança do Trabalho',
       status: 'Ativo',
-      nrs: ['NR 06', 'NR 33'],
+      nrs: [
+        'NR 06 — Equipamentos de Proteção Individual (EPI)',
+        'NR 33 — Segurança e Saúde no Trabalho em Espaços Confinados',
+      ],
     },
   ];
 
@@ -138,6 +192,17 @@ export class GerenciarFuncionarios {
     return this.funcionarios.filter((funcionario) => funcionario.nrs.length > 0).length;
   }
 
+  get nrOptionsFiltradas(): string[] {
+    const busca = this.nrBusca.trim().toLowerCase();
+
+    return this.nrOptions.filter((nr) => {
+      const naoSelecionada = !this.form.nrs.includes(nr);
+      const correspondeBusca = !busca || nr.toLowerCase().includes(busca);
+
+      return naoSelecionada && correspondeBusca;
+    });
+  }
+
   abrirNovoFuncionario(): void {
     if (!this.podeGerenciarFuncionarios) {
       return;
@@ -145,6 +210,7 @@ export class GerenciarFuncionarios {
 
     this.funcionarioEditandoId = null;
     this.form = this.criarFormVazio();
+    this.nrBusca = '';
     this.modalAberto = true;
   }
 
@@ -155,24 +221,58 @@ export class GerenciarFuncionarios {
 
     this.funcionarioEditandoId = funcionario.id;
     this.form = {
-      matricula: funcionario.matricula,
       nome: funcionario.nome,
       cpf: funcionario.cpf,
       setor: funcionario.setor,
       cargo: funcionario.cargo,
       perfil: funcionario.perfil,
-      status: funcionario.status,
       nrs: [...funcionario.nrs],
     };
+    this.nrBusca = '';
     this.modalAberto = true;
+  }
+
+  abrirModalStatus(funcionario: Funcionario): void {
+    if (!this.podeGerenciarFuncionarios) {
+      return;
+    }
+
+    this.funcionarioStatusSelecionado = funcionario;
+    this.statusTemporario = funcionario.status;
+    this.modalStatusAberto = true;
+  }
+
+  selecionarStatusTemporario(status: FuncionarioStatus): void {
+    this.statusTemporario = status;
+  }
+
+  fecharModalStatus(): void {
+    this.modalStatusAberto = false;
+    this.funcionarioStatusSelecionado = null;
+    this.statusTemporario = null;
+  }
+
+  salvarAlteracaoStatus(): void {
+    if (!this.funcionarioStatusSelecionado || !this.statusTemporario) {
+      return;
+    }
+
+    this.funcionarios = this.funcionarios.map((funcionario) =>
+      funcionario.id === this.funcionarioStatusSelecionado?.id
+        ? { ...funcionario, status: this.statusTemporario as FuncionarioStatus }
+        : funcionario
+    );
+
+    this.fecharModalStatus();
   }
 
   fecharModal(): void {
     this.modalAberto = false;
+    this.nrBusca = '';
   }
 
   salvarFuncionario(): void {
-    if (!this.form.nome.trim() || !this.form.matricula.trim() || !this.form.cpf.trim()) {
+    if (!this.form.nome.trim() || !this.form.cpf.trim()) {
       return;
     }
 
@@ -188,6 +288,8 @@ export class GerenciarFuncionarios {
         ...this.funcionarios,
         {
           id: proximoId,
+          matricula: this.gerarMatricula(proximoId),
+          status: 'Ativo',
           ...this.form,
           nrs: [...this.form.nrs],
         },
@@ -197,33 +299,23 @@ export class GerenciarFuncionarios {
     this.fecharModal();
   }
 
-  removerFuncionario(id: number): void {
-    if (!this.podeGerenciarFuncionarios) {
-      return;
-    }
-
-    this.funcionarios = this.funcionarios.filter((funcionario) => funcionario.id !== id);
-  }
-
   limparFiltros(): void {
     this.filtroBusca = '';
     this.filtroSetor = '';
     this.filtroStatus = '';
   }
 
-  alternarNr(nr: string, checked: boolean): void {
-    if (checked && !this.form.nrs.includes(nr)) {
-      this.form.nrs = [...this.form.nrs, nr];
+  selecionarNr(nr: string): void {
+    if (this.form.nrs.includes(nr)) {
       return;
     }
 
-    if (!checked) {
-      this.form.nrs = this.form.nrs.filter((item) => item !== nr);
-    }
+    this.form.nrs = [...this.form.nrs, nr];
+    this.nrBusca = '';
   }
 
-  possuiNr(nr: string): boolean {
-    return this.form.nrs.includes(nr);
+  removerNr(nr: string): void {
+    this.form.nrs = this.form.nrs.filter((item) => item !== nr);
   }
 
   statusClass(status: FuncionarioStatus): string {
@@ -240,14 +332,16 @@ export class GerenciarFuncionarios {
 
   private criarFormVazio(): FuncionarioForm {
     return {
-      matricula: '',
       nome: '',
       cpf: '',
-      setor: 'Operacões',
+      setor: 'Operações',
       cargo: 'Operador',
-      perfil: 'Funcionário de campo',
-      status: 'Ativo',
+      perfil: 'Funcionário',
       nrs: [],
     };
+  }
+
+  private gerarMatricula(id: number): string {
+    return String(1000 + id);
   }
 }

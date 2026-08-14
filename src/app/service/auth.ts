@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { timeout } from 'rxjs';
 
-export type UserRole = 'Técnico de Segurança do Trabalho' | 'Funcionário de campo';
+export type UserRole = 'Técnico de Segurança do Trabalho' | 'Funcionário';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   apenasVisualizacao(): boolean {
-    return this.obterPerfil() === 'Funcionário de campo';
+    return this.obterPerfil() === 'Funcionário';
   }
 
   isAuthenticated(): boolean {

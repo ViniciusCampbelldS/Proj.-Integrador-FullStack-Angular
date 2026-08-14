@@ -16,10 +16,10 @@ interface TurmaTreinamento {
   selector: 'app-abre-treinamento',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './abre-turma-treinamento.html',
-  styleUrl: './abre-turma-treinamento.scss'
+  templateUrl: './presenca-treinamento.html',
+  styleUrl: './presenca-treinamento.scss'
 })
-export class AbreTurmaTreinamento {
+export class PresençaTreinamento {
   readonly funcionarios = ['Pedro Henrique', 'João da Silva', 'Carlos Oliveira', 'Fernanda Lima', 'Ana Costa'];
 
   treinamento = '';

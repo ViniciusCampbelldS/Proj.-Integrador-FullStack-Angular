@@ -74,7 +74,7 @@ export class App {
   }
 
   get isOperario(): boolean {
-    return this.authService.obterPerfil() === 'Funcionário de campo';
+    return this.authService.obterPerfil() === 'Funcionário';
   }
 
   get isFuncionarioArea(): boolean {
