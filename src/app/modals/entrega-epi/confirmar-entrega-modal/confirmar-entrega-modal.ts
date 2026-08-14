@@ -14,7 +14,6 @@ export class ConfirmarEntregaModal {
 	deliveryItems = input.required<DeliveryItem[]>();
 	employeeName = input<string>('João Pedro da Rocha');
 	deliveryDate = input<string>('2026-08-06');
-	signatureType = input<string>('Física');
 
 	closed = output<void>();
 	confirm = output<void>();

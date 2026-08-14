@@ -2,10 +2,6 @@
 
 @include shared.portal-list-foundation;
 
-* {
-  box-sizing: border-box;
-}
-
 .portal-dashboard {
   display: flex;
   flex-direction: column;
@@ -306,40 +302,6 @@
   display: flex;
   justify-content: flex-end;
   gap: 8px;
-}
-
-.btn-brand,
-.btn-outline-brand {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 40px;
-  border-radius: 10px;
-  font-weight: 700;
-}
-
-.btn-brand {
-  border: 1px solid var(--mar-laranja-escuro);
-  background: var(--mar-laranja-escuro);
-  color: var(--mar-surface);
-}
-
-.btn-brand:hover,
-.btn-brand:focus {
-  border-color: var(--mar-laranja-claro);
-  background: var(--mar-laranja-claro);
-}
-
-.btn-outline-brand {
-  border: 1px solid var(--mar-azul-claro);
-  background: var(--mar-surface);
-  color: var(--mar-azul-escuro);
-}
-
-.btn-outline-brand:hover,
-.btn-outline-brand:focus {
-  background: rgba(25, 150, 208, 0.1);
 }
 
 @media (max-width: 960px) {

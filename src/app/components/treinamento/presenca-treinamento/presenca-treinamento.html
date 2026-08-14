@@ -1,0 +1,139 @@
+<section class="treinamento-view">
+  <div class="header-area">
+    <div>
+      <h1>Presença em Treinamentos</h1>
+      <p>Agende turmas, vincule participantes e mantenha as listas de presença organizadas.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Abertura de turma</h2>
+        <p>Agende um novo treinamento e cadastre os funcionários participantes.</p>
+      </div>
+    </div>
+
+    @if (mensagem) {
+      <div class="form-message" role="status">
+        <i class="bi bi-info-circle"></i>
+        {{ mensagem }}
+      </div>
+    }
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="turma-treinamento">Treinamento *</label>
+        <select id="turma-treinamento" class="form-select" [(ngModel)]="treinamento">
+          <option value="">Selecione o treinamento</option>
+          <option>NR-10 - Segurança em Eletricidade</option>
+          <option>NR-35 - Trabalho em Altura</option>
+          <option>NR-12 - Segurança em Máquinas</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="turma-data">Data *</label>
+        <input id="turma-data" type="date" class="form-control" [(ngModel)]="data" />
+      </div>
+
+      <div class="field">
+        <label for="turma-horario">Horário *</label>
+        <input id="turma-horario" type="time" class="form-control" [(ngModel)]="horario" />
+      </div>
+
+      <div class="field">
+        <label for="turma-funcionario">Funcionários *</label>
+        <div class="inline-field">
+          <select id="turma-funcionario" class="form-select" [(ngModel)]="funcionarioSelecionado">
+            <option value="">Selecionar funcionário</option>
+            @for (funcionario of funcionarios; track funcionario) {
+              <option [value]="funcionario">{{ funcionario }}</option>
+            }
+          </select>
+
+          <button class="btn btn-soft icon-only" type="button" aria-label="Adicionar funcionário" (click)="adicionarParticipante()">
+            <i class="bi bi-plus-lg"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="participants-panel">
+      <strong>Participantes</strong>
+
+      <div class="participant-list">
+        @for (participante of participantes; track participante) {
+          <button class="participant-chip" type="button" (click)="removerParticipante(participante)">
+            {{ participante }}
+            <i class="bi bi-x"></i>
+          </button>
+        } @empty {
+          <span>Nenhum funcionário selecionado.</span>
+        }
+      </div>
+    </div>
+
+    <div class="upload-area">
+      <div class="upload-icon">
+        <i class="bi bi-file-earmark-arrow-up-fill"></i>
+      </div>
+
+      <div>
+        <strong>Lista de presença</strong>
+        <p>{{ documento || 'Faça upload da lista de presença assinada.' }}</p>
+      </div>
+
+      <label class="upload-btn">
+        Selecionar arquivo
+        <input type="file" hidden (change)="onDocumentoSelecionado($event)" />
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-soft" type="button" (click)="limpar()">Limpar</button>
+      <button class="btn btn-brand" type="button" [disabled]="!podeCriar" (click)="criarTurma()">
+        <i class="bi bi-check-lg"></i>
+        Criar treinamento
+      </button>
+    </div>
+  </div>
+
+  <div class="panel table-panel">
+    <div class="panel-header">
+      <div>
+        <h2>Turmas agendadas</h2>
+        <p>Registro local das turmas criadas nesta tela.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Treinamento</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Participantes</th>
+            <th>Documento</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (turma of turmas; track turma.id) {
+            <tr>
+              <td>{{ turma.id }}</td>
+              <td>{{ turma.treinamento }}</td>
+              <td>{{ turma.data | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ turma.horario }}</td>
+              <td>{{ turma.participantes.join(', ') }}</td>
+              <td>{{ turma.documento }}</td>
+              <td><span class="status-badge" [class.is-pending]="turma.status === 'Pendente'">{{ turma.status }}</span></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

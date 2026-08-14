@@ -1,5 +1,14 @@
-<div class="tool-grid">
-	<section class="panel delivery-panel">
+<section class="epi-view">
+	<div class="page-shell">
+		<div class="header-area">
+			<div>
+				<h1>Entrega de EPI</h1>
+				<p>Registre entregas, vincule funcionários e mantenha os comprovantes organizados.</p>
+			</div>
+		</div>
+
+		<div class="tool-grid">
+			<section class="panel delivery-panel">
 		<div class="panel-title">
 			<div>
 				<h3>Entrega de EPIs</h3>
@@ -12,21 +21,37 @@
 					<p class="section-caption">Selecione o Funcionário</p>
 				</div>
 
-				<div class="col-md-5">
-					<label class="form-label" for="employee">Nome do funcionário*</label>
-					<input
-						class="form-control"
-						id="employee"
-						list="employee-options"
-						[(ngModel)]="selectedEmployee"
-						[ngModelOptions]="{ standalone: true }"
-					/>
-					<datalist id="employee-options">
-						<option *ngFor="let employee of employeeOptions" [value]="employee"></option>
-					</datalist>
+				<div class="col-md-8">
+					<label class="form-label" for="employee">Nome ou CPF</label>
+					<div class="employee-select">
+						<input
+							class="form-control"
+							id="employee"
+							[(ngModel)]="selectedEmployee"
+							[ngModelOptions]="{ standalone: true }"
+							(input)="onEmployeeInput()"
+							(focus)="onEmployeeFocus()"
+							(blur)="hideEmployeeSuggestions()"
+							placeholder="Digite o nome ou CPF do funcionário"
+							autocomplete="off"
+						/>
+
+						@if (showEmployeeSuggestions && filteredEmployeeOptions.length > 0) {
+							<div class="employee-suggestions">
+								@for (employee of filteredEmployeeOptions; track employee.cpf) {
+									<button
+										class="employee-suggestion"
+										type="button"
+										(mousedown)="selectEmployee(employee)">
+										{{ employee.nome }} — {{ employee.cpf }}
+									</button>
+								}
+							</div>
+						}
+					</div>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<label class="form-label" for="delivery-date">Data da entrega</label>
 					<input
 						class="form-control"
@@ -34,17 +59,6 @@
 						type="date"
 						[(ngModel)]="deliveryDate"
 						[ngModelOptions]="{ standalone: true }"
-					/>
-				</div>
-
-				<div class="col-md-4">
-					<label class="form-label" for="employee-cpf">CPF do funcionário*</label>
-					<input
-						class="form-control"
-						id="employee-cpf"
-						[(ngModel)]="employeeCpf"
-						[ngModelOptions]="{ standalone: true }"
-						placeholder="000.000.000-00"
 					/>
 				</div>
 			</form>
@@ -55,24 +69,34 @@
 
 			<div *ngIf="deliveryItems[0] as item">
 				<div class="row g-3 align-items-end">
-					<div class="col-lg-6">
-						<label class="form-label" for="epi-0">Nome do EPI*</label>
-						<input
-							class="form-control"
-							id="epi-0"
-							list="epi-options"
-							[(ngModel)]="item.epi"
-							[ngModelOptions]="{ standalone: true }"
-							(change)="syncDeliveryItem(0)"
-						/>
-						<datalist id="epi-options">
-							<option *ngFor="let epi of availableEpis" [value]="epi.name"></option>
-						</datalist>
-					</div>
+					<div class="col-lg-9">
+						<label class="form-label" for="epi-0">CA ou Nome do EPI</label>
+						<div class="employee-select">
+							<input
+								class="form-control"
+								id="epi-0"
+								[(ngModel)]="epiSearch"
+								[ngModelOptions]="{ standalone: true }"
+								(input)="onEpiInput()"
+								(focus)="onEpiFocus()"
+								(blur)="hideEpiSuggestions()"
+								placeholder="Digite o CA ou nome do EPI"
+								autocomplete="off"
+							/>
 
-					<div class="col-sm-6 col-lg-3">
-						<label class="form-label" for="ca-0">CA*</label>
-						<input class="form-control" id="ca-0" [(ngModel)]="item.ca" [ngModelOptions]="{ standalone: true }" />
+							@if (showEpiSuggestions && filteredEpiOptions.length > 0) {
+								<div class="employee-suggestions">
+									@for (epi of filteredEpiOptions; track epi.ca) {
+										<button
+											class="employee-suggestion"
+											type="button"
+											(mousedown)="selectEpi(epi)">
+											{{ epi.name }} — {{ epi.ca }}
+										</button>
+									}
+								</div>
+							}
+						</div>
 					</div>
 
 					<div class="col-sm-6 col-lg-3">
@@ -101,25 +125,34 @@
 				</div>
 
 				<div class="row g-3 align-items-end">
-					<div class="col-lg-6">
-						<label class="form-label" for="replaced-epi-name">Nome do EPI antigo*</label>
-						<input
-							class="form-control"
-							id="replaced-epi-name"
-							list="epi-options"
-							[(ngModel)]="replacedEpiName"
-							[ngModelOptions]="{ standalone: true }"
-						/>
-					</div>
+					<div class="col-lg-9">
+						<label class="form-label" for="replaced-epi-name">CA ou Nome do EPI antigo</label>
+						<div class="employee-select">
+							<input
+								class="form-control"
+								id="replaced-epi-name"
+								[(ngModel)]="replacedEpiSearch"
+								[ngModelOptions]="{ standalone: true }"
+								(input)="onReplacedEpiInput()"
+								(focus)="onReplacedEpiFocus()"
+								(blur)="hideReplacedEpiSuggestions()"
+								placeholder="Digite o CA ou nome do EPI antigo"
+								autocomplete="off"
+							/>
 
-					<div class="col-sm-6 col-lg-3">
-						<label class="form-label" for="replaced-epi-ca">CA*</label>
-						<input
-							class="form-control"
-							id="replaced-epi-ca"
-							[(ngModel)]="replacedEpiCa"
-							[ngModelOptions]="{ standalone: true }"
-						/>
+							@if (showReplacedEpiSuggestions && filteredReplacedEpiOptions.length > 0) {
+								<div class="employee-suggestions">
+									@for (epi of filteredReplacedEpiOptions; track epi.ca) {
+										<button
+											class="employee-suggestion"
+											type="button"
+											(mousedown)="selectReplacedEpi(epi)">
+											{{ epi.name }} — {{ epi.ca }}
+										</button>
+									}
+								</div>
+							}
+						</div>
 					</div>
 
 					<div class="col-sm-6 col-lg-3">
@@ -137,8 +170,7 @@
 
 			<div class="upload-zone">
 				<div>
-					<h4>Uploads</h4>
-					<p>Envie uma imagem da ficha assinada ou assine digitalmente.</p>
+					<h4>Upload</h4>
 				</div>
 
 				<div class="upload-actions">
@@ -147,11 +179,6 @@
 						Carregar imagem da ficha assinada
 						<input type="file" accept="image/*" hidden (change)="onFichaUpload($event)" />
 					</label>
-
-					<button class="btn btn-soft" type="button" (click)="selectDigitalSignature()">
-						<i class="bi bi-pen"></i>
-						Assinar digitalmente
-					</button>
 				</div>
 			</div>
 
@@ -170,7 +197,7 @@
 			<div class="delivery-list">
 				<button class="btn btn-outline-brand" type="button" (click)="addDeliveryItem()">
 					<i class="bi bi-plus-lg"></i>
-					Adicionar Entrega de EPI ao funcionário
+					Adicionar Entrega
 				</button>
 			</div>
 
@@ -178,18 +205,12 @@
 				[deliveryItems]="deliveryItems"
 				[employeeName]="selectedEmployee"
 				[deliveryDate]="deliveryDate"
-				[signatureType]="signatureType"
 				[showRemoveButton]="true"
 				(removeItem)="removeDeliveryItem($event)">
 			</app-delivery-items-review>
-
-			<p class="form-note">
-				* Apenas um entre os campos nome e cpf precisam ser preenchidos para identificar o funcionário.
-				Apenas um entre Nome do EPI e CA precisam ser preenchidos para os Equipamentos de Proteção.
-			</p>
 		</div>
 
-		<div class="action-row">
+		<div class="action-row mt-3">
 			<button class="btn btn-brand register-delivery-button" type="button" (click)="registerDelivery()">
 				<i class="bi bi-check2-circle"></i>
 				Registrar entrega
@@ -199,15 +220,16 @@
 		<div class="alert alert-success mt-3 mb-0" *ngIf="deliverySaved" role="alert">
 			Entrega registrada de {{ deliveryItems.length }} EPI(s).
 		</div>
-	</section>
-</div>
+			</section>
+		</div>
+	</div>
+</section>
 
 <app-confirmar-entrega-modal
 	*ngIf="showConfirmarEntregaModal"
 	[deliveryItems]="deliveryItems"
 	[employeeName]="selectedEmployee"
 	[deliveryDate]="deliveryDate"
-	[signatureType]="signatureType"
 	(closed)="showConfirmarEntregaModal = false"
 	(confirm)="onConfirmDelivery()">
 </app-confirmar-entrega-modal>

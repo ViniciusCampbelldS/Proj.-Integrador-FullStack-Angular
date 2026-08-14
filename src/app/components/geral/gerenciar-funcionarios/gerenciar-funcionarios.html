@@ -2,7 +2,6 @@
   <div class="page-shell">
     <div class="header-area">
       <div>
-        <p class="eyebrow">FUNCIONÁRIOS</p>
         <h1>Gerenciar Funcionários</h1>
         <p>Cadastro, consulta e atualização dos funcionários da empresa.</p>
       </div>
@@ -64,7 +63,7 @@
               id="busca-funcionario"
               class="form-control"
               type="text"
-              placeholder="Nome, matrícula, CPF ou cargo"
+              placeholder="Nome ou CPF"
               [(ngModel)]="filtroBusca"
             />
             <span class="input-group-text"><i class="bi bi-search"></i></span>
@@ -149,9 +148,9 @@
                       Editar
                     </button>
 
-                    <button class="btn btn-sm btn-danger-brand" type="button" [disabled]="!podeGerenciarFuncionarios" [title]="!podeGerenciarFuncionarios ? 'Perfil Operário possui apenas visualização' : ''" (click)="removerFuncionario(funcionario.id)">
-                      <i class="bi bi-trash3-fill"></i>
-                      Remover
+                    <button class="btn btn-sm btn-soft action-status-button" type="button" [disabled]="!podeGerenciarFuncionarios" [title]="!podeGerenciarFuncionarios ? 'Perfil Operário possui apenas visualização' : ''" (click)="abrirModalStatus(funcionario)">
+                      <i class="bi bi-sliders"></i>
+                      Alterar situação
                     </button>
                   </div>
                 </td>
@@ -177,7 +176,6 @@
   <section class="funcionario-modal" role="dialog" aria-modal="true" aria-labelledby="funcionario-modal-title">
     <div class="modal-header">
       <div>
-        <p class="eyebrow">CADASTRO</p>
         <h2 id="funcionario-modal-title">
           {{ funcionarioEditandoId ? 'Editar funcionário' : 'Novo funcionário' }}
         </h2>
@@ -190,18 +188,13 @@
 
     <div class="modal-body">
       <div class="row g-3">
-        <div class="col-md-4">
-          <label class="form-label" for="matricula">Matrícula *</label>
-          <input id="matricula" class="form-control" type="text" [(ngModel)]="form.matricula" />
-        </div>
-
         <div class="col-md-8">
-          <label class="form-label" for="nome">Nome *</label>
+          <label class="form-label" for="nome">Nome*</label>
           <input id="nome" class="form-control" type="text" [(ngModel)]="form.nome" />
         </div>
 
         <div class="col-md-4">
-          <label class="form-label" for="cpf">CPF *</label>
+          <label class="form-label" for="cpf">CPF*</label>
           <input id="cpf" class="form-control" type="text" [(ngModel)]="form.cpf" />
         </div>
 
@@ -223,20 +216,11 @@
           </select>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label class="form-label" for="perfil">Perfil de acesso</label>
           <select id="perfil" class="form-select" [(ngModel)]="form.perfil">
             @for (perfil of perfis; track perfil) {
               <option [value]="perfil">{{ perfil }}</option>
-            }
-          </select>
-        </div>
-
-        <div class="col-md-6">
-          <label class="form-label" for="status">Status</label>
-          <select id="status" class="form-select" [(ngModel)]="form.status">
-            @for (status of statusOptions; track status) {
-              <option [value]="status">{{ status }}</option>
             }
           </select>
         </div>
@@ -245,16 +229,35 @@
       <div class="nr-panel">
         <strong>NRs necessárias para a função</strong>
 
-        <div class="nr-grid">
-          @for (nr of nrOptions; track nr) {
-            <label class="nr-option">
-              <input
-                type="checkbox"
-                [checked]="possuiNr(nr)"
-                (change)="alternarNr(nr, $any($event.target).checked)"
-              />
+        <div class="nr-search">
+          <input
+            id="nr-busca"
+            class="form-control"
+            type="text"
+            placeholder="Digite para buscar uma NR"
+            [(ngModel)]="nrBusca"
+          />
+
+          @if (nrOptionsFiltradas.length > 0) {
+            <div class="nr-suggestions">
+              @for (nr of nrOptionsFiltradas; track nr) {
+                <button class="nr-suggestion" type="button" (click)="selecionarNr(nr)">
+                  {{ nr }}
+                </button>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="nr-list selected">
+          @for (nr of form.nrs; track nr) {
+            <button class="nr-chip" type="button" (click)="removerNr(nr)" [attr.aria-label]="'Remover ' + nr">
               <span>{{ nr }}</span>
-            </label>
+              <i class="bi bi-x-lg"></i>
+            </button>
+          }
+          @empty {
+            <small>Nenhuma NR selecionada.</small>
           }
         </div>
       </div>
@@ -268,6 +271,52 @@
       <button class="btn btn-brand" type="button" (click)="salvarFuncionario()">
         <i class="bi bi-check-lg"></i>
         Salvar funcionário
+      </button>
+    </div>
+  </section>
+}
+
+@if (modalStatusAberto && funcionarioStatusSelecionado) {
+  <div class="modal-backdrop" (click)="fecharModalStatus()"></div>
+
+  <section class="status-modal" role="dialog" aria-modal="true" aria-labelledby="status-modal-title">
+    <div class="modal-header">
+      <div>
+        <h2 id="status-modal-title">Alterar situação do funcionário</h2>
+      </div>
+
+      <button class="icon-button" type="button" (click)="fecharModalStatus()" aria-label="Fechar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="status-person-card">
+        <strong>{{ funcionarioStatusSelecionado.nome }}</strong>
+        <span>{{ funcionarioStatusSelecionado.cpf }}</span>
+      </div>
+
+      <div class="status-option-list">
+        @for (status of statusOptions; track status) {
+          <button
+            class="status-option-button"
+            type="button"
+            [class.is-selected]="statusTemporario === status"
+            (click)="selecionarStatusTemporario(status)">
+            {{ status }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-soft" type="button" (click)="fecharModalStatus()">
+        Cancelar
+      </button>
+
+      <button class="btn btn-brand" type="button" (click)="salvarAlteracaoStatus()">
+        <i class="bi bi-check-lg"></i>
+        Salvar alteração
       </button>
     </div>
   </section>

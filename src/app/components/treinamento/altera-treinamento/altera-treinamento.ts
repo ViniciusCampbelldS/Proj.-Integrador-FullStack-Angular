@@ -251,7 +251,7 @@ export class AlteraTreinamento {
       return 'warning';
     }
 
-    return 'success';
+    return 'good';
   }
 
   private criarTreinamentoVazio(): TreinamentoRegistro {

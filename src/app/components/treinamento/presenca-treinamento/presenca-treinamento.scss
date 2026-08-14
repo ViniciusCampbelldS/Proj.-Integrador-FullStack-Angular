@@ -1,0 +1,250 @@
+@use "../../../../styles/shared" as shared;
+
+@include shared.form-message;
+@include shared.page-shell(".treinamento-view");
+
+:host {
+	color: var(--mar-ink);
+}
+
+.header-area h1 {
+	font-size: clamp(1.9rem, 3vw, 2.5rem);
+}
+
+.header-area p {
+	max-width: 760px;
+	color: var(--mar-muted);
+	font-size: 1rem;
+	line-height: 1.6;
+}
+
+.panel {
+	max-width: var(--mar-page-max-width);
+	margin: 0 auto;
+}
+
+.panel-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: var(--mar-panel-padding);
+}
+
+.panel-header h2 {
+	margin: 0 0 5px;
+	color: var(--mar-azul-escuro);
+	font-size: 19px;
+	font-weight: 800;
+}
+
+.panel-header p {
+	margin: 0;
+	color: #71808d;
+	font-size: 14px;
+}
+
+.form-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 18px;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+}
+
+.field label {
+	font-size: 13px;
+	font-weight: 800;
+	color: var(--mar-azul-escuro);
+}
+
+.inline-field {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 42px;
+	gap: 8px;
+}
+
+.icon-only {
+	padding: 0;
+}
+
+.participants-panel {
+	display: grid;
+	gap: 10px;
+	margin-top: var(--mar-panel-padding);
+	padding: 14px;
+	border: 1px solid var(--mar-line-soft);
+	border-radius: 10px;
+	background: var(--mar-bg);
+}
+
+.participants-panel strong {
+	color: var(--mar-azul-escuro);
+	font-size: 0.9rem;
+}
+
+.participant-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	color: var(--mar-muted-2);
+	font-size: 0.86rem;
+}
+
+.participant-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	min-height: 30px;
+	padding: 5px 9px;
+	border: 1px solid rgba(4, 103, 158, 0.18);
+	border-radius: 999px;
+	background: #e8f3f9;
+	color: var(--mar-azul-escuro);
+	font-size: 0.78rem;
+	font-weight: 800;
+}
+
+.upload-area {
+	margin-top: var(--mar-panel-padding);
+	padding: var(--mar-panel-padding);
+	border: 2px dashed rgba(4, 103, 158, 0.24);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	background: #f8fbfd;
+}
+
+.upload-icon {
+	display: grid;
+	width: 46px;
+	height: 46px;
+	flex: 0 0 46px;
+	place-items: center;
+	border-radius: 12px;
+	background: rgba(4, 103, 158, 0.1);
+	color: var(--mar-azul-medio);
+	font-size: 22px;
+}
+
+.upload-area strong {
+	font-size: 15px;
+}
+
+.upload-area p {
+	margin: 4px 0 0;
+	color: #758592;
+	font-size: 13px;
+}
+
+.upload-btn {
+	margin-left: auto;
+	min-height: 38px;
+	display: inline-flex;
+	align-items: center;
+	padding: 9px 14px;
+	border: 1px solid rgba(21, 89, 124, 0.22);
+	background: #edf4f8;
+	color: #15597c;
+	border-radius: 10px;
+	font-size: 13px;
+	font-weight: 800;
+	cursor: pointer;
+}
+
+.upload-btn:hover {
+	background: #e1eef5;
+}
+
+.form-actions {
+	margin-top: var(--mar-panel-padding);
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+.table-panel {
+	margin-top: 18px;
+}
+
+.table-wrap {
+	width: 100%;
+	overflow-x: auto;
+	border: 1px solid #c7d5df;
+	border-radius: 10px;
+}
+
+table {
+	width: 100%;
+	min-width: 980px;
+	border-collapse: collapse;
+}
+
+th,
+td {
+	padding: 11px 12px;
+	border-right: 1px solid #e2eaf0;
+	border-bottom: 1px solid #e2eaf0;
+	color: var(--mar-text);
+	font-size: 0.88rem;
+	text-align: left;
+}
+
+th {
+	background: var(--mar-azul-escuro);
+	color: var(--mar-surface);
+	font-size: 0.76rem;
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+th:last-child,
+td:last-child {
+	border-right: 0;
+}
+
+tbody tr:nth-child(even) {
+	background: #f8fbfd;
+}
+
+.status-badge {
+	background: #dceee8;
+	color: #008f61;
+}
+
+.status-badge.is-pending {
+	background: #fff0dc;
+	color: #c86713;
+}
+
+@media (max-width: 900px) {
+	.form-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 620px) {
+	.treinamento-view {
+		padding: 22px 14px 42px;
+	}
+
+	.form-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.upload-area,
+	.form-actions {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.upload-btn,
+	.form-actions button {
+		width: 100%;
+		justify-content: center;
+	}
+}
