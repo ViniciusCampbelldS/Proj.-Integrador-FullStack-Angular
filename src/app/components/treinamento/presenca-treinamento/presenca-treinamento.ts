@@ -1,6 +1,8 @@
-﻿import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { EmployeeSelectorModal, FuncionarioTreinamento } from '../employee-selector-modal/employee-selector-modal';
+import { SelectedEmployeesModal } from '../selected-employees-modal/selected-employees-modal';
 
 interface TurmaTreinamento {
   id: number;
@@ -9,26 +11,38 @@ interface TurmaTreinamento {
   horario: string;
   participantes: string[];
   documento: string;
-  status: 'Agendada' | 'Pendente';
 }
 
 @Component({
   selector: 'app-abre-treinamento',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, EmployeeSelectorModal, SelectedEmployeesModal],
   templateUrl: './presenca-treinamento.html',
   styleUrl: './presenca-treinamento.scss'
 })
-export class PresençaTreinamento {
-  readonly funcionarios = ['Pedro Henrique', 'João da Silva', 'Carlos Oliveira', 'Fernanda Lima', 'Ana Costa'];
+export class PresencaTreinamento {
+  readonly funcionarios: FuncionarioTreinamento[] = [
+    { id: 1, nome: 'Pedro Henrique', cpf: '354.287.696-10', cargo: 'Tecnico de Seguranca', area: 'Operacoes' },
+    { id: 2, nome: 'Joao da Silva', cpf: '875.143.220-41', cargo: 'Eletricista', area: 'Manutencao' },
+    { id: 3, nome: 'Carlos Oliveira', cpf: '192.334.870-55', cargo: 'Operador', area: 'Producao' },
+    { id: 4, nome: 'Fernanda Lima', cpf: '621.904.118-83', cargo: 'Supervisora', area: 'Qualidade' },
+    { id: 5, nome: 'Ana Costa', cpf: '448.072.561-09', cargo: 'Auxiliar', area: 'Logistica' },
+    { id: 6, nome: 'Marcos Pereira', cpf: '903.655.412-77', cargo: 'Soldador', area: 'Metalurgia' },
+  ];
 
   treinamento = '';
   data = '';
   horario = '';
-  funcionarioSelecionado = '';
+  filtroTurmaData = '';
+  filtroTurmaHorario = '';
   participantes: string[] = [];
   documento = '';
+  documentoPreviewUrl = '';
   mensagem = '';
+  turmaSelecionadaId: number | null = 1;
+  isEmployeeModalOpen = false;
+  isSelectedEmployeesModalOpen = false;
+  selectedFuncionarioIds = new Set<number>([1, 3]);
 
   turmas: TurmaTreinamento[] = [
     {
@@ -38,30 +52,117 @@ export class PresençaTreinamento {
       horario: '08:00',
       participantes: ['Pedro Henrique', 'Carlos Oliveira'],
       documento: 'lista-presenca-nr35.pdf',
-      status: 'Agendada',
+    },
+    {
+      id: 2,
+      treinamento: 'NR-10 - Seguranca em Eletricidade',
+      data: '2026-08-12',
+      horario: '14:00',
+      participantes: ['Joao da Silva', 'Ana Costa'],
+      documento: 'lista-presenca-nr10.pdf',
+    },
+    {
+      id: 3,
+      treinamento: 'NR-12 - Seguranca em Maquinas',
+      data: '2026-08-22',
+      horario: '09:30',
+      participantes: ['Fernanda Lima', 'Marcos Pereira'],
+      documento: 'lista-presenca-nr12.pdf',
     },
   ];
+
+  constructor() {
+    const turmaInicial = this.turmaSelecionada;
+
+    if (turmaInicial) {
+      this.selecionarTurma(turmaInicial);
+    }
+  }
 
   get podeCriar(): boolean {
     return Boolean(this.treinamento && this.data && this.horario && this.participantes.length > 0);
   }
 
-  adicionarParticipante(): void {
-    if (!this.funcionarioSelecionado || this.participantes.includes(this.funcionarioSelecionado)) {
-      return;
-    }
+  get filteredTurmas(): TurmaTreinamento[] {
+    return this.turmas.filter((turma) => {
+      const matchData = !this.filtroTurmaData || turma.data === this.filtroTurmaData;
+      const matchHorario = !this.filtroTurmaHorario || turma.horario === this.filtroTurmaHorario;
 
-    this.participantes = [...this.participantes, this.funcionarioSelecionado];
-    this.funcionarioSelecionado = '';
+      return matchData && matchHorario;
+    });
   }
 
-  removerParticipante(nome: string): void {
-    this.participantes = this.participantes.filter((participante) => participante !== nome);
+  get turmaSelecionada(): TurmaTreinamento | null {
+    return this.turmas.find((turma) => turma.id === this.turmaSelecionadaId) ?? null;
+  }
+
+  get funcionariosSelecionados(): FuncionarioTreinamento[] {
+    return this.funcionarios.filter((funcionario) => this.selectedFuncionarioIds.has(funcionario.id));
+  }
+
+  obterStatusTurma(turma: TurmaTreinamento): 'Planejada' | 'Realizada' {
+    const dataHoraTurma = new Date(`${turma.data}T${turma.horario}:00`);
+    const agora = new Date();
+
+    return dataHoraTurma < agora ? 'Realizada' : 'Planejada';
+  }
+
+  selecionarTurma(turma: TurmaTreinamento): void {
+    this.turmaSelecionadaId = turma.id;
+    this.treinamento = turma.treinamento;
+    this.data = turma.data;
+    this.horario = turma.horario;
+    this.participantes = [...turma.participantes];
+    this.selectedFuncionarioIds = new Set(
+      this.funcionarios
+        .filter((funcionario) => turma.participantes.includes(funcionario.nome))
+        .map((funcionario) => funcionario.id)
+    );
+  }
+
+  abrirModalFuncionarios(): void {
+    this.isEmployeeModalOpen = true;
+  }
+
+  fecharModalFuncionarios(): void {
+    this.isEmployeeModalOpen = false;
+  }
+
+  abrirModalFuncionariosSelecionados(): void {
+    this.isSelectedEmployeesModalOpen = true;
+  }
+
+  fecharModalFuncionariosSelecionados(): void {
+    this.isSelectedEmployeesModalOpen = false;
+  }
+
+  salvarFuncionariosSelecionados(funcionarioIds: number[]): void {
+    this.selectedFuncionarioIds = new Set(funcionarioIds);
+    this.sincronizarParticipantes();
+    this.fecharModalFuncionarios();
+  }
+
+  removerParticipante(funcionarioId: number): void {
+    this.selectedFuncionarioIds = new Set(
+      [...this.selectedFuncionarioIds].filter((id) => id !== funcionarioId)
+    );
+    this.sincronizarParticipantes();
   }
 
   onDocumentoSelecionado(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.documento = input.files?.[0]?.name ?? '';
+    const file = input.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (this.documentoPreviewUrl) {
+      URL.revokeObjectURL(this.documentoPreviewUrl);
+    }
+
+    this.documento = file.name;
+    this.documentoPreviewUrl = URL.createObjectURL(file);
   }
 
   criarTurma(): void {
@@ -85,22 +186,14 @@ export class PresençaTreinamento {
         horario: this.horario,
         participantes: [...this.participantes],
         documento: this.documento || 'Documento pendente',
-        status: this.documento ? 'Agendada' : 'Pendente',
       },
       ...this.turmas,
     ];
 
-    this.limpar();
-    this.mensagem = 'Turma criada localmente no frontend.';
+    this.mensagem = 'Presenca registrada localmente no frontend.';
   }
 
-  limpar(): void {
-    this.treinamento = '';
-    this.data = '';
-    this.horario = '';
-    this.funcionarioSelecionado = '';
-    this.participantes = [];
-    this.documento = '';
+  private sincronizarParticipantes(): void {
+    this.participantes = this.funcionariosSelecionados.map((funcionario) => funcionario.nome);
   }
 }
-

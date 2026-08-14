@@ -100,22 +100,25 @@ export class EpiData {
   getHistory(): HistoryEntry[] {
     return [
       {
-        date: '06/08/2026 09:48',
-        user: 'Admin SST',
-        action: 'Entrega registrada',
-        detail: 'Ficha digital criada para João Pedro com 2 EPIs.',
+        data: '06/08/2026 09:48',
+        usuario: 'Admin SST',
+        registro: 'CPF 16779645, CA 11022 e 34456',
+        alteracao: 'Entrega registrada',
+        detalhe: 'Ficha digital criada para João Pedro com 2 EPIs.',
       },
       {
-        date: '05/08/2026 16:20',
-        user: 'Admin SST',
-        action: 'Alteração manual',
-        detail: 'CA 34456 marcado como próximo do vencimento.',
+        data: '05/08/2026 16:20',
+        usuario: 'Admin SST',
+        registro: 'CA 34456',
+        alteracao: 'Manual',
+        detalhe: 'Alterado o número de dias para notificação de próximo do vencimento para CA 34456.',
       },
       {
-        date: '02/08/2026 11:05',
-        user: 'Admin SST',
-        action: 'Substituição',
-        detail: 'Bota isolante anterior substituída por vencimento.',
+        data: '02/08/2026 11:05',
+        usuario: 'Admin SST',
+        registro: 'CPF 20724369, CA 40271',
+        alteracao: 'Substituição',
+        detalhe: 'Bota isolante anterior substituída por vencimento.',
       },
     ];
   }

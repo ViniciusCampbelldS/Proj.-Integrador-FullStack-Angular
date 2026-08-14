@@ -1,8 +1,8 @@
 <section class="treinamento-page">
   <div class="hero">
     <div>
-            <h1>Gerenciar Treinamentos</h1>
-      <p>Área para cadastrar, agendar e acompanhar os treinamentos de segurança dos funcionários.</p>
+      <h1>Gerenciar Treinamentos</h1>
+      <p>Area para cadastrar, agendar e acompanhar os treinamentos de seguranca dos funcionarios.</p>
     </div>
   </div>
 
@@ -15,24 +15,24 @@
       </div>
     </div>
     <div class="stat-card">
-      <div class="stat-icon">📅</div>
+      <div class="stat-icon">🗓️</div>
       <div>
         <small>Agendados</small>
         <strong>08</strong>
       </div>
     </div>
     <div class="stat-card">
-      <div class="stat-icon">👥</div>
+      <div class="stat-icon">⚠️</div>
       <div>
-        <small>Funcionários treinados</small>
-        <strong>47</strong>
+        <small>Proximos do vencimento</small>
+        <strong>07</strong>
       </div>
     </div>
     <div class="stat-card">
-      <div class="stat-icon">⚠️</div>
+      <div class="stat-icon">❗</div>
       <div>
-        <small>Próximos do vencimento</small>
-        <strong>05</strong>
+        <small>Vencidos</small>
+        <strong>01</strong>
       </div>
     </div>
   </div>
@@ -57,14 +57,6 @@
       </div>
 
       <div class="field">
-        <label>Funcionários</label>
-        <button class="employee-picker" type="button" (click)="openFuncionarioModal()">
-          <span>{{ funcionariosSelecionadosLabel }}</span>
-          <span class="picker-icon" aria-hidden="true">▾</span>
-        </button>
-      </div>
-
-      <div class="field">
         <label>Data</label>
         <input type="date" class="form-control" />
       </div>
@@ -75,7 +67,7 @@
       </div>
 
       <div class="field">
-        <label>Código da NR</label>
+        <label>Codigo da NR</label>
         <select class="form-select">
           <option>Todos</option>
           <option>NR-01</option>
@@ -83,58 +75,84 @@
           <option>NR-03</option>
           <option>NR-04</option>
           <option>NR-05</option>
-		  <option>NR-06</option>
+          <option>NR-06</option>
           <option>NR-07</option>
           <option>NR-08</option>
           <option>NR-09</option>
           <option>NR-10</option>
-		  <option>NR-11</option>
+          <option>NR-11</option>
           <option>NR-12</option>
           <option>NR-13</option>
           <option>NR-14</option>
           <option>NR-15</option>
-		  <option>NR-16</option>
+          <option>NR-16</option>
           <option>NR-17</option>
           <option>NR-18</option>
           <option>NR-19</option>
           <option>NR-20</option>
-		  <option>NR-21</option>
+          <option>NR-21</option>
           <option>NR-22</option>
           <option>NR-23</option>
           <option>NR-24</option>
           <option>NR-25</option>
-		  <option>NR-26</option>
+          <option>NR-26</option>
           <option>NR-27 (Revogada)</option>
           <option>NR-28</option>
           <option>NR-29</option>
           <option>NR-30</option>
-		  <option>NR-31</option>
+          <option>NR-31</option>
           <option>NR-32</option>
           <option>NR-33</option>
           <option>NR-34</option>
           <option>NR-35</option>
-		  <option>NR-36</option>
+          <option>NR-36</option>
           <option>NR-37</option>
           <option>NR-38</option>
         </select>
       </div>
 
       <div class="field">
-        <label>Situação</label>
+        <label>Situacao</label>
         <select class="form-select">
           <option>Todos</option>
           <option>Em dia</option>
-          <option>Próximo do vencimento</option>
+          <option>Proximo do vencimento</option>
           <option>Vencido</option>
         </select>
       </div>
 
       <div class="actions">
+        <button class="btn btn-outline-brand" type="button" (click)="abrirModalFuncionarios()">
+          <i class="bi bi-people"></i>
+          Adicionar funcionarios
+        </button>
         <button class="btn btn-soft" type="button">
           <i class="bi bi-search"></i>
           Filtrar
         </button>
-        <button class="btn btn-brand" type="button" routerLink="/treinamento/abrir-turma">Novo treinamento/Abrir Turma</button>
+        <button class="btn btn-brand" type="button" (click)="adicionarNovoTreinamento()">Novo treinamento/Abrir Turma</button>
+      </div>
+    </div>
+	<div class="selected-panel">
+      <div class="selected-panel-header">
+        <div>
+          <strong>Funcionarios selecionados</strong>
+          <p>Visualize os funcionarios vinculados antes de abrir a nova turma.</p>
+        </div>
+        <!-- <button class="btn btn-soft" type="button" [disabled]="funcionariosSelecionados.length === 0" (click)="abrirModalFuncionariosSelecionados()">
+          Visualizar selecionados
+        </button> -->
+      </div>
+
+      <div class="selected-list-inline">
+        @for (funcionario of funcionariosSelecionados; track funcionario.id) {
+          <button class="selected-chip-inline" type="button" (click)="removerFuncionarioSelecionado(funcionario.id)">
+            {{ funcionario.nome }} - {{ funcionario.cpf }} - {{ funcionario.cargo }} - {{ funcionario.area }}
+            <i class="bi bi-x"></i>
+          </button>
+        } @empty {
+          <span>Nenhum funcionario selecionado.</span>
+        }
       </div>
     </div>
   </div>
@@ -148,7 +166,7 @@
 
       <button class="btn btn-outline-brand" type="button" routerLink="/treinamento/historico">
         <i class="bi bi-clock-history"></i>
-        Histórico de alterações
+        Historico de alteracoes
       </button>
     </div>
 
@@ -166,10 +184,10 @@
             <th>ID</th>
             <th>NR</th>
             <th>Treinamento</th>
-            <th>Funcionário</th>
-            <th>Aplicação</th>
+            <th>Funcionario</th>
+            <th>Aplicacao</th>
             <th>Vencimento</th>
-            <th>Situação</th>
+            <th>Situacao</th>
             <th>Documento</th>
             <th>Editar</th>
           </tr>
@@ -186,7 +204,7 @@
               <td><span class="status-badge" [class]="'status-badge ' + situacaoClass(treinamento.situacao)">{{ treinamento.situacao }}</span></td>
               <td><button class="btn btn-sm btn-soft" type="button"><i class="bi bi-eye"></i> Visualizar</button></td>
               <td>
-                <button class="btn btn-sm btn-outline-brand" type="button" [disabled]="!podeEditarTreinamento" [title]="!podeEditarTreinamento ? 'Perfil sem permissão de edição' : ''" (click)="abrirEdicaoTreinamento(treinamento)">
+                <button class="btn btn-sm btn-outline-brand" type="button" [disabled]="!podeEditarTreinamento" [title]="!podeEditarTreinamento ? 'Perfil sem permissao de edicao' : ''" (click)="abrirEdicaoTreinamento(treinamento)">
                   <i class="bi bi-pencil-fill"></i> Editar
                 </button>
               </td>
@@ -197,171 +215,29 @@
     </div>
   </div>
 
-  @if (isFuncionarioModalOpen) {
-    <div class="modal-overlay" role="dialog" aria-modal="true" aria-label="Selecionar funcionários" (click)="closeFuncionarioModal()">
-      <section class="employee-modal" (click)="$event.stopPropagation()">
-        <header class="modal-header">
-          <div>
-            <span class="eyebrow">FUNCIONÁRIOS</span>
-            <h3>Selecionar Funcionários</h3>
-          </div>
+  <app-editar-treinamento-modal
+    [isOpen]="isEditModalOpen"
+    [formTreinamento]="formTreinamento"
+    [situacoes]="situacoes"
+    (close)="fecharEdicaoTreinamento()"
+    (save)="salvarEdicaoTreinamento()"
+  />
 
-          <button class="close-btn" type="button" aria-label="Fechar" (click)="closeFuncionarioModal()">
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </header>
+  <app-employee-selector-modal
+    [isOpen]="isEmployeeModalOpen"
+    [funcionarios]="funcionarios"
+    [selectedFuncionarioIds]="selectedFuncionarioIds"
+    titulo="Adicionar funcionarios"
+    (close)="fecharModalFuncionarios()"
+    (save)="salvarFuncionariosSelecionados($event)"
+  />
 
-        <div class="modal-search-grid">
-          <div class="field">
-            <label for="funcionario-matricula">Matrícula</label>
-            <input
-              id="funcionario-matricula"
-              type="text"
-              class="form-control"
-              [value]="filtroMatricula"
-              (input)="filtroMatricula = $any($event.target).value"
-              placeholder="Pesquisar por matrícula"
-            />
-          </div>
-
-          <div class="field">
-            <label for="funcionario-nome">Nome</label>
-            <input
-              id="funcionario-nome"
-              type="text"
-              class="form-control"
-              [value]="filtroNome"
-              (input)="filtroNome = $any($event.target).value"
-              placeholder="Pesquisar por nome"
-            />
-          </div>
-
-          <div class="field">
-            <label for="funcionario-cargo">Cargo</label>
-            <input
-              id="funcionario-cargo"
-              type="text"
-              class="form-control"
-              [value]="filtroCargo"
-              (input)="filtroCargo = $any($event.target).value"
-              placeholder="Pesquisar por cargo"
-            />
-          </div>
-
-          <div class="field">
-            <label for="funcionario-area">Área</label>
-            <input
-              id="funcionario-area"
-              type="text"
-              class="form-control"
-              [value]="filtroArea"
-              (input)="filtroArea = $any($event.target).value"
-              placeholder="Pesquisar por área"
-            />
-          </div>
-        </div>
-
-        <div class="modal-table-container">
-          <table class="modal-table">
-            <thead>
-              <tr>
-                <th>
-                  <input
-                    type="checkbox"
-                    [checked]="allFilteredChecked"
-                    (change)="toggleAllFiltered($any($event.target).checked)"
-                    aria-label="Selecionar todos os resultados filtrados"
-                  />
-                </th>
-                <th>Matrícula</th>
-                <th>Nome</th>
-                <th>Cargo</th>
-                <th>Área</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (funcionario of filteredFuncionarios; track funcionario.id) {
-                <tr>
-                  <td>
-                    <input
-                      type="checkbox"
-                      [checked]="checkedFuncionarioIds.has(funcionario.id)"
-                      (change)="toggleFuncionarioChecked(funcionario.id, $any($event.target).checked)"
-                      [attr.aria-label]="'Selecionar ' + funcionario.nome"
-                    />
-                  </td>
-                  <td>{{ funcionario.matricula }}</td>
-                  <td>{{ funcionario.nome }}</td>
-                  <td>{{ funcionario.cargo }}</td>
-                  <td>{{ funcionario.area }}</td>
-                </tr>
-              } @empty {
-                <tr>
-                  <td colspan="5" class="empty-row">Nenhum funcionário encontrado com os filtros informados.</td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
-
-        <div class="selected-preview">
-          <strong>Selecionados:</strong>
-          @if (funcionariosSelecionadosNoModal.length > 0) {
-            <span>
-              {{ funcionariosSelecionadosNoModal.map((funcionario) => funcionario.nome).join(', ') }}
-            </span>
-          } @else {
-            <span>Nenhum funcionário selecionado.</span>
-          }
-        </div>
-
-        <footer class="modal-actions">
-          <button class="btn btn-soft" type="button" [disabled]="!hasCheckedFuncionarios" (click)="addSelectedFuncionarios()">
-            Adicionar selecionados
-          </button>
-          <button class="btn btn-outline-brand" type="button" [disabled]="!hasCheckedFuncionarios" (click)="removeSelectedFuncionarios()">
-            Remover selecionados
-          </button>
-          <button class="btn btn-brand" type="button" [disabled]="!hasSelectedFuncionarios" (click)="applyFuncionariosSelecionados()">
-            Aplicar
-          </button>
-        </footer>
-      </section>
-    </div>
-  }
-  @if (isEditModalOpen) {
-    <div class="modal-overlay" role="dialog" aria-modal="true" aria-label="Editar treinamento" (click)="fecharEdicaoTreinamento()">
-      <section class="employee-modal" (click)="$event.stopPropagation()">
-        <header class="modal-header">
-          <div>
-            <span class="eyebrow">TREINAMENTO</span>
-            <h3>Editar treinamento</h3>
-          </div>
-          <button class="close-btn" type="button" aria-label="Fechar" (click)="fecharEdicaoTreinamento()"><i class="bi bi-x-lg"></i></button>
-        </header>
-
-        <div class="modal-search-grid">
-          <div class="field"><label>NR</label><input class="form-control" [(ngModel)]="formTreinamento.nr" /></div>
-          <div class="field"><label>Treinamento</label><input class="form-control" [(ngModel)]="formTreinamento.treinamento" /></div>
-          <div class="field"><label>Funcionário</label><input class="form-control" [(ngModel)]="formTreinamento.funcionario" /></div>
-          <div class="field"><label>Aplicação</label><input class="form-control" type="date" [(ngModel)]="formTreinamento.aplicacao" /></div>
-          <div class="field"><label>Vencimento</label><input class="form-control" type="date" [(ngModel)]="formTreinamento.vencimento" /></div>
-          <div class="field">
-            <label>Situação</label>
-            <select class="form-select" [(ngModel)]="formTreinamento.situacao">
-              @for (situacao of situacoes; track situacao) {
-                <option [value]="situacao">{{ situacao }}</option>
-              }
-            </select>
-          </div>
-        </div>
-
-        <footer class="modal-actions">
-          <button class="btn btn-outline-brand" type="button" (click)="fecharEdicaoTreinamento()">Cancelar</button>
-          <button class="btn btn-brand" type="button" (click)="salvarEdicaoTreinamento()">Salvar alterações</button>
-        </footer>
-      </section>
-    </div>
-  }
-
+  <app-selected-employees-modal
+    [isOpen]="isSelectedEmployeesModalOpen"
+    [funcionarios]="funcionariosSelecionados"
+    [allowRemove]="true"
+    titulo="Funcionarios selecionados"
+    (close)="fecharModalFuncionariosSelecionados()"
+    (remove)="removerFuncionarioSelecionado($event)"
+  />
 </section>

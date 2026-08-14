@@ -34,10 +34,11 @@ export interface PreviousEpi {
 }
 
 export interface HistoryEntry {
-  date: string;
-  user: string;
-  action: string;
-  detail: string;
+  data: string;
+  usuario: string;
+  registro: string;
+  alteracao: string;
+  detalhe: string;
 }
 
 export interface Epi {

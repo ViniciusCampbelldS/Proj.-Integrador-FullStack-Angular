@@ -54,9 +54,9 @@ export const routes: Routes = [
     canActivate: [tstGuard]
   },
 
-  // treinamento - presenca
+  // treinamento - editar
   {
-    path: 'treinamento/presenca',
+    path: 'treinamento/editar',
     loadComponent: () =>
       import('./components/treinamento/gerenciar-treinamento')
         .then((m) => m.GerenciarTreinamento),
@@ -64,9 +64,9 @@ export const routes: Routes = [
     canActivate: [tstGuard]
   },
 
-  // treinamento - abrir turma
+  // treinamento - presenca
   {
-    path: 'treinamento/abrir-turma',
+    path: 'treinamento/presenca',
     loadComponent: () =>
       import('./components/treinamento/gerenciar-treinamento')
         .then((m) => m.GerenciarTreinamento),

@@ -1,33 +1,9 @@
-:host {
-  display: block;
-  background: var(--mar-bg);
-  color: var(--mar-ink);
-}
+@use "../../../../styles/shared" as shared;
+
+@include shared.page-shell(".epi-view");
 
 .epi-view {
-  display: grid;
-  gap: 18px;
-  max-width: var(--mar-page-max-width);
-  margin: 0 auto;
-  padding: var(--mar-page-padding-top) var(--mar-page-padding-x) var(--mar-page-padding-bottom);
-}
-
-.header-area h1,
-.panel-header h2 {
-  margin: 0;
-  color: var(--mar-azul-escuro);
-  font-weight: 800;
-}
-
-.header-area h1 {
-  font-size: clamp(1.7rem, 2.4vw, 2.25rem);
-}
-
-.header-area p,
-.panel-header p {
-  margin: 6px 0 0;
-  color: var(--mar-text);
-  font-size: 0.92rem;
+  padding: 0;
 }
 
 .panel {
@@ -43,7 +19,16 @@
 }
 
 .panel-header h2 {
+  margin: 0;
+  color: var(--mar-azul-escuro);
   font-size: 1.08rem;
+  font-weight: 800;
+}
+
+.panel-header p {
+  margin: 6px 0 0;
+  color: var(--mar-text);
+  font-size: 0.92rem;
 }
 
 .table-container {
@@ -82,6 +67,7 @@ th {
   font-weight: 800;
   letter-spacing: 0.4px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 td {
@@ -115,6 +101,10 @@ tbody tr:nth-child(even) {
   white-space: nowrap;
 }
 
+tbody td:nth-child(4) {
+  text-align: center;
+}
+
 .status.success {
   background: #dceee8;
   color: #008f61;
@@ -132,6 +122,6 @@ tbody tr:nth-child(even) {
 
 @media (max-width: 620px) {
   .epi-view {
-    padding: 22px 14px 42px;
+    padding: 0;
   }
 }

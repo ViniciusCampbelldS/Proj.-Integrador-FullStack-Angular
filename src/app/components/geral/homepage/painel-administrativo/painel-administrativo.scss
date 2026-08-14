@@ -5,7 +5,7 @@
 .admin-dashboard {
   display: grid;
   gap: 0;
-  max-width: 1450px;
+  max-width: var(--mar-page-max-width);
   margin: 0 auto;
 }
 

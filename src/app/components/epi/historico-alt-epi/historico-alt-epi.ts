@@ -14,25 +14,28 @@ export class HistóricoAltEpi {
   history: HistoryEntry[];
 
   constructor(private readonly epiData: EpiData) {
-    this.history = this.epiData.getHistory();
+    this.history = this.epiData.getHistory().map((item, index) =>
+      index === 2
+        ? {
+            ...item,
+            alteracao: 'Manual',
+            detalhe: 'EPI marcado como substituído pois não será mais exigido para o funcionário.',
+          }
+        : item
+    );
   }
 
-  getActionClass(action: string): 'success' | 'warning' | 'danger' {
-    const normalizedAction = action.toLowerCase();
+  getActionClass(alteracao: string): 'success' | 'warning' | 'danger' {
+    const normalizedAction = alteracao.toLowerCase();
 
     if (normalizedAction.includes('entrega')) {
       return 'success';
     }
 
-    if (normalizedAction.includes('altera')) {
+    if (normalizedAction.includes('altera') || normalizedAction.includes('manual')) {
       return 'warning';
     }
 
     return 'danger';
-  }
-
-  getRegistro(item: HistoryEntry): string {
-    const [firstSentence] = item.detail.split('.');
-    return firstSentence.trim();
   }
 }

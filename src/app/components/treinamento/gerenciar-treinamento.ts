@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { PresençaTreinamento } from './presenca-treinamento/presenca-treinamento';
+import { PresencaTreinamento } from './presenca-treinamento/presenca-treinamento';
 import { AlteraTreinamento } from './altera-treinamento/altera-treinamento';
 
 type TreinamentoView =
@@ -12,7 +12,7 @@ type TreinamentoView =
 @Component({
   selector: 'app-gerenciar-treinamento',
   standalone: true,
-  imports: [CommonModule, AlteraTreinamento, PresençaTreinamento],
+  imports: [CommonModule, AlteraTreinamento, PresencaTreinamento],
   template: `
     @if (activeView === 'presenca') {
       <app-altera-treinamento></app-altera-treinamento>

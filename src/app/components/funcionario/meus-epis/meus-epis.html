@@ -19,7 +19,6 @@
     <section class="panel epi-panel">
       <div class="section-header">
         <div>
-          <p class="eyebrow">Equipamentos</p>
           <h3>Meus EPIs</h3>
         </div>
         <span class="item-count">{{ employeeEpis.length }} equipamentos</span>
@@ -57,7 +56,6 @@
     </section>
 
     <aside class="panel summary-card">
-      <p class="eyebrow">Resumo</p>
       <h3>Situação dos EPIs</h3>
 
       <div class="summary-number">{{ employeeEpis.length }}</div>
@@ -83,7 +81,6 @@
   <section class="panel documents-card">
     <div class="section-header">
       <div>
-        <p class="eyebrow">Documentos</p>
         <h3>Fichas de EPI</h3>
         <p class="section-description">Abra uma ficha em uma nova guia ou baixe uma cópia.</p>
       </div>
@@ -134,7 +131,6 @@
       <section class="panel modal-card" (click)="$event.stopPropagation()">
         <div class="modal-header-custom">
           <div>
-            <p class="eyebrow">Relatório de estado</p>
             <h3 id="report-title">{{ selectedEpi.name }}</h3>
             <small>CA {{ selectedEpi.ca }}</small>
           </div>

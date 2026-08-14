@@ -2,6 +2,10 @@
 
 @include shared.page-shell(".epi-view");
 
+.epi-view {
+	padding: 0;
+}
+
 // ======================================================
 // 2. ESTRUTURA
 // ======================================================
@@ -436,6 +440,68 @@
 	font-weight: 800;
 }
 
+.epi-modal {
+	width: min(860px, calc(100vw - 32px));
+}
+
+.epi-detail-box {
+	margin-bottom: 16px;
+	padding: 14px 16px;
+	border: 1px solid rgba(0, 61, 108, 0.1);
+	border-radius: var(--mar-radius-md);
+	background: var(--mar-bg);
+}
+
+.epi-detail-box h4 {
+	margin: 0;
+	color: var(--mar-azul-escuro);
+	font-size: 1rem;
+	font-weight: 800;
+}
+
+.epi-detail-box > p:last-of-type {
+	margin: 6px 0 0;
+	color: var(--mar-text-secondary);
+	font-size: 0.84rem;
+}
+
+.epi-detail-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+	margin-top: 14px;
+}
+
+.epi-detail-grid .modal-field {
+	margin-bottom: 0;
+}
+
+.epi-detail-grid-full {
+	grid-column: 1 / -1;
+}
+
+.checkbox-field {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	min-height: 44px;
+	padding: 10px 12px;
+	border: 1px solid rgba(0, 61, 108, 0.12);
+	border-radius: 10px;
+	background: var(--mar-surface);
+	color: var(--mar-azul-escuro);
+	font-size: 0.84rem;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.checkbox-field input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	margin: 0;
+	accent-color: var(--mar-azul-medio);
+}
+
 
 // ======================================================
 // 9. RESPONSIVIDADE
@@ -444,6 +510,23 @@
 @media (max-width: 1100px) {
 	.table-actions {
 		min-width: 0;
+	}
+}
+
+@media (max-width: 640px) {
+	.epi-modal {
+		width: min(100%, calc(100vw - 20px));
+		padding: 16px;
+	}
+
+	.modal-header,
+	.modal-actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.modal-actions .btn {
+		width: 100%;
 	}
 }
 
@@ -473,6 +556,10 @@
 	.filter-box,
 	.list-card {
 		padding: 14px;
+	}
+
+	.epi-detail-grid {
+		grid-template-columns: 1fr;
 	}
 
 	.btn {

@@ -18,6 +18,16 @@ interface BuscaEpiForm {
 	situacao: string;
 }
 
+interface BuscaEpiEditForm {
+	nome: string;
+	ca: string;
+	lote: string;
+	validade: string;
+	quantidade: number;
+	funcionario: string;
+	substituido: boolean;
+}
+
 interface BuscaEpiRow {
 	id: number;
 	funcionario: string;
@@ -26,6 +36,7 @@ interface BuscaEpiRow {
 	vencimento: string;
 	lote?: string;
 	quantidade?: number;
+	substituido?: boolean;
 	diasAvisoEpi: number;
 	status: string;
 	statusClass: StatusClass;
@@ -48,18 +59,15 @@ export class BuscaEpi implements OnInit {
 	epis: BuscaEpiRow[] = [];
 	resultados: BuscaEpiRow[] = [];
 	exportMessage = '';
-	modalEstadoAberto = false;
 	modalDescarteAberto = false;
 	modalEdicaoAberto = false;
 	itemSelecionado: BuscaEpiRow | null = null;
 	itemEditando: BuscaEpiRow | null = null;
-	estadoSelecionado = 'Distante do vencimento';
-	observacaoEstado = '';
 	motivoDescarte = '';
+	quantidadeDescarte = 1;
 	diasAvisoEdicao = this.diasAvisoPadrao;
 	form: BuscaEpiForm = this.criarFormVazio();
-
-	readonly estadosEpi = ['Distante do vencimento', 'Atenção', 'Danificado', 'Vencido'];
+	editForm: BuscaEpiEditForm = this.criarEditFormVazio();
 
 	get podeEditar(): boolean {
 		return this.authService.podeEditarEpi();
@@ -144,6 +152,7 @@ export class BuscaEpi implements OnInit {
 			lote: this.form.lote.trim(),
 			vencimento: this.formatarData(this.toDate(this.form.validade)),
 			quantidade: this.form.quantidade,
+			substituido: false,
 			diasAvisoEpi: this.diasAvisoPadrao,
 			status: 'Distante do vencimento',
 			statusClass: 'status-good',
@@ -195,6 +204,15 @@ export class BuscaEpi implements OnInit {
 
 		this.itemEditando = item;
 		this.diasAvisoEdicao = item.diasAvisoEpi;
+		this.editForm = {
+			nome: item.nome,
+			ca: item.ca,
+			lote: item.lote ?? '',
+			validade: this.dataParaInput(item.vencimento),
+			quantidade: item.quantidade ?? 1,
+			funcionario: item.funcionario,
+			substituido: item.substituido ?? false,
+		};
 		this.modalEdicaoAberto = true;
 	}
 
@@ -208,49 +226,36 @@ export class BuscaEpi implements OnInit {
 			return;
 		}
 
+		if (
+			!this.editForm.nome.trim() ||
+			!this.editForm.ca.trim() ||
+			!this.editForm.lote.trim() ||
+			!this.editForm.validade ||
+			this.editForm.quantidade < 1 ||
+			!this.editForm.funcionario.trim()
+		) {
+			this.exportMessage = 'Preencha todos os campos do EPI antes de salvar a edição.';
+			return;
+		}
+
 		this.epis = this.epis.map((item) =>
 			item.id === this.itemEditando?.id
 				? this.atualizarStatusDoItem({
 					...item,
+					nome: this.editForm.nome.trim(),
+					ca: this.editForm.ca.trim(),
+					lote: this.editForm.lote.trim(),
+					vencimento: this.formatarData(this.toDate(this.editForm.validade)),
+					quantidade: this.editForm.quantidade,
+					funcionario: this.editForm.funcionario.trim(),
+					substituido: this.editForm.substituido,
 					diasAvisoEpi: this.diasAvisoEdicao,
 				})
 				: item
 		);
 
 		this.aplicarFiltros();
-		this.exportMessage = `Dias de aviso do CA ${this.itemEditando.ca} atualizados para ${this.diasAvisoEdicao}.`;
-		this.fecharModais();
-	}
-
-	abrirEstado(item: BuscaEpiRow): void {
-		if (!this.podeEditar) {
-			this.exportMessage = `Perfil ${this.perfilAtual} possui apenas visualização administrativa de EPIs.`;
-			return;
-		}
-
-		this.itemSelecionado = item;
-		this.estadoSelecionado = item.status;
-		this.observacaoEstado = '';
-		this.modalEstadoAberto = true;
-	}
-
-	salvarEstado(): void {
-		if (!this.itemSelecionado) {
-			return;
-		}
-
-		this.epis = this.epis.map((item) =>
-			item.id === this.itemSelecionado?.id
-				? {
-					...item,
-					status: this.estadoSelecionado,
-					statusClass: this.statusClassPorTexto(this.estadoSelecionado),
-				}
-				: item
-		);
-
-		this.aplicarFiltros();
-		this.exportMessage = `Estado do EPI atualizado localmente${this.observacaoEstado ? ' com observação' : ''}.`;
+		this.exportMessage = `EPI ${this.editForm.nome} atualizado localmente no frontend.`;
 		this.fecharModais();
 	}
 
@@ -262,6 +267,7 @@ export class BuscaEpi implements OnInit {
 
 		this.itemSelecionado = item;
 		this.motivoDescarte = '';
+		this.quantidadeDescarte = 1;
 		this.modalDescarteAberto = true;
 	}
 
@@ -270,18 +276,24 @@ export class BuscaEpi implements OnInit {
 			return;
 		}
 
+		if (this.quantidadeDescarte < 1) {
+			this.exportMessage = 'Informe uma quantidade válida para exclusão.';
+			return;
+		}
+
 		this.epis = this.epis.filter((item) => item.id !== this.itemSelecionado?.id);
 		this.aplicarFiltros();
-		this.exportMessage = `EPI descartado localmente${this.motivoDescarte ? ': ' + this.motivoDescarte : '.'}`;
+		this.exportMessage = `Exclusão local registrada para ${this.quantidadeDescarte} unidade(s)${this.motivoDescarte ? ': ' + this.motivoDescarte : '.'}`;
 		this.fecharModais();
 	}
 
 	fecharModais(): void {
-		this.modalEstadoAberto = false;
 		this.modalDescarteAberto = false;
 		this.modalEdicaoAberto = false;
 		this.itemSelecionado = null;
 		this.itemEditando = null;
+		this.quantidadeDescarte = 1;
+		this.editForm = this.criarEditFormVazio();
 	}
 
 	private recalcularStatuses(): void {
@@ -371,7 +383,8 @@ export class BuscaEpi implements OnInit {
 			nome: epi.nome,
 			ca: epi.ca,
 			vencimento: this.formatarData(this.toDate(epi.vencimento)),
-			diasAvisoEpi: this.diasAvisoPadrao,
+			substituido: false,
+			diasAvisoEpi: this.obterDiasAvisoInicial(epi.ca),
 			status: 'Distante do vencimento',
 			statusClass: 'status-good',
 		});
@@ -384,7 +397,8 @@ export class BuscaEpi implements OnInit {
 			nome: epi.nome,
 			ca: epi.ca,
 			vencimento: this.formatarData(this.toDate(epi.vencimento)),
-			diasAvisoEpi: this.diasAvisoPadrao,
+			substituido: false,
+			diasAvisoEpi: this.obterDiasAvisoInicial(epi.ca),
 			status: 'Distante do vencimento',
 			statusClass: 'status-good',
 		});
@@ -472,6 +486,36 @@ export class BuscaEpi implements OnInit {
 			funcionario: '',
 			situacao: '',
 		};
+	}
+
+	private criarEditFormVazio(): BuscaEpiEditForm {
+		return {
+			nome: '',
+			ca: '',
+			lote: '',
+			validade: '',
+			quantidade: 1,
+			funcionario: '',
+			substituido: false,
+		};
+	}
+
+	private obterDiasAvisoInicial(ca: string): number {
+		return ca === '34456' ? 120 : this.diasAvisoPadrao;
+	}
+
+	private dataParaInput(valor: string): string {
+		const data = this.toDate(valor);
+
+		if (!data) {
+			return '';
+		}
+
+		const ano = data.getFullYear();
+		const mes = String(data.getMonth() + 1).padStart(2, '0');
+		const dia = String(data.getDate()).padStart(2, '0');
+
+		return `${ano}-${mes}-${dia}`;
 	}
 
 	private limparCadastro(): void {

@@ -192,7 +192,8 @@
 	}
 
 	.page-shell {
-		max-width: var(--mar-page-max-width);
+		width: 100%;
+		max-width: var(--mar-page-max-width) !important;
 		margin: 0 auto;
 	}
 
